@@ -1,8 +1,8 @@
-module.exports = {
-  images: {
-    domains: ['cdn.hashnode.com', 'avatars.githubusercontent.com', 'res.cloudinary.com'],
-  },
+/** @type {import('next').NextConfig} */
+const nextConfig = {
   compiler: {
     styledComponents: true,
   },
 };
+
+module.exports = nextConfig;

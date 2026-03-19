@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vimal Desai — Senior Full Stack Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0e0e0e;
+    --paper: #f5f2ec;
+    --accent: #c8420a;
+    --accent2: #1a4a8a;
+    --muted: #6b6456;
+    --rule: #d4cfc7;
+    --tag-bg: #e8e3da;
+    --white: #ffffff;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { font-size: 15px; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 400;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes slideRight {
+    from { opacity: 0; transform: translateX(-20px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+  @keyframes widthIn {
+    from { width: 0; }
+    to { width: 100%; }
+  }
+
+  .page {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 60px 48px 80px;
+    animation: fadeUp 0.7s ease both;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 32px;
+    align-items: end;
+    padding-bottom: 24px;
+    border-bottom: 3px solid var(--ink);
+    margin-bottom: 40px;
+    position: relative;
+  }
+  .header::after {
+    content: '';
+    position: absolute;
+    top: 64px; left: 16px;
+    width: 120px; height: 4px;
+    background: var(--accent);
+  }
+  .name-block {}
+  .name-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    animation: slideRight 0.6s ease both 0.1s;
+  }
+  h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 4.2rem;
+    line-height: 1.0;
+    letter-spacing: 0.03em;
+    color: var(--ink);
+    animation: fadeUp 0.7s ease both 0.15s;
+  }
+  .title-line {
+    margin-top: 16px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--accent2);
+    letter-spacing: 0.01em;
+    animation: fadeUp 0.7s ease both 0.2s;
+  }
+  .contact-block {
+    text-align: right;
+    animation: fadeUp 0.7s ease both 0.25s;
+  }
+  .contact-item {
+    display: block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--muted);
+    line-height: 2.0;
+  }
+  .contact-item a {
+    color: var(--accent2);
+    text-decoration: none;
+    border-bottom: 1px dotted var(--accent2);
+    transition: color 0.2s;
+  }
+  .contact-item a:hover { color: var(--accent); }
+
+  /* ── LAYOUT ── */
+  .body-grid {
+    display: grid;
+    grid-template-columns: 1fr 260px;
+    gap: 48px;
+    align-items: start;
+  }
+  .main-col {}
+  .side-col {}
+
+  /* ── SECTIONS ── */
+  .section { margin-bottom: 38px; animation: fadeUp 0.6s ease both; }
+  .section:nth-child(1) { animation-delay: 0.3s; }
+  .section:nth-child(2) { animation-delay: 0.4s; }
+  .section:nth-child(3) { animation-delay: 0.5s; }
+  .section:nth-child(4) { animation-delay: 0.6s; }
+
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 22px;
+  }
+  .section-label span {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--rule);
+  }
+
+  /* ── SUMMARY ── */
+  .summary p {
+    font-size: 0.97rem;
+    line-height: 1.75;
+    color: #2a2520;
+    max-width: 640px;
+  }
+  .summary p strong { color: var(--accent); font-weight: 600; }
+
+  /* ── JOB ENTRIES ── */
+  .job { margin-bottom: 30px; padding-bottom: 30px; border-bottom: 1px solid var(--rule); }
+  .job:last-child { border-bottom: none; margin-bottom: 0; }
+
+  .job-header { display: flex; justify-content: space-between; align-items: start; gap: 16px; margin-bottom: 4px; }
+  .job-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.12rem;
+    color: var(--ink);
+    line-height: 1.2;
+  }
+  .job-period {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.66rem;
+    color: var(--accent);
+    white-space: nowrap;
+    padding-top: 4px;
+    letter-spacing: 0.04em;
+  }
+  .job-company {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--accent2);
+    margin-bottom: 2px;
+    letter-spacing: 0.01em;
+  }
+  .job-location {
+    font-size: 0.74rem;
+    color: var(--muted);
+    margin-bottom: 12px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .job-bullets { list-style: none; }
+  .job-bullets li {
+    position: relative;
+    padding-left: 16px;
+    font-size: 0.86rem;
+    line-height: 1.65;
+    color: #2d2822;
+    margin-bottom: 5px;
+  }
+  .job-bullets li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-size: 0.7rem;
+    top: 4px;
+  }
+  .job-bullets li strong { color: var(--ink); font-weight: 600; }
+
+  .job-tech {
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+  .tech-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.63rem;
+    letter-spacing: 0.03em;
+    background: var(--tag-bg);
+    color: var(--accent2);
+    padding: 2px 8px;
+    border-radius: 2px;
+    border: 1px solid var(--rule);
+    transition: background 0.2s, color 0.2s;
+  }
+  .tech-tag:hover { background: var(--accent2); color: #fff; }
+
+  /* ── SIDEBAR ── */
+  .side-section { margin-bottom: 32px; animation: fadeUp 0.6s ease both; }
+  .side-section:nth-child(1) { animation-delay: 0.35s; }
+  .side-section:nth-child(2) { animation-delay: 0.45s; }
+  .side-section:nth-child(3) { animation-delay: 0.55s; }
+  .side-section:nth-child(4) { animation-delay: 0.65s; }
+
+  .side-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  /* Skills */
+  .skill-group { margin-bottom: 12px; }
+  .skill-category {
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 6px;
+  }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 4px; }
+  .skill-tag {
+    font-size: 0.72rem;
+    background: var(--tag-bg);
+    color: var(--ink);
+    padding: 3px 8px;
+    border-radius: 2px;
+    line-height: 1.4;
+    transition: background 0.2s;
+  }
+  .skill-tag:hover { background: var(--accent); color: #fff; }
+
+  /* Highlights */
+  .highlight-item {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 12px;
+    align-items: flex-start;
+  }
+  .highlight-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.5rem;
+    color: var(--rule);
+    line-height: 1;
+    flex-shrink: 0;
+    width: 28px;
+    text-align: right;
+  }
+  .highlight-text {
+    font-size: 0.78rem;
+    line-height: 1.5;
+    color: var(--muted);
+  }
+  .highlight-text strong { display: block; color: var(--ink); font-weight: 600; font-size: 0.82rem; }
+
+  /* Education */
+  .edu-degree {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1rem;
+    color: var(--ink);
+    margin-bottom: 2px;
+  }
+  .edu-school {
+    font-size: 0.78rem;
+    color: var(--accent2);
+    font-weight: 500;
+    margin-bottom: 2px;
+  }
+  .edu-year {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--muted);
+  }
+
+  /* Awards */
+  .award-item { margin-bottom: 10px; }
+  .award-name {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--ink);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .award-name::before {
+    content: '★';
+    color: var(--accent);
+    font-size: 0.7rem;
+  }
+  .award-desc {
+    font-size: 0.74rem;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+
+  @media print {
+    body { background: white; }
+    .page { padding: 30px 36px; }
+    * { animation: none !important; }
+    .tech-tag:hover, .skill-tag:hover { background: var(--tag-bg); color: var(--accent2); }
+  }
+
+  @media (max-width: 720px) {
+    .page { padding: 32px 24px; }
+    h1 { font-size: 2.8rem; }
+    .body-grid { grid-template-columns: 1fr; }
+    .header { grid-template-columns: 1fr; }
+    .contact-block { text-align: left; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="name-block">
+      <!-- <p class="name-label">Resume · 2026</p> -->
+      <h1>Vimal Desai</h1>
+      <p class="title-line">Senior Full Stack Engineer &nbsp;·&nbsp; React · Next.js · Node.js · TypeScript · AWS</p>
+    </div>
+    <div class="contact-block">
+      <span class="contact-item"><a href="mailto:desai.vimal250@gmail.com">desai.vimal250@gmail.com</a></span>
+      <span class="contact-item">(+91) 90333 19000</span>
+      <span class="contact-item">Surat, Gujarat, India</span>
+      <span class="contact-item"><a href="#">LinkedIn</a> &nbsp;·&nbsp; <a href="#">GitHub</a> &nbsp;·&nbsp; <a href="#">npm</a></span>
+    </div>
+  </header>
+
+  <!-- BODY -->
+  <div class="body-grid">
+
+    <!-- MAIN COLUMN -->
+    <main>
+      <!-- SUMMARY -->
+      <div class="section summary">
+        <div class="section-label"><span>About</span></div>
+        <p>Senior Full Stack Engineer with <strong>9+ years</strong> building scalable, high-performance web applications — from pixel-perfect UIs to robust microservices. Known for <strong>doubling sprint velocity</strong> through AI-augmented workflows, leading zero-downtime deployments, and growing from intern to Tech Lead in 4 years. Testing is core to my craft, not an afterthought.</p>
+      </div>
+
+      <!-- EXPERIENCE -->
+      <div class="section">
+        <div class="section-label"><span>Experience</span></div>
+
+        <div class="job">
+          <div class="job-header">
+            <div class="job-title">Senior Software Engineer</div>
+            <div class="job-period">Nov 2023 – Present</div>
+          </div>
+          <div class="job-company">UpKeep Technologies</div>
+          <div class="job-location">Remote, India</div>
+          <ul class="job-bullets">
+            <li>Delivered full-stack features across frontend, backend & shared component libraries for a <strong>high-traffic enterprise asset management platform</strong> used by thousands of businesses worldwide.</li>
+            <li>Key contributor to the <strong>Preventive Maintenance module</strong> — optimised performance and significantly reduced system complexity.</li>
+            <li>Served as <strong>Release Engineer for 2 months</strong>, owning and executing platform-wide zero-downtime deployments.</li>
+            <li>Leveraged AI tooling to <strong>double sprint velocity from 16 → 30+ story points</strong> through smarter automation & workflow efficiency.</li>
+            <li><strong>3rd place</strong> in internal AI Hackathon for a POC improving data consistency and system-wide quality at scale.</li>
+            <li>Recognised as <strong>"Leader of the Month"</strong> for ownership, innovation, and cross-functional impact.</li>
+          </ul>
+          <div class="job-tech">
+            <span class="tech-tag">React.js</span><span class="tech-tag">Next.js</span><span class="tech-tag">Node.js</span><span class="tech-tag">NestJS</span><span class="tech-tag">TypeScript</span><span class="tech-tag">TailwindCSS</span><span class="tech-tag">MongoDB</span><span class="tech-tag">PostgreSQL</span><span class="tech-tag">Cypress</span><span class="tech-tag">Jest</span><span class="tech-tag">AWS</span><span class="tech-tag">Docker</span><span class="tech-tag">Playwright</span>
+          </div>
+        </div>
+
+        <div class="job">
+          <div class="job-header">
+            <div class="job-title">Senior Software Development Engineer</div>
+            <div class="job-period">Sep 2022 – Nov 2023</div>
+          </div>
+          <div class="job-company">Emtec Inc.</div>
+          <div class="job-location">Remote, India</div>
+          <ul class="job-bullets">
+            <li>Built scalable, responsive UIs for a <strong>high-traffic US rental platform</strong> using React.js, Next.js, TypeScript, and modern UI libraries.</li>
+            <li>Designed and managed <strong>Node.js/NestJS APIs</strong> backed by MongoDB and PostgreSQL.</li>
+            <li>Reduced automated testing cycle time significantly through <strong>Cypress, Jest, k6, and JMeter</strong> automation.</li>
+            <li>Collaborated directly with the CTO; championed coding standards driving an <strong>11% improvement in operational efficiency.</strong></li>
+            <li>Improved CI/CD pipelines and AWS-based deployment infrastructure, streamlining release workflows.</li>
+          </ul>
+          <div class="job-tech">
+            <span class="tech-tag">React.js</span><span class="tech-tag">Next.js</span><span class="tech-tag">TailwindCSS</span><span class="tech-tag">TypeScript</span><span class="tech-tag">GraphQL</span><span class="tech-tag">NestJS</span><span class="tech-tag">k6</span><span class="tech-tag">Cypress</span><span class="tech-tag">PostgreSQL</span><span class="tech-tag">AWS</span>
+          </div>
+        </div>
+
+        <div class="job">
+          <div class="job-header">
+            <div class="job-title">Technical Lead & Sr. Front-End Developer</div>
+            <div class="job-period">Jul 2018 – Jul 2022</div>
+          </div>
+          <div class="job-company">Knovator Technologies Pvt. Ltd.</div>
+          <div class="job-location">Surat, Gujarat, India</div>
+          <ul class="job-bullets">
+            <li>Grew from <strong>intern to Tech Lead in 4 years</strong> — led cross-functional teams delivering <strong>50+ projects</strong> across Healthcare, Real Estate, Textile, Travel & Diamond industries.</li>
+            <li>Architected scalable Node.js microservices — one (<strong>"Implr"</strong>) independently launched as a standalone product.</li>
+            <li>Built a reusable React.js + TypeScript component library that <strong>accelerated development velocity by 30%.</strong></li>
+            <li>Conducted <strong>40+ technical interviews</strong>, mentored junior developers, and championed Agile practices across the team.</li>
+            <li>Managed StringERP product — overseeing front-end quality, server management, and team operations end-to-end.</li>
+          </ul>
+          <div class="job-tech">
+            <span class="tech-tag">React.js</span><span class="tech-tag">Node.js</span><span class="tech-tag">TypeScript</span><span class="tech-tag">Ant Design</span><span class="tech-tag">Express.js</span><span class="tech-tag">MongoDB</span><span class="tech-tag">Microservices</span><span class="tech-tag">Flutter</span><span class="tech-tag">Next.js</span><span class="tech-tag">TailwindCSS</span>
+          </div>
+        </div>
+
+        <div class="job">
+          <div class="job-header">
+            <div class="job-title">Web Developer</div>
+            <div class="job-period">Feb 2017 – Mar 2018</div>
+          </div>
+          <div class="job-company">Codelash · Self-Employed</div>
+          <div class="job-location">Vadodara, Gujarat, India</div>
+          <ul class="job-bullets">
+            <li>Crafted responsive, cross-browser UI solutions using HTML5, CSS3, JavaScript, jQuery, and PHP with third-party API integrations.</li>
+          </ul>
+          <div class="job-tech">
+            <span class="tech-tag">HTML5</span><span class="tech-tag">CSS3</span><span class="tech-tag">JavaScript</span><span class="tech-tag">jQuery</span><span class="tech-tag">PHP</span>
+          </div>
+        </div>
+
+      </div>
+    </main>
+
+    <!-- SIDEBAR -->
+    <aside>
+
+      <!-- KEY NUMBERS -->
+      <div class="side-section">
+        <div class="side-label">By the Numbers</div>
+        <div class="highlight-item">
+          <div class="highlight-num">9+</div>
+          <div class="highlight-text"><strong>Years of Experience</strong>Full-stack, frontend-to-backend</div>
+        </div>
+        <div class="highlight-item">
+          <div class="highlight-num">50+</div>
+          <div class="highlight-text"><strong>Projects Shipped</strong>Across 7 industries</div>
+        </div>
+        <div class="highlight-item">
+          <div class="highlight-num">2×</div>
+          <div class="highlight-text"><strong>Sprint Velocity</strong>16 → 30+ story points via AI</div>
+        </div>
+        <div class="highlight-item">
+          <div class="highlight-num">40+</div>
+          <div class="highlight-text"><strong>Interviews Conducted</strong>Front-end hiring & mentoring</div>
+        </div>
+        <div class="highlight-item">
+          <div class="highlight-num">11%</div>
+          <div class="highlight-text"><strong>Efficiency Gain</strong>Through code quality at Emtec</div>
+        </div>
+      </div>
+
+      <!-- SKILLS -->
+      <div class="side-section">
+        <div class="side-label">Technical Skills</div>
+        <div class="skill-group">
+          <div class="skill-category">Frontend</div>
+          <div class="skill-tags">
+            <span class="skill-tag">React.js</span><span class="skill-tag">Next.js</span><span class="skill-tag">TypeScript</span><span class="skill-tag">TailwindCSS</span><span class="skill-tag">MUI</span><span class="skill-tag">Chakra</span><span class="skill-tag">Ant Design</span><span class="skill-tag">Redux</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-category">Backend</div>
+          <div class="skill-tags">
+            <span class="skill-tag">Node.js</span><span class="skill-tag">NestJS</span><span class="skill-tag">Express</span><span class="skill-tag">GraphQL</span><span class="skill-tag">Microservices</span><span class="skill-tag">RabbitMQ</span><span class="skill-tag">Kafka</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-category">Databases</div>
+          <div class="skill-tags">
+            <span class="skill-tag">PostgreSQL</span><span class="skill-tag">MongoDB</span><span class="skill-tag">MySQL</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-category">Testing</div>
+          <div class="skill-tags">
+            <span class="skill-tag">Cypress</span><span class="skill-tag">Jest</span><span class="skill-tag">Playwright</span><span class="skill-tag">k6</span><span class="skill-tag">JMeter</span><span class="skill-tag">Postman</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-category">DevOps</div>
+          <div class="skill-tags">
+            <span class="skill-tag">AWS</span><span class="skill-tag">Docker</span><span class="skill-tag">CI/CD</span><span class="skill-tag">Git</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- AWARDS -->
+      <div class="side-section">
+        <div class="side-label">Recognition</div>
+        <div class="award-item">
+          <div class="award-name">Leader of the Month</div>
+          <div class="award-desc">UpKeep Technologies — ownership, innovation & cross-functional impact</div>
+        </div>
+        <div class="award-item">
+          <div class="award-name">AI Hackathon — 3rd Place</div>
+          <div class="award-desc">POC improving data consistency and system quality at scale</div>
+        </div>
+        <div class="award-item">
+          <div class="award-name">Release Engineer</div>
+          <div class="award-desc">Led zero-downtime platform-wide deployments for 2 months</div>
+        </div>
+      </div>
+
+      <!-- EDUCATION -->
+      <div class="side-section">
+        <div class="side-label">Education</div>
+        <div class="edu-degree">Bachelor of Computer Applications</div>
+        <div class="edu-school">Dr. Sarvepalli Radhakrishnan University</div>
+        <div class="edu-year">Bhopal, MP &nbsp;·&nbsp; 2015 – 2018</div>
+      </div>
+
+    </aside>
+  </div>
+</div>
+</body>
+</html>
