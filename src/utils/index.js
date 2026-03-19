@@ -22,7 +22,9 @@ export const tint = (hex, amount) => {
     B = B < 255 ? B : 255;
 
     const getDouble = (number) =>
-      number.toString(16).length === 1 ? `0${number.toString(16)}` : number.toString(16);
+      number.toString(16).length === 1
+        ? `0${number.toString(16)}`
+        : number.toString(16);
 
     const RR = getDouble(R);
     const GG = getDouble(G);
@@ -65,7 +67,12 @@ export const getStringByCriteria = (strings = [], criteria = 'largest') => {
     return value;
   }
   filteredStrings.forEach((s) => {
-    if (s && (criteria === 'largest' ? s.length > value.length : s.length < value.length)) {
+    if (
+      s &&
+      (criteria === 'largest'
+        ? s.length > value.length
+        : s.length < value.length)
+    ) {
       value = s;
     }
   });

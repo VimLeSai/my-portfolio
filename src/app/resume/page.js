@@ -1,40 +1,37 @@
-import ResumeHeader from "@/components/resume/ResumeHeader";
-import SectionLabel from "@/components/resume/SectionLabel";
-import JobEntry from "@/components/resume/JobEntry";
-import BulletText from "@/components/resume/BulletText";
-import Sidebar from "@/components/resume/Sidebar";
-import { resumeMeta, jobs } from "@lib/resume-data";
+import ResumeHeader from '@/components/resume/ResumeHeader';
+import SectionLabel from '@/components/resume/SectionLabel';
+import JobEntry from '@/components/resume/JobEntry';
+import BulletText from '@/components/resume/BulletText';
+import Sidebar from '@/components/resume/Sidebar';
+import { resumeMeta, jobs } from '@lib/resume-data';
 
 export const metadata = {
-  title: "Vimal Desai — Senior Full Stack Engineer",
+  title: 'Vimal Desai — Senior Full Stack Engineer',
   description:
-    "Senior Full Stack Engineer with 9+ years of experience building scalable, high-performance web applications.",
+    'Senior Full Stack Engineer with 9+ years of experience building scalable, high-performance web applications.',
 };
 
 export default function ResumePage() {
   return (
     <div className="bg-paper min-h-screen">
-      <div className="max-w-[960px] mx-auto px-12 py-[60px] pb-20 animate-fade-up">
-
+      <div className="animate-fade-up mx-auto max-w-[960px] px-12 py-[60px] pb-20">
         {/* ── Header ── */}
         <ResumeHeader meta={resumeMeta} />
 
         {/* ── Body grid: main + sidebar ── */}
-        <div className="grid grid-cols-[1fr_260px] gap-12 items-start max-lg:grid-cols-1">
-
+        <div className="grid grid-cols-[1fr_260px] items-start gap-12 max-lg:grid-cols-1">
           {/* ── Main column ── */}
           <main>
-
             {/* About / Summary */}
-            <section className="mb-[38px] animate-fade-up delay-300">
+            <section className="animate-fade-up mb-[38px] delay-300">
               <SectionLabel label="About" />
-              <p className="text-[0.97rem] leading-[1.75] text-[#2a2520] max-w-[640px]">
+              <p className="max-w-[640px] text-[0.97rem] leading-[1.75] text-[#2a2520]">
                 <BulletText text={resumeMeta.summary} />
               </p>
             </section>
 
             {/* Experience */}
-            <section className="mb-[38px] animate-fade-up delay-400">
+            <section className="animate-fade-up mb-[38px] delay-400">
               <SectionLabel label="Experience" />
               {jobs.map((job, i) => (
                 <JobEntry
@@ -44,12 +41,10 @@ export default function ResumePage() {
                 />
               ))}
             </section>
-
           </main>
 
           {/* ── Sidebar ── */}
           <Sidebar />
-
         </div>
       </div>
     </div>

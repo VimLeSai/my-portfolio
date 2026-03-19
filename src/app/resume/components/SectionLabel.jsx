@@ -1,10 +1,10 @@
 export default function SectionLabel({ label }) {
   return (
-    <div className="flex items-center gap-3 mb-[22px]">
-      <span className="font-mono text-[0.65rem] tracking-[0.16em] uppercase text-muted whitespace-nowrap">
+    <div className="mb-[22px] flex items-center gap-3">
+      <span className="text-muted font-mono text-[0.65rem] tracking-[0.16em] whitespace-nowrap uppercase">
         {label}
       </span>
-      <span className="flex-1 h-px bg-rule" />
+      <span className="bg-rule h-px flex-1" />
     </div>
   );
 }

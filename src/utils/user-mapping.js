@@ -1,11 +1,22 @@
 import { get, has, replace, isEmpty } from 'lodash';
-import { IS_GENERATOR, GITHUB_README_URL, MAIN_SITE_URL, AVATAR_GEN_URL } from '@lib/constants';
+import {
+  IS_GENERATOR,
+  GITHUB_README_URL,
+  MAIN_SITE_URL,
+  AVATAR_GEN_URL,
+} from '@lib/constants';
 import theme from '@themes/common';
 import { getPageFavicon } from '@utils';
 
 export const extractSocialNetworks = (user) => {
   if (!user) return '';
-  const socialMedia = { github: '', linkedin: '', hashnode: '', devto: '', twitter: '' };
+  const socialMedia = {
+    github: '',
+    linkedin: '',
+    hashnode: '',
+    devto: '',
+    twitter: '',
+  };
   if (user.hasHashnode) {
     socialMedia.linkedin = get(user, 'hashnode.socialMedia.linkedin');
     socialMedia.twitter = get(user, 'hashnode.socialMedia.twitter');
@@ -45,16 +56,24 @@ export const getNavLinks = (user) => {
     contact: '',
   };
   if (user?.posts && user?.showBlog && user.posts.length > 0) {
-    navLinks.blog = IS_GENERATOR ? `/portfolio/${user?.username}#blog` : '#blog';
+    navLinks.blog = IS_GENERATOR
+      ? `/portfolio/${user?.username}#blog`
+      : '#blog';
   }
   if (user?.hasReadme && user?.showAbout && user?.username) {
-    navLinks.about = IS_GENERATOR ? `/portfolio/${user?.username}#about` : '#about';
+    navLinks.about = IS_GENERATOR
+      ? `/portfolio/${user?.username}#about`
+      : '#about';
   }
   if (user?.hasRepos && user?.showRepos) {
-    navLinks.projects = IS_GENERATOR ? `/portfolio/${user?.username}#projects` : '#projects';
+    navLinks.projects = IS_GENERATOR
+      ? `/portfolio/${user?.username}#projects`
+      : '#projects';
   }
   if (!isEmpty(user.email) || user.isHireable) {
-    navLinks.contact = IS_GENERATOR ? `/portfolio/${user?.username}#contact` : '#contact';
+    navLinks.contact = IS_GENERATOR
+      ? `/portfolio/${user?.username}#contact`
+      : '#contact';
   }
   return navLinks;
 };
@@ -79,7 +98,11 @@ export const getAvatar = (user) => {
     get(
       user,
       'github.avatar_url',
-      get(user, 'hashnode.photo', get(user, 'devto.profile_image', '/default-avatar.png')),
+      get(
+        user,
+        'hashnode.photo',
+        get(user, 'devto.profile_image', '/default-avatar.png'),
+      ),
     ),
   );
 };
@@ -115,7 +138,11 @@ export const purgeUserReadme = (readme) => {
   return container.innerHTML;
 };
 
-export const getGithubReadmeURL = (username, branch = 'main', fileName = 'README.md') => {
+export const getGithubReadmeURL = (
+  username,
+  branch = 'main',
+  fileName = 'README.md',
+) => {
   return `${GITHUB_README_URL}${username}/${username}/${branch}/${fileName}`;
 };
 
@@ -144,12 +171,15 @@ export const getHeadData = ({ isPortfolio, user }) => {
     og_title: title,
     og_url: MAIN_SITE_URL,
     og_image: `${MAIN_SITE_URL}/twitter-image-devcover.jpg`,
-    description: '🌐 Get and publish your developer portfolio with just your username',
+    description:
+      '🌐 Get and publish your developer portfolio with just your username',
     keywords: 'Portfolio, Developer, Generator, Vercel, Hashnode',
   };
   if (!isEmpty(user) && isPortfolio) {
     const userImage =
-      user?.github?.avatar_url || user?.hashnode?.photo || user?.devto?.profile_image;
+      user?.github?.avatar_url ||
+      user?.hashnode?.photo ||
+      user?.devto?.profile_image;
     const userIcon = user.favicon || getUserFavicon(user);
     const userTitle = `${user.name} ${user.shortBio && `| ${user.shortBio}`}`;
     head.title = userTitle;
