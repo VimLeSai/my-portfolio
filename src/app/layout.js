@@ -20,6 +20,9 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata = {
   title: 'Vimal Desai — Senior Full Stack Engineer',
   description: 'Portfolio and Resume of Vimal Desai',
+  icons: {
+    icon: '/favicon.svg',
+  },
 };
 
 export default function RootLayout({ children }) {
