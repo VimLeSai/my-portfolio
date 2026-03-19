@@ -13,16 +13,19 @@ export const StyledRepo = styled.div`
 
   .project-inner {
     ${({ theme }) => theme.mixins.flexBetween};
-    border: 2px solid ${(props) => hexa(props.theme.brand.primary, 0.5, true)};
+    border: 1px solid ${(props) => props.theme.accents.a7};
     flex-direction: column;
     align-items: flex-start;
     position: relative;
     height: 100%;
     padding: 2rem 1.75rem;
-    border-radius: ${(props) => props.theme.borderRadius};
+    border-radius: 0;
+    background-color: transparent;
     transition: all 0.25s ease;
+    font-family: ${(props) => props.theme.fontFamily.fontMono};
     &:hover {
-      border-color: ${(props) => props.theme.brand.primary};
+      border-color: ${(props) => props.theme.text.default};
+      transform: translateY(-5px);
     }
     header,
     footer {

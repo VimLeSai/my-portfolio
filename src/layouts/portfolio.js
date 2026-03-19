@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { useEffect } from 'react';
-import { Toasts } from '@components';
+import { Toasts, StatusBar } from '@components';
 import { withRouter } from 'next/router';
 import dynamic from 'next/dynamic';
 import { IS_GENERATOR } from '@lib/constants';
@@ -44,6 +44,7 @@ const PorfolioLayout = ({ children, router }) => {
 
   return (
     <BaseLayout isPortfolio>
+      <StatusBar />
       <SkipToContentLink href="#content">Skip to Content</SkipToContentLink>
       {showNavbar && <Navbar isHome={isHome} />}
       <Main id="content" fullHeight={mainFullHeight} className="fillHeight">

@@ -11,7 +11,7 @@ const Footer = ({ simple = false, user = {} }) => {
   const renderFooter = () => {
     if (!isEmpty(user)) {
       return (
-        <StyledCredit simple={simple} tabindex="-1">
+        <StyledCredit simple={simple ? 1 : 0} tabIndex="-1">
           <span className="copyright">
             <span>
               ©&nbsp;
@@ -20,7 +20,7 @@ const Footer = ({ simple = false, user = {} }) => {
               {user.name || user.username}
             </span>
           </span>
-          <StyledCredit simple tabindex="-1">
+          <StyledCredit simple={1} tabIndex="-1">
             <a rel="noreferrer" target="_blank" href={MAIN_SITE_URL}>
               <span>Powered by Devcover</span>
             </a>
@@ -30,7 +30,7 @@ const Footer = ({ simple = false, user = {} }) => {
     }
     if (IS_PORTFOLIO) {
       return (
-        <StyledCredit simple tabindex="-1">
+        <StyledCredit simple={1} tabIndex="-1">
           <a rel="noreferrer" target="_blank" href={MAIN_SITE_URL}>
             <span>Powered by Devcover</span>
           </a>
@@ -39,7 +39,7 @@ const Footer = ({ simple = false, user = {} }) => {
     }
     if (simple) {
       return (
-        <StyledCredit simple tabindex="-1">
+        <StyledCredit simple={1} tabIndex="-1">
           <a rel="noreferrer" target="_blank" href="https://jrgarciadev.com">
             <span>Created by</span>
             &nbsp;
@@ -51,7 +51,7 @@ const Footer = ({ simple = false, user = {} }) => {
     return (
       <>
         <Social className="social-networks" />
-        <StyledCredit simple={simple} small tabindex="-1">
+        <StyledCredit simple={simple ? 1 : 0} small={1} tabIndex="-1">
           <a rel="noreferrer" target="_blank" href="https://vercel.com">
             <span>Hosted by</span>
             &nbsp;

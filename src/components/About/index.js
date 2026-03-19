@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { NumberedHeading, SectionButton } from '@common/styles';
-import ReactMarkdownWithHtml from 'react-markdown/with-html';
+import ReactMarkdownWithHtml from 'react-markdown';
 import PropTypes from 'prop-types';
 import dynamic from 'next/dynamic';
 import { useUIContext } from '@contexts/ui';

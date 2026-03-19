@@ -1,4 +1,4 @@
-import { HomeFormView, UserNotFoundView, PortfolioView } from '@views';
+import { CreativeHeroView, UserNotFoundView, PortfolioView } from '@views';
 import { StyledMainContainer } from '@common/styles';
 import PortfolioLayout from '@layouts/portfolio';
 import HomeLayout from '@layouts/home';
@@ -50,7 +50,7 @@ const IndexPage = ({ user, remaining }) => {
   }
   return (
     <StyledMainContainer className="fillHeight">
-      <HomeFormView remaining={remaining} />
+      <CreativeHeroView remaining={remaining} />
     </StyledMainContainer>
   );
 };

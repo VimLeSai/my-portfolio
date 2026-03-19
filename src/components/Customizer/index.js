@@ -21,7 +21,11 @@ const Customizer = () => {
   const { user, updateValue: updateUserData } = useUserDataContext();
   const [localColor, setLocalColor] = useState(user.primaryColor || '#1ee0e0');
 
-  const { register, handleSubmit, formState, errors } = useForm({
+  const {
+    register,
+    handleSubmit,
+    formState: { isValid, errors },
+  } = useForm({
     mode: 'onBlur',
     defaultValues: {
       name: user.name,
@@ -32,8 +36,6 @@ const Customizer = () => {
       ga: user.ga,
     },
   });
-
-  const { isValid } = formState;
 
   useOnClickOutside(customizerRef, () => {
     setOpen(false);
@@ -123,8 +125,7 @@ const Customizer = () => {
               className="input"
               size="lg"
               placeholder="Name"
-              name="name"
-              ref={register(rules.name)}
+              {...register('name', rules.name)}
               error={!isEmpty(errors.name) ? errors.name.message : ''}
             />
             <h5 className="field-title">Email</h5>
@@ -133,8 +134,7 @@ const Customizer = () => {
               fullWidth
               size="lg"
               placeholder="Email"
-              name="email"
-              ref={register(rules.email)}
+              {...register('email', rules.email)}
               error={!isEmpty(errors.email) ? errors.email.message : ''}
             />
             <h5 className="field-title">Page Title</h5>
@@ -143,8 +143,7 @@ const Customizer = () => {
               fullWidth
               size="lg"
               placeholder="Page Title"
-              name="shortBio"
-              ref={register(rules.shortBio)}
+              {...register('shortBio', rules.shortBio)}
               error={!isEmpty(errors.shortBio) ? errors.shortBio.message : ''}
             />
             <h5 className="field-title">Bio</h5>
@@ -154,11 +153,10 @@ const Customizer = () => {
               fullWidth
               size="lg"
               placeholder="Large Bio"
-              name="largeBio"
-              ref={register(rules.largeBio)}
+              {...register('largeBio', rules.largeBio)}
               error={!isEmpty(errors.largeBio) ? errors.largeBio.message : ''}
             />
-            <Switch fullWidth ref={register} name="isHireable" label="Open for new opportunities" />
+            <Switch fullWidth {...register('isHireable')} label="Open for new opportunities" />
           </div>
           <ColorPicker selectedColor={localColor} onChange={onUpdateColor} />
           <div className="section">
@@ -169,8 +167,7 @@ const Customizer = () => {
               fullWidth
               size="lg"
               placeholder="UA-XXXXX"
-              name="ga"
-              ref={register(rules.ga)}
+              {...register('ga', rules.ga)}
               error={!isEmpty(errors.ga) ? errors.ga.message : ''}
             />
             <button disabled={!isValid} type="submit" className="submit-button">

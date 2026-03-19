@@ -11,8 +11,12 @@ export const StyledHeroSection = styled.section`
 
 export const StyledBigTitle = styled.h3`
   margin: 0;
-  font-size: clamp(40px, 8vw, 80px);
-  font-weight: ${(props) => props.theme.fontw.semibold};
+  font-size: clamp(4rem, 8vw, 10rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 0.9;
+  letter-spacing: -0.05em;
+  font-family: ${(props) => props.theme.fontFamily.fontMono};
 `;
 
 export const LeftContainer = styled.div`

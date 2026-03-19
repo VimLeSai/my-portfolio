@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import { ThemeProvider } from 'styled-components';
 import theme from '@themes/dark';
+import { StatusBar } from '@components';
 import { SkipToContentLink } from './styles';
 import Main from './main';
 import Footer from './footer';
@@ -10,6 +11,7 @@ const HomeLayout = ({ children }) => {
   return (
     <ThemeProvider theme={theme}>
       <BaseLayout>
+        <StatusBar />
         <SkipToContentLink href="#content">Skip to Content</SkipToContentLink>
         <Main id="content" className="fillHeight">
           {children}

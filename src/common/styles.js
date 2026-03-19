@@ -31,8 +31,11 @@ export const NumberedHeading = styled.h2`
   position: relative;
   margin: 10px 0 40px;
   width: 100%;
-  font-size: clamp(26px, 5vw, 4rem);
-  font-weight: ${(props) => props.theme.fontw.semibold};
+  font-size: clamp(2rem, 5vw, 4rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  font-family: ${(props) => props.theme.fontFamily.fontMono};
   white-space: nowrap;
 
   &:before {

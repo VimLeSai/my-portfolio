@@ -17,4 +17,6 @@ export { default as Toasts } from './Toasts';
 export { default as Tooltip } from './Tooltip';
 export { default as ActionButtons } from './ActionButtons';
 export { default as Repo } from './Repo';
+export { default as StatusBar } from './StatusBar';
+export { default as GrainedText } from './GrainedText';
 export * from './Icons';

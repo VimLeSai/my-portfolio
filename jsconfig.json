@@ -1,0 +1,33 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@common": ["src/common"],
+      "@common/*": ["src/common/*"],
+      "@contexts": ["src/contexts"],
+      "@contexts/*": ["src/contexts/*"],
+      "@styles": ["src/styles"],
+      "@styles/*": ["src/styles/*"],
+      "@components": ["src/components"],
+      "@components/*": ["src/components/*"],
+      "@graphql": ["src/graphql"],
+      "@graphql/*": ["src/graphql/*"],
+      "@hooks": ["src/hooks"],
+      "@hooks/*": ["src/hooks/*"],
+      "@lib": ["src/lib"],
+      "@lib/*": ["src/lib/*"],
+      "@services": ["src/services"],
+      "@services/*": ["src/services/*"],
+      "@themes": ["src/themes"],
+      "@themes/*": ["src/themes/*"],
+      "@utils": ["src/utils"],
+      "@utils/*": ["src/utils/*"],
+      "@layouts": ["src/layouts"],
+      "@layouts/*": ["src/layouts/*"],
+      "@views": ["src/views"],
+      "@views/*": ["src/views/*"],
+      "@models": ["src/models"],
+      "@models/*": ["src/models/*"]
+    }
+  }
+}
