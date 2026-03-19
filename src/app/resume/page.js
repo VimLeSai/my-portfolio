@@ -14,18 +14,18 @@ export const metadata = {
 export default function ResumePage() {
   return (
     <div className="bg-paper min-h-screen">
-      <div className="animate-fade-up mx-auto max-w-[960px] px-12 py-[60px] pb-20">
+      <div className="animate-fade-up mx-auto w-full max-w-6xl px-6 py-8 pb-12 md:px-12 md:py-15 md:pb-20">
         {/* ── Header ── */}
         <ResumeHeader meta={resumeMeta} />
 
         {/* ── Body grid: main + sidebar ── */}
-        <div className="grid grid-cols-[1fr_260px] items-start gap-12 max-lg:grid-cols-1">
+        <div className="grid grid-cols-[1fr_300px] items-start gap-12 max-lg:grid-cols-1">
           {/* ── Main column ── */}
           <main>
             {/* About / Summary */}
             <section className="animate-fade-up mb-[38px] delay-300">
               <SectionLabel label="About" />
-              <p className="max-w-[640px] text-[0.97rem] leading-[1.75] text-[#2a2520]">
+              <p className="max-w-[764px] text-[1rem] leading-[1.75] text-[#2a2520]">
                 <BulletText text={resumeMeta.summary} />
               </p>
             </section>

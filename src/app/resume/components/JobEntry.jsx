@@ -10,7 +10,7 @@ export default function JobEntry({ job, isLast = false }) {
     >
       {/* Title + Period */}
       <div className="mb-1 flex items-start justify-between gap-4">
-        <h3 className="text-ink font-serif text-[1.12rem] leading-[1.2]">
+        <h3 className="text-ink font-serif text-lg leading-[1.2]">
           {job.title}
         </h3>
         <span className="text-accent pt-1 font-mono text-[0.66rem] tracking-[0.04em] whitespace-nowrap">
@@ -19,7 +19,7 @@ export default function JobEntry({ job, isLast = false }) {
       </div>
 
       {/* Company */}
-      <p className="text-accent2 mb-0.5 text-[0.82rem] font-semibold tracking-[0.01em]">
+      <p className="text-accent2 mb-0.5 text-sm font-semibold tracking-[0.01em]">
         {job.company}
       </p>
 
@@ -31,7 +31,7 @@ export default function JobEntry({ job, isLast = false }) {
         {job.bullets.map((bullet, i) => (
           <li
             key={i}
-            className="relative pl-4 text-[0.86rem] leading-[1.65] text-[#2d2822]"
+            className="relative pl-4 text-[1rem] leading-[1.65] text-[#2d2822]"
           >
             <span className="text-accent absolute top-[4px] left-0 text-[0.7rem]">
               ▸
