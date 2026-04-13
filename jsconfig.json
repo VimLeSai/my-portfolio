@@ -3,8 +3,8 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"],
-      "@lib/*": ["./src/lib/*"],
-      "@/components/resume/*": ["./src/app/resume/components/*"]
+      "@/app/*": ["./src/app/*"],
+      "@lib/*": ["./src/lib/*"]
     },
     "jsx": "preserve",
     "module": "esnext",

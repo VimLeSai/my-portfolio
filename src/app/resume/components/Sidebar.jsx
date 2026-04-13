@@ -48,6 +48,14 @@ export default function Sidebar() {
             Led zero-downtime platform-wide deployments for 2 months
           </div>
         </div>
+         <div className="award-item mb-2.5">
+          <div className="award-name text-ink before:text-accent flex items-center gap-1.5 text-[0.85rem] font-semibold before:text-[0.7rem] before:content-['★']">
+            Tech Lead
+          </div>
+          <div className="award-desc text-muted mt-0.5 text-[0.8rem]">
+            Led a cross-functional team of 10+ developers to successful project delivery
+          </div>
+        </div>
       </SidebarSection>
 
       {/* Education */}

@@ -1,8 +1,8 @@
-import ResumeHeader from '@/components/resume/ResumeHeader';
-import SectionLabel from '@/components/resume/SectionLabel';
-import JobEntry from '@/components/resume/JobEntry';
-import BulletText from '@/components/resume/BulletText';
-import Sidebar from '@/components/resume/Sidebar';
+import ResumeHeader from './components/ResumeHeader';
+import SectionLabel from './components/SectionLabel';
+import JobEntry from './components/JobEntry';
+import BulletText from './components/BulletText';
+import Sidebar from './components/Sidebar';
 import { resumeMeta, jobs } from '@lib/resume-data';
 
 export const metadata = {
