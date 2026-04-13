@@ -1,6 +1,6 @@
 export const resumeMeta = {
   name: 'Vimal Desai',
-  label: 'Portfolio · Resume · 2025',
+  label: 'Portfolio · Resume · 2026',
   title:
     'Senior Full Stack Engineer · React · Next.js · Node.js · TypeScript · AWS',
   email: 'desai.vimal250@gmail.com',
@@ -17,7 +17,7 @@ export const jobs = [
   {
     title: 'Senior Software Engineer',
     company: 'UpKeep Technologies',
-    period: 'Aug 2024 – Present',
+    period: 'Nov 2023 – Present',
     location: 'Remote, India',
     bullets: [
       'Delivered full-stack features across frontend, backend & shared component libraries for a **high-traffic enterprise asset management platform** used by thousands of businesses worldwide.',
@@ -45,7 +45,7 @@ export const jobs = [
   {
     title: 'Senior Software Development Engineer',
     company: 'Emtec Inc.',
-    period: 'Sep 2022 – Jul 2024',
+    period: 'Sep 2022 – Nov 2023',
     location: 'Remote, India',
     bullets: [
       'Built scalable, responsive UIs for a **high-traffic US rental platform** using React.js, Next.js, TypeScript, and modern UI libraries.',
@@ -180,6 +180,10 @@ export const awards = [
   {
     name: 'Release Engineer',
     desc: 'Led zero-downtime platform-wide deployments for 2 months',
+  },
+  {
+    name: 'Tech Lead',
+    desc: 'Led a cross-functional team of 10+ developers to successful project delivery',
   },
 ];
 
