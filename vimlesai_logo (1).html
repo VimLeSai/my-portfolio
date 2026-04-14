@@ -1,0 +1,324 @@
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/@fontsource/jetbrains-mono@5/400.min.css"
+/>
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/@fontsource/jetbrains-mono@5/500.min.css"
+/>
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/@fontsource/dm-sans@5/400.min.css"
+/>
+<style>
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  .logo-wrap {
+    display: flex;
+    flex-direction: column;
+  }
+  .panel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 56px 0 46px;
+    position: relative;
+  }
+  .panel-light {
+    background: #f5f2ec;
+  }
+  .panel-dark {
+    background: #0c0c0c;
+  }
+  .ver-label {
+    position: absolute;
+    bottom: 13px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #b8b2aa;
+  }
+  .panel-dark .ver-label {
+    color: #2a2a2a;
+  }
+  .icon-row-wrap {
+    background: #edeae3;
+    border-top: 1px solid #d4cfc7;
+    padding: 22px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  .icon-row-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #b8b2aa;
+  }
+  .icon-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+  }
+  .icon-chip {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  .swatches {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 16px;
+    background: #e5e2db;
+    border-top: 1px solid #ccc8c0;
+  }
+  .swatch {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: #6b6456;
+  }
+  .chip {
+    width: 14px;
+    height: 14px;
+    border-radius: 3px;
+    flex-shrink: 0;
+  }
+</style>
+
+<div class="logo-wrap">
+  <!-- LIGHT -->
+  <div class="panel panel-light">
+    <svg width="320" viewBox="0 0 320 235" xmlns="http://www.w3.org/2000/svg">
+      <rect
+        x="136"
+        y="52"
+        width="44"
+        height="44"
+        rx="2"
+        transform="rotate(45 158 74)"
+        fill="none"
+        stroke="#ddd9d0"
+        stroke-width="1.5"
+      />
+      <polyline
+        points="135,34 158,114 181,34"
+        fill="none"
+        stroke="#1a4a8a"
+        stroke-width="17"
+        stroke-linecap="round"
+        stroke-linejoin="miter"
+      />
+      <rect x="149" y="107" width="18" height="15" fill="#800020" />
+      <line
+        x1="84"
+        y1="137"
+        x2="232"
+        y2="137"
+        stroke="#800020"
+        stroke-width="1.5"
+      />
+      <text
+        x="158"
+        y="177"
+        text-anchor="middle"
+        font-family="'JetBrains Mono', monospace"
+        font-size="38"
+        font-weight="500"
+      >
+        <tspan fill="#1a4a8a">Vim</tspan>
+        <tspan fill="#8b8074">Le</tspan>
+        <tspan fill="#800020">Sai</tspan>
+      </text>
+      <text
+        x="158"
+        y="211"
+        text-anchor="middle"
+        font-family="'DM Sans', sans-serif"
+        font-size="10"
+        fill="#b0aba4"
+        letter-spacing="3"
+      >
+        FULL STACK ENGINEER
+      </text>
+    </svg>
+    <span class="ver-label">Light</span>
+  </div>
+
+  <!-- DARK -->
+  <div class="panel panel-dark">
+    <svg width="320" viewBox="0 0 320 235" xmlns="http://www.w3.org/2000/svg">
+      <rect
+        x="136"
+        y="52"
+        width="44"
+        height="44"
+        rx="2"
+        transform="rotate(45 158 74)"
+        fill="none"
+        stroke="#1e1e1e"
+        stroke-width="1.5"
+      />
+      <polyline
+        points="135,34 158,114 181,34"
+        fill="none"
+        stroke="#5588d8"
+        stroke-width="17"
+        stroke-linecap="round"
+        stroke-linejoin="miter"
+      />
+      <rect x="149" y="107" width="18" height="15" fill="#a02030" />
+      <line
+        x1="84"
+        y1="137"
+        x2="232"
+        y2="137"
+        stroke="#a02030"
+        stroke-width="1.5"
+      />
+      <text
+        x="158"
+        y="177"
+        text-anchor="middle"
+        font-family="'JetBrains Mono', monospace"
+        font-size="38"
+        font-weight="500"
+      >
+        <tspan fill="#5588d8">Vim</tspan>
+        <tspan fill="#46433f">Le</tspan>
+        <tspan fill="#a02030">Sai</tspan>
+      </text>
+      <text
+        x="158"
+        y="211"
+        text-anchor="middle"
+        font-family="'DM Sans', sans-serif"
+        font-size="10"
+        fill="#2c2c2c"
+        letter-spacing="3"
+      >
+        FULL STACK ENGINEER
+      </text>
+    </svg>
+    <span class="ver-label">Dark</span>
+  </div>
+
+  <!-- ICON MARK SIZES -->
+  <div class="icon-row-wrap">
+    <span class="icon-row-label">Icon mark</span>
+    <div class="icon-row">
+      <!-- 72px -->
+      <div
+        class="icon-chip"
+        style="width: 72px; height: 72px; background: #1a4a8a"
+      >
+        <svg width="72" height="72" viewBox="0 0 72 72">
+          <polyline
+            points="22,18 36,50 50,18"
+            fill="none"
+            stroke="#ffffff"
+            stroke-width="7"
+            stroke-linecap="round"
+            stroke-linejoin="miter"
+          />
+          <rect x="30" y="45" width="12" height="9" fill="#800020" />
+        </svg>
+      </div>
+      <!-- 48px -->
+      <div
+        class="icon-chip"
+        style="width: 48px; height: 48px; background: #800020"
+      >
+        <svg width="48" height="48" viewBox="0 0 48 48">
+          <polyline
+            points="13,11 24,34 35,11"
+            fill="none"
+            stroke="#ffffff"
+            stroke-width="5.5"
+            stroke-linecap="round"
+            stroke-linejoin="miter"
+          />
+          <rect x="19" y="30" width="10" height="7" fill="#f5f2ec" />
+        </svg>
+      </div>
+      <!-- 32px on paper -->
+      <div
+        class="icon-chip"
+        style="
+          width: 32px;
+          height: 32px;
+          background: #f5f2ec;
+          border: 1px solid #d4cfc7;
+        "
+      >
+        <svg width="32" height="32" viewBox="0 0 32 32">
+          <polyline
+            points="8,8 16,22 24,8"
+            fill="none"
+            stroke="#1a4a8a"
+            stroke-width="3.5"
+            stroke-linecap="round"
+            stroke-linejoin="miter"
+          />
+          <rect x="12" y="19" width="8" height="5" fill="#800020" />
+        </svg>
+      </div>
+      <!-- 20px on dark -->
+      <div
+        class="icon-chip"
+        style="width: 20px; height: 20px; background: #0c0c0c"
+      >
+        <svg width="20" height="20" viewBox="0 0 20 20">
+          <polyline
+            points="4,5 10,14 16,5"
+            fill="none"
+            stroke="#5588d8"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="miter"
+          />
+          <rect x="7" y="12" width="6" height="4" fill="#a02030" />
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- SWATCHES -->
+  <div class="swatches">
+    <div class="swatch">
+      <div class="chip" style="background: #1a4a8a"></div>
+      #1a4a8a
+    </div>
+    <div class="swatch">
+      <div class="chip" style="background: #800020"></div>
+      #800020
+    </div>
+    <div class="swatch">
+      <div class="chip" style="background: #8b8074"></div>
+      #8b8074
+    </div>
+    <div class="swatch">
+      <div
+        class="chip"
+        style="background: #f5f2ec; border: 1px solid #ccc8c0"
+      ></div>
+      #f5f2ec
+    </div>
+  </div>
+</div>
