@@ -1,4 +1,4 @@
-'use client';
+
 import Navbar from '@/components/nav';
 
 import Biography from '@/app/home/biography';
@@ -43,7 +43,10 @@ const Home = () => {
       </main>
 
       {/* ── Footer ── */}
-      <Footer />
+      <Footer
+        brandName="Vimal Desai"
+        tagline="Architecting scalable web applications and high-performance digital products."
+      />
 
       <Watermark text="VimLeSai" />
     </>

@@ -5,9 +5,9 @@ import Button from '@/components/ui/Button';
 import Link from 'next/link';
 
 export const metadata = {
-  title: 'Process — Portfolio',
+  title: 'Engineering Process & Methodology — Vimal Desai',
   description:
-    'From Discovery to Deployment — the engineering methodology behind every project.',
+    "Learn about Vimal Desai's rigorous software engineering process, from architectural discovery and system design to zero-downtime deployment.",
 };
 
 const phases = [
@@ -165,8 +165,8 @@ export default function ProcessPage() {
   return (
     <>
       <Navbar
-        brandName="Portfolio"
-        ctaLabel="Get in Touch"
+        brandName="Vimal Desai"
+        ctaLabel="Work Together"
         ctaHref="/contact"
       />
 
@@ -511,8 +511,8 @@ export default function ProcessPage() {
       </main>
 
       <Footer
-        brandName="Portfolio"
-        tagline="Senior Full Stack Engineer. Crafted with intentionality."
+        brandName="Vimal Desai"
+        tagline="Executing scalable engineering through a rigorous, repeatable process."
       />
       <Watermark text="process" />
     </>

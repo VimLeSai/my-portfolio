@@ -160,7 +160,7 @@ export async function generateMetadata({ params }) {
   const project = await projects[params.id] || 'string-erp';
   if (!project) return { title: 'Not Found' };
   return {
-    title: `${project.title} — Portfolio`,
+    title: `${project.title} Case Study — Vimal Desai`,
     description: project.overview,
   };
 }
@@ -172,9 +172,9 @@ export default async function WorkDetailPage({ params }) {
   return (
     <>
       <Navbar
-        brandName="Portfolio"
-        ctaLabel="Get in Touch"
-        ctaHref="/contact"
+        brandName="Vimal Desai"
+        ctaLabel="View All Work"
+        ctaHref="/work"
       />
 
       {/* ── Hero Image ── */}
@@ -185,7 +185,7 @@ export default async function WorkDetailPage({ params }) {
         <img
           src={project.hero}
           alt={project.title}
-          className="h-full w-full object-cover"
+          className="h-full w-full object-cover object-top"
         />
         <div
           className="absolute inset-0"
@@ -456,8 +456,8 @@ export default async function WorkDetailPage({ params }) {
       </main>
 
       <Footer
-        brandName="Portfolio"
-        tagline="Senior Full Stack Engineer. Crafted with intentionality."
+        brandName="Vimal Desai"
+        tagline="Building performant, scalable systems from concept to deployment."
       />
       <Watermark text={project.title?.toLowerCase()} />
     </>

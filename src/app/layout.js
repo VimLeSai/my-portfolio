@@ -19,9 +19,9 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata = {
-  title: 'Vimal Desai — Senior Full Stack Engineer',
+  title: 'Vimal Desai — Senior Full Stack Engineer & Architect',
   description:
-    'Crafting monolithic digital experiences. Senior Full Stack Engineer focused on building resilient systems and sculptural interfaces.',
+    'Portfolio of Vimal Desai, a Senior Full Stack Engineer with 9+ years of experience building scalable, high-performance web applications using React, Node.js, and AWS.',
   icons: {
     icon: '/favicon.svg',
   },

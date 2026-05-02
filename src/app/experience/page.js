@@ -9,17 +9,17 @@ import ExpStats from './stats';
 import Timeline from './timeline';
 
 export const metadata = {
-  title: 'Experience — Portfolio',
+  title: 'Experience & Career — Vimal Desai | Senior Full Stack Engineer',
   description:
-    'A trajectory defined by 9+ years of architecting scalable systems.',
+    "Explore Vimal Desai's 9+ year engineering career across UpKeep, Emtec, and Knovator, leading teams to build high-traffic scalable enterprise applications.",
 };
 
 export default function ExperiencePage() {
   return (
     <>
       <Navbar
-        brandName="Senior Engineer"
-        ctaLabel="Contact"
+        brandName="Vimal Desai"
+        ctaLabel="Get in Touch"
         ctaHref="/contact"
       />
 
@@ -46,7 +46,7 @@ export default function ExperiencePage() {
       </main>
 
       <Footer
-        brandName="VD."
+        brandName="Vimal Desai"
         tagline="Engineering the future of digital products through thoughtful architecture."
       />
       <Watermark text="lineage" />

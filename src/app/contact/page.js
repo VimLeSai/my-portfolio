@@ -1,11 +1,15 @@
-'use client';
-
 import Navbar from '@/components/nav';
 import Footer from '@/components/footer';
 import Watermark from '@/components/ui/Watermark';
-import Button from '@/components/ui/Button';
 import StatusBadge from '@/components/ui/StatusBadge';
 import Link from 'next/link';
+import ContactForm from './contact-form';
+
+export const metadata = {
+  title: 'Contact Vimal Desai — Senior Full Stack Engineer',
+  description:
+    'Get in touch with Vimal Desai to collaborate on high-impact engineering, architectural consulting, and product vision.',
+};
 
 const techStack = [
   'Next.js',
@@ -19,28 +23,21 @@ const techStack = [
 const directChannels = [
   {
     icon: 'alternate_email',
-    label: 'vimal@engineer.dev',
-    href: 'mailto:vimal@engineer.dev',
+    label: 'vimlesai@duck.com',
+    href: 'mailto:vimlesai@duck.com',
   },
-  { icon: 'link', label: 'LinkedIn Profile', href: '#' },
-];
-
-const projectTypes = [
-  'Full Stack Development',
-  'UI/UX Engineering',
-  'Technical Strategy',
-  'Cloud Infrastructure',
+  { icon: 'link', label: 'LinkedIn Profile', href: 'https://www.linkedin.com/in/vimlesai' },
 ];
 
 export default function ContactPage() {
   return (
     <>
       <Navbar
-        brandName="Portfolio"
-        ctaLabel="Get in Touch"
-        ctaHref="/contact"
+        brandName="Vimal Desai"
+        ctaLabel="Email Me"
+        ctaHref="mailto:vimlesai@duck.com"
       />
-
+     
       <main className="mx-auto max-w-7xl px-8 pt-40 pb-24">
         {/* ── Hero ── */}
         <header className="mb-24">
@@ -57,9 +54,8 @@ export default function ContactPage() {
             className="font-body mt-8 max-w-xl text-lg leading-relaxed"
             style={{ color: 'var(--color-on-surface-variant)' }}
           >
-            Currently taking on new architectural challenges and digital
-            craftsmanship for Q4 2024. Reach out for high-impact engineering and
-            product vision.
+            Currently open for new architectural challenges and digital craftsmanship. 
+            Reach out to collaborate on high-impact engineering and product vision.
           </p>
         </header>
 
@@ -74,88 +70,7 @@ export default function ContactPage() {
                 borderRadius: 'var(--radius-xl)',
               }}
             >
-              <form className="relative z-10 space-y-10">
-                {/* Name + Company */}
-                <div className="grid grid-cols-1 gap-10 md:grid-cols-2">
-                  <FormField
-                    label="Your Name"
-                    type="text"
-                    placeholder="John Doe"
-                  />
-                  <FormField
-                    label="Company"
-                    type="text"
-                    placeholder="Acme Inc."
-                  />
-                </div>
-
-                {/* Email + Project Type */}
-                <div className="grid grid-cols-1 gap-10 md:grid-cols-2">
-                  <FormField
-                    label="Email Address"
-                    type="email"
-                    placeholder="hello@world.com"
-                  />
-                  <div className="relative">
-                    <label
-                      className="font-label mb-2 block text-[0.6875rem] font-semibold tracking-widest uppercase"
-                      style={{ color: 'var(--color-on-surface-variant)' }}
-                    >
-                      Project Type
-                    </label>
-                    <select
-                      className="w-full cursor-pointer appearance-none bg-transparent px-0 py-3 text-lg focus:outline-none"
-                      style={{
-                        borderBottom: '1px solid rgba(224,191,191,0.4)',
-                        color: 'var(--color-on-surface)',
-                        fontFamily: 'var(--font-body)',
-                      }}
-                    >
-                      {projectTypes.map((type) => (
-                        <option key={type}>{type}</option>
-                      ))}
-                    </select>
-                  </div>
-                </div>
-
-                {/* Message */}
-                <div className="relative">
-                  <label
-                    className="font-label mb-2 block text-[0.6875rem] font-semibold tracking-widest uppercase"
-                    style={{ color: 'var(--color-on-surface-variant)' }}
-                  >
-                    Your Message
-                  </label>
-                  <textarea
-                    rows={4}
-                    placeholder="Tell me about your vision..."
-                    className="w-full resize-none bg-transparent px-0 py-3 text-lg focus:outline-none"
-                    style={{
-                      borderBottom: '1px solid rgba(224,191,191,0.4)',
-                      color: 'var(--color-on-surface)',
-                      fontFamily: 'var(--font-body)',
-                    }}
-                  />
-                </div>
-
-                {/* Submit */}
-                <div className="pt-6">
-                  <button
-                    type="submit"
-                    className="font-body flex items-center gap-3 px-12 py-5 font-semibold transition-all hover:opacity-80 hover:shadow-xl active:translate-y-px"
-                    style={{
-                      backgroundColor: 'var(--color-primary-container)',
-                      color: 'var(--color-on-primary)',
-                      borderRadius: 'var(--radius-lg)',
-                    }}
-                  >
-                    Send Inquiry
-                    <span className="material-symbols-outlined text-lg">
-                      arrow_forward
-                    </span>
-                  </button>
-                </div>
-              </form>
+              <ContactForm />
             </div>
           </div>
 
@@ -178,15 +93,13 @@ export default function ContactPage() {
                   className="font-headline text-3xl italic"
                   style={{ color: 'var(--color-primary-container)' }}
                 >
-                  Open for Q4 2024
+                  Available for New Opportunities
                 </p>
                 <p
                   className="font-body mt-4 text-sm leading-relaxed"
                   style={{ color: 'var(--color-on-surface-variant)' }}
                 >
-                  I am currently vetting selected projects for the final quarter
-                  of the year. I specialise in taking products from zero to one
-                  with architectural precision.
+                  I am currently evaluating select projects and opportunities. I specialize in taking products from zero to one with architectural precision and scaling existing platforms.
                 </p>
               </div>
             </section>
@@ -209,14 +122,6 @@ export default function ContactPage() {
                       backgroundColor: 'var(--color-surface-container-low)',
                       borderRadius: 'var(--radius-lg)',
                     }}
-                    onMouseEnter={(e) =>
-                      (e.currentTarget.style.backgroundColor =
-                        'var(--color-surface-container-high)')
-                    }
-                    onMouseLeave={(e) =>
-                      (e.currentTarget.style.backgroundColor =
-                        'var(--color-surface-container-low)')
-                    }
                   >
                     <div className="flex items-center gap-4">
                       <span
@@ -272,40 +177,10 @@ export default function ContactPage() {
       </main>
 
       <Footer
-        brandName="Portfolio"
-        tagline="Senior Full Stack Engineer. Crafted with intentionality."
+        brandName="Vimal Desai"
+        tagline="Available for new architectural challenges and technical leadership roles."
       />
       <Watermark text="curate" />
     </>
-  );
-}
-
-/* ── Reusable form field ── */
-function FormField({ label, type, placeholder }) {
-  return (
-    <div className="relative">
-      <label
-        className="font-label mb-2 block text-[0.6875rem] font-semibold tracking-widest uppercase"
-        style={{ color: 'var(--color-on-surface-variant)' }}
-      >
-        {label}
-      </label>
-      <input
-        type={type}
-        placeholder={placeholder}
-        className="w-full bg-transparent px-0 py-3 text-lg transition-all focus:outline-none"
-        style={{
-          borderBottom: '1px solid rgba(224,191,191,0.4)',
-          color: 'var(--color-on-surface)',
-          fontFamily: 'var(--font-body)',
-        }}
-        onFocus={(e) =>
-          (e.currentTarget.style.borderBottomColor = 'var(--color-primary)')
-        }
-        onBlur={(e) =>
-          (e.currentTarget.style.borderBottomColor = 'rgba(224,191,191,0.4)')
-        }
-      />
-    </div>
   );
 }

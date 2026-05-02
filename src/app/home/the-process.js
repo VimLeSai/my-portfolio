@@ -4,19 +4,19 @@ const Process = () => {
   return (
     <section className="mx-auto max-w-screen-2xl py-40">
       <div className="mx-auto max-w-screen-2xl px-8 text-center">
-        <span className="label-sm text-secondary mb-4 block font-bold tracking-widest uppercase">
+        <span className="font-label text-sm uppercase tracking-[0.2em] text-outline mb-5">
           The Process
         </span>
         <h2 className="font-headline text-5xl italic">
           From Discovery to Deployment
         </h2>
 
-        <div className="hide-scrollbar relative my-12 flex justify-center overflow-x-auto py-24">
-          <div className="flex gap-8" style={{ scrollbarWidth: 'none' }}>
+        <div className="relative my-12 py-8 lg:py-24 w-full">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 mx-auto max-w-7xl text-left">
             {pipelineSteps.map((step) => (
               <div
                 key={step.num}
-                className="flex w-80 flex-col gap-6 p-8"
+                className="flex flex-col gap-6 p-8 w-full max-w-md mx-auto"
                 style={{
                   backgroundColor: 'var(--color-surface)',
                   border: '1px solid rgba(224,191,191,0.2)',

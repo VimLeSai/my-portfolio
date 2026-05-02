@@ -42,9 +42,9 @@ export default function LetsTalk() {
           </div>
           <a
             className="font-headline border-primary/40 hover:text-primary border-b text-2xl italic transition-colors"
-            href="mailto:hello@vimaldesai.com"
+            href="/contact"
           >
-            vimal@engineering.io
+            hello@vimlesai.io
           </a>
         </div>
       </div>

@@ -7,7 +7,7 @@ import { useState } from 'react';
 const navLinks = [
   { label: 'Work', href: '/' },
   { label: 'Experience', href: '/experience' },
-  { label: 'Archive', href: '/archive' },
+  // { label: 'Archive', href: '/archive' },
   { label: 'Process', href: '/process' },
   { label: 'About', href: '/about' },
 ];
@@ -16,6 +16,7 @@ export default function Navbar({
   brandName = 'VimLeSai',
   ctaLabel = `Let's Talk`,
   ctaHref = '/contact',
+  rightItems = null,
 }) {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -25,18 +26,19 @@ export default function Navbar({
       <header
         className="fixed top-0 z-50 w-full"
         style={{
-          background: 'rgba(252,249,243,0.8)',
-          backdropFilter: 'blur(20px)',
-          boxShadow: '0 20px 80px rgba(88,65,65,0.08)',
+          background: 'rgba(252,249,243,0.7)',
+          backdropFilter: 'blur(15px)',
+          boxShadow: '0 15px 80px rgba(88,65,65,0.08)',
         }}
       >
         <nav className="mx-auto flex w-full max-w-screen-2xl items-center justify-between px-8 py-6">
-          <div
+          <a
+            href="/"
             className="font-headline text-2xl font-bold"
             style={{ color: 'var(--color-on-surface)' }}
           >
             {brandName}
-          </div>
+          </a>
           <div className="hidden items-center gap-12 md:flex">
             {navLinks.map((link) => {
               const isActive = pathname === link.href;
@@ -59,6 +61,7 @@ export default function Navbar({
 
           {/* Right Side */}
           <div className="flex items-center gap-6">
+            {rightItems}
             <Link
               href={ctaHref}
               className="font-body px-6 py-2 text-sm tracking-wide shadow-sm transition-all hover:opacity-90"

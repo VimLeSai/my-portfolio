@@ -4,8 +4,9 @@ import Watermark from '@/components/ui/Watermark';
 import Button from '@/components/ui/Button';
 
 export const metadata = {
-  title: 'About — Portfolio',
-  description: 'About Vimal Desai, Senior Full Stack Engineer.',
+  title: 'About Vimal Desai — Senior Full Stack Engineer',
+  description:
+    'Learn more about Vimal Desai, a Senior Full Stack Engineer from India with a passion for clean execution, system thinking, and architectural clarity.',
 };
 
 const skills = [
@@ -51,7 +52,7 @@ const testimonials = [
 export default function AboutPage() {
   return (
     <div className="min-h-screen bg-[var(--color-paper)] selection:bg-[var(--color-accent)] selection:text-[var(--color-paper)]">
-      <Navbar brandName="Vimal Desai" ctaLabel="Contact" ctaHref="/contact" />
+      <Navbar brandName="Vimal Desai" ctaLabel="Get in Touch" ctaHref="/contact" />
       <Watermark />
 
       <main className="mx-auto max-w-6xl px-8 pt-48 pb-32">
@@ -157,7 +158,7 @@ export default function AboutPage() {
           </Button>
         </div>
       </main>
-      <Footer brandName="Vimal Desai" />
+      <Footer brandName="Vimal Desai" tagline="Transforming complex business requirements into elegant, scalable architectures." />
     </div>
   );
 }

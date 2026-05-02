@@ -148,6 +148,14 @@ We implemented several unique, domain-specific features — including a real-tim
     `.trim(),
 
     image: '/assets/projects/string-erp/thumbnail.png',
+    showcaseImages: [
+      '/assets/projects/notloco/hero-section.png',
+      '/assets/projects/notloco/how-it-works.png',
+      '/assets/projects/notloco/testimonial.png',
+    ],
+    webViewDemo: '/assets/projects/notloco/website-demo.mov',
+    mobileViewDemo: '/assets/projects/rampnow/Movile View Showcase.mp4',
+
     featured: true,
   },
 
@@ -263,6 +271,8 @@ I developed responsive UIs using **TypeScript and Redux Toolkit**, and built mod
 
 This eliminated manual QA and ensured a seamless, zero-data-loss production cutover.
     `.trim(),
+
+    image: '/assets/projects/mastery/thumbnail.png',
   },
 
   // ─────────────────────────────────────────────────────────────────────────────
@@ -365,6 +375,8 @@ I held full ownership of the frontend architecture, developing a reusable compon
 
 Operating without a dedicated QA team, I engineered a comprehensive **end-to-end automated testing suite** using Postman's pre/post-request scripting, covering the entire user lifecycle from account creation to final report generation. This reduced manual testing overhead by over **70%** and ensured stable, zero-defect deployments.
     `.trim(),
+
+    image: '/assets/projects/rentbase/thumbnail.png',
   },
 
   // ─────────────────────────────────────────────────────────────────────────────
@@ -447,6 +459,15 @@ The **Africa Business Console** is the first digital platform launched by ETK, p
 
 Through this project, I strengthened my ability to design highly reusable and adaptable components, implement scalable folder structures, and establish clean architectural patterns to support long-term maintainability — aligning development standards with enterprise-level expectations across diverse regulatory environments.
     `.trim(),
+
+    image: '/assets/projects/etk/etk-hero-section.png',
+    showcaseImages: [
+      '/assets/projects/etk/etk-hero-section.png',
+      '/assets/projects/etk/etk-services.png',
+      '/assets/projects/etk/etk-profile.png',
+      '/assets/projects/etk/etk-onboarding.png',
+      '/assets/projects/etk/full-landing-page.png',
+    ],
   },
 
   // ─────────────────────────────────────────────────────────────────────────────
@@ -565,6 +586,8 @@ I contribute across the full stack — frontend, backend, shared component libra
 
 By integrating AI tools and workflow automation (Cursor AI, OpenAI), I helped increase team sprint velocity from **16 to over 40 story points** without compromising code quality. I was recognized twice as **"Leader of the Month"** and placed **3rd in an internal AI hackathon** for a POC that substantially improved data consistency across services.
     `.trim(),
+
+    image: '/assets/projects/upkeep/thumbnail.png',
   },
 
   // ─────────────────────────────────────────────────────────────────────────────
@@ -718,6 +741,14 @@ This project validated the architectural approach of building each module as an 
  
 I spent a day deeply understanding the functionality, then rewrote the filter state from an array to a keyed object — reducing iterations to a flat **33 regardless of filter count**. Fixed the following day.
     `.trim(),
+
+    image: '/assets/projects/flightstravel/landing-page.png',
+    showcaseImages: [
+      '/assets/projects/flightstravel/landing-page.png',
+      '/assets/projects/flightstravel/booking-page.png',
+      '/assets/projects/flightstravel/search-page.png',
+      '/assets/projects/flightstravel/travel-detail-page.png',
+    ],
   },
 
   // ─────────────────────────────────────────────────────────────────────────────
@@ -855,6 +886,22 @@ I spent a day deeply understanding the functionality, then rewrote the filter st
     markdown: `
 **Micqro** is a quiz-first social platform that replaces image feeds with interactive questions — polls, ratings, location queries, and multi-choice posts. Users see answer distributions in their feed and can engage through community groups or 1-on-1 messages. Built with **React.js and Next.js**, deployed on AWS and Vercel.
     `.trim(),
+    image: '/assets/projects/micqro/thumbnail.png',
+    showcaseImages: [
+      '/assets/projects/micqro/micqro-welcome.png',
+      '/assets/projects/micqro/micqro-welcome-thank-you.png',
+      '/assets/projects/micqro/micqro-quiz.png',
+      '/assets/projects/micqro/micqro-feed.png',
+      '/assets/projects/micqro/micqro-profile.png',
+      '/assets/projects/micqro/micqro-mention.png',
+      '/assets/projects/micqro/micqro-media-modal.png',
+      '/assets/projects/micqro/micqro-currency.png',
+      '/assets/projects/micqro/micqro-chat-sent.png',
+      '/assets/projects/micqro/micqro-chat-attachment-sent.png',
+      '/assets/projects/micqro/micqro-long-text-quiz.png',
+      '/assets/projects/micqro/micqro-feed-mobile.png',
+    ],
+    featured: true,
   },
 
   // ─────────────────────────────────────────────────────────────────────────────
@@ -915,6 +962,14 @@ I spent a day deeply understanding the functionality, then rewrote the filter st
     markdown: `
 **(not)Loco** is an online therapy platform connecting users with licensed therapists. I designed and built the full website, translating Figma designs into a responsive, production-ready **Next.js + Tailwind CSS** site — with careful attention to emotional tone, accessibility, and conversion design for a mental health audience.
     `.trim(),
+
+    image: '/assets/projects/notloco/hero-section.png',
+    showcaseImages: [
+      '/assets/projects/notloco/hero-section.png',
+      '/assets/projects/notloco/how-it-works.png',
+      '/assets/projects/notloco/testimonial.png',
+    ],
+    webViewDemo: '/assets/projects/notloco/website-demo.mov',
   },
 
   // ─────────────────────────────────────────────────────────────────────────────
@@ -1009,6 +1064,20 @@ I spent a day deeply understanding the functionality, then rewrote the filter st
  
 I integrated payment gateway APIs, wired webhook endpoints, and connected both consoles to live backend services — handling all edge cases throughout. Four modules, one engineer, fully production-ready.
     `.trim(),
+
+    image: '/assets/projects/rampnow/thumbnail.png',
+    showcaseImages: [
+      '/assets/projects/rampnow/landing-section.png',
+      '/assets/projects/rampnow/connectivity-section.png',
+      '/assets/projects/rampnow/how-it-works-section.png',
+      '/assets/projects/rampnow/supported-methods-section.png',
+      '/assets/projects/rampnow/get-demo-section.png',
+      '/assets/projects/rampnow/footer.png',
+      '/assets/projects/rampnow/merchant-widget-checkout.png',
+      '/assets/projects/rampnow/merchant-widget-details.png',
+      '/assets/projects/rampnow/merchant-widget-methods.png',
+    ],
+    mobileviewVideo: '/assets/projects/rampnow/Movile View Showcase.mp4',
   },
 
   // ─────────────────────────────────────────────────────────────────────────────
@@ -1071,6 +1140,14 @@ I integrated payment gateway APIs, wired webhook endpoints, and connected both c
     markdown: `
 **Textile Aadhar** is an e-commerce platform for textile products (Zari, Threads, Yarn). I built the user website and admin panel with a fully dynamic, admin-configurable landing page. This was my first project as manager — it taught me the necessity of thorough verification before shipping.
     `.trim(),
+
+    image: '/assets/projects/textileaadhar/landing-page.png',
+    showcaseImages: [
+      '/assets/projects/textileaadhar/landing-page.png',
+      '/assets/projects/textileaadhar/product-page.png',
+      '/assets/projects/textileaadhar/results-page.png',
+      '/assets/projects/textileaadhar/cart-page.png',
+    ],
   },
 
   // ─────────────────────────────────────────────────────────────────────────────
@@ -1135,6 +1212,18 @@ I integrated payment gateway APIs, wired webhook endpoints, and connected both c
     markdown: `
 A domain-specific **Textile ERP** covering the full manufacturing lifecycle — design management, cloth design recipe management, Warp and Weft calculations, inventory, and sales and purchase orders. Deep collaboration with the client was essential to translate complex textile domain logic into reliable software.
     `.trim(),
+
+    image: '/assets/projects/textileerp/dashboard.png',
+    showcaseImages: [
+      '/assets/projects/textileerp/add-design.png',
+      '/assets/projects/textileerp/add-po.png',
+      '/assets/projects/textileerp/add-so.png',
+      '/assets/projects/textileerp/add-thread.png',
+      '/assets/projects/textileerp/add-yarn-so.png',
+      '/assets/projects/textileerp/list-sales.png',
+      '/assets/projects/textileerp/side-nav.png',
+      '/assets/projects/textileerp/thumbnail.png',
+    ],
   },
 
   // ─────────────────────────────────────────────────────────────────────────────
@@ -1202,6 +1291,12 @@ A domain-specific **Textile ERP** covering the full manufacturing lifecycle — 
     markdown: `
 **Tatkal Jobs** is a recruitment consultancy platform. I contributed to both the admin panel (managing jobs, interviews, students, agencies, employees) and the user-facing site. I also created custom **animated infographics** for the About Us page. This project significantly deepened my understanding of **Redux**, compilation, and frontend bundle optimization.
     `.trim(),
+
+    image: '/assets/projects/tatkaljobs/thumbnail.png',
+    showcaseImages: [
+      '/assets/projects/tatkaljobs/landing-page.png',
+      '/assets/projects/tatkaljobs/about-us.png',
+    ],
   },
 
   // ─────────────────────────────────────────────────────────────────────────────
@@ -1409,5 +1504,987 @@ For **Thomas Cook**, I built an internal operations admin panel managing employe
     markdown: `
 **Magic Author** was my very first React project — a platform for creating eBooks on the go. The most challenging module was **BookShelf**, a canvas-based cover designer using **Fabric.js** — a library I had never used before. I also learned web storage from scratch during this project. The messy existing codebase made it harder. I shipped it anyway.
     `.trim(),
+
+    image: '/assets/projects/magicauthor/landing-page.png',
+    showcaseImages: [
+      '/assets/projects/magicauthor/landing-page.png',
+      '/assets/projects/magicauthor/magicauthor.png',
+      '/assets/projects/magicauthor/book-page.png',
+    ],
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────────
+  // Laahchee
+  // ─────────────────────────────────────────────────────────────────────────────
+  laahchee: {
+    id: 'laahchee',
+    title: 'Laahchee',
+    tagline: 'High-performance interactive web experience with complex timeline animations.',
+    tags: ['Frontend', 'Animation', 'Web', 'Performance'],
+    role: 'Frontend Engineer',
+    platform: 'Web',
+    industries: ['Creative Web', 'Design'],
+    deliverables: [
+      'High-performance React 19 frontend',
+      'GSAP-driven interactive animations',
+      'Next.js 15 App Router architecture',
+    ],
+    url: null,
+    featured: false,
+    period: { start: '2024', end: 'Present' },
+
+    skills: [
+      skills.react,
+      skills.nextjs,
+      skills.tailwindcss,
+      skills.typescript,
+      skills.javascript,
+    ],
+    tools: [tools.git, tools.github],
+
+    impact: 'Delivered a buttery-smooth 60fps animated experience while maintaining excellent core web vitals and SEO performance through modern React 19 architecture.',
+
+    overview: 'Laahchee is a visually stunning, high-performance web platform built with Next.js 15 and React 19. The project heavily utilizes GSAP for complex, timeline-based animations and micro-interactions, wrapped in a modern TailwindCSS v4 architecture.',
+
+    challenges: [
+      {
+        label: 'Complex Animation States',
+        value: 'Managing complex timeline animations and scroll-triggered events required precision to avoid layout thrashing and maintain 60fps performance.',
+      },
+      {
+        label: 'React 19 Compatibility',
+        value: 'Integrating advanced client-side animations with bleeding-edge React 19 concurrent features and server components.',
+      },
+    ],
+
+    approach: [
+      {
+        icon: 'animation',
+        title: 'GSAP Choreography',
+        description: 'Orchestrated intricate, multi-step animations using GSAP timelines to create a cohesive narrative flow without sacrificing performance.',
+      },
+      {
+        icon: 'performance',
+        title: 'Modern Architecture',
+        description: 'Leveraged Next.js 15 and Tailwind v4 to ensure the application remains lightweight, highly responsive, and easy to maintain.',
+      },
+    ],
+
+    impacts: [],
+
+    markdown: `
+**Laahchee** represents a cutting-edge approach to creative web development. Leveraging the power of **Next.js 15**, **React 19**, and **TailwindCSS v4**, I engineered a high-performance frontend focused on immersive user experiences.
+
+The core of the project relies on **GSAP** to orchestrate intricate, scroll-driven timelines. By carefully managing render cycles and offloading heavy computations, I ensured that the complex visual effects maintain a buttery-smooth **60fps** across all devices without compromising core web vitals.
+    `.trim(),
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────────
+  // Jivita Design
+  // ─────────────────────────────────────────────────────────────────────────────
+  jivitadesign: {
+    id: 'jivita-design',
+    title: 'Jivita Design',
+    tagline: 'Modern, responsive storefront with highly interactive UI components.',
+    tags: ['E-commerce', 'Full-Stack', 'UI/UX'],
+    role: 'Full-Stack Engineer',
+    platform: 'Web',
+    industries: ['E-commerce', 'Retail'],
+    deliverables: [
+      'Next.js SSR application',
+      'Responsive Tailwind UI',
+      'MongoDB backend integration',
+    ],
+    url: null,
+    featured: false,
+    period: { start: '2021', end: '2022' },
+
+    skills: [
+      skills.react,
+      skills.nextjs,
+      skills.tailwindcss,
+      skills.mongodb,
+    ],
+    tools: [tools.git, tools.github],
+
+    impact: 'Architected an SEO-optimized storefront with highly interactive UI components, significantly improving user engagement metrics.',
+
+    overview: 'Jivita is a full-stack Next.js web application designed for a seamless user experience. Combining SSR for performance with a robust MongoDB backend, the project emphasizes a clean, responsive design utilizing TailwindCSS and Alpine.js for lightweight frontend interactions.',
+
+    challenges: [
+      {
+        label: 'SSR Performance',
+        value: 'Balancing SSR performance with dynamic client-side interactivity using lightweight libraries.',
+      },
+      {
+        label: 'Database Integration',
+        value: 'Integrating a fast, scalable MongoDB backend with a heavy frontend without causing latency.',
+      },
+    ],
+
+    approach: [
+      {
+        icon: 'architecture',
+        title: 'Hybrid Rendering',
+        description: 'Utilized Next.js SSR and SSG features to provide instant page loads while deferring non-critical interactive components.',
+      },
+    ],
+
+    impacts: [],
+
+    markdown: `
+**Jivita Design** is a modern e-commerce platform built on **Next.js** and **TailwindCSS**. The goal was to create a highly responsive, visually appealing storefront that doesn't compromise on performance or SEO.
+
+By leveraging server-side rendering (SSR) and integrating a flexible **MongoDB** backend, I delivered a robust full-stack solution. Lightweight interactivity was handled carefully to ensure the time-to-interactive (TTI) remained minimal, providing users with a fast and fluid shopping experience.
+    `.trim(),
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────────
+  // DS Universe
+  // ─────────────────────────────────────────────────────────────────────────────
+  dsuniverse: {
+    id: 'ds-universe',
+    title: 'DS Universe',
+    tagline: 'Immersive, creative web experience pushing the boundaries of modern frontend development.',
+    tags: ['Creative Web', 'Animation', 'Immersive'],
+    role: 'Frontend Engineer',
+    platform: 'Web',
+    industries: ['Creative Web', 'Design'],
+    deliverables: [
+      'Immersive smooth-scrolling experience',
+      'Complex GSAP animations',
+      'Modern React 19 frontend',
+    ],
+    url: null,
+    featured: false,
+    period: { start: '2024', end: 'Present' },
+
+    skills: [
+      skills.react,
+      skills.nextjs,
+      skills.tailwindcss,
+      skills.typescript,
+    ],
+    tools: [tools.git, tools.github],
+
+    impact: 'Created an award-winning level digital experience that captivates users through interactive storytelling and seamless performance.',
+
+    overview: 'DS Universe is an immersive, creative web experience that pushes the boundaries of modern frontend development. Utilizing Next.js 16 and React 19, the project features buttery-smooth scrolling powered by Lenis and highly choreographed animations using GSAP.',
+
+    challenges: [
+      {
+        label: 'Scroll Synchronization',
+        value: 'Achieving perfectly synchronized scroll-based animations across varied device capabilities and screen sizes.',
+      },
+    ],
+
+    approach: [
+      {
+        icon: 'performance',
+        title: 'Smooth Scrolling',
+        description: 'Implemented Lenis for fluid, momentum-based scrolling, closely tied to GSAP ScrollTrigger for precise animation timing.',
+      },
+    ],
+
+    impacts: [],
+
+    markdown: `
+**DS Universe** is a testament to what is possible on the modern web. Built using **Next.js 16** and **React 19**, it prioritizes fluid motion and user immersion above all else.
+
+I integrated **Lenis** for smooth, momentum-based scrolling and paired it with **GSAP** to orchestrate animations that react perfectly to the user's scroll position. This combination creates a seamless narrative flow, transforming a standard website into an interactive digital journey.
+    `.trim(),
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────────
+  // Creg Caribbean
+  // ─────────────────────────────────────────────────────────────────────────────
+  cregcaribbean: {
+    id: 'creg-caribbean',
+    title: 'Creg Caribbean',
+    tagline: 'Comprehensive real estate platform with a heavy focus on geospatial property discovery.',
+    tags: ['Real Estate', 'Maps', 'Dashboard'],
+    role: 'Frontend Engineer',
+    platform: 'Web',
+    industries: ['Real Estate', 'PropTech'],
+    deliverables: [
+      'Interactive Mapbox integration',
+      'Data-rich real estate dashboard',
+      'Complex state management',
+    ],
+    url: null,
+    featured: false,
+    company: companies.knovator,
+    period: { start: '2019', end: '2020' },
+
+    skills: [
+      skills.react,
+      skills.redux,
+      skills.javascript,
+    ],
+    tools: [tools.git, tools.github],
+
+    impact: 'Transformed property discovery by building a high-performance, map-first interface that handles large geospatial datasets smoothly.',
+
+    overview: 'Creg Caribbean is a comprehensive real estate platform focused on the Caribbean market. The frontend is powered by React and Redux, featuring a deeply integrated Mapbox-GL interactive map for property discovery, coupled with an Ant Design dashboard for data management.',
+
+    challenges: [
+      {
+        label: 'Geospatial Performance',
+        value: 'Optimizing performance with heavy geospatial data rendering on the client side using Mapbox and React.',
+      },
+    ],
+
+    approach: [
+      {
+        icon: 'architecture',
+        title: 'Map-First UI',
+        description: 'Architected a map-first interface that tightly synchronizes with Redux state to display hundreds of properties without lag.',
+      },
+    ],
+
+    impacts: [],
+
+    markdown: `
+**Creg Caribbean** is a dedicated real estate platform designed for the Caribbean market. The core feature of the application is its interactive, map-based property search, built using **React** and **Mapbox-GL**.
+
+I engineered the frontend to handle large geospatial datasets efficiently. By leveraging **Redux** for state management and **Ant Design** for dashboard UI components, the platform offers users a fast, intuitive way to explore properties, filtering by complex criteria while maintaining smooth map interactions.
+    `.trim(),
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────────
+  // Gateflix
+  // ─────────────────────────────────────────────────────────────────────────────
+  gateflix: {
+    id: 'gateflix',
+    title: 'Gateflix',
+    tagline: 'Scalable educational platform focused on delivering high-quality video content.',
+    tags: ['EdTech', 'Video Streaming', 'Platform'],
+    role: 'Frontend Engineer',
+    platform: 'Web',
+    industries: ['EdTech', 'Education'],
+    deliverables: [
+      'Scalable video streaming platform',
+      'Rich-text content management',
+      'Custom video player integration',
+    ],
+    url: null,
+    featured: false,
+    company: companies.knovator,
+    period: { start: '2019', end: '2020' },
+
+    skills: [
+      skills.react,
+      skills.redux,
+      skills.scss,
+    ],
+    tools: [tools.git, tools.github],
+
+    impact: 'Empowered thousands of students with a reliable, scalable streaming experience and interactive study materials.',
+
+    overview: 'Gateflix is a robust educational platform focused on delivering high-quality video content to students preparing for competitive exams. The platform integrates HLS.js for adaptive bitrate streaming, complex state management via Redux, and a rich content editor.',
+
+    challenges: [
+      {
+        label: 'Adaptive Streaming',
+        value: 'Ensuring smooth video playback across varied network conditions using adaptive streaming technologies.',
+      },
+    ],
+
+    approach: [
+      {
+        icon: 'performance',
+        title: 'HLS Integration',
+        description: 'Implemented HLS.js to provide seamless, adaptive bitrate video streaming, minimizing buffering for users on slower connections.',
+      },
+    ],
+
+    impacts: [],
+
+    markdown: `
+**Gateflix** is an EdTech platform designed to help students prepare for competitive exams through high-quality video courses. Built with **React** and **Redux**, the application handles complex state requirements for student progress, course catalogs, and interactive testing.
+
+A major focus of the project was video delivery. I integrated **HLS.js** to enable adaptive bitrate streaming, ensuring that students across varying network conditions receive a smooth, uninterrupted learning experience.
+    `.trim(),
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────────
+  // HK Analytics
+  // ─────────────────────────────────────────────────────────────────────────────
+  hkanalytics: {
+    id: 'hk-analytics',
+    title: 'HK Analytics',
+    tagline: 'Enterprise-grade data visualization and analytics dashboard.',
+    tags: ['Data Analytics', 'Dashboard', 'Enterprise'],
+    role: 'Frontend Engineer',
+    platform: 'Web',
+    industries: ['Data Analytics', 'Enterprise Software'],
+    deliverables: [
+      'Data-intensive analytical dashboard',
+      'Complex grid implementations',
+      'Interactive charting',
+    ],
+    url: null,
+    featured: false,
+    company: companies.knovator,
+    period: { start: '2021', end: '2022' },
+
+    skills: [
+      skills.react,
+      skills.nextjs,
+      skills.tailwindcss,
+    ],
+    tools: [tools.git, tools.github],
+
+    impact: 'Streamlined enterprise decision-making by providing a highly performant, customizable data analytics suite.',
+
+    overview: 'HK Analytics is an enterprise-grade data visualization and analytics dashboard. Built with Next.js, the platform leverages AG-Grid for handling massive datasets in tabular formats and Highcharts for rendering complex, interactive data visualizations.',
+
+    challenges: [
+      {
+        label: 'Massive Datasets',
+        value: 'Maintaining 60fps rendering performance when dealing with thousands of data rows and complex chart re-renders.',
+      },
+    ],
+
+    approach: [
+      {
+        icon: 'architecture',
+        title: 'Virtualization & Memoization',
+        description: 'Utilized AG-Grid for efficient DOM virtualization and strict React memoization to prevent unnecessary re-renders of complex charts.',
+      },
+    ],
+
+    impacts: [],
+
+    markdown: `
+**HK Analytics** is a powerful data visualization tool built for enterprise clients. Utilizing **Next.js** and **TailwindCSS**, the platform provides a clean, responsive interface for deep data analysis.
+
+To handle massive amounts of tabular data without crashing the browser, I integrated **AG-Grid** for advanced row virtualization and column management. For visualization, **Highcharts** was used to render interactive, customizable charts, giving stakeholders real-time insights into their business metrics.
+    `.trim(),
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────────
+  // RK Synthetics
+  // ─────────────────────────────────────────────────────────────────────────────
+  rksynthetics: {
+    id: 'rk-synthetics',
+    title: 'RK Synthetics',
+    tagline: 'Lightning-fast corporate portal engineered for B2B excellence.',
+    tags: ['Corporate Website', 'B2B', 'Performance'],
+    role: 'Frontend Engineer',
+    platform: 'Web',
+    industries: ['Manufacturing', 'Corporate'],
+    deliverables: [
+      'High-speed corporate portal',
+      'Modern frontend architecture',
+    ],
+    url: null,
+    featured: false,
+    period: { start: '2024', end: 'Present' },
+
+    skills: [
+      skills.react,
+      skills.nextjs,
+      skills.tailwindcss,
+      skills.typescript,
+    ],
+    tools: [tools.git, tools.github],
+
+    impact: 'Modernized the corporate digital presence, significantly reducing page load times and improving B2B lead generation.',
+
+    overview: 'RK Synthetics is a modern B2B corporate portal engineered for lightning-fast load times and SEO excellence. Built on the cutting edge of Next.js 15 and React 19, it utilizes Turbopack and Tailwind v4 to deliver a pristine user experience.',
+
+    challenges: [
+      {
+        label: 'Migration to Modern Stack',
+        value: 'Migrating legacy corporate content to a strict TypeScript, server-component-first Next.js architecture.',
+      },
+    ],
+
+    approach: [
+      {
+        icon: 'performance',
+        title: 'Server Components',
+        description: 'Heavily utilized React Server Components to reduce client-side JavaScript, resulting in near-instant page loads.',
+      },
+    ],
+
+    impacts: [],
+
+    markdown: `
+**RK Synthetics** is a corporate website revamp that focuses on raw performance and professional aesthetics. Built with the latest **Next.js 15** and **React 19**, the site leverages **Turbopack** for rapid development and **TailwindCSS v4** for styling.
+
+By embracing a Server-Component-first architecture, I was able to dramatically reduce the client-side JavaScript payload. This architectural choice led to near-instant page loads, excellent SEO scores, and a significantly improved digital presence for the enterprise.
+    `.trim(),
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────────
+  // Sequelis
+  // ─────────────────────────────────────────────────────────────────────────────
+  sequelis: {
+    id: 'sequelis',
+    title: 'Sequelis',
+    tagline: 'Interactive digital experience built to captivate audiences through motion design.',
+    tags: ['Creative Web', 'Interactive', 'Frontend'],
+    role: 'Frontend Engineer',
+    platform: 'Web',
+    industries: ['Creative Web', 'Marketing'],
+    deliverables: [
+      'Interactive marketing site',
+      'GSAP animation timelines',
+    ],
+    url: null,
+    featured: false,
+    period: { start: '2024', end: 'Present' },
+
+    skills: [
+      skills.react,
+      skills.nextjs,
+      skills.tailwindcss,
+      skills.typescript,
+    ],
+    tools: [tools.git, tools.github],
+
+    impact: 'Delivered a highly engaging marketing platform that sets a new standard for brand presentation through motion.',
+
+    overview: 'Sequelis is an interactive digital experience built to captivate audiences through motion design. Leveraging Next.js 15 and React 19, the platform makes heavy use of GSAP to orchestrate intricate animation sequences that respond to user interaction.',
+
+    challenges: [
+      {
+        label: 'Motion Choreography',
+        value: 'Managing complex timeline animations and ensuring smooth playback across mobile and desktop devices.',
+      },
+    ],
+
+    approach: [
+      {
+        icon: 'animation',
+        title: 'Interactive Timelines',
+        description: 'Designed sequential, interactive GSAP timelines that respond naturally to user scroll and hover events.',
+      },
+    ],
+
+    impacts: [],
+
+    markdown: `
+**Sequelis** is a creative marketing platform where motion design takes center stage. Utilizing **Next.js 15** and **React 19**, I built a fast, modern foundation capable of supporting heavy visual interactions.
+
+The standout feature of the project is its extensive use of **GSAP**. By choreographing complex timeline animations that react to user inputs—such as scrolling and hovering—I created an engaging, dynamic experience that elevates the brand's digital presence while maintaining strict performance standards.
+    `.trim(),
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────────
+  // Can
+  // ─────────────────────────────────────────────────────────────────────────────
+  can: {
+    id: 'can-package',
+    title: '@knovator/can',
+    tagline: 'Role-based access control npm package for React admin panels.',
+    tags: ['NPM Package', 'Open Source', 'Access Control'],
+    role: 'Open Source Creator',
+    platform: 'Web · Library',
+    industries: ['Software Development', 'Open Source'],
+    deliverables: [
+      'Role-based permission checking methods',
+      'Conditional JSX rendering component',
+    ],
+    url: 'https://github.com/knovator/Can',
+    featured: false,
+    company: companies.knovator,
+    period: { start: '2020', end: '2021' },
+    skills: [skills.react, skills.javascript, skills.babel],
+    tools: [tools.git, tools.github],
+    impact: 'Simplified role-based access control in multiple admin panels, abstracting complex condition logic into reusable methods and components.',
+    overview: 'In admin panels, different roles require different access to routes and functionalities. @knovator/can is an npm package I developed to simplify this process. It provides utility methods like `hasAccessOf` and `hasAccessTo`, along with a `Can` component for conditionally rendering JSX based on a standardized permission object structure.',
+    challenges: [
+      {
+        label: 'Condition Bloat',
+        value: 'Writing multiple conditions for every role-based action clutters the codebase and increases maintenance overhead.',
+      }
+    ],
+    approach: [
+      {
+        icon: 'architecture',
+        title: 'Declarative Access Control',
+        description: 'Abstracted permission logic into a declarative `Can` wrapper component, making role-based UI clean and readable.',
+      }
+    ],
+    impacts: [],
+    markdown: `
+Developed **@knovator/can**, an open-source npm package that streamlines role-based access control in React applications. By standardizing the permission object structure, it provides an intuitive way to manage module-level and function-level access, significantly reducing conditional boilerplate across multiple admin panel codebases.
+    `.trim(),
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────────
+  // API Wrapper
+  // ─────────────────────────────────────────────────────────────────────────────
+  apiwrapper: {
+    id: 'api-wrapper',
+    title: '@knovator/api',
+    tagline: 'Productive Axios wrapper for simplified and centralized API calls.',
+    tags: ['NPM Package', 'Open Source', 'API Wrapper'],
+    role: 'Open Source Creator',
+    platform: 'Web · Library',
+    industries: ['Software Development', 'Open Source'],
+    deliverables: [
+      'Centralized API configuration',
+      'Automatic token injection',
+      'Request caching and cancellation',
+    ],
+    url: 'https://github.com/knovator/api',
+    featured: false,
+    company: companies.knovator,
+    period: { start: '2021', end: '2021' },
+    skills: [skills.typescript, skills.javascript],
+    tools: [tools.git, tools.github],
+    impact: 'Reduced boilerplate for API calls across multiple projects by centralizing token management, error handling, and request cancellation.',
+    overview: '@knovator/api is a lightweight wrapper around Axios designed to make API calls more productive. It provides a centralized configuration method `setAPIConfig` to handle base URLs, token injection, and global error handling, alongside a streamlined `fetchUrl` method for executing requests with built-in support for request cancellation.',
+    challenges: [
+      {
+        label: 'Redundant Configuration',
+        value: 'Passing tokens and managing base URLs individually for every API call creates redundant code and increases the risk of errors.',
+      }
+    ],
+    approach: [
+      {
+        icon: 'optimization',
+        title: 'Centralized Configuration & Caching',
+        description: 'Implemented a `setAPIConfig` method for global configuration and built-in request cancellation to prevent redundant API calls when endpoints match.',
+      }
+    ],
+    impacts: [],
+    markdown: `
+Created **@knovator/api**, an npm package that wraps Axios to simplify HTTP requests. The package abstracts away repetitive tasks like token injection and error handling into a single global configuration. It also features automatic request cancellation to prevent race conditions and redundant network calls, significantly improving the efficiency of data fetching in complex front-end applications.
+    `.trim(),
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────────
+  // Game Design
+  // ─────────────────────────────────────────────────────────────────────────────
+  gamedesign: {
+    id: 'game-design-platform',
+    title: 'Game Design Platform',
+    tagline: 'A responsive and interactive game design interface built with React.',
+    tags: ['Interactive UI', 'Responsive', 'Platform'],
+    role: 'Frontend Engineer',
+    platform: 'Web · Mobile-Responsive',
+    industries: ['Gaming', 'Software Development'],
+    deliverables: [
+      'Responsive interactive UI',
+      'React component architecture',
+    ],
+    url: null,
+    featured: false,
+    company: companies.personal,
+    period: { start: '2023', end: '2023' },
+    skills: [skills.react, skills.tailwindcss, skills.javascript],
+    tools: [tools.git],
+    impact: 'Delivered a highly responsive and visually engaging platform interface, ensuring seamless interaction across both desktop and mobile devices.',
+    overview: 'A frontend interface for a game design platform built using modern React 18 paradigms. The project focused heavily on creating a dynamic, responsive user experience that adapts flawlessly to different screen sizes, utilizing Tailwind CSS for rapid and consistent styling.',
+    challenges: [
+      {
+        label: 'Responsive Complexity',
+        value: 'Ensuring that interactive game design elements remain usable and visually appealing on smaller mobile screens.',
+      }
+    ],
+    approach: [
+      {
+        icon: 'architecture',
+        title: 'Mobile-First Design',
+        description: 'Leveraged Tailwind CSS to implement a mobile-first responsive strategy, ensuring a unified experience across devices.',
+      }
+    ],
+    impacts: [],
+    markdown: `
+Developed the frontend for a **Game Design Platform** using **React 18** and **Tailwind CSS**. A major focus of my work was ensuring the entire application was fully responsive, allowing users to interact with complex game design interfaces seamlessly on both mobile and desktop environments.
+    `.trim(),
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────────
+  // Digibooks
+  // ─────────────────────────────────────────────────────────────────────────────
+  digibooks: {
+    id: 'digibooks',
+    title: 'Digibooks',
+    tagline: 'Comprehensive digital publishing and reading platform.',
+    tags: ['EdTech', 'Digital Publishing', 'SSR'],
+    role: 'Frontend Engineer',
+    platform: 'Web',
+    industries: ['Education', 'Publishing'],
+    deliverables: [
+      'Rich text editor integration (Draft.js)',
+      'Secure video streaming (HLS.js)',
+      'Real-time data synchronization (Firebase)',
+    ],
+    url: null,
+    featured: true,
+    company: companies.knovator,
+    period: { start: '2019', end: '2020' },
+    skills: [skills.react, skills.redux, skills.nodejs, skills.webpack],
+    tools: [tools.git, tools.github],
+    impact: 'Successfully delivered a robust digital reading experience capable of handling rich media, secure streaming, and real-time updates.',
+    overview: 'Digibooks is a sophisticated digital publishing platform designed to deliver rich, interactive reading experiences. I was responsible for architecting and implementing complex frontend modules, utilizing React and Redux.',
+    challenges: [
+      {
+        label: 'Rich Content Authoring',
+        value: 'Integrating a robust editor capable of handling complex formatting and media for digital books.',
+      },
+      {
+        label: 'Secure Media Delivery',
+        value: 'Preventing unauthorized downloading of premium video content embedded within the digital books.',
+      }
+    ],
+    approach: [
+      {
+        icon: 'integration',
+        title: 'Draft.js & HLS.js Integration',
+        description: 'Implemented Draft.js for advanced rich-text authoring and utilized HLS.js to deliver secure, chunked video streaming, preventing unauthorized downloads.',
+      },
+      {
+        icon: 'architecture',
+        title: 'Real-time Sync with Firebase',
+        description: 'Leveraged Firebase to provide real-time updates and synchronization across user sessions.',
+      }
+    ],
+    impacts: [],
+    markdown: `
+As a Frontend Engineer on **Digibooks**, I tackled significant technical challenges to deliver a robust digital publishing platform. 
+
+A key difficulty was enabling rich content authoring; I solved this by deeply integrating **Draft.js** to handle complex document structures. Additionally, to protect premium content, I implemented secure video streaming using **HLS.js**, effectively preventing unauthorized downloads. I also integrated **Firebase** to ensure real-time data synchronization, creating a seamless and secure reading experience for end users.
+    `.trim(),
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────────
+  // Digibooks Admin Panel
+  // ─────────────────────────────────────────────────────────────────────────────
+  digibooksadmin: {
+    id: 'digibooks-admin',
+    title: 'Digibooks Admin Panel',
+    tagline: 'Comprehensive CMS and back-office management for Digibooks.',
+    tags: ['Admin Panel', 'CMS'],
+    role: 'Frontend Engineer',
+    platform: 'Web',
+    industries: ['Education', 'Publishing'],
+    deliverables: [
+      'Data-heavy management dashboards',
+      'Complex form processing',
+      'Large file upload integration',
+    ],
+    url: null,
+    featured: false,
+    company: companies.knovator,
+    period: { start: '2019', end: '2020' },
+    skills: [skills.react, skills.redux, skills.webpack],
+    tools: [tools.git, tools.github],
+    impact: 'Streamlined content management and user administration, empowering the operations team to efficiently handle thousands of digital assets.',
+    overview: 'The back-office administration portal for the Digibooks platform. Built with React, Redux, and Ant Design, the panel provides the necessary tools for administrators to manage users, digital assets, and system configurations.',
+    challenges: [
+      {
+        label: 'Large File Management',
+        value: 'Handling reliable uploads for large video and document files required robust upload architecture.',
+      }
+    ],
+    approach: [
+      {
+        icon: 'integration',
+        title: 'Fine Uploader Integration',
+        description: 'Integrated Fine Uploader to handle chunked, resumable uploads for large digital assets seamlessly within the dashboard.',
+      }
+    ],
+    impacts: [],
+    markdown: `
+Developed the **Digibooks Admin Panel**, the core CMS enabling the operations team to manage the digital publishing platform. Utilizing **React, Redux, and Ant Design**, I built complex, data-heavy interfaces. A notable feature was the integration of Fine Uploader to reliably process chunked, resumable uploads for large media assets.
+    `.trim(),
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────────
+  // Gateflix Admin Panel
+  // ─────────────────────────────────────────────────────────────────────────────
+  gateflixadmin: {
+    id: 'gateflix-admin',
+    title: 'Gateflix Admin Panel',
+    tagline: 'Robust administration portal for the Gateflix educational platform.',
+    tags: ['EdTech', 'Admin Panel'],
+    role: 'Frontend Engineer',
+    platform: 'Web',
+    industries: ['Education', 'E-learning'],
+    deliverables: [
+      'Content management dashboard',
+      'Video asset management',
+    ],
+    url: null,
+    featured: false,
+    company: companies.knovator,
+    period: { start: '2019', end: '2020' },
+    skills: [skills.react, skills.redux, skills.webpack],
+    tools: [tools.git, tools.github],
+    impact: 'Provided a stable and efficient management interface for organizing educational content and video assets.',
+    overview: `The administration portal for Gateflix, built to manage course content, student data, and video assets. It utilizes a similar architectural foundation to the Digibooks admin panel, ensuring consistency and reliability across Knovator\\'s internal tools.`,
+    challenges: [],
+    approach: [
+      {
+        icon: 'architecture',
+        title: 'Standardized Component Library',
+        description: 'Utilized Ant Design to rapidly build out complex data tables and forms, ensuring a consistent administrative user experience.',
+      }
+    ],
+    impacts: [],
+    markdown: `
+Built the **Gateflix Admin Panel** using **React, Redux, and Ant Design**. The platform serves as the central hub for managing educational content and video assets. By standardizing the UI with a robust component library, I was able to rapidly deliver complex data-management interfaces that empowered the Gateflix team.
+    `.trim(),
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────────
+  // Stay Classy
+  // ─────────────────────────────────────────────────────────────────────────────
+  stayclassy: {
+    id: 'stay-classy',
+    title: 'Stay Classy',
+    tagline: 'High-performance Next.js e-commerce platform.',
+    tags: ['E-commerce', 'SSR', 'Web Platform'],
+    role: 'Frontend Engineer',
+    platform: 'Web',
+    industries: ['E-commerce', 'Retail'],
+    deliverables: [
+      'Server-Side Rendered e-commerce frontend',
+      'Optimized product galleries and sliders',
+    ],
+    url: null,
+    featured: false,
+    company: companies.knovator,
+    period: { start: '2020', end: '2021' },
+    skills: [skills.nextjs, skills.react, skills.redux],
+    tools: [tools.git, tools.github],
+    impact: 'Improved SEO and initial page load times significantly by migrating the e-commerce architecture to Server-Side Rendering via Next.js.',
+    overview: 'Stay Classy is an e-commerce platform where performance and SEO were paramount. I utilized Next.js to build a Server-Side Rendered (SSR) application, integrating rich features like product magnification, dynamic sliders, and comprehensive cart management.',
+    challenges: [
+      {
+        label: 'SEO & Performance',
+        value: 'A traditional SPA approach was harming search engine visibility and initial load performance for product pages.',
+      }
+    ],
+    approach: [
+      {
+        icon: 'optimization',
+        title: 'Next.js SSR',
+        description: 'Implemented Server-Side Rendering using Next.js to ensure product pages were fully indexed by search engines and delivered instantly to users.',
+      }
+    ],
+    impacts: [],
+    markdown: `
+Engineered the **Stay Classy** e-commerce platform focusing heavily on SEO and performance. By adopting **Next.js** for Server-Side Rendering (SSR), I resolved indexing issues inherent to traditional SPAs and drastically improved initial page load times. I integrated complex interactive elements like product magnification and dynamic sliders while maintaining a smooth user experience.
+    `.trim(),
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────────
+  // WonderMD Patient Portal
+  // ─────────────────────────────────────────────────────────────────────────────
+  wondermdpatient: {
+    id: 'wondermd-patient',
+    title: 'WonderMD Patient Portal',
+    tagline: 'Secure telehealth platform for patient consultations.',
+    tags: ['Healthcare', 'Telemedicine', 'Patient Portal'],
+    role: 'Frontend Engineer',
+    platform: 'Web',
+    industries: ['Healthcare', 'Telemedicine'],
+    deliverables: [
+      'Integrated video consultations (OpenTok)',
+      'Secure payment processing (Stripe)',
+      'HIPAA-compliant data handling',
+    ],
+    url: null,
+    featured: true,
+    company: companies.knovator,
+    period: { start: '2021', end: '2022' },
+    skills: [skills.nextjs, skills.react, skills.tailwindcss],
+    tools: [tools.git, tools.github],
+    impact: 'Enabled seamless, secure remote medical consultations by integrating robust video conferencing and payment solutions.',
+    overview: 'WonderMD is a telehealth platform designed to connect patients with medical professionals. I developed the patient-facing portal using Next.js and Tailwind CSS, focusing on a secure and accessible user experience for scheduling, payments, and video consultations.',
+    challenges: [
+      {
+        label: 'Seamless Video Integration',
+        value: 'Providing a reliable, in-browser video consultation experience without requiring external application downloads.',
+      }
+    ],
+    approach: [
+      {
+        icon: 'integration',
+        title: 'OpenTok & Stripe',
+        description: 'Integrated OpenTok (Vonage) for high-quality, secure video calls directly within the portal, and Stripe for seamless consultation payments.',
+      }
+    ],
+    impacts: [],
+    markdown: `
+Developed the **WonderMD Patient Portal**, a secure telemedicine platform built with **Next.js** and **Tailwind CSS**. 
+
+The core of the application revolved around facilitating remote consultations. I successfully integrated the **OpenTok (Vonage)** API to deliver stable, browser-based video conferencing, and implemented **Stripe** to handle secure session payments. The portal provides patients with an intuitive interface for managing their medical history, appointments, and active telehealth calls.
+    `.trim(),
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────────
+  // otp-input-react
+  // ─────────────────────────────────────────────────────────────────────────────
+  otpinput: {
+    id: 'otp-input-react',
+    title: 'otp-input-react',
+    tagline: 'Open-source React component for OTP inputs.',
+    tags: ['Open Source Contributor', 'React Component'],
+    role: 'Open Source Contributor',
+    platform: 'Web · Library',
+    industries: ['Software Development', 'Open Source'],
+    deliverables: [
+      'Code contributions and improvements',
+      'Test coverage enhancements',
+    ],
+    url: 'https://github.com/shubhanus/otp-input-react',
+    featured: false,
+    company: companies.personal,
+    period: { start: '2020', end: '2020' },
+    skills: [skills.react, skills.typescript, skills.jest],
+    tools: [tools.git, tools.github],
+    impact: 'Contributed to the stability and feature set of a widely-used open-source OTP input component.',
+    overview: 'An open-source React functional component providing a customizable One-Time Password (OTP) input interface. I contributed to the repository to improve its functionality and reliability.',
+    challenges: [],
+    approach: [
+      {
+        icon: 'optimization',
+        title: 'Open Source Collaboration',
+        description: 'Collaborated with the maintainer to refine component logic and ensure high test coverage using Jest and React Testing Library.',
+      }
+    ],
+    impacts: [],
+    markdown: `
+Made significant open-source contributions to **otp-input-react**, a popular React component library for handling One-Time Passwords. My work involved refining the component's internal logic, improving TypeScript support, and enhancing test coverage using **Jest** and **React Testing Library**.
+    `.trim(),
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────────
+  // Svitae Housing Management
+  // ─────────────────────────────────────────────────────────────────────────────
+  svitae: {
+    id: 'svitae-housing',
+    title: 'Svitae Housing Management',
+    tagline: 'Comprehensive dashboard for property and housing management.',
+    tags: ['Property Management', 'Dashboard'],
+    role: 'Frontend Engineer',
+    platform: 'Web',
+    industries: ['Real Estate', 'Property Management'],
+    deliverables: [
+      'Advanced data grid integration (Wijmo)',
+      'Data visualization (Chartist)',
+    ],
+    url: null,
+    featured: false,
+    company: companies.personal,
+    period: { start: '2019', end: '2020' },
+    skills: [skills.react, skills.typescript],
+    tools: [tools.git, tools.github],
+    impact: 'Delivered complex data visualization and management tools that allowed property managers to oversee housing portfolios efficiently.',
+    overview: 'A robust housing management dashboard built with React and Material-UI. The application provides detailed analytics, financial reporting, and property oversight tools.',
+    challenges: [
+      {
+        label: 'Complex Data Grids',
+        value: 'Handling and rendering large datasets for financial and property records required high-performance grid solutions.',
+      }
+    ],
+    approach: [
+      {
+        icon: 'integration',
+        title: 'Wijmo & Chartist Integration',
+        description: 'Integrated GrapeCity Wijmo for high-performance, complex data grids and Chartist for rendering responsive financial analytics dashboards.',
+      }
+    ],
+    impacts: [],
+    markdown: `
+Developed the **Svitae Housing Management** dashboard, a complex administrative tool for real estate professionals. Built utilizing **React and Material-UI**, the platform required handling substantial amounts of data. I integrated **GrapeCity Wijmo** to provide advanced, high-performance data grids, and utilized **Chartist** to build responsive data visualization dashboards for financial reporting.
+    `.trim(),
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────────
+  // PropertyIQ
+  // ─────────────────────────────────────────────────────────────────────────────
+  propertyiq: {
+    id: 'property-iq',
+    title: 'PropertyIQ',
+    tagline: 'High-fidelity mobile UI/UX implementation for PropTech.',
+    tags: ['PropTech', 'Mobile UI/UX'],
+    role: 'Frontend Engineer',
+    platform: 'Mobile',
+    industries: ['Real Estate', 'PropTech'],
+    deliverables: [
+      'Responsive mobile screen implementation',
+      'Pixel-perfect UI translation from draft screens',
+    ],
+    url: null,
+    featured: false,
+    company: companies.emtec,
+    period: { start: '2022', end: '2022' },
+    skills: [skills.react],
+    tools: [tools.git],
+    impact: 'Translated draft designs into high-fidelity, responsive mobile views for an intuitive property intelligence application.',
+    overview: 'PropertyIQ is a PropTech application focusing on intuitive property intelligence. My work involved analyzing draft screens and implementing pixel-perfect, highly responsive mobile interfaces.',
+    challenges: [
+      {
+        label: 'Pixel-Perfect Translation',
+        value: 'Ensuring the implemented mobile UI matched the high-fidelity design drafts precisely across various device sizes.',
+      }
+    ],
+    approach: [
+      {
+        icon: 'architecture',
+        title: 'Responsive UI Implementation',
+        description: 'Focused on precise styling and layout techniques to translate static PDF/PNG drafts into interactive, responsive mobile screens.',
+      }
+    ],
+    impacts: [],
+    markdown: `
+Worked on **PropertyIQ**, a PropTech mobile application. My primary responsibility was the precise implementation of high-fidelity mobile UI/UX screens based on provided design drafts. I ensured that the application delivered an intuitive and highly responsive mobile experience tailored for property intelligence tasks.
+    `.trim(),
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────────
+  // Varni Travel
+  // ─────────────────────────────────────────────────────────────────────────────
+  varnitravel: {
+    id: 'varni-travel',
+    title: 'Varni Travel',
+    tagline: 'Blazing-fast Progressive Web App for the travel industry.',
+    tags: ['Travel', 'PWA', 'SSR'],
+    role: 'Frontend Engineer',
+    platform: 'Web · PWA',
+    industries: ['Travel', 'E-commerce'],
+    deliverables: [
+      'Server-Side Rendering integration',
+      'PWA configuration and caching',
+    ],
+    url: null,
+    featured: false,
+    company: companies.knovator,
+    period: { start: '2019', end: '2020' },
+    skills: [skills.react, skills.redux, skills.webpack],
+    tools: [tools.git, tools.github],
+    impact: 'Delivered an app-like experience on the web with offline capabilities and lightning-fast load times, drastically improving user retention.',
+    overview: 'Varni Travel is a digital platform for booking travel experiences. To ensure optimal performance and SEO, the application was built as a Server-Side Rendered Progressive Web App (PWA) using React, Redux, and Laravel Mix.',
+    challenges: [
+      {
+        label: 'App-like Performance on Web',
+        value: 'Users expected native-app speed and offline reliability from a web-based travel booking platform.',
+      }
+    ],
+    approach: [
+      {
+        icon: 'optimization',
+        title: 'SSR & PWA',
+        description: 'Implemented Server-Side Rendering via a custom SSR architecture (Knovator-ssr-pwa) and configured service workers to provide robust offline caching and an installable PWA experience.',
+      }
+    ],
+    impacts: [],
+    markdown: `
+Engineered the frontend for **Varni Travel**, focusing on delivering an exceptional user experience through performance optimizations. I built the platform as a **Progressive Web App (PWA)** with **Server-Side Rendering (SSR)**. 
+
+By utilizing React, Redux, and custom Webpack/Laravel Mix configurations, I ensured the platform had lightning-fast initial load times, strong SEO indexing, and the ability to function seamlessly even with unstable network connections.
+    `.trim(),
   },
 };
+
+export const projectsArray = Object.values(projects);

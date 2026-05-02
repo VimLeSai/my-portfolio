@@ -24,11 +24,11 @@ export default function SelectedArtifacts() {
           </p>
           <div className="bg-primary/30 hidden h-px w-24 lg:block" />
           <Vink
-            href="/archive"
+            href="/work"
             // variant="secondary"
             mode="text"
             showArrow
-            className="label-sm group-hover:text-primary font-bold tracking-widest uppercase"
+            className="text-on-surface-variant text-md group-hover:italic group-hover:text-primary my-4 leading-relaxed "
           >
             View All
           </Vink>
@@ -66,7 +66,7 @@ export default function SelectedArtifacts() {
                       href={`/work/${project.id}`}
                       mode="icon"
                       hoverStyle="fill"
-                      className="group-hover:bg-[var(--color-primary-container)] duration-700 group-hover:text-[var(--color-on-primary)]"
+                      className="duration-700 group-hover:bg-[var(--color-primary-container)] group-hover:text-[var(--color-on-primary)]"
                     >
                       <span className="material-symbols-outlined">
                         north_east

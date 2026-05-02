@@ -4,9 +4,9 @@ import Watermark from '@/components/ui/Watermark';
 import Button from '@/components/ui/Button';
 
 export const metadata = {
-  title: 'Stack — Portfolio',
+  title: 'Technology Stack — Vimal Desai | React, Node.js, AWS',
   description:
-    'The trusted technology stack behind 9+ years of full-stack engineering.',
+    'Explore the trusted technology stack of Vimal Desai. Expertise across React, Next.js, TypeScript, Node.js, PostgreSQL, and AWS infrastructure.',
 };
 
 const stackCategories = [
@@ -238,8 +238,8 @@ export default function StackPage() {
   return (
     <>
       <Navbar
-        brandName="Senior Engineer"
-        ctaLabel="Contact"
+        brandName="Vimal Desai"
+        ctaLabel="Get in Touch"
         ctaHref="/contact"
       />
 
@@ -541,8 +541,8 @@ export default function StackPage() {
       </main>
 
       <Footer
-        brandName="Senior Engineer"
-        tagline="Full Stack Engineering. Crafted with intentionality."
+        brandName="Vimal Desai"
+        tagline="Building scalable foundations using the best tools for the job."
       />
       <Watermark text="stack" />
     </>

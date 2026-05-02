@@ -5,20 +5,40 @@ const footerSections = [
   {
     title: 'Navigation',
     links: [
-      { label: 'Work', href: '/' },
+      { label: 'Work', href: '/work' },
       { label: 'Experience', href: '/experience' },
       { label: 'Process', href: '/process' },
-      { label: 'Archive', href: '/archive' },
+      // { label: 'Archive', href: '/archive' }, will enable later
       { label: 'About', href: '/about' },
     ],
   },
   {
     title: 'Connect',
     links: [
-      { label: 'LinkedIn', href: '#' },
-      { label: 'GitHub', href: '#' },
-      { label: 'ReadCV', href: '#' },
-      { label: 'StackOverflow', href: '#' },
+      {
+        label: 'LinkedIn',
+        href: 'https://www.linkedin.com/in/vimlesai/',
+        target: '_blank',
+        rel: 'noopener noreferrer',
+      },
+      {
+        label: 'GitHub',
+        href: 'https://github.com/vimlesai',
+        target: '_blank',
+        rel: 'noopener noreferrer',
+      },
+      {
+        label: 'ReadCV',
+        href: '/resume',
+        target: '_blank',
+        rel: 'noopener noreferrer',
+      },
+      {
+        label: 'Upwork',
+        href: 'https://www.upwork.com/freelancers/~01df3a31d6a2f121f6',
+        target: '_blank',
+        rel: 'noopener noreferrer',
+      },
     ],
   },
   {
@@ -33,7 +53,7 @@ const footerSections = [
 ];
 
 export default function Footer({
-  brandName = 'Portfolio',
+  brandName = 'Vimal Desai',
   tagline = 'Senior Full Stack Architect specializing in high-fidelity interfaces and distributed backend systems. Engineered with editorial intent.',
 }) {
   return (
@@ -64,6 +84,8 @@ export default function Footer({
                   <Link
                     key={link.label}
                     href={link.href}
+                    target={link.target}
+                    rel={link.rel}
                     className="font-body text-md text-[var(--color-muted)] transition-colors hover:text-[var(--color-accent)]"
                   >
                     {link.label}
@@ -80,7 +102,18 @@ export default function Footer({
             Built with Next.js 16 & Tailwind 4
           </p>
           <div className="flex gap-8">
-            <a
+            <p className="font-body mt-8 max-w-md text-sm leading-relaxed text-[var(--color-muted)]">
+              Made with love by <span style={{ color: 'red' }}>❤️</span>{' '}
+              <a
+                href="https://www.google.com/search?q=everything+on+%22VimLeSai%22"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[var(--color-accent)] underline underline-offset-4"
+              >
+                VimLeSai
+              </a>
+            </p>
+            {/* <a
               href="#"
               className="font-mono text-xs tracking-widest text-[var(--color-muted)] uppercase transition-colors hover:text-[var(--color-accent)]"
             >
@@ -91,7 +124,7 @@ export default function Footer({
               className="font-mono text-xs tracking-widest text-[var(--color-muted)] uppercase transition-colors hover:text-[var(--color-accent)]"
             >
               Privacy
-            </a>
+            </a> */}
           </div>
         </div>
       </div>
