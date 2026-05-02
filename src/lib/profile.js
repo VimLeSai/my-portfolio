@@ -21,7 +21,7 @@ export const profile = {
 
   bio: {
     short:
-      'Full-stack engineer with 8+ years of experience across ERP, CRM, logistics, real estate, and healthcare. I specialize in React, Node.js, and TypeScript, and care deeply about clean architecture, team velocity, and thoughtful engineering.',
+      'Full-stack engineer with 9+ years of experience across ERP, CRM, logistics, real estate, and healthcare. I specialize in React, Node.js, and TypeScript, and care deeply about clean architecture, team velocity, and thoughtful engineering.',
     long: `A few years ago, I set out to find my niche in software by exploring different languages and fields.
 I found it in front-end development, fell deep into the React ecosystem, and never looked back.
 
