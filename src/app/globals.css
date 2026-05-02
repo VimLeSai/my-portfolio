@@ -4,34 +4,95 @@
 /* 1. Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
 
-/* 2. Tailwind v4 entry point (replaces @tailwind base/components/utilities) */
+/* 2. Tailwind v4 entry point */
 @import 'tailwindcss';
 
 /* ─────────────────────────────────────────
-   3. Theme tokens  — replaces tailwind.config.ts
-      All values here become Tailwind utilities automatically:
-      --color-accent  →  text-accent, bg-accent, border-accent …
-      --font-serif    →  font-serif
-      --animate-*     →  animate-fade-up, animate-slide-right
+   3. Theme tokens
    ───────────────────────────────────────── */
 @theme {
   /* ── Colors ── */
   --color-ink: #0e0e0e;
   --color-paper: #f5f2ec;
-  --color-accent: #800020; /* burgundy / wine red */
-  --color-accent2: #1a4a8a; /* navy blue */
+  --color-accent: #800020; /* burgundy */
   --color-muted: #6b6456;
   --color-rule: #d4cfc7;
   --color-tag-bg: #e8e3da;
 
   /* ── Fonts ── */
   --font-serif: 'DM Serif Display', Georgia, serif;
-  --font-sans: 'DM Sans', system-ui, sans-serif;
+  --font-sans: 'Poppins, DM Sans', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', Menlo, monospace;
 
   /* ── Animations ── */
   --animate-fade-up: fadeUp 0.7s ease both;
   --animate-slide-right: slideRight 0.6s ease both;
+
+  /* ── Color Tokens ── */
+  --color-primary: #570013;
+  --color-primary-container: #800020;
+  --color-primary-fixed: #ffdada;
+  --color-primary-fixed-dim: #ffb3b5;
+  --color-on-primary: #ffffff;
+  --color-on-primary-fixed: #40000b;
+  --color-on-primary-fixed-variant: #8e0f28;
+  --color-on-primary-container: #ff828a;
+  --color-inverse-primary: #ffb3b5;
+
+  --color-secondary: #335e9f;
+  --color-secondary-container: #8fb7fe;
+  --color-secondary-fixed: #d6e3ff;
+  --color-secondary-fixed-dim: #aac7ff;
+  --color-on-secondary: #ffffff;
+  --color-on-secondary-fixed: #001b3e;
+  --color-on-secondary-fixed-variant: #144686;
+  --color-on-secondary-container: #154686;
+
+  --color-tertiary: #002c36;
+  --color-tertiary-container: #004451;
+  --color-tertiary-fixed: #b6ebfb;
+  --color-tertiary-fixed-dim: #9acfde;
+  --color-on-tertiary: #ffffff;
+  --color-on-tertiary-fixed: #001f26;
+  --color-on-tertiary-fixed-variant: #114d5b;
+  --color-on-tertiary-container: #7cb0c0;
+
+  --color-surface: #fcf9f3;
+  --color-surface-bright: #fcf9f3;
+  --color-surface-dim: #dcdad4;
+  --color-surface-variant: #e5e2dc;
+  --color-surface-tint: #af2b3e;
+  --color-surface-container: #f0eee8;
+  --color-surface-container-low: #f6f3ed;
+  --color-surface-container-high: #ebe8e2;
+  --color-surface-container-highest: #e5e2dc;
+  --color-surface-container-lowest: #ffffff;
+  --color-on-surface: #1c1c18;
+  --color-on-surface-variant: #584141;
+  --color-inverse-surface: #31312d;
+  --color-inverse-on-surface: #f3f0ea;
+
+  --color-background: #fcf9f3;
+  --color-on-background: #1c1c18;
+
+  --color-error: #ba1a1a;
+  --color-error-container: #ffdad6;
+  --color-on-error: #ffffff;
+  --color-on-error-container: #93000a;
+
+  --color-outline: #8c7071;
+  --color-outline-variant: #e0bfbf;
+
+  /* ── Typography ── */
+  --font-headline: 'Newsreader', Georgia, serif;
+  --font-body: 'Poppins', system-ui, sans-serif;
+  --font-label: 'DM Sans', system-ui, sans-serif;
+
+  /* ── Border Radius ── */
+  --radius-DEFAULT: 0.125rem;
+  --radius-lg: 0.25rem;
+  --radius-xl: 0.5rem;
+  --radius-full: 0.75rem;
 }
 
 /* ─────────────────────────────────────────
@@ -59,6 +120,19 @@
   }
 }
 
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 40s linear infinite;
+}
+
 /* ─────────────────────────────────────────
    5. Base styles
    ───────────────────────────────────────── */
@@ -66,6 +140,7 @@
   html {
     font-size: 15px;
     -webkit-font-smoothing: antialiased;
+    scroll-behavior: smooth;
   }
 
   body {
@@ -74,13 +149,105 @@
     font-family: var(--font-sans);
     font-weight: 400;
     line-height: 1.6;
+    background-color: var(--color-surface);
+    color: var(--color-on-surface);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 }
 
+::selection {
+  background-color: var(--color-primary-fixed);
+  color: var(--color-primary);
+}
+
+/* ── Font Utility Classes ── */
+.font-headline {
+  font-family: var(--font-headline);
+  /* @apply tracking-2px leading-tighter text-on-surface leading-tight; */
+}
+
+.font-body {
+  font-family: var(--font-body);
+}
+
+.font-label {
+  font-family: var(--font-label);
+}
+
+/* ── Material Symbols ── */
+.material-symbols-outlined {
+  font-variation-settings:
+    'FILL' 0,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 24;
+}
+
+/* ── Decorative / Animations ── */
+@keyframes ping {
+  75%,
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+.animate-ping {
+  animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+/* ── Paper Texture Helper ── */
+.paper-texture::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.06;
+  pointer-events: none;
+  background-image: url('https://www.transparenttextures.com/patterns/natural-paper.png');
+}
+
+/* ── Nav Blur ── */
+.nav-blur {
+  background-color: rgba(252, 249, 243, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* ── Decorative Watermark ── */
+.watermark {
+  position: fixed;
+  bottom: 3rem;
+  right: 3rem;
+  pointer-events: none;
+  user-select: none;
+  opacity: 0.05;
+  font-family: var(--font-headline);
+  font-style: italic;
+  font-size: 20vw;
+  line-height: 1;
+  color: var(--color-primary);
+  transform: rotate(12deg);
+  z-index: 0;
+}
+
+/* ── Timeline connector lines ── */
+.timeline-line {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    var(--color-outline-variant),
+    transparent
+  );
+}
+
 /* ─────────────────────────────────────────
-   6. Animation delay utilities
-      (v4 allows arbitrary values like [250ms]
-       but these named ones are more ergonomic)
+   6. Utilities
    ───────────────────────────────────────── */
 @layer utilities {
   .delay-100 {
@@ -92,31 +259,22 @@
   .delay-200 {
     animation-delay: 200ms;
   }
-  .delay-250 {
-    animation-delay: 250ms;
-  }
   .delay-300 {
     animation-delay: 300ms;
-  }
-  .delay-350 {
-    animation-delay: 350ms;
   }
   .delay-400 {
     animation-delay: 400ms;
   }
-  .delay-450 {
-    animation-delay: 450ms;
-  }
   .delay-500 {
     animation-delay: 500ms;
   }
-  .delay-550 {
-    animation-delay: 550ms;
+  .delay-700 {
+    animation-delay: 700ms;
   }
-  .delay-600 {
-    animation-delay: 600ms;
+  .delay-800 {
+    animation-delay: 800ms;
   }
-  .delay-650 {
-    animation-delay: 650ms;
+  .delay-1000 {
+    animation-delay: 1000ms;
   }
 }
