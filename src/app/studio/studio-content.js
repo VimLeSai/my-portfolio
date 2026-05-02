@@ -1,125 +1,125 @@
 'use client';
 
 import Link from 'next/link';
-import { useState } from 'react';
+import { useState, useEffect, useCallback } from 'react';
+import { profile } from '@/lib/profile';
+import { resumeMeta, skillGroups, highlights, jobs } from '@/lib/resume-data';
 
+/* ─────────────────────── helpers ─────────────────────── */
 
+/** Derive a Material icon from a URL domain */
+function iconForLink(url) {
+  if (!url) return 'link';
+  if (url.includes('github')) return 'code';
+  if (url.includes('linkedin')) return 'person';
+  if (url.includes('npmjs')) return 'deployed_code';
+  if (url.includes('stackoverflow')) return 'forum';
+  if (url.includes('instagram')) return 'photo_camera';
+  if (url.includes('facebook')) return 'group';
+  if (url.includes('upwork') || url.includes('contra') || url.includes('toptal'))
+    return 'work';
+  if (url.includes('intch')) return 'handshake';
+  return 'public';
+}
 
-const searchResults = [
+/** Parse a URL into a breadcrumb-style source label */
+function displayedLinkFor(url) {
+  try {
+    const u = new URL(url);
+    const host = u.hostname.replace(/^www\./, '');
+    const path = u.pathname
+      .split('/')
+      .filter(Boolean)
+      .join(' › ');
+    return path ? `${host} › ${path}` : host;
+  } catch {
+    return url;
+  }
+}
+
+/* ─────────────────────── filter tabs ─────────────────────── */
+
+const filterTabs = [
+  { label: 'All', icon: null },
+  { label: 'Code', icon: 'code', match: ['github', 'npmjs', 'stackoverflow'] },
+  { label: 'Professional', icon: 'work', match: ['linkedin', 'upwork', 'contra', 'toptal', 'intch'] },
+  { label: 'Social', icon: 'group', match: ['instagram', 'facebook', 'twitter'] },
+  { label: 'Portfolio', icon: 'web', match: ['vimlesai.io'] },
+];
+
+/* ─────────────────────── knowledge panel data (from lib) ─────────────────────── */
+
+const knowledgePanelInfo = [
   {
-    id: 'featured',
-    type: 'featured',
-    badge: 'Featured Portfolio · Exhibition 01',
-    title: "The Architectural Mind: Vimal's Design Philosophy",
-    url: 'vimal.dev/philosophy',
-    description:
-      'An in-depth exploration of curated digital interfaces. Merging the rigid structures of modern architecture with the fluid movement of high-end editorial layouts. Featuring works in React, Node.js, and generative art.',
-    images: [
-      'https://images.unsplash.com/photo-1486325212027-8081e485255e?w=200&q=80',
-      'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=200&q=80',
-    ],
+    icon: 'location_on',
+    label: 'Based In',
+    value: profile.location.display,
   },
   {
-    id: 'linkedin',
-    type: 'result',
-    source: 'linkedin.com › in › vimalsai',
-    title: 'Vimal Sai — Senior Design Engineer',
-    description:
-      'Professional background at Emtec Inc. Specialised in building scalable design systems and high-performance React architectures.',
-    tags: [],
+    icon: 'school',
+    label: 'Education',
+    value: profile.education[0]?.displayDegree || 'B.Sc. Computer Science',
   },
   {
-    id: 'github',
-    type: 'result',
-    source: 'github.com › vimlesai',
-    title: 'Vimlesai (The Curator) · GitHub',
-    description: '',
-    tags: ['REACT', 'TYPESCRIPT', 'TAILWIND'],
+    icon: 'business',
+    label: 'Current Role',
+    value: `${jobs[0]?.title} · ${jobs[0]?.company}`,
   },
   {
-    id: 'journal',
-    type: 'result',
-    source: 'vimal.dev › journal › obsidian-workflow',
-    title: 'Journal: Designing for Persistence',
-    description:
-      'How I use Obsidian and the Second Brain methodology to curate my design inspirations and engineering challenges.',
-    tags: [],
+    icon: 'schedule',
+    label: 'Experience',
+    value: `${highlights[0]?.value} years`,
   },
 ];
 
-const nexusResults = [
-  {
-    id: 'nexus',
-    type: 'featured-link',
-    source: 'github.com › vimal-desai › nexus-core',
-    title: 'Nexus-Core: A Distributed Microservices Orchestrator in Go',
-    description:
-      'An open-source high-performance engine designed for high-concurrency environments. Features zero-config service discovery and automated circuit breaking. Built with Go and gRPC.',
-    badges: ['STARRED 4.2K', 'UPDATED 2D AGO'],
-    color: 'var(--color-primary-container)',
-    href: '/work/string-erp',
-  },
-  {
-    id: 'medium',
-    type: 'result',
-    source: 'medium.com › engineering › architectural-intentionality',
-    title: 'Architectural Intentionality: Moving Beyond the Boxy Web',
-    description:
-      'Exploring why modern software engineering needs more editorial curation. A deep dive into using React and Tailwind to create "breathable" high-end digital galleries.',
-    quote: '"The digital screen is a physical sheet of fine-grain paper..."',
-    href: '/archive/architects-dilemma',
-  },
-  {
-    id: 'dribbble',
-    type: 'card',
-    source: 'dribbble.com › shots › vimlesai-portfolio-concept',
-    title: 'Editorial UI: Portfolio Case Study',
-    description:
-      "Design patterns for Senior Engineers. Focuses on typography hierarchy and asymmetric grids. Featured in 'Dribbble Best of Mobile'.",
-    image:
-      'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=200&q=80',
-    href: '/',
-  },
-  {
-    id: 'linkedin2',
-    type: 'result',
-    source: 'linkedin.com › in › vimal-desai-dev',
-    title: 'Vimal Desai — Senior Full Stack Engineer — Fintech Solutions',
-    description:
-      'Current: Lead Developer at VimLeSai Digital. Past: Senior Engineer at Global Pay. Specialist in React, Node.js, and Cloud Infrastructure. Mentored 50+ junior developers.',
-    href: '/experience',
-  },
-];
+const relatedTechStack = skillGroups
+  .flatMap((g) => g.skills)
+  .slice(0, 8);
 
-const relatedSearches = [
-  'Vimal Desai Go projects',
-  'Senior Engineer Chennai',
-  'VimLeSai UI Kits',
-  'Editorial Web Design 2024',
-];
-
-const alsoSearchFor = [
-  'Brutalist UI Trends',
-  'Micro-interactions Guide',
-  'Typescript Design Patterns',
-];
-
-const filterTabs = ['All', 'Repositories', 'Articles', 'Dribbble', 'Network'];
+/* ─────────────────────── component ─────────────────────── */
 
 export default function StudioContent() {
-  const [activeQuery, setActiveQuery] = useState(
-    'Vimal Desai Senior Full Stack Engineer',
-  );
+  const [activeQuery, setActiveQuery] = useState('VimLeSai');
   const [activeTab, setActiveTab] = useState('All');
+  const [results, setResults] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  const fetchResults = useCallback(async (query) => {
+    setLoading(true);
+    try {
+      const res = await fetch(`/api/search?q=${encodeURIComponent(query)}`);
+      const data = await res.json();
+      setResults(data);
+    } catch {
+      setResults(null);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchResults(activeQuery);
+  }, [activeQuery, fetchResults]);
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    fetchResults(activeQuery);
+  };
+
+  /* Filter the organic results based on tab */
+  const filteredResults = (results?.organic || []).filter((r) => {
+    if (activeTab === 'All') return true;
+    const tab = filterTabs.find((t) => t.label === activeTab);
+    if (!tab?.match) return true;
+    return tab.match.some((domain) => r.link?.includes(domain));
+  });
 
   return (
     <>
-
       <main className="mx-auto max-w-7xl px-8 pt-28 pb-24">
-        {/* ── Search Bar ── */}
+        {/* ── Branding ── */}
         <section className="mb-10">
           <div className="mb-8 flex items-center gap-4">
-            {/* Logo wordmark */}
             <Link
               href="/"
               className="font-headline text-4xl font-bold tracking-tighter"
@@ -130,43 +130,40 @@ export default function StudioContent() {
           </div>
 
           {/* Search input */}
-          <div
-            className="mb-6 flex max-w-2xl items-center gap-4 px-6 py-4"
-            style={{
-              backgroundColor: 'var(--color-surface-container-lowest)',
-              border: '1px solid var(--color-outline-variant)',
-              borderRadius: 'var(--radius-full)',
-              boxShadow: '0 2px 12px rgba(88,65,65,0.08)',
-            }}
-          >
-            <span
-              className="material-symbols-outlined text-xl"
-              style={{ color: 'var(--color-outline)' }}
+          <form onSubmit={handleSearch}>
+            <div
+              className="mb-6 flex max-w-2xl items-center gap-4 px-6 py-4"
+              style={{
+                backgroundColor: 'var(--color-surface-container-lowest)',
+                border: '1px solid var(--color-outline-variant)',
+                borderRadius: 'var(--radius-full)',
+                boxShadow: '0 2px 12px rgba(88,65,65,0.08)',
+              }}
             >
-              search
-            </span>
-            <input
-              type="text"
-              value={activeQuery}
-              onChange={(e) => setActiveQuery(e.target.value)}
-              className="font-body flex-1 bg-transparent text-base focus:outline-none"
-              style={{ color: 'var(--color-on-surface)' }}
-            />
-            <div className="flex items-center gap-3">
               <span
-                className="material-symbols-outlined cursor-pointer text-xl"
+                className="material-symbols-outlined text-xl"
                 style={{ color: 'var(--color-outline)' }}
               >
-                mic
+                search
               </span>
-              <span
-                className="material-symbols-outlined cursor-pointer text-xl"
-                style={{ color: 'var(--color-outline)' }}
-              >
-                image_search
-              </span>
+              <input
+                type="text"
+                value={activeQuery}
+                onChange={(e) => setActiveQuery(e.target.value)}
+                className="font-body flex-1 bg-transparent text-base focus:outline-none"
+                style={{ color: 'var(--color-on-surface)' }}
+              />
+              <div className="flex items-center gap-3">
+                <button
+                  type="submit"
+                  className="material-symbols-outlined cursor-pointer text-xl transition-colors hover:opacity-70"
+                  style={{ color: 'var(--color-outline)', background: 'none', border: 'none' }}
+                >
+                  search
+                </button>
+              </div>
             </div>
-          </div>
+          </form>
 
           {/* Filter tabs */}
           <div
@@ -175,43 +172,28 @@ export default function StudioContent() {
           >
             {filterTabs.map((tab) => (
               <button
-                key={tab}
-                onClick={() => setActiveTab(tab)}
-                className="font-body px-5 py-3 text-sm transition-all"
+                key={tab.label}
+                onClick={() => setActiveTab(tab.label)}
+                className="font-body flex items-center gap-1.5 px-5 py-3 text-sm transition-all"
                 style={{
                   color:
-                    activeTab === tab
+                    activeTab === tab.label
                       ? 'var(--color-primary-container)'
                       : 'var(--color-on-surface-variant)',
                   borderBottom:
-                    activeTab === tab
+                    activeTab === tab.label
                       ? '2px solid var(--color-primary-container)'
                       : '2px solid transparent',
-                  fontWeight: activeTab === tab ? '600' : '400',
+                  fontWeight: activeTab === tab.label ? '600' : '400',
                   marginBottom: '-1px',
                 }}
               >
-                {tab === 'Repositories' && (
-                  <span className="material-symbols-outlined mr-1 align-middle text-xs">
-                    code
+                {tab.icon && (
+                  <span className="material-symbols-outlined text-sm">
+                    {tab.icon}
                   </span>
                 )}
-                {tab === 'Articles' && (
-                  <span className="material-symbols-outlined mr-1 align-middle text-xs">
-                    article
-                  </span>
-                )}
-                {tab === 'Dribbble' && (
-                  <span className="material-symbols-outlined mr-1 align-middle text-xs">
-                    palette
-                  </span>
-                )}
-                {tab === 'Network' && (
-                  <span className="material-symbols-outlined mr-1 align-middle text-xs">
-                    group
-                  </span>
-                )}
-                {tab}
+                {tab.label}
               </button>
             ))}
           </div>
@@ -220,253 +202,157 @@ export default function StudioContent() {
         {/* ── Main Grid ── */}
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-3">
           {/* ── Results Column ── */}
-          <div className="space-y-8 lg:col-span-2">
+          <div className="space-y-6 lg:col-span-2">
             {/* Result count */}
             <p
               className="font-body text-sm"
               style={{ color: 'var(--color-on-surface-variant)' }}
             >
-              About 1,240 results (0.42 seconds)
+              {loading
+                ? 'Searching…'
+                : results?.source === 'live'
+                ? `About ${results.searchInformation?.totalResults || 'many'} results (${results.searchInformation?.timeTaken || '—'})`
+                : `About ${results?.searchInformation?.totalResults || '1,240'} results (${results?.searchInformation?.timeTaken || '0.42'} seconds)`}
             </p>
 
-            {/* Nexus featured link */}
-            <div
-              className="p-6"
-              style={{
-                backgroundColor: 'var(--color-surface-container-low)',
-                borderRadius: 'var(--radius-xl)',
-              }}
-            >
-              <div className="mb-2 flex items-center gap-2">
-                <span
-                  className="material-symbols-outlined text-base"
-                  style={{ color: 'var(--color-outline)' }}
-                >
-                  link
-                </span>
-                <p
-                  className="font-body text-xs"
-                  style={{ color: 'var(--color-on-surface-variant)' }}
-                >
-                  {nexusResults[0].source}
-                </p>
-              </div>
-              <Link href={nexusResults[0].href}>
-                <h3
-                  className="font-headline mb-2 cursor-pointer text-2xl hover:underline"
-                  style={{ color: 'var(--color-primary-container)' }}
-                >
-                  {nexusResults[0].title}
-                </h3>
-              </Link>
-              <p
-                className="font-body mb-3 text-sm leading-relaxed"
-                style={{ color: 'var(--color-on-surface)' }}
-              >
-                {nexusResults[0].description}
-              </p>
-              <div className="flex gap-3">
-                {nexusResults[0].badges.map((badge) => (
-                  <span
-                    key={badge}
-                    className="font-label px-3 py-1 text-xs tracking-wider uppercase"
+            {/* Skeleton loader */}
+            {loading && (
+              <div className="space-y-6">
+                {[1, 2, 3, 4].map((i) => (
+                  <div
+                    key={i}
+                    className="animate-pulse space-y-3 p-6"
                     style={{
-                      backgroundColor: 'var(--color-surface-container-highest)',
-                      color: 'var(--color-on-surface-variant)',
-                      borderRadius: 'var(--radius-full)',
+                      backgroundColor: 'var(--color-surface-container-low)',
+                      borderRadius: 'var(--radius-xl)',
                     }}
                   >
-                    {badge}
-                  </span>
+                    <div className="h-3 w-48 rounded" style={{ backgroundColor: 'var(--color-surface-container-highest)' }} />
+                    <div className="h-5 w-3/4 rounded" style={{ backgroundColor: 'var(--color-surface-container-highest)' }} />
+                    <div className="h-3 w-full rounded" style={{ backgroundColor: 'var(--color-surface-container-highest)' }} />
+                    <div className="h-3 w-2/3 rounded" style={{ backgroundColor: 'var(--color-surface-container-highest)' }} />
+                  </div>
                 ))}
               </div>
-            </div>
+            )}
 
-            {/* Medium article */}
-            <div>
-              <div className="mb-1 flex items-center gap-2">
-                <span
-                  className="material-symbols-outlined text-base"
-                  style={{ color: 'var(--color-outline)' }}
-                >
-                  article
-                </span>
-                <p
-                  className="font-body text-xs"
-                  style={{ color: 'var(--color-on-surface-variant)' }}
-                >
-                  {nexusResults[1].source}
-                </p>
-              </div>
-              <Link href={nexusResults[1].href}>
-                <h3
-                  className="font-headline mb-1 cursor-pointer text-xl hover:underline"
-                  style={{ color: 'var(--color-primary-container)' }}
-                >
-                  {nexusResults[1].title}
-                </h3>
-              </Link>
-              <p
-                className="font-body mb-1 text-sm leading-relaxed"
-                style={{ color: 'var(--color-on-surface)' }}
-              >
-                {nexusResults[1].description}
-              </p>
-              <p
-                className="font-headline text-sm italic"
-                style={{ color: 'var(--color-on-surface-variant)' }}
-              >
-                {nexusResults[1].quote}
-              </p>
-            </div>
-
-            {/* Dribbble card result */}
-            <div className="flex gap-5">
-              <div
-                className="flex-shrink-0 overflow-hidden"
-                style={{
-                  width: '160px',
-                  height: '110px',
-                  borderRadius: 'var(--radius-xl)',
-                }}
-              >
-                <img
-                  src={nexusResults[2].image}
-                  alt={nexusResults[2].title}
-                  className="h-full w-full object-cover"
-                />
-              </div>
-              <div>
+            {/* Results */}
+            {!loading && filteredResults.map((result, idx) => (
+              <div key={result.link || idx}>
+                {/* Source breadcrumb */}
                 <div className="mb-1 flex items-center gap-2">
                   <span
                     className="material-symbols-outlined text-base"
                     style={{ color: 'var(--color-outline)' }}
                   >
-                    palette
+                    {iconForLink(result.link)}
                   </span>
                   <p
                     className="font-body text-xs"
                     style={{ color: 'var(--color-on-surface-variant)' }}
                   >
-                    {nexusResults[2].source}
+                    {result.displayedLink || displayedLinkFor(result.link)}
                   </p>
                 </div>
-                <Link href={nexusResults[2].href}>
-                  <h3
-                    className="font-headline mb-2 cursor-pointer text-xl hover:underline"
-                    style={{ color: 'var(--color-primary-container)' }}
-                  >
-                    {nexusResults[2].title}
-                  </h3>
-                </Link>
-                <p
-                  className="font-body text-sm leading-relaxed"
-                  style={{ color: 'var(--color-on-surface)' }}
-                >
-                  {nexusResults[2].description}
-                </p>
-              </div>
-            </div>
 
-            {/* LinkedIn result */}
-            <div>
-              <div className="mb-1 flex items-center gap-2">
-                <span
-                  className="material-symbols-outlined text-base"
-                  style={{ color: 'var(--color-outline)' }}
-                >
-                  link
-                </span>
-                <p
-                  className="font-body text-xs"
-                  style={{ color: 'var(--color-on-surface-variant)' }}
-                >
-                  {nexusResults[3].source}
-                </p>
-              </div>
-              <Link href={nexusResults[3].href}>
-                <h3
-                  className="font-headline mb-1 cursor-pointer text-xl hover:underline"
+                {/* Title */}
+                <a
+                  href={result.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-headline mb-1 block text-xl transition-opacity hover:underline"
                   style={{ color: 'var(--color-primary-container)' }}
                 >
-                  {nexusResults[3].title}
-                </h3>
-              </Link>
-              <p
-                className="font-body text-sm leading-relaxed"
-                style={{ color: 'var(--color-on-surface)' }}
-              >
-                {nexusResults[3].description}
-              </p>
-            </div>
+                  {result.title}
+                </a>
+
+                {/* Snippet */}
+                {result.snippet && (
+                  <p
+                    className="font-body text-sm leading-relaxed"
+                    style={{ color: 'var(--color-on-surface)' }}
+                  >
+                    {result.snippet}
+                  </p>
+                )}
+              </div>
+            ))}
+
+            {!loading && filteredResults.length === 0 && (
+              <div className="py-12 text-center">
+                <span
+                  className="material-symbols-outlined mb-4 text-5xl"
+                  style={{ color: 'var(--color-outline)' }}
+                >
+                  search_off
+                </span>
+                <p
+                  className="font-body text-base"
+                  style={{ color: 'var(--color-on-surface-variant)' }}
+                >
+                  No results found for this filter. Try "All".
+                </p>
+              </div>
+            )}
 
             {/* Related Searches */}
-            <div
-              className="p-6"
-              style={{
-                backgroundColor: 'var(--color-surface-container-low)',
-                borderRadius: 'var(--radius-xl)',
-              }}
-            >
-              <p
-                className="font-label mb-4 text-xs font-bold tracking-widest uppercase"
-                style={{ color: 'var(--color-on-surface)' }}
-              >
-                People also search for
-              </p>
-              <div className="grid grid-cols-2 gap-3">
-                {relatedSearches.map((s) => (
-                  <button
-                    key={s}
-                    className="hover:bg-surface-container-high flex items-center gap-3 p-3 text-left transition-all"
-                    style={{
-                      backgroundColor: 'var(--color-surface-container-highest)',
-                      borderRadius: 'var(--radius-lg)',
-                    }}
-                    onClick={() => setActiveQuery(s)}
-                  >
-                    <span
-                      className="material-symbols-outlined text-base"
-                      style={{ color: 'var(--color-outline)' }}
-                    >
-                      search
-                    </span>
-                    <span
-                      className="font-body text-sm"
-                      style={{ color: 'var(--color-on-surface)' }}
-                    >
-                      {s}
-                    </span>
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* Pagination hint */}
-            <div className="flex items-center gap-4">
-              <span
-                className="font-headline text-2xl tracking-widest opacity-40 select-none"
-                style={{ color: 'var(--color-on-surface)' }}
-              >
-                V i m l e s a i
-              </span>
-              <button
-                className="font-body flex items-center gap-1 px-4 py-2 text-sm"
+            {!loading && results?.relatedSearches?.length > 0 && (
+              <div
+                className="mt-4 p-6"
                 style={{
-                  color: 'var(--color-primary-container)',
-                  border: '1px solid var(--color-outline-variant)',
-                  borderRadius: 'var(--radius-lg)',
+                  backgroundColor: 'var(--color-surface-container-low)',
+                  borderRadius: 'var(--radius-xl)',
                 }}
               >
-                NEXT
-                <span className="material-symbols-outlined text-base">
-                  chevron_right
+                <p
+                  className="font-label mb-4 text-xs font-bold tracking-widest uppercase"
+                  style={{ color: 'var(--color-on-surface)' }}
+                >
+                  People also search for
+                </p>
+                <div className="grid grid-cols-2 gap-3">
+                  {results.relatedSearches.map((s) => (
+                    <button
+                      key={s}
+                      className="flex items-center gap-3 p-3 text-left transition-all"
+                      style={{
+                        backgroundColor: 'var(--color-surface-container-highest)',
+                        borderRadius: 'var(--radius-lg)',
+                      }}
+                      onClick={() => setActiveQuery(s)}
+                    >
+                      <span
+                        className="material-symbols-outlined text-base"
+                        style={{ color: 'var(--color-outline)' }}
+                      >
+                        search
+                      </span>
+                      <span
+                        className="font-body text-sm"
+                        style={{ color: 'var(--color-on-surface)' }}
+                      >
+                        {s}
+                      </span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Pagination hint */}
+            {!loading && (
+              <div className="flex items-center gap-4 pt-4">
+                <span
+                  className="font-headline text-2xl tracking-widest opacity-40 select-none"
+                  style={{ color: 'var(--color-on-surface)' }}
+                >
+                  V i m L e S a i
                 </span>
-              </button>
-            </div>
+              </div>
+            )}
           </div>
 
-          {/* ── Knowledge Panel ── */}
+          {/* ── Knowledge Panel (Right Sidebar) ── */}
           <div className="space-y-6 lg:col-span-1">
             {/* Profile card */}
             <div
@@ -486,23 +372,23 @@ export default function StudioContent() {
                 }}
               >
                 <img
-                  src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80"
-                  alt="Vimal Desai"
-                  className="h-full w-full object-cover mix-blend-luminosity grayscale"
+                  src="/assets/hero-image.png"
+                  alt={profile.name.full}
+                  className="h-full w-full object-cover object-top"
                 />
                 <div
                   className="absolute inset-0"
                   style={{
                     background:
-                      'linear-gradient(to bottom, transparent 50%, rgba(128,0,32,0.6))',
+                      'linear-gradient(to bottom, transparent 40%, rgba(128,0,32,0.7))',
                   }}
                 />
                 <div className="absolute bottom-4 left-4">
                   <p className="font-headline text-xl font-bold text-white">
-                    Vimal Desai
+                    {profile.name.full}
                   </p>
                   <p className="font-label text-xs tracking-wider text-white/70 uppercase">
-                    Senior Full Stack Engineer
+                    {profile.title}
                   </p>
                 </div>
               </div>
@@ -513,29 +399,10 @@ export default function StudioContent() {
                   className="font-body text-sm leading-relaxed"
                   style={{ color: 'var(--color-on-surface-variant)' }}
                 >
-                  Vimal Desai is a distinguished Senior Full Stack Engineer and
-                  UI Designer known for his "Editorial Curator" approach to web
-                  architecture. Based in India, his work bridges the gap between
-                  high-performance systems and premium visual experiences.
+                  {profile.bio.short}
                 </p>
 
-                {[
-                  {
-                    icon: 'location_on',
-                    label: 'Born',
-                    value: 'Chennai, India',
-                  },
-                  {
-                    icon: 'school',
-                    label: 'Education',
-                    value: 'B.Tech Computer Science Engineering',
-                  },
-                  {
-                    icon: 'business',
-                    label: 'Founded',
-                    value: 'VimLeSai Digital Studio',
-                  },
-                ].map((row) => (
+                {knowledgePanelInfo.map((row) => (
                   <div key={row.label} className="flex items-start gap-3">
                     <span
                       className="material-symbols-outlined mt-0.5 flex-shrink-0 text-base"
@@ -560,7 +427,43 @@ export default function StudioContent() {
                   </div>
                 ))}
 
-                {/* Related entities */}
+                {/* Social links */}
+                <div>
+                  <p
+                    className="font-label mb-3 text-xs tracking-widest uppercase"
+                    style={{ color: 'var(--color-on-surface-variant)' }}
+                  >
+                    Profiles
+                  </p>
+                  <div className="space-y-1.5">
+                    {profile.socials
+                      .filter((s) => s.enabled && s.href)
+                      .map((social) => (
+                        <a
+                          key={social.id}
+                          href={social.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="group flex items-center justify-between py-1.5 text-sm transition-opacity hover:opacity-80"
+                        >
+                          <span
+                            className="font-body"
+                            style={{ color: 'var(--color-primary-container)' }}
+                          >
+                            {social.label}
+                          </span>
+                          <span
+                            className="material-symbols-outlined text-sm opacity-0 transition-opacity group-hover:opacity-60"
+                            style={{ color: 'var(--color-outline)' }}
+                          >
+                            north_east
+                          </span>
+                        </a>
+                      ))}
+                  </div>
+                </div>
+
+                {/* Related tech entities */}
                 <div>
                   <p
                     className="font-label mb-3 text-xs tracking-widest uppercase"
@@ -569,14 +472,7 @@ export default function StudioContent() {
                     Related Entities
                   </p>
                   <div className="flex flex-wrap gap-2">
-                    {[
-                      'React',
-                      'Node.js',
-                      'Go',
-                      'TypeScript',
-                      'PostgreSQL',
-                      'GCP',
-                    ].map((tech) => (
+                    {relatedTechStack.map((tech) => (
                       <span
                         key={tech}
                         className="font-label px-3 py-1 text-xs"
@@ -621,7 +517,7 @@ export default function StudioContent() {
               </div>
             </div>
 
-            {/* Also search for */}
+            {/* Highlights / Stats */}
             <div
               className="p-5"
               style={{
@@ -633,28 +529,24 @@ export default function StudioContent() {
                 className="font-label mb-4 text-xs font-bold tracking-widest uppercase"
                 style={{ color: 'var(--color-on-surface)' }}
               >
-                People also search for
+                Career Highlights
               </p>
-              <div className="space-y-2">
-                {alsoSearchFor.map((item) => (
-                  <button
-                    key={item}
-                    className="flex w-full items-center justify-between p-2 text-left transition-opacity hover:opacity-70"
-                    onClick={() => setActiveQuery(item)}
-                  >
-                    <span
-                      className="font-body text-sm"
+              <div className="grid grid-cols-2 gap-3">
+                {highlights.slice(0, 4).map((h) => (
+                  <div key={h.label} className="text-center">
+                    <p
+                      className="font-headline text-2xl"
                       style={{ color: 'var(--color-primary-container)' }}
                     >
-                      {item}
-                    </span>
-                    <span
-                      className="material-symbols-outlined text-base"
-                      style={{ color: 'var(--color-outline)' }}
+                      {h.value}
+                    </p>
+                    <p
+                      className="font-label text-xs"
+                      style={{ color: 'var(--color-on-surface-variant)' }}
                     >
-                      north_east
-                    </span>
-                  </button>
+                      {h.label}
+                    </p>
+                  </div>
                 ))}
               </div>
             </div>
@@ -673,17 +565,24 @@ export default function StudioContent() {
               >
                 Status
               </p>
-              <p
-                className="font-body text-sm font-semibold"
-                style={{ color: 'var(--color-primary-container)' }}
-              >
-                Open for high-impact roles
-              </p>
+              <div className="flex items-center gap-2">
+                <span
+                  className="inline-block h-2 w-2 rounded-full"
+                  style={{ backgroundColor: '#22c55e' }}
+                />
+                <p
+                  className="font-body text-sm font-semibold"
+                  style={{ color: 'var(--color-primary-container)' }}
+                >
+                  {profile.meta.availableForHire
+                    ? 'Open for high-impact roles'
+                    : 'Currently unavailable'}
+                </p>
+              </div>
             </div>
           </div>
         </div>
       </main>
-
     </>
   );
 }
