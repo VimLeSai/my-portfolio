@@ -1,4 +1,4 @@
-"use client";
+'use client';
 import React from 'react';
 
 import { useProjects } from './context';
@@ -20,7 +20,7 @@ const WorkAside = () => {
           Work Archive
         </h3>
         <p className="mt-1 text-xs font-medium tracking-wider text-[#6b6456] uppercase">
-          2020 — 2024 Collections
+          2020 — 2025 Collections
         </p>
       </div>
       <nav className="flex flex-col gap-2 font-['Inter'] text-sm font-medium">
@@ -49,23 +49,23 @@ const WorkAside = () => {
         <div className="flex items-center gap-3">
           <div className="bg-surface-container-highest h-10 w-10 overflow-hidden rounded-full">
             <img
-              alt="Curator Profile"
+              alt="VimLeSai"
               data-alt="professional portrait of a creative engineering lead in a minimalist studio setting with soft natural light"
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-6fYRPsDUlNlPsRPsliSDS4nMKQSpJ_RW74ocLtdlhpQKxmbpRCoR2aBEyrbPave_kepDHMOBp0BvKInsAmlhTxHS8SAkZ8yVxeB_sXRg93SdWX7LEXG4k-Y-TmHYg6Q01rMDGHulpekhuqoalNAIxlun9J1zmrG6DtnfmC0PN5aBUhX_IiHlKu6I-kKqoyYOlqHQidvmgQO5eKeEenfkcL74vziwySxvMKCfBfq9dWs4XKSm5FAvXBXi7hy5YDJjUlm6xDYuM3U"
+              src="/assets/hero-image.png"
             />
           </div>
           <div>
-            <p className="text-on-surface text-sm font-bold">
-              Curator Profile
-            </p>
+            <p className="text-on-surface text-sm font-bold">VimLeSai</p>
             <p className="text-on-surface-variant text-[10px] tracking-widest uppercase">
               Active Now
             </p>
           </div>
         </div>
-        <button className="bg-surface-container-high text-primary border-primary/5 hover:bg-surface-container-highest rounded-md border py-3 text-xs font-bold transition-colors">
-          Download CV
-        </button>
+        <a href="/resume" target="_blank" className="w-full">
+          <button className="bg-surface-container-high text-primary w-full border-primary/5 hover:bg-surface-container-highest rounded-md border py-3 text-xs font-bold transition-colors">
+            Read CV
+          </button>
+        </a>
       </div>
     </aside>
   );

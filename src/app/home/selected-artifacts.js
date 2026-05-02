@@ -28,7 +28,7 @@ export default function SelectedArtifacts() {
             // variant="secondary"
             mode="text"
             showArrow
-            className="text-on-surface-variant text-md group-hover:italic group-hover:text-primary my-4 leading-relaxed "
+            className="text-on-surface-variant text-md group-hover:italic hover:italic group-hover:text-primary my-4 leading-relaxed "
           >
             View All
           </Vink>

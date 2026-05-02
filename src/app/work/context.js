@@ -64,7 +64,7 @@ export const ProjectsProvider = ({ children }) => {
     if (showAllProjects) {
       return filteredProjects;
     }
-    return filteredProjects.slice(0, 6);
+    return filteredProjects.slice(0, 8);
   }, [filteredProjects, showAllProjects]);
 
   const value = {
