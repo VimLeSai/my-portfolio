@@ -1,9 +1,5 @@
 const certifications = [
-  { name: 'AWS Certified Solutions Architect', icon: 'cloud' },
-  { name: 'Google Professional Cloud Architect', icon: 'cloud_done' },
-  { name: 'Certified Kubernetes Administrator (CKA)', icon: 'developer_board' },
-  { name: 'Certified Ethical Hacker', icon: 'security' },
+  { name: 'React Certification', icon: 'code', issuer: 'Testdom', year: '2022' },
 ];
-
 
 export default certifications;
