@@ -329,4 +329,20 @@ export const skills = {
     group: 'ai',
     yearsOfExperience: 1,
   },
+
+  // ─── Tools & Build ───────────────────────────────────────────────────────────
+  babel: {
+    label: 'Babel',
+    description: 'JavaScript compiler for using next-generation JS today.',
+    href: 'https://babeljs.io/',
+    group: 'tools',
+    yearsOfExperience: 5,
+  },
+  webpack: {
+    label: 'Webpack',
+    description: 'Static module bundler for modern JavaScript applications.',
+    href: 'https://webpack.js.org/',
+    group: 'tools',
+    yearsOfExperience: 5,
+  },
 };
