@@ -1,5 +1,6 @@
 "use client";
 import React from 'react';
+import Link from 'next/link';
 import { useProjects } from './context';
 
 const ProjectsGrid = () => {
@@ -8,44 +9,45 @@ const ProjectsGrid = () => {
   const renderProject = (project, index) => {
     const isFirst = index === 0;
     const isSecond = index === 1;
-    const isRest = index > 1;
 
     if (isFirst) {
       return (
         <article key={project.id} className="group md:col-span-8">
-          <div className="bg-surface-container-low editorial-shadow overflow-hidden rounded-lg transition-transform duration-500 hover:scale-[1.01]">
-            <img
-              alt={project.title}
-              className="h-[400px] w-full scale-105 rounded-b-lg object-cover transition-transform duration-700 group-hover:scale-100 object-top-left"
-              data-alt={project.tagline}
-              src={project.image || '/assets/projects/image.png'}
-            />
-            <div className="p-8">
-              <div className="mb-4 flex items-start justify-between">
-                <div>
-                  <h2 className="font-headline text-primary text-3xl font-bold transition-all group-hover:italic">
-                    {project.title}
-                  </h2>
-                  <p className="text-on-surface-variant mt-1 text-sm font-bold tracking-widest uppercase">
-                    {project.role}
-                  </p>
-                </div>
-                <span className="material-symbols-outlined text-primary-container text-4xl opacity-20 transition-opacity group-hover:opacity-100">
-                  arrow_outward
-                </span>
-              </div>
-              <p className="text-on-surface/80 mb-6 max-w-xl leading-relaxed">
-                {project.overview || project.tagline}
-              </p>
-              <div className="flex flex-wrap gap-2">
-                {project.skills?.slice(0, 3).map((skill) => (
-                  <span key={skill?.id} className="bg-surface-container-highest text-on-surface-variant rounded-full px-3 py-1 text-[10px] font-bold tracking-wider uppercase">
-                    {skill?.name}
+          <Link href={`/work/${project.id}`} className="block">
+            <div className="bg-surface-container-low editorial-shadow overflow-hidden rounded-lg transition-transform duration-500 hover:scale-[1.01]">
+              <img
+                alt={project.title}
+                className="h-[400px] w-full scale-105 rounded-b-lg object-cover transition-transform duration-700 group-hover:scale-100 object-top-left"
+                data-alt={project.tagline}
+                src={project.image || '/assets/projects/image.png'}
+              />
+              <div className="p-8">
+                <div className="mb-4 flex items-start justify-between">
+                  <div>
+                    <h2 className="font-headline text-primary text-3xl font-bold transition-all group-hover:italic">
+                      {project.title}
+                    </h2>
+                    <p className="text-on-surface-variant mt-1 text-sm font-bold tracking-widest uppercase">
+                      {project.role}
+                    </p>
+                  </div>
+                  <span className="material-symbols-outlined text-primary-container text-4xl opacity-20 transition-opacity group-hover:opacity-100">
+                    arrow_outward
                   </span>
-                ))}
+                </div>
+                <p className="text-on-surface/80 mb-6 max-w-xl leading-relaxed">
+                  {project.overview || project.tagline}
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {project.skills?.slice(0, 3).map((skill) => (
+                    <span key={skill?.id} className="bg-surface-container-highest text-on-surface-variant rounded-full px-3 py-1 text-[10px] font-bold tracking-wider uppercase">
+                      {skill?.name}
+                    </span>
+                  ))}
+                </div>
               </div>
             </div>
-          </div>
+          </Link>
         </article>
       );
     }
@@ -57,24 +59,26 @@ const ProjectsGrid = () => {
             <span className="mb-4 block text-[10px] font-bold tracking-[0.2em] text-[#6b6456] uppercase">
               Archive 00{index + 1}
             </span>
-            <h3 className="font-headline text-on-surface mb-2 text-2xl font-bold">
-              {project.title}
-            </h3>
-            <p className="text-on-surface-variant mb-6 text-sm">
-              {project.tagline}
-            </p>
-            <img
-              alt="Design System Grid"
-              className="mb-6 aspect-square w-full rounded-lg object-cover grayscale transition-all duration-500 hover:grayscale-0 object-top-left"
-              data-alt={project.title}
-              src={project.image || '/assets/projects/image.png'}
-            />
-            <button className="text-primary group flex items-center gap-2 text-xs font-bold tracking-widest uppercase">
-              Case Study{' '}
-              <span className="material-symbols-outlined text-lg transition-transform group-hover:translate-x-2">
-                arrow_forward
-              </span>
-            </button>
+            <Link href={`/work/${project.id}`} className="group/link block">
+              <h3 className="font-headline text-on-surface mb-2 text-2xl font-bold group-hover/link:text-primary transition-colors">
+                {project.title}
+              </h3>
+              <p className="text-on-surface-variant mb-6 text-sm">
+                {project.tagline}
+              </p>
+              <img
+                alt="Design System Grid"
+                className="mb-6 aspect-square w-full rounded-lg object-cover grayscale transition-all duration-500 hover:grayscale-0 object-top-left"
+                data-alt={project.title}
+                src={project.image || '/assets/projects/image.png'}
+              />
+              <div className="text-primary group flex items-center gap-2 text-xs font-bold tracking-widest uppercase">
+                Case Study{' '}
+                <span className="material-symbols-outlined text-lg transition-transform group-hover/link:translate-x-2">
+                  arrow_forward
+                </span>
+              </div>
+            </Link>
           </div>
         </article>
       );
@@ -82,23 +86,25 @@ const ProjectsGrid = () => {
 
     return (
       <article key={project.id} className="group">
-        <div className="bg-surface-container-low rounded-lg p-1">
-          <img
-            alt={project.title}
-            className="aspect-video w-full rounded-lg object-cover object-top-left grayscale transition-all duration-500 hover:grayscale-0"
-            data-alt={project.tagline}
-            src={project.image || '/assets/projects/placeholder.png'}
-          />
-        </div>
-        <h4 className="font-headline text-on-surface group-hover:text-primary my-1 text-xl font-bold transition-colors">
-          {project.title}
-        </h4>
-        <p className="mb-3 text-[10px] font-bold tracking-widest text-[#6b6456] uppercase">
-          {project.tags?.[0] || 'Engineering'} • {project.industries?.[0] || 'Software'}
-        </p>
-        <p className="text-on-surface-variant text-sm leading-relaxed">
-          {project.tagline}
-        </p>
+        <Link href={`/work/${project.id}`} className="block">
+          <div className="bg-surface-container-low rounded-lg p-1">
+            <img
+              alt={project.title}
+              className="aspect-video w-full rounded-lg object-cover object-top-left grayscale transition-all duration-500 hover:grayscale-0"
+              data-alt={project.tagline}
+              src={project.image || '/assets/projects/placeholder.png'}
+            />
+          </div>
+          <h4 className="font-headline text-on-surface group-hover:text-primary my-1 text-xl font-bold transition-colors">
+            {project.title}
+          </h4>
+          <p className="mb-3 text-[10px] font-bold tracking-widest text-[#6b6456] uppercase">
+            {project.tags?.[0] || 'Engineering'} • {project.industries?.[0] || 'Software'}
+          </p>
+          <p className="text-on-surface-variant text-sm leading-relaxed">
+            {project.tagline}
+          </p>
+        </Link>
       </article>
     );
   };
