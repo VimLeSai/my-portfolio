@@ -24,7 +24,7 @@ export default function Navbar({
   return (
     <>
       <header
-        className="fixed top-0 z-50 w-full"
+        className="fixed top-0 z-50 w-full border-b border-stone-200/60 bg-[#F5F0E8]/85 px-6 backdrop-blur-md"
         style={{
           background: 'rgba(252,249,243,0.7)',
           backdropFilter: 'blur(15px)',
@@ -64,7 +64,7 @@ export default function Navbar({
             {rightItems}
             <Link
               href={ctaHref}
-              className="font-body px-6 py-2 text-sm tracking-wide shadow-sm transition-all hover:opacity-90"
+              className="font-body px-6 py-2 text-sm hidden md:block tracking-wide shadow-sm transition-all hover:opacity-90"
               style={{
                 backgroundColor: 'var(--color-primary-container)',
                 color: 'var(--color-on-primary)',
