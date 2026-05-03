@@ -39,7 +39,7 @@ const ProjectsGrid = () => {
                   {project.overview || project.tagline}
                 </p>
                 <div className="flex flex-wrap gap-2">
-                  {project.skills?.slice(0, 3).map((skill) => (
+                  {project.skills?.filter(Boolean).slice(0, 3).map((skill) => (
                     <span key={skill?.id} className="bg-surface-container-highest text-on-surface-variant rounded-full px-3 py-1 text-[10px] font-bold tracking-wider uppercase">
                       {skill?.name}
                     </span>

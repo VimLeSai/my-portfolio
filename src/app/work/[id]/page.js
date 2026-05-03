@@ -36,12 +36,8 @@ export default async function WorkDetailPage({ params }) {
     subtitle: project.tagline,
     category: project.industries?.join(' · ') || project.tags?.join(' · '),
     year: project.period?.end || project.period?.start,
-    duration:
-      project.period?.end === 'Present'
-        ? 'Ongoing'
-        : `${project.period?.start} – ${project.period?.end}`,
-    tags:
-      project.skills?.map((s) => s.label || s.name).slice(0, 6) || project.tags,
+    duration: project.period?.end === 'Present' ? 'Ongoing' : `${project.period?.start} – ${project.period?.end}`,
+    tags: project.skills?.filter(Boolean).map(s => s.label || s.name).slice(0, 6) || project.tags,
     hero: project.image,
     challenge: project.challenges?.[0]?.value || project.overview,
     approach: project.approach?.map((a) => ({
