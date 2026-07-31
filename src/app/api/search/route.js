@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
+import { profile } from '@/lib/profile';
 
 /** Prefer Serper.dev (used elsewhere in this repo). SerpAPI still supported. */
 const SERPER_API_KEY = process.env.SERPER_API_KEY;
@@ -16,7 +17,59 @@ const CACHE_TTL_MS = 30 * 24 * 60 * 60 * 1000;
 /** Google returns ~10 organic per page — paginate for a fuller index. */
 const RESULTS_PER_PAGE = 10;
 const MAX_PAGES = 4; // up to ~40 organic results
-const CACHE_VERSION = 'serper_exact_p4';
+const CACHE_VERSION = 'serper_seed_p4';
+
+/** Queries that should pin curated profile links first. */
+const IDENTITY_TOKENS = [
+  'vimlesai',
+  'vimal desai',
+  'vimaldesai',
+  'vim le sai',
+];
+
+function isIdentityQuery(query) {
+  const q = query.replace(/"/g, '').trim().toLowerCase();
+  return IDENTITY_TOKENS.some(
+    (t) => q === t || q.includes(t) || t.includes(q),
+  );
+}
+
+function curatedPresenceResults() {
+  return profile.socials
+    .filter((s) => s.enabled && s.href)
+    .map((s, i) => ({
+      title: `${profile.name.full} — ${s.label}`,
+      link: s.href,
+      snippet:
+        s.snippet ||
+        `${s.label} profile for ${profile.name.full} (${s.handle || 'VimLeSai'}).`,
+      position: i + 1,
+      favicon: null,
+      displayedLink: null,
+      curated: true,
+    }));
+}
+
+/** Prepend curated profiles; dedupe by normalized URL host+path. */
+function withCuratedPresence(organic, query) {
+  if (!isIdentityQuery(query)) {
+    return organic.map((r, i) => ({ ...r, position: i + 1 }));
+  }
+
+  const seeds = curatedPresenceResults();
+  const normalize = (url) => {
+    try {
+      const u = new URL(url);
+      return `${u.hostname.replace(/^www\./, '')}${u.pathname.replace(/\/$/, '')}`.toLowerCase();
+    } catch {
+      return (url || '').toLowerCase();
+    }
+  };
+
+  const seen = new Set(seeds.map((s) => normalize(s.link)));
+  const rest = organic.filter((r) => !seen.has(normalize(r.link)));
+  return [...seeds, ...rest].map((r, i) => ({ ...r, position: i + 1 }));
+}
 
 function cacheKeyFor(query) {
   const slug = query
@@ -156,7 +209,10 @@ async function fetchViaSerper(query) {
       totalResults: null,
       timeTaken: null,
     },
-    organic: filterRelevant(mergeOrganicPages(pages), query),
+    organic: withCuratedPresence(
+      filterRelevant(mergeOrganicPages(pages), query),
+      query,
+    ),
     knowledgeGraph,
     relatedSearches,
   };
@@ -214,7 +270,10 @@ async function fetchViaSerpApi(query) {
       totalResults: first?.search_information?.total_results || null,
       timeTaken: first?.search_information?.time_taken_displayed || null,
     },
-    organic: filterRelevant(mergeOrganicPages(pageBodies), query),
+    organic: withCuratedPresence(
+      filterRelevant(mergeOrganicPages(pageBodies), query),
+      query,
+    ),
     knowledgeGraph: first?.knowledge_graph || null,
     relatedSearches: (first?.related_searches || []).map((s) => s.query),
   };
@@ -267,94 +326,7 @@ export async function GET(request) {
       totalResults: '1,240',
       timeTaken: '0.42',
     },
-    organic: [
-      {
-        title: 'VimLeSai (Vimal Desai) - GitHub',
-        link: 'https://github.com/VimLeSai',
-        snippet:
-          'Shipping across frontend, backend & shared component libraries for a high-traffic enterprise asset management SaaS.',
-        position: 1,
-        favicon: null,
-        displayedLink: 'github.com › VimLeSai',
-      },
-      {
-        title: 'vimlesai - NPM',
-        link: 'https://www.npmjs.com/~vimlesai',
-        snippet:
-          'It is a simple custom hook on top of useState to provide a callback after the state is updated.',
-        position: 2,
-        favicon: null,
-        displayedLink: 'npmjs.com › ~vimlesai',
-      },
-      {
-        title: 'Vimal Desai - UpKeep - LinkedIn',
-        link: 'https://in.linkedin.com/in/vimlesai',
-        snippet:
-          "I'm a Senior Full Stack Engineer with 10+ years of experience building scalable… · Experience: UpKeep",
-        position: 3,
-        favicon: null,
-        displayedLink: 'linkedin.com › in › vimlesai',
-      },
-      {
-        title: 'Vimal Desai — Senior Full Stack Engineer',
-        link: 'https://vimlesai.io/',
-        snippet:
-          'Senior Full Stack Engineer with 10+ years building scalable, high-performance web applications.',
-        position: 4,
-        favicon: null,
-        displayedLink: 'vimlesai.io',
-      },
-      {
-        title: 'User VimLeSai - Stack Overflow',
-        link: 'https://stackoverflow.com/users/7801396/vimlesai',
-        snippet: "VimLeSai's user avatar. Explorer. Member for 8 years.",
-        position: 5,
-        favicon: null,
-        displayedLink: 'stackoverflow.com › users › vimlesai',
-      },
-      {
-        title: 'Vimal Desai - Contra',
-        link: 'https://contra.com/VimLeSai/about',
-        snippet:
-          'Full Stack Developer building scalable, high-performance web applications.',
-        position: 6,
-        favicon: null,
-        displayedLink: 'contra.com › VimLeSai',
-      },
-      {
-        title: 'Vimal Desai (@vimlesai) • Instagram',
-        link: 'https://www.instagram.com/vimlesai/',
-        snippet: 'Instagram profile for VimLeSai.',
-        position: 7,
-        favicon: null,
-        displayedLink: 'instagram.com › vimlesai',
-      },
-      {
-        title: 'Vimal D. - Senior Full Stack Architect - Upwork',
-        link: 'https://www.upwork.com/freelancers/vimlesai',
-        snippet:
-          'Senior Full Stack Engineer using React, Next.js, Node.js, and TypeScript.',
-        position: 8,
-        favicon: null,
-        displayedLink: 'upwork.com › freelancers › vimlesai',
-      },
-      {
-        title: 'Vimal Desai (@VimLeSai) - Facebook',
-        link: 'https://www.facebook.com/VimLeSai/about/',
-        snippet: 'Facebook profile for VimLeSai.',
-        position: 9,
-        favicon: null,
-        displayedLink: 'facebook.com › VimLeSai',
-      },
-      {
-        title: 'Vimal Desai - Intch',
-        link: 'https://intch.org/p/VimLeSai',
-        snippet: 'Senior Software Engineer profile on Intch.',
-        position: 10,
-        favicon: null,
-        displayedLink: 'intch.org › VimLeSai',
-      },
-    ],
+    organic: withCuratedPresence([], query),
     relatedSearches: [
       'Vimal Desai software engineer',
       'VimLeSai GitHub projects',
