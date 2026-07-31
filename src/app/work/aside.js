@@ -1,70 +1,68 @@
 'use client';
-import React from 'react';
 
+import React from 'react';
 import { useProjects } from './context';
+import { workCategories } from './categories';
 
 const WorkAside = () => {
   const { filters, setFilters } = useProjects();
 
-  const categories = [
-    { name: 'All Projects', icon: 'grid_view' },
-    { name: 'Engineering', icon: 'code' },
-    { name: 'Design', icon: 'brush' },
-    { name: 'Strategy', icon: 'insights' },
-  ];
-
   return (
-    <aside className="sticky top-21 hidden h-[calc(100vh-84px)] w-64 flex-col gap-6 border-r border-[#e0bfbf]/15 p-6 lg:flex">
-      <div className="mb-4">
-        <h3 className="font-['Newsreader'] text-xl font-bold text-[#1c1c18]">
-          Work Archive
-        </h3>
-        <p className="mt-1 text-xs font-medium tracking-wider text-[#6b6456] uppercase">
-          2020 — 2025 Collections
+    <aside className="sticky top-24 hidden h-[calc(100vh-6rem)] w-56 shrink-0 flex-col gap-8 border-r border-[var(--color-outline-variant)]/20 py-8 pr-6 lg:flex xl:w-60">
+      <div>
+        <h3 className="font-headline text-on-surface text-xl">Projects</h3>
+        <p className="font-label text-outline mt-1 text-[10px] tracking-[0.16em] uppercase">
+          Filter by type
         </p>
       </div>
-      <nav className="flex flex-col gap-2 font-['Inter'] text-sm font-medium">
-        {categories.map((cat) => (
-          <a
-            key={cat.name}
-            className={`flex items-center gap-3 rounded-md px-4 py-2 ${
-              filters.category === cat.name
-                ? 'bg-[#800020] text-white shadow-inner'
-                : 'text-[#6b6456] transition-transform duration-200 hover:translate-x-1 hover:bg-[#f6f3ed]'
-            }`}
-            href="#"
-            onClick={(e) => {
-              e.preventDefault();
-              setFilters((prev) => ({ ...prev, category: cat.name }));
-            }}
-          >
-            <span className="material-symbols-outlined text-[18px]">
-              {cat.icon}
-            </span>{' '}
-            {cat.name}
-          </a>
-        ))}
+
+      <nav className="flex flex-col gap-1">
+        {workCategories.map((cat) => {
+          const active = filters.category === cat.name;
+          return (
+            <button
+              key={cat.name}
+              type="button"
+              className={`font-label px-3 py-2.5 text-left text-sm tracking-wide transition-colors ${
+                active
+                  ? 'bg-primary-container text-on-primary'
+                  : 'text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface'
+              }`}
+              onClick={() =>
+                setFilters((prev) => ({ ...prev, category: cat.name }))
+              }
+            >
+              {cat.short}
+            </button>
+          );
+        })}
       </nav>
-      <div className="border-outline-variant/15 mt-auto flex flex-col gap-4 border-t pt-6">
-        <div className="flex items-center gap-3">
-          <div className="bg-surface-container-highest h-10 w-10 overflow-hidden rounded-full">
+
+      <div className="border-outline-variant/20 mt-auto border-t pt-6">
+        <div className="mb-4 flex items-center gap-3">
+          <div className="bg-surface-container-highest h-9 w-9 overflow-hidden">
             <img
-              alt="VimLeSai"
-              data-alt="professional portrait of a creative engineering lead in a minimalist studio setting with soft natural light"
+              alt=""
               src="/assets/hero-image.png"
+              className="h-full w-full object-cover object-top"
             />
           </div>
           <div>
-            <p className="text-on-surface text-sm font-bold">VimLeSai</p>
-            <p className="text-on-surface-variant text-[10px] tracking-widest uppercase">
-              Active Now
+            <p className="font-label text-on-surface text-xs font-bold tracking-wide">
+              Vimal Desai
+            </p>
+            <p className="font-label text-outline text-[10px] tracking-wider uppercase">
+              Open to work
             </p>
           </div>
         </div>
-        <a href="/resume" target="_blank" className="w-full">
-          <button className="bg-surface-container-high text-primary w-full border-primary/5 hover:bg-surface-container-highest rounded-md border py-3 text-xs font-bold transition-colors">
-            Read CV
-          </button>
+        <a
+          href="/resume"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="font-label border-outline-variant/40 text-on-surface hover:border-primary hover:text-primary block w-full border py-2.5 text-center text-[10px] tracking-[0.16em] uppercase transition-colors"
+        >
+          Read CV
         </a>
       </div>
     </aside>

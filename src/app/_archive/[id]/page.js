@@ -27,7 +27,7 @@ const articles = {
       },
       {
         heading: 'A Framework for Trade-offs',
-        body: "After nine years of shipping systems at scale, I've converged on a decision heuristic I call the 'Three-Quarter Rule'. When evaluating any shortcut or architectural compromise, ask: will this decision still make sense when this system is at 75% of its projected scale? If yes, ship it. If no, invest in the right solution now. The edge cases — decisions that are acceptable at 25% scale but not at 75% — are where most teams get into trouble.",
+        body: "After ten years of shipping systems at scale, I've converged on a decision heuristic I call the 'Three-Quarter Rule'. When evaluating any shortcut or architectural compromise, ask: will this decision still make sense when this system is at 75% of its projected scale? If yes, ship it. If no, invest in the right solution now. The edge cases — decisions that are acceptable at 25% scale but not at 75% — are where most teams get into trouble.",
       },
       {
         heading: 'Case Study: The Reporting Engine',

@@ -4,7 +4,7 @@ import Watermark from '@/components/ui/Watermark';
 import Button from '@/components/ui/Button';
 
 export const metadata = {
-  title: 'Technology Stack — Vimal Desai | React, Node.js, AWS',
+  title: 'Stack',
   description:
     'Explore the trusted technology stack of Vimal Desai. Expertise across React, Next.js, TypeScript, Node.js, PostgreSQL, and AWS infrastructure.',
 };
@@ -196,7 +196,6 @@ export default function StackPage() {
   return (
     <>
       <Navbar
-        brandName="Vimal Desai"
         ctaLabel="Get in Touch"
         ctaHref="/contact"
       />
@@ -224,7 +223,7 @@ export default function StackPage() {
             className="font-body mt-8 max-w-2xl text-lg leading-relaxed"
             style={{ color: 'var(--color-on-surface-variant)' }}
           >
-            9+ years of production experience across the full spectrum — from
+            10+ years of production experience across the full spectrum — from
             pixel-perfect interfaces to distributed infrastructure. Every tool
             chosen for a reason; every level earned in production.
           </p>
@@ -499,7 +498,6 @@ export default function StackPage() {
       </main>
 
       <Footer
-        brandName="Vimal Desai"
         tagline="Building scalable foundations using the best tools for the job."
       />
       <Watermark text="stack" />

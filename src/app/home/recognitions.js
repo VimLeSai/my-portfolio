@@ -1,195 +1,148 @@
+'use client';
+
+import Reveal, { RevealItem, RevealStagger } from '@/components/ui/reveal';
+
 const milestonesData = [
   {
     id: 1,
     type: 'hero',
     gridSpan: 'md:col-span-8',
-    icon: 'military_tech',
-    backgroundIcon: 'star',
     title: 'Leader of the Month',
     description:
-      'Awarded for exceptional technical guidance and fostering a high-velocity engineering culture within the core product team.',
+      'Recognized for technical guidance and keeping the core product team moving without burning people out.',
   },
   {
     id: 2,
     type: 'primary',
     gridSpan: 'md:col-span-4',
-    icon: 'smart_toy',
-
     title: 'AI Hackathon Champion',
     description:
-      'Engineered an automated code refactoring agent using LLMs to reduce technical debt by 40%.',
+      'Built an LLM refactoring agent that cut a chunk of tech debt ~40% in a weekend sprint.',
   },
   {
     id: 3,
     type: 'stat',
     gridSpan: 'md:col-span-4',
-    icon: 'history',
-
-    title: '9+',
+    title: '10+',
     subtitle: 'Years Experience',
-    description: 'A decade of engineering growth and technical leadership.',
+    description: 'From intern to lead — still hands-on in the codebase.',
   },
   {
     id: 4,
     type: 'list',
     gridSpan: 'md:col-span-8',
-    icon: 'code',
-    backgroundIcon: 'javascript',
-    title: 'Core Tech Stack',
+    title: 'Core stack',
     description:
-      'Architecting full-stack solutions with TypeScript, Node.js, and React/Next.js, powered by AWS cloud infrastructure and optimized SQL/NoSQL database design.',
-    checks: 2,
+      'TypeScript, Node, React/Next.js, AWS, and the SQL/NoSQL mix the product actually needs.',
   },
 ];
 
 export default function Recognitions() {
   return (
     <section
-      className="bg-surface-container-low rounded-b-[3rem] py-40"
-      id="experience"
+      className="bg-surface-container-low rounded-b-[2.5rem] py-28 md:py-36"
+      id="milestones"
     >
       <div className="mx-auto max-w-7xl px-8">
-        <div className="mb-16 text-center">
-          <span className="font-label text-sm uppercase tracking-[0.2em] text-outline mb-5">
+        <Reveal className="mb-14 text-center md:mb-16">
+          <span className="font-label text-outline mb-5 block text-sm uppercase tracking-[0.2em]">
             Milestones
           </span>
-          <h2 className="font-headline text-5xl">Honors &amp; Recognition</h2>
-        </div>
+          <h2 className="font-headline text-4xl md:text-5xl">
+            Marks along the way
+          </h2>
+        </Reveal>
 
-        <div className="grid h-auto grid-cols-1 gap-6 md:h-[600px] md:grid-cols-12">
+        <RevealStagger
+          className="grid h-auto grid-cols-1 gap-5 md:h-[560px] md:grid-cols-12"
+          stagger={0.1}
+        >
           {milestonesData.map((item) => {
             if (item.type === 'hero') {
               return (
-                <div
+                <RevealItem
                   key={item.id}
-                  className={`${item.gridSpan} bg-surface group relative flex flex-col justify-between overflow-hidden rounded-2xl p-12 shadow-[0_20px_80px_rgba(88,65,65,0.04)]`}
+                  className={`${item.gridSpan} bg-surface group relative flex flex-col justify-between overflow-hidden p-10 md:p-12`}
                 >
                   <div className="relative z-10">
-                    <span
-                      className="material-symbols-outlined text-primary mb-8"
-                      style={{
-                        fontSize: '48px',
-                        fontVariationSettings: "'FILL' 1",
-                      }}
-                    >
-                      {item.icon}
-                    </span>
-                    <h3 className="font-headline mb-4 text-4xl">
+                    <p className="font-label text-primary/40 mb-6 text-[0.65rem] tracking-[0.2em]">
+                      01
+                    </p>
+                    <h3 className="font-headline mb-4 text-3xl md:text-4xl">
                       {item.title}
                     </h3>
-                    <p className="text-on-surface-variant max-w-md">
+                    <p className="text-on-surface-variant max-w-md leading-relaxed">
                       {item.description}
                     </p>
                   </div>
-                  {item.backgroundIcon && (
-                    <div className="pointer-events-none absolute right-0 bottom-0 translate-x-10 translate-y-10 opacity-5 transition-transform duration-1000 ease-out group-hover:translate-x-0 group-hover:translate-y-0">
-                      <span
-                        className="material-symbols-outlined text-on-surface"
-                        style={{
-                          fontSize: '300px',
-                          fontVariationSettings: "'FILL' 1",
-                          lineHeight: 1,
-                        }}
-                      >
-                        {item.backgroundIcon}
-                      </span>
-                    </div>
-                  )}
-                </div>
+                  <div
+                    aria-hidden
+                    className="font-headline text-primary/[0.04] absolute -right-4 -bottom-8 text-[12rem] italic leading-none transition-transform duration-700 group-hover:translate-x-[-8px]"
+                  >
+                    ★
+                  </div>
+                </RevealItem>
               );
             }
 
             if (item.type === 'primary') {
               return (
-                <div
+                <RevealItem
                   key={item.id}
-                  className={`${item.gridSpan} bg-primary-container text-on-primary flex flex-col justify-end rounded-2xl p-12 shadow-lg`}
+                  className={`${item.gridSpan} bg-primary-container text-on-primary flex flex-col justify-end p-10 md:p-12`}
                 >
-                  <span
-                    className="material-symbols-outlined text-on-primary mb-8"
-                    style={{
-                      fontSize: '48px',
-                      fontVariationSettings: "'FILL' 1",
-                    }}
-                  >
-                    {item.icon}
-                  </span>
-                  <h3 className="font-headline mb-4 text-3xl leading-tight">
+                  <p className="font-label text-on-primary/40 mb-6 text-[0.65rem] tracking-[0.2em]">
+                    02
+                  </p>
+                  <h3 className="font-headline mb-4 text-2xl leading-tight md:text-3xl">
                     {item.title}
                   </h3>
-                  <p className="text-on-primary-container font-light">
+                  <p className="text-on-primary-container font-light leading-relaxed">
                     {item.description}
                   </p>
-                </div>
+                </RevealItem>
               );
             }
 
             if (item.type === 'stat') {
               return (
-                <div
+                <RevealItem
                   key={item.id}
-                  className={`${item.gridSpan} bg-secondary text-on-secondary flex flex-col justify-between rounded-2xl p-12`}
+                  className={`${item.gridSpan} bg-secondary text-on-secondary flex flex-col justify-between p-10 md:p-12`}
                 >
-               
-                  <div className="font-headline text-5xl italic">
+                  <div className="font-headline text-6xl italic md:text-7xl">
                     {item.title}
                   </div>
                   <div>
-                     <h3 className="font-headline mb-2 text-2xl">
+                    <h3 className="font-headline mb-2 text-2xl">
                       {item.subtitle}
                     </h3>
-                    <p className="text-secondary-container text-sm">
+                    <p className="text-secondary-container text-sm leading-relaxed">
                       {item.description}
                     </p>
                   </div>
-                </div>
+                </RevealItem>
               );
             }
 
-            if (item.type === 'list') {
-              return (
-                <div
-                  key={item.id}
-                  className={`${item.gridSpan} bg-surface-container-highest relative flex items-center justify-between overflow-hidden rounded-2xl p-12 shadow-inner`}
-                >
-                  <div className="flex-1">
-                    <span
-                      className="material-symbols-outlined text-primary mb-8"
-                      style={{
-                        fontSize: '48px',
-                        fontVariationSettings: "'FILL' 1",
-                      }}
-                    >
-                      {item.icon}
-                    </span>
-                    <h3 className="font-headline mb-2 text-2xl">
-                      {item.title}
-                    </h3>
-                    <p className="text-on-surface-variant text-sm">
-                      {item.description}
-                    </p>
-                  </div>
-                  {item.backgroundIcon && (
-                    <div className="pointer-events-none absolute right-0 bottom-0 translate-x-10 translate-y-10 opacity-5 transition-transform duration-1000 ease-out group-hover:translate-x-0 group-hover:translate-y-0">
-                      <span
-                        className="material-symbols-outlined text-primary"
-                        style={{
-                          fontSize: '300px',
-                          fontVariationSettings: "'FILL' 1",
-                          lineHeight: 1,
-                        }}
-                      >
-                        {item.backgroundIcon}
-                      </span>
-                    </div>
-                  )}
+            return (
+              <RevealItem
+                key={item.id}
+                className={`${item.gridSpan} bg-surface-container-highest relative flex items-center overflow-hidden p-10 md:p-12`}
+              >
+                <div className="relative z-10 max-w-xl">
+                  <p className="font-label text-primary/40 mb-6 text-[0.65rem] tracking-[0.2em]">
+                    04
+                  </p>
+                  <h3 className="font-headline mb-2 text-2xl">{item.title}</h3>
+                  <p className="text-on-surface-variant text-sm leading-relaxed">
+                    {item.description}
+                  </p>
                 </div>
-              );
-            }
-
-            return null;
+              </RevealItem>
+            );
           })}
-        </div>
+        </RevealStagger>
       </div>
     </section>
   );

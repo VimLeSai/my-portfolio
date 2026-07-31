@@ -6,7 +6,6 @@ export default function NotFound() {
   return (
     <>
       <Navbar
-        brandName="Vimal Desai"
         ctaLabel="Get in Touch"
         ctaHref="/contact"
       />
@@ -55,7 +54,6 @@ export default function NotFound() {
         </div>
       </main>
       <Footer
-         brandName="Vimal Desai"
         tagline="Architecting scalable web applications and high-performance digital products."
       />
     </>

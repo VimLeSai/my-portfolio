@@ -1,8 +1,8 @@
-
 import Navbar from '@/components/nav';
 
 import Biography from '@/app/home/biography';
 import Hero from '@/app/home/hero';
+import InkBreak from '@/app/home/ink-break';
 import LetsTalk from '@/app/home/lets-talk';
 import Recognitions from '@/app/home/recognitions';
 import SelectedArtifacts from '@/app/home/selected-artifacts';
@@ -14,40 +14,27 @@ import Watermark from '@/components/ui/Watermark';
 const Home = () => {
   return (
     <>
-      {/* ── Nav ── */}
       <Navbar
-        brandName="Vimal Desai"
         ctaLabel="Get in Touch"
         ctaHref="/contact"
       />
 
       <main>
         <Hero />
-        {/* ── Biography & Bento Stats ── */}
         <Biography />
-
-        {/* ── The Process ── */}
         <TheProcess />
-
-        {/* ── Selected Artifacts — Offset Grid ── */}
         <SelectedArtifacts />
-
-        {/* ── Recognitions & CTA ── */}
-        {/* ── Honors & Recognition ── */}
+        <InkBreak />
         <Recognitions />
-
-        {/* <!-- Testimonials --> */}
         <Testimonials />
-
         <LetsTalk />
       </main>
 
-      {/* ── Footer ── */}
       <Footer
-        brandName="Vimal Desai"
-        tagline="Architecting scalable web applications and high-performance digital products."
+        tagline="Full-stack engineer. Ten years building products that ship and stay up."
       />
 
+      <div className="site-grain" aria-hidden="true" />
       <Watermark text="VimLeSai" />
     </>
   );

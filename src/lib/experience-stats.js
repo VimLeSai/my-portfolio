@@ -1,7 +1,7 @@
 const stats = [
   {
     label: 'Experience',
-    value: '9+',
+    value: '10+',
     sub: 'Years',
     icon: 'schedule',
     bg: 'var(--color-primary-container)',

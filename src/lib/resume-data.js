@@ -10,7 +10,7 @@ export const resumeMeta = {
   github: 'https://github.com/VimLeSai',
   npm: 'https://npmjs.com/~vimlesai',
   summary:
-    'Senior Full Stack Engineer with **9+ years** building scalable, high-performance web applications — from pixel-perfect UIs to robust microservices. Known for **doubling sprint velocity** through AI-augmented workflows, leading zero-downtime deployments, and growing from intern to Tech Lead in 4 years. Testing is core to my craft, not an afterthought.',
+    'Senior Full Stack Engineer with **10+ years** building scalable, high-performance web applications — from pixel-perfect UIs to robust microservices. Known for **doubling sprint velocity** through AI-augmented workflows, leading zero-downtime deployments, and growing from intern to Tech Lead in 4 years. Testing is core to my craft, not an afterthought.',
 };
 
 export const jobs = [
@@ -106,7 +106,7 @@ export const jobs = [
 
 export const highlights = [
   {
-    value: '9+',
+    value: '10+',
     label: 'Years of Experience',
     sub: 'Full-stack, frontend-to-backend',
   },

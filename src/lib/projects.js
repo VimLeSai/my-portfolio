@@ -264,17 +264,18 @@ This eliminated manual QA and ensured a seamless, zero-data-loss production cuto
     id: 'rentbase',
     title: 'RentBase',
     tagline:
-      'Rental leads CRM built from scratch with a three-person team and a former Zillow lead.',
+      'US rental leads CRM — portal, NestJS API, TransUnion screening, and marketing site for a 3-person team.',
     tags: ['Real Estate', 'CRM', 'PropTech', 'Startup'],
     role: 'Senior Full-Stack Engineer',
     platform: 'Web · SaaS',
     industries: ['Real Estate', 'PropTech', 'CRM'],
     deliverables: [
-      'Full rental portal frontend (React + TypeScript)',
-      'Reusable component library',
-      'NestJS backend APIs',
-      'TransUnion background & credit check integration',
-      'Full-flow Postman E2E automation suite',
+      'Agent portal (React + TypeScript) — leads, listings, landlords, renters, team',
+      'NestJS + MongoDB API — auth, listings, screening, HubSpot, payments',
+      'TransUnion rental screening: shareable landlords/properties, webhooks, reports',
+      'Admin panel (React + Ant Design / Material UI)',
+      'Marketing site (Next.js + Contentful + HubSpot + SendGrid)',
+      'Postman + Cypress coverage for multi-role onboarding flows',
     ],
     url: null,
     featured: true,
@@ -287,75 +288,82 @@ This eliminated manual QA and ensured a seamless, zero-data-loss production cuto
       skills.nestjs,
       skills.nodejs,
       skills.mongodb,
+      skills.nextjs,
       skills.cypress,
-      skills.graphql,
     ],
-    tools: [tools.postman, tools.git, tools.github, tools.apache],
+    tools: [tools.postman, tools.git, tools.github],
 
     impact:
-      'Reduced manual QA time by over 70% through a full-flow Postman automation suite covering the entire renter-agent-property lifecycle, enabling zero-defect deployments for a small team with no dedicated QA.',
+      'Cut manual QA on multi-role flows by ~70% with Postman lifecycle scripts. Shipped TransUnion screening end-to-end so agents could run credit/background checks inside the product instead of juggling vendor portals.',
 
     overview:
-      'RentBase is a US-based Rental Leads CRM and Listings Database automating the relationship between landlords, agents, and renters. I joined as a Senior Full-Stack Engineer in a lean three-person core team, working in a tight feedback loop with the CEO — a former Lead at Zillow. I owned the entire frontend and contributed significantly to backend APIs and third-party integrations.',
+      'RentBase connects landlords, agents, and renters around listings and lead qualification. Lean 3-person core team; I worked directly with the CEO (ex-Zillow lead). Owned the React/TypeScript portal, built NestJS modules for screening and related domain APIs, and helped keep the marketing site and admin panel in sync with product reality.',
 
     challenges: [
       {
-        label: 'No Dedicated QA Team',
+        label: 'No QA seat',
         value:
-          'With a three-person team and no QA engineer, manual testing of the lengthy onboarding and listing flows was a critical bottleneck that threatened deployment stability.',
+          'Onboarding spans agent → landlord → listing → renter → screening report. Manual regression before every deploy was eating the whole week.',
       },
       {
-        label: 'Sensitive Third-Party Integration',
+        label: 'TransUnion screening',
         value:
-          'The TransUnion credit and background check integration required careful handling of sensitive renter PII, reliable webhook processing, and accurate data surfacing in the dashboard.',
+          'PII-heavy flow: shareable landlord/property records, renter validation exams, status/delivery webhooks, IP-guarded notification endpoints, and report UI that agents actually trust.',
       },
       {
-        label: 'Frontend Architecture from Zero',
+        label: 'Many surfaces, one product',
         value:
-          'The portal needed a scalable, reusable component system that could grow with the product without accumulating technical debt.',
+          'Portal, Nest API, admin, and Next.js marketing site had to stay consistent for leads, listings, follow-ups, and HubSpot sync without a large platform team.',
       },
     ],
 
     approach: [
       {
-        icon: 'auto_awesome',
-        title: 'Postman Full-Flow Automation Suite',
-        description:
-          'Engineered pre-request and post-request Postman scripts that automated the entire user lifecycle — renter creation, agent creation, property listing, interest simulation, and final report generation — replacing manual QA entirely.',
-      },
-      {
         icon: 'integration_instructions',
-        title: 'TransUnion API Integration',
+        title: 'Screening domain in NestJS',
         description:
-          'Built the complete integration layer for automated credit and background checks, surfacing results in real time within the RentBase dashboard.',
+          'Implemented rental screening APIs — shareable landlords/properties, renter payloads, TransUnion notification handlers with IP guards — and surfaced TenantScreenings / ScreeningReports in the portal.',
       },
       {
         icon: 'architecture',
-        title: 'Reusable Component Library',
+        title: 'Portal ownership',
         description:
-          'Architected a modular React component system with TypeScript, ensuring UI consistency across complex flows like onboarding, listings, and reporting.',
+          'Built TypeScript React flows for leads, listings, landlords, renters, team dashboard, follow-ups, Cognito/SAML auth hooks, and Google Maps listing context.',
+      },
+      {
+        icon: 'auto_awesome',
+        title: 'Lifecycle automation',
+        description:
+          'Postman pre/post scripts walked renter → agent → listing → interest → report. Cypress covered critical UI paths so a 3-person team could ship without a dedicated QA hire.',
       },
     ],
 
     impacts: [
       {
-        label: 'Manual QA Time',
-        before: 'Hours of manual testing per deployment',
-        after: '70%+ reduction via automated Postman suite',
+        label: 'Manual QA',
+        before: 'Hours of hand-testing per release',
+        after: '~70% less via Postman + Cypress',
       },
       {
-        label: 'Deployment Confidence',
-        before: 'Risk of regression in multi-role flows',
-        after: 'Zero-defect deployments on complex onboarding features',
+        label: 'Screening',
+        before: 'Off-platform vendor tooling',
+        after: 'In-product TransUnion credit & background checks',
+      },
+      {
+        label: 'Product surface',
+        before: 'Fragmented tools for CRM + marketing',
+        after: 'Portal + API + admin + Next.js site as one system',
       },
     ],
 
     markdown: `
-As a **Senior Full-Stack Engineer** in a high-impact team of three, I collaborated directly with the CEO (a former Lead at Zillow) to build the **RentBase** rental portal from the ground up.
+**RentBase** is a US rental leads CRM. Three-person core team; CEO was a former Zillow lead. I owned the **React + TypeScript** agent portal and worked deep in the **NestJS + MongoDB** API.
 
-I held full ownership of the frontend architecture, developing a reusable component library and high-performance responsive UI using **React.js and TypeScript**. On the backend, I built **NestJS APIs** and executed mission-critical integrations with **TransUnion** for automated renter background and credit checks.
+**Backend work that mattered:** rental screening module (shareable landlords/properties, renter payloads, TransUnion status/delivery webhooks with IP guards), plus domain APIs around listings, landlords, renters, agents, HubSpot, payments, and follow-ups.
 
-Operating without a dedicated QA team, I engineered a comprehensive **end-to-end automated testing suite** using Postman's pre/post-request scripting, covering the entire user lifecycle from account creation to final report generation. This reduced manual testing overhead by over **70%** and ensured stable, zero-defect deployments.
+**Frontend:** leads/listings/landlord/renter/team flows, screening report UI, Cognito/SAML auth pieces, Google Maps. Also touched the **admin panel** and the **Next.js** marketing site (Contentful, HubSpot, SendGrid).
+
+With no QA hire, I wrote **Postman** lifecycle automation and **Cypress** coverage so multi-role onboarding could ship without weekly regression theater. Manual QA time dropped ~**70%**.
     `.trim(),
 
     image: '/assets/projects/rentbase/thumbnail.png',
@@ -579,70 +587,91 @@ By integrating AI tools and workflow automation (Cursor AI, OpenAI), I helped in
     id: 'micqro',
     title: 'Micqro',
     tagline:
-      'A quiz-first social media platform with polls, ratings, and community discussions.',
+      'Quiz-first social app — typed polls in the feed, chat, campaigns, and EC2/pm2 deploys.',
     tags: ['Social Media', 'Quizzes', 'Community'],
     role: 'Frontend Engineer',
     platform: 'Web',
     industries: ['Social Media', 'EdTech'],
     deliverables: [
-      'Quiz and poll creation interface',
-      'Feed with answer distribution analytics',
-      'Community groups and 1-on-1 messaging',
-      'AWS + Vercel deployment',
+      'Next.js app: welcome, feed, create-poll, chat, search, profile, notifications',
+      'Poll types: single choice, short/long text, star rating, currency, date-time',
+      'Mentions, media crop/upload, saved posts, interest tags, campaigns',
+      'iron-session auth cookies + next-translate i18n',
+      'EC2 + Apache + pm2 production pipeline',
     ],
     url: null,
-    featured: false,
+    featured: true,
     company: companies.knovator,
     period: { start: '2020', end: '2021' },
 
     skills: [
       skills.react,
       skills.nextjs,
-      skills.typescript,
       skills.javascript,
       skills.scss,
       skills.aws,
     ],
-    tools: [tools.git, tools.github, tools.vercel],
+    tools: [tools.git, tools.github],
 
     impact:
-      'Delivered a unique social platform that moves beyond image-based content to enable data-rich quiz and poll interactions with live analytics in the feed.',
+      'Shipped a social feed where the unit of content is a question — with answer distributions inline — plus DMs and campaigns, not another photo wall.',
 
     overview:
-      'Micqro is a social media platform focused on quizzes and information sharing rather than image posts. Users can post polls, ratings, location-based queries, and single/multiple-choice questions, and view answer distributions in their feed. The platform also includes community groups and one-on-one conversations.',
+      'Micqro (codebase lived under affy-frontend) is a quiz-first social product. Posts are polls and questions; the feed shows how people answered. Built the Next.js client end-to-end: auth, feed, poll composer, chat, search, profiles, notifications, and campaign surfaces, then wired EC2/pm2 deploys.',
 
     challenges: [
       {
-        label: 'Real-Time Analytics in Feed',
+        label: 'Many poll shapes, one feed',
         value:
-          'Displaying live distributions and analyses for each quiz post in a performant feed required careful data handling and UI design.',
+          'Star rating, currency, date-time, short/long text, and choice polls each need distinct composers and result UIs without turning the feed into a mess.',
+      },
+      {
+        label: 'Social chrome on top of quizzes',
+        value:
+          'Mentions, media cropping, chat attachments, saved posts, and interest tags had to feel native next to analytics in the same scroll.',
       },
     ],
 
     approach: [
       {
         icon: 'web',
-        title: 'React + Next.js',
+        title: 'Next.js product surface',
         description:
-          'Built the full frontend using React and Next.js, with GitHub for code synchronization across the team.',
+          'Pages for welcome, feed, create-poll, chat, search, profile, notifications, campaigns. iron-session for cookie auth; next-translate for locale strings.',
+      },
+      {
+        icon: 'tune',
+        title: 'Typed poll system',
+        description:
+          'Built composers and feed renderers per question type so answer distributions stay readable instead of dumping raw JSON into cards.',
+      },
+      {
+        icon: 'cloud',
+        title: 'Ops that stuck',
+        description:
+          'yarn build + pm2 on EC2 behind Apache — init once, serve for subsequent deploys — so product updates landed without heroics.',
       },
     ],
 
     impacts: [
       {
-        label: 'Content Strategy',
-        before: 'Standard image feed',
-        after: 'Quiz & poll-first interactive feed',
+        label: 'Content model',
+        before: 'Image / status feed',
+        after: 'Interactive quiz & poll feed with distributions',
       },
       {
-        label: 'Analytics Processing',
-        before: 'Static post data',
-        after: 'Real-time answer distribution in feed',
+        label: 'Engagement tools',
+        before: 'Post and hope',
+        after: 'Chat, mentions, campaigns, saved posts, interest tags',
       },
     ],
 
     markdown: `
-**Micqro** is a quiz-first social platform that replaces image feeds with interactive questions — polls, ratings, location queries, and multi-choice posts. Users see answer distributions in their feed and can engage through community groups or 1-on-1 messages. Built with **React.js and Next.js**, deployed on AWS and Vercel.
+**Micqro** (affy-frontend repo) is a quiz-first social app. Feed posts are polls and questions — single choice, short/long text, star rating, currency, date-time — with answer distributions in-line.
+
+I built the **Next.js** client: welcome onboarding, feed, poll creator, chat (attachments), search, profiles, notifications, campaigns, media crop, mentions, saved posts, interest tags. Auth via **iron-session**; copy via **next-translate**.
+
+Deployed on **EC2** with Apache + **pm2** (\`yarn init\` / \`yarn serve\`). Goal was simple: social product where the interesting bit is what people answer, not what they upload.
     `.trim(),
     image: '/assets/projects/micqro/thumbnail.png',
     showcaseImages: [
@@ -659,7 +688,6 @@ By integrating AI tools and workflow automation (Cursor AI, OpenAI), I helped in
       '/assets/projects/micqro/micqro-long-text-quiz.png',
       '/assets/projects/micqro/micqro-feed-mobile.png',
     ],
-    featured: true,
   },
 
   // ─────────────────────────────────────────────────────────────────────────────
@@ -1108,15 +1136,16 @@ A domain-specific **Textile ERP** covering the full manufacturing lifecycle — 
     id: 'flights-travel',
     title: 'FlightsTravel',
     tagline:
-      'Refactored a legacy flight-booking platform to restore performance and search reliability.',
+      'UK flight booking site — tore out a filter loop that grew with every click and rewrote search results.',
     tags: ['Travel', 'Performance', 'Refactor'],
     role: 'Frontend Engineer',
     platform: 'Web',
     industries: ['Travel', 'E-commerce'],
     deliverables: [
-      'Full refactor of search and results pages',
-      'Filter logic rewrite — looping reduced from 368× to 33×',
-      'Performance and rendering optimization',
+      'Search results rewrite (SearchResult/New — hooks for flights, price, bound-time)',
+      'Filter state remodel: array → keyed object (368× loops → flat 33)',
+      'Sidebar filters: stops, airlines, price & time sliders',
+      'Booking / passenger / Stripe checkout path hardening',
     ],
     url: 'https://www.flightstravel.co.uk/',
     featured: false,
@@ -1126,63 +1155,62 @@ A domain-specific **Textile ERP** covering the full manufacturing lifecycle — 
     skills: [
       skills.react,
       skills.javascript,
-      skills.typescript,
       skills.redux,
       skills.scss,
     ],
     tools: [tools.git, tools.github],
 
     impact:
-      'Reduced a catastrophic filter-loop from 368 iterations (doubling on each interaction) down to a flat 33 — regardless of how many filters are applied — restoring a seamless search experience.',
+      'One filter click used to run 368 iterations and roughly double with each extra filter. After the rewrite: flat 33 — search stayed usable under real filter stacks.',
 
     overview:
-      'FlightsTravel.co.uk is a prominent UK travel brand owned and marketed by Flights & Travels Ltd. The platform suffered from a severely degraded search and results experience: filters triggered cascading re-renders, logic was tangled with excessive branching, and performance degraded exponentially with each filter selection. I was brought in to diagnose, refactor, and optimise.',
+      'FlightsTravel.co.uk (Flights & Travels Ltd) had a search UX that melted under filters. Legacy results page mixed branching and array-shaped filter state. A previous engineer spent about a month on it. I rebuilt the results layer and fixed the filter model.',
 
     challenges: [
       {
-        label: 'Exponential Loop Growth',
+        label: 'Filter loops that compound',
         value:
-          'Selecting one filter caused 368 iterations. Selecting a second doubled that to ~700. A third pushed it to ~1,300. Users were left waiting after every filter interaction — the problem compounded with each click.',
+          'First filter → ~368 iterations. Second → ~700. Third → ~1,300. Every click made the page slower.',
       },
       {
-        label: 'Legacy Codebase Complexity',
+        label: 'Legacy results spaghetti',
         value:
-          'The existing code accessed filter state as an array of selected options, creating deeply nested conditional logic that a previous engineer had worked on for a month without resolution.',
+          'Filter options lived as selected arrays, so every change rescanned everything. Hard to fix without rewriting how selection was represented.',
       },
     ],
 
     approach: [
       {
         icon: 'handyman',
-        title: 'Filter State as an Object',
+        title: 'Keyed filter state',
         description:
-          'Rewrote filter state from an array of selected values to a keyed object. This eliminated the need to loop over all options on every state change — reducing iterations from hundreds to a flat 33, regardless of how many filters are active.',
+          'Switched selected filters from arrays to keyed objects. Lookups stopped scanning the whole option list on every change — iterations dropped to a flat 33 no matter how many filters were on.',
       },
       {
         icon: 'bolt',
-        title: 'Logic Simplification',
+        title: 'New results module',
         description:
-          'Spent a full day understanding the existing functionality holistically before writing a line of code. Resolved the entire issue the following day.',
+          'Day one: map the real behavior. Day two: ship SearchResult/New with useFlights, price/bound-time hooks, and a sidebar that applies filters without the old cascade.',
       },
     ],
 
     impacts: [
       {
-        label: 'Filter Loop Iterations',
-        before: '368 (doubling on each additional filter)',
-        after: '33 — flat, regardless of filter count',
+        label: 'Filter work per click',
+        before: '368+ (doubling with each filter)',
+        after: '33 — constant',
       },
       {
-        label: 'Time to Resolution',
-        before: '1 month (previous engineer)',
-        after: '2 days (understanding + fix)',
+        label: 'Time to fix',
+        before: '~1 month (prior attempt)',
+        after: '2 days (understand + ship)',
       },
     ],
 
     markdown: `
-**FlightsTravel.co.uk** is a prominent UK travel brand suffering from a badly broken search and filter experience. The filter logic looped 368 times on a single selection — and doubled with every additional filter applied. A colleague spent a month trying to resolve it before it was handed to me.
- 
-I spent a day deeply understanding the functionality, then rewrote the filter state from an array to a keyed object — reducing iterations to a flat **33 regardless of filter count**. Fixed the following day.
+**FlightsTravel.co.uk** — UK flight booking. Search filters were broken: one selection looped **368** times and roughly doubled with each extra filter. Prior engineer spent a month; problem stayed.
+
+I spent a day reading the real flow, then remodelled filter selection from arrays to keyed objects and landed a new results stack (\`SearchResult/New\` — \`useFlights\`, price/time sliders, sidebar). Iterations fell to a flat **33**. Booking/passenger/Stripe paths stayed in the same React client (Material UI, Formik).
     `.trim(),
 
     image: '/assets/projects/flightstravel/landing-page.png',
@@ -2798,56 +2826,306 @@ Worked on **PropertyIQ**, a PropTech mobile application. My primary responsibili
   varnitravel: {
     id: 'varni-travel',
     title: 'Varni Travel',
-    tagline: 'Blazing-fast Progressive Web App for the travel industry.',
-    tags: ['Travel', 'PWA', 'SSR'],
-    role: 'Frontend Engineer',
+    tagline:
+      'Travel booking stack — React SSR/PWA client plus Sails.js APIs for air, hotel, insurance, and visa.',
+    tags: ['Travel', 'PWA', 'SSR', 'Full-Stack'],
+    role: 'Full-Stack Engineer',
     platform: 'Web · PWA',
     industries: ['Travel', 'E-commerce'],
     deliverables: [
-      'Server-Side Rendering integration',
-      'PWA configuration and caching',
+      'React SSR + PWA client (Laravel Mix / Webpack, Redux) — flights, hotels, insurance, visa, payment',
+      'Sails.js + MongoDB API — auth, booking, TravelPort/Galileo air search, hotel suppliers',
+      'Supplier sync scripts (Agoda / Rezlive city IDs)',
+      'Admin panel for ops (bookings, masters, services)',
+      'Service workers + Apache SSR/CSR virtual-host setup',
     ],
     url: null,
     featured: false,
     company: companies.knovator,
     period: { start: '2019', end: '2020' },
-    skills: [skills.react, skills.redux, skills.webpack],
-    tools: [tools.git, tools.github],
+    skills: [
+      skills.react,
+      skills.redux,
+      skills.nodejs,
+      skills.mongodb,
+      skills.webpack,
+    ],
+    tools: [tools.git, tools.github, tools.apache],
     impact:
-      'Delivered an app-like experience on the web with offline capabilities and lightning-fast load times, drastically improving user retention.',
+      'Shipped bookable travel flows with SSR for SEO and a PWA shell for flaky networks — backed by real GDS/hotel supplier APIs, not a brochure site.',
+
     overview:
-      'Varni Travel is a digital platform for booking travel experiences. To ensure optimal performance and SEO, the application was built as a Server-Side Rendered Progressive Web App (PWA) using React, Redux, and Laravel Mix.',
+      'Varni Travel is a booking platform for flights, hotels, insurance, visas, and related documents. Frontend is a custom SSR Progressive Web App (Knovator-ssr-pwa). Backend is Sails.js on MongoDB with TravelPort/Galileo air search, hotel payment/booking services, and Agoda/Rezlive city ID sync. I owned the client booking UX and worked across the Node API and admin panel so supplier data actually powered the UI.',
+
     challenges: [
       {
-        label: 'App-like Performance on Web',
+        label: 'SSR + PWA on a real booking funnel',
         value:
-          'Users expected native-app speed and offline reliability from a web-based travel booking platform.',
+          'Needed crawlable first paint and offline-tolerant shell while still supporting multi-step flight/hotel/insurance/visa booking.',
+      },
+      {
+        label: 'Supplier-backed inventory',
+        value:
+          'Air search via TravelPort/Galileo and hotel suppliers (Agoda, Rezlive) meant city IDs, fare rules, and booking states had to stay consistent between API and UI.',
+      },
+      {
+        label: 'Ops surface',
+        value:
+          'Agents needed an admin panel for bookings, masters, and service checklists — not only a consumer PWA.',
+      },
+    ],
+
+    approach: [
+      {
+        icon: 'speed',
+        title: 'SSR PWA client',
+        description:
+          'React + Redux with custom SSR compile path, service worker caching, and Apache virtual hosts split for CSR vs HTTPS SSR. Containers for Flight/Hotel/Insurance/Visa/Payment/Profile.',
+      },
+      {
+        icon: 'integration_instructions',
+        title: 'Sails.js domain services',
+        description:
+          'Worked AirSearch, Flight, Hotel, Insurance, Visa, Passport, PaymentGateway, PromoCode, and TravelPort controllers — JWT auth, Mongo models for reservations and booking detail.',
+      },
+      {
+        icon: 'sync',
+        title: 'Supplier ID hygiene',
+        description:
+          'Maintained store-city scripts for Agoda and Rezlive IDs so hotel search mapped cleanly to supplier catalogs.',
+      },
+    ],
+
+    impacts: [
+      {
+        label: 'Delivery shape',
+        before: 'Brochure / CSR-only travel UI',
+        after: 'SSR PWA + bookable multi-product funnel',
+      },
+      {
+        label: 'Inventory',
+        before: 'Static or mocked catalogs',
+        after: 'TravelPort/Galileo air + Agoda/Rezlive hotel wiring',
+      },
+      {
+        label: 'Scope',
+        before: 'Frontend-only narrative',
+        after: 'Client + Sails API + admin in one delivery story',
+      },
+    ],
+
+    markdown: `
+**Varni Travel** — book flights, hotels, insurance, visas. Not a marketing site.
+
+**Frontend:** React SSR Progressive Web App (Knovator-ssr-pwa) with Redux, Laravel Mix/Webpack, service workers, Apache SSR/CSR hosts. Booking containers for Flight, Hotel, Insurance, Visa, Passport docs, and Payment.
+
+**Backend (Sails.js + MongoDB):** Auth (JWT/Passport), TravelPort controllers, AirSearch / Galileo / Flight / Hotel / Insurance / Visa / PaymentGateway / PromoCode services, reservation and booking models. Scripts to store Agoda and Rezlive city IDs. Separate **admin panel** for ops.
+
+I led the client experience and stayed in the Node API and admin so supplier responses, booking state, and UI stayed aligned — full-stack delivery on a real travel stack, not FE-only polish.
+    `.trim(),
+  },
+
+  orbitlms: {
+    id: 'orbit-lms',
+    title: 'Orbit LMS',
+    tagline:
+      'Learning platform — Next.js client + Node API for courses, assessments, and orgs.',
+    tags: ['EdTech', 'LMS', 'SaaS'],
+    role: 'Full-Stack Engineer',
+    platform: 'Web',
+    industries: ['Education', 'Enterprise Learning'],
+    deliverables: [
+      'Next.js LMS frontend (i18n, auth cookies)',
+      'Orbit LMS Node API',
+      'Course / assessment flows across Orbit suite',
+    ],
+    url: null,
+    featured: false,
+    company: companies.knovator,
+    period: { start: '2021', end: '2022' },
+    skills: [skills.nextjs, skills.react, skills.nodejs],
+    tools: [tools.git, tools.github],
+    impact:
+      'Shipped learner-facing LMS surfaces with a matching Node backend in the Orbit product family.',
+    overview:
+      'Orbit LMS is the learning hub in a broader Orbit suite (LMS, jobs, SSO, works). Built the Next.js app and contributed to the Node API — courses, locales, and sessioned access for multi-tenant learning orgs.',
+    challenges: [
+      {
+        label: 'Suite consistency',
+        value:
+          'Had to stay compatible with Orbit SSO and sister apps without forking auth/session patterns.',
       },
     ],
     approach: [
       {
-        icon: 'speed',
-        title: 'SSR & PWA',
+        icon: 'school',
+        title: 'Next.js + Node slice',
         description:
-          'Implemented Server-Side Rendering via a custom SSR architecture (Knovator-ssr-pwa) and configured service workers to provide robust offline caching and an installable PWA experience.',
+          'Pages/API client on Next; Orbit LMS Node for domain endpoints. i18n via locale files.',
       },
     ],
     impacts: [
       {
-        label: 'Web Performance',
-        before: 'Standard web app loading',
-        after: 'App-like PWA with offline caching',
-      },
-      {
-        label: 'Search Visibility',
-        before: 'Client-side SPA limits',
-        after: 'Server-Side Rendered (SSR) indexing',
+        label: 'Surface',
+        before: 'Fragmented learning tools',
+        after: 'Unified Orbit LMS web experience',
       },
     ],
     markdown: `
-Engineered the frontend for **Varni Travel**, focusing on delivering an exceptional user experience through performance optimizations. I built the platform as a **Progressive Web App (PWA)** with **Server-Side Rendering (SSR)**. 
+**Orbit LMS** — Next.js learning frontend + Node API inside the Orbit suite. Courses, assessments, org access, shared SSO patterns with sibling Orbit apps.
+    `.trim(),
+  },
 
-By utilizing React, Redux, and custom Webpack/Laravel Mix configurations, I ensured the platform had lightning-fast initial load times, strong SEO indexing, and the ability to function seamlessly even with unstable network connections.
+  domus: {
+    id: 'domus',
+    title: 'Domus',
+    tagline:
+      'Property / assurer platform — Next.js UI, Stripe payments, Express API.',
+    tags: ['PropTech', 'Payments', 'SaaS'],
+    role: 'Full-Stack Engineer',
+    platform: 'Web',
+    industries: ['Real Estate', 'Insurance'],
+    deliverables: [
+      'Next.js app (layouts, i18n, Stripe Elements)',
+      'Express API (controllers, models, emails)',
+      'Charts / assurer operational views',
+    ],
+    url: null,
+    featured: false,
+    company: companies.knovator,
+    period: { start: '2021', end: '2022' },
+    skills: [skills.nextjs, skills.react, skills.nodejs],
+    tools: [tools.git, tools.github],
+    impact:
+      'Connected assurer workflows to live Stripe checkout instead of offline payment handoffs.',
+    overview:
+      'Domus covers property/assurer operations. Owned Next.js surfaces (Headless UI, Highcharts, Stripe) and worked the Express API for domain routes, mail, and payment wiring.',
+    challenges: [
+      {
+        label: 'Payments in ops flows',
+        value:
+          'Assurer journeys needed reliable Stripe Elements without breaking multi-step forms.',
+      },
+    ],
+    approach: [
+      {
+        icon: 'payments',
+        title: 'Stripe + Next',
+        description:
+          'Integrated @stripe/react-stripe-js on the client; Express handlers for intent/confirm paths.',
+      },
+    ],
+    impacts: [
+      {
+        label: 'Checkout',
+        before: 'Manual / offline payment steps',
+        after: 'In-product Stripe payment flow',
+      },
+    ],
+    markdown: `
+**Domus** — Next.js + Express property/assurer product. Stripe Elements on the client, Express for APIs/email, Highcharts for ops views.
+    `.trim(),
+  },
+
+  sparrowhealth: {
+    id: 'sparrow-health',
+    title: 'Sparrow Health',
+    tagline:
+      'Health ops web app — Next.js + Tailwind frontend, Express API, Stripe.',
+    tags: ['Healthcare', 'SaaS', 'Payments'],
+    role: 'Full-Stack Engineer',
+    platform: 'Web',
+    industries: ['Healthcare'],
+    deliverables: [
+      'Next.js + Tailwind patient/ops UI',
+      'Express API (jobs, uploads, models)',
+      'Stripe billing hooks',
+    ],
+    url: null,
+    featured: false,
+    company: companies.knovator,
+    period: { start: '2021', end: '2022' },
+    skills: [skills.nextjs, skills.react, skills.tailwindcss, skills.nodejs],
+    tools: [tools.git, tools.github],
+    impact:
+      'Gave clinic/ops users a single web surface for health workflows plus billing.',
+    overview:
+      'Sparrow Health is a healthcare ops product. Built Next.js/Tailwind screens (Headless UI, Heroicons, Stripe) and worked Express services for uploads, jobs, and domain models.',
+    challenges: [
+      {
+        label: 'Ops + billing together',
+        value:
+          'Clinical/admin flows and Stripe had to share the same sessioned Next app without leaking PII in client bundles.',
+      },
+    ],
+    approach: [
+      {
+        icon: 'health_and_safety',
+        title: 'Next + Express split',
+        description:
+          'UI in Next/Tailwind; sensitive writes through Express controllers and job workers.',
+      },
+    ],
+    impacts: [
+      {
+        label: 'Product shape',
+        before: 'Split tools for ops vs billing',
+        after: 'One Sparrow web app + API',
+      },
+    ],
+    markdown: `
+**Sparrow Health** — Next.js/Tailwind frontend + Express API. Stripe on the client; uploads/jobs/models on the Node side for healthcare ops.
+    `.trim(),
+  },
+
+  likita: {
+    id: 'likita',
+    title: 'Likita',
+    tagline:
+      'Healthcare platform — Next admin, patient apps, and Express API with rate limits + i18n.',
+    tags: ['Healthcare', 'Admin', 'API'],
+    role: 'Full-Stack Engineer',
+    platform: 'Web · Admin',
+    industries: ['Healthcare'],
+    deliverables: [
+      'Next.js admin panel (Tailwind, Highcharts)',
+      'Likita Express API (rate limit, i18n, uploads)',
+      'Shared API used by Flutter companion apps',
+    ],
+    url: null,
+    featured: false,
+    company: companies.knovator,
+    period: { start: '2020', end: '2021' },
+    skills: [skills.nextjs, skills.react, skills.nodejs, skills.tailwindcss],
+    tools: [tools.git, tools.github],
+    impact:
+      'Stood up admin analytics + API foundation used by patient and Flutter clients.',
+    overview:
+      'Likita is a multi-surface health product (admin web, patient, Flutter). Built the Next admin (charts, Tailwind) and contributed to the Express API — i18n middleware, uploads, rate limiting, seeders.',
+    challenges: [
+      {
+        label: 'Multi-client API',
+        value:
+          'Admin web and mobile clients shared one API — needed stable contracts and i18n from day one.',
+      },
+    ],
+    approach: [
+      {
+        icon: 'monitoring',
+        title: 'Admin + API core',
+        description:
+          'Highcharts dashboards in Next admin; Express routes/models with i18next and upload pipelines.',
+      },
+    ],
+    impacts: [
+      {
+        label: 'Ops visibility',
+        before: 'Limited admin insight',
+        after: 'Charted admin panel on shared API',
+      },
+    ],
+    markdown: `
+**Likita** — healthcare suite. Next.js admin + Express API (i18n, uploads, rate limits). Same backend family as patient/Flutter clients.
     `.trim(),
   },
 };

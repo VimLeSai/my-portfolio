@@ -19,7 +19,7 @@ export async function generateMetadata({ params }) {
 
   if (!project) return { title: 'Project Not Found' };
   return {
-    title: `${project.title} Case Study — Vimal Desai`,
+    title: `${project.title}`,
     description: project.tagline || project.overview,
   };
 }
@@ -38,7 +38,7 @@ export default async function WorkDetailPage({ params }) {
     year: project.period?.end || project.period?.start,
     duration: project.period?.end === 'Present' ? 'Ongoing' : `${project.period?.start} – ${project.period?.end}`,
     tags: project.skills?.filter(Boolean).map(s => s.label || s.name).slice(0, 6) || project.tags,
-    hero: project.image,
+    hero: project.image || project.images?.[0] || '/assets/projects/placeholder.png',
     challenge: project.challenges?.[0]?.value || project.overview,
     approach: project.approach?.map((a) => ({
       icon: a.icon,
@@ -53,7 +53,7 @@ export default async function WorkDetailPage({ params }) {
   return (
     <>
       <Navbar
-        brandName="Vimal Desai"
+        brandName={project.title}
         ctaLabel="View All Work"
         ctaHref="/work"
       />

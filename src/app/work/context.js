@@ -33,11 +33,24 @@ export const ProjectsProvider = ({ children }) => {
 
     if (filters.category !== 'All Projects') {
       if (filters.category === 'Engineering') {
-        result = result.filter((p) => p.role.toLowerCase().includes('engineer') || p.role.toLowerCase().includes('lead'));
+        result = result.filter(
+          (p) =>
+            p.role?.toLowerCase().includes('engineer') ||
+            p.role?.toLowerCase().includes('lead'),
+        );
       } else if (filters.category === 'Design') {
-        result = result.filter((p) => p.role.toLowerCase().includes('design'));
+        result = result.filter((p) =>
+          p.role?.toLowerCase().includes('design'),
+        );
       } else if (filters.category === 'Strategy') {
-        result = result.filter((p) => p.tags && p.tags.some((tag) => tag.includes('Strategy') || tag.includes('Architecture')));
+        result = result.filter(
+          (p) =>
+            p.tags &&
+            p.tags.some(
+              (tag) =>
+                tag.includes('Strategy') || tag.includes('Architecture'),
+            ),
+        );
       }
     }
 

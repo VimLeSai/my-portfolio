@@ -1,82 +1,112 @@
+'use client';
+
+import Reveal from '@/components/ui/reveal';
 import Vink from '@/components/ui/vink';
 import { projects } from '@/lib/projects';
+import { motion, useReducedMotion } from 'motion/react';
 
 export default function SelectedArtifacts() {
-  const { stringerp, masterylogistics, micqro } = projects;
+  const { stringerp, rentbase, micqro } = projects;
+  const selectedProjects = [stringerp, rentbase, micqro];
+  const reduce = useReducedMotion();
 
-  const selectedProjects = [stringerp, masterylogistics, micqro];
   return (
     <section
-      className="border-outline-variant/20 mx-auto max-w-7xl border-t px-8 py-32"
+      className="border-outline-variant/20 mx-auto max-w-7xl border-t px-8 py-28 md:py-36"
       id="work"
     >
       <div className="grid gap-12 lg:grid-cols-12 lg:gap-24">
-        <div className="h-fit lg:sticky lg:top-40 lg:col-span-4">
+        <Reveal className="h-fit lg:sticky lg:top-40 lg:col-span-4">
           <span className="label-sm text-primary mb-6 block font-bold tracking-widest uppercase">
             Selected Projects
           </span>
-          <h2 className="font-headline mb-8 text-5xl leading-tight">
-            Engineering solutions for complex problems.
+          <h2 className="font-headline mb-8 text-4xl leading-tight md:text-5xl">
+            Work that paid rent — not demos.
           </h2>
           <p className="text-on-surface-variant mb-8 text-lg leading-relaxed italic">
-            A curation of enterprise applications and high-traffic platforms
-            built with precision.
+            Textile ERP, PropTech CRM, quiz social. Real users, real
+            constraints.
           </p>
-          <div className="bg-primary/30 hidden h-px w-24 lg:block" />
+          <div className="editorial-rule mb-6 hidden w-24 lg:block" />
           <Vink
             href="/work"
-            // variant="secondary"
             mode="text"
             showArrow
-            className="text-on-surface-variant text-md group-hover:italic hover:italic group-hover:text-primary my-4 leading-relaxed "
+            className="text-on-surface-variant text-md group-hover:text-primary my-4 leading-relaxed group-hover:italic hover:italic"
           >
             View All
           </Vink>
-        </div>
-        <div className="space-y-32 lg:col-span-8">
-          {selectedProjects?.map((project) => {
-            return (
-              <div className="group" key={project.id}>
-                <div className="bg-surface-container-low mb-8 overflow-hidden rounded-xl shadow-[0_20px_80px_rgba(88,65,65,0.06)] transition-all duration-500 group-hover:shadow-[0_20px_80px_rgba(88,65,65,0.12)]">
-                  <img
-                    className="h-80 w-full object-cover grayscale transition-all duration-700 group-hover:grayscale-0"
-                    data-alt="Dashboard interface for StringERP with data visualizations"
-                    src={project.image}
-                  />
-                </div>
-                <div className="flex items-start justify-between">
+        </Reveal>
+
+        <div className="space-y-28 lg:col-span-8">
+          {selectedProjects.map((project, i) => (
+            <Reveal key={project.id} delay={i * 0.05}>
+              <article className="group">
+                <a href={`/work/${project.id}`} className="block">
+                  <div className="bg-surface-container-low relative mb-7 aspect-[16/10] overflow-hidden">
+                    <motion.img
+                      className="h-full w-full object-cover"
+                      src={project.image}
+                      alt={project.title}
+                      initial={false}
+                      whileHover={
+                        reduce ? undefined : { scale: 1.04 }
+                      }
+                      transition={{
+                        duration: 0.85,
+                        ease: [0.16, 1, 0.3, 1],
+                      }}
+                      style={{ filter: 'grayscale(55%) contrast(1.04)' }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.filter =
+                          'grayscale(0%) contrast(1.02)';
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.filter =
+                          'grayscale(55%) contrast(1.04)';
+                      }}
+                    />
+                    <div
+                      aria-hidden
+                      className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                      style={{
+                        boxShadow: 'inset 0 0 0 1px rgba(128,0,32,0.25)',
+                      }}
+                    />
+                  </div>
+                </a>
+
+                <div className="flex items-start justify-between gap-6">
                   <div>
-                    <h3 className="font-headline text-3xl">{project.title}</h3>
-                    <h6 className="font-body mb-2 text-sm">
+                    <h3 className="font-headline text-3xl transition-colors group-hover:text-[var(--color-primary-container)]">
+                      <a href={`/work/${project.id}`}>{project.title}</a>
+                    </h3>
+                    <p className="font-body text-on-surface-variant mb-4 mt-1 max-w-xl text-sm leading-relaxed">
                       {project.tagline}
-                    </h6>
-                    <div className="flex gap-2">
+                    </p>
+                    <div className="flex flex-wrap gap-x-4 gap-y-1">
                       {project.tags.map((tag) => (
                         <span
                           key={tag}
-                          className="bg-surface-container-highest text-on-surface-variant rounded-full px-3 py-1 text-[10px] font-bold tracking-wider uppercase"
+                          className="font-label text-outline text-[10px] font-medium tracking-[0.16em] uppercase"
                         >
                           {tag}
                         </span>
                       ))}
                     </div>
                   </div>
-                  <div>
-                    <Vink
-                      href={`/work/${project.id}`}
-                      mode="icon"
-                      hoverStyle="fill"
-                      className="duration-700 group-hover:bg-[var(--color-primary-container)] group-hover:text-[var(--color-on-primary)]"
-                    >
-                      <span className="material-symbols-outlined">
-                        north_east
-                      </span>
-                    </Vink>
-                  </div>
+                  <Vink
+                    href={`/work/${project.id}`}
+                    mode="icon"
+                    hoverStyle="fill"
+                    className="duration-500 group-hover:bg-[var(--color-primary-container)] group-hover:text-[var(--color-on-primary)]"
+                  >
+                    <span className="material-symbols-outlined">north_east</span>
+                  </Vink>
                 </div>
-              </div>
-            );
-          })}
+              </article>
+            </Reveal>
+          ))}
         </div>
       </div>
     </section>

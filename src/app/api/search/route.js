@@ -1,28 +1,84 @@
 import { NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
+import { profile } from '@/lib/profile';
 
+/** Prefer Serper.dev (used elsewhere in this repo). SerpAPI still supported. */
+const SERPER_API_KEY = process.env.SERPER_API_KEY;
 const SERP_API_KEY = process.env.SERP_API_KEY;
 
 /**
  * Cache lives at <project-root>/.cache/search/
  * Each query gets its own JSON file keyed by a slug.
- * Cache TTL: 30 days (2_592_000_000 ms).
+ * Cache TTL: 30 days.
  */
 const CACHE_DIR = path.join(process.cwd(), '.cache', 'search');
-const CACHE_TTL_MS = 30 * 24 * 60 * 60 * 1000; // 30 days
+const CACHE_TTL_MS = 30 * 24 * 60 * 60 * 1000;
+/** Google returns ~10 organic per page — paginate for a fuller index. */
+const RESULTS_PER_PAGE = 10;
+const MAX_PAGES = 4; // up to ~40 organic results
+const CACHE_VERSION = 'serper_seed_p4';
 
-/** Turn a query string into a safe filename */
-function cacheKeyFor(query) {
-  return query.toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_|_$/g, '') + '.json';
+/** Queries that should pin curated profile links first. */
+const IDENTITY_TOKENS = [
+  'vimlesai',
+  'vimal desai',
+  'vimaldesai',
+  'vim le sai',
+];
+
+function isIdentityQuery(query) {
+  const q = query.replace(/"/g, '').trim().toLowerCase();
+  return IDENTITY_TOKENS.some(
+    (t) => q === t || q.includes(t) || t.includes(q),
+  );
 }
 
-/**
- * Read from file-based cache.
- * Returns { data, fresh } where:
- *   - data  = parsed cache payload (or null if no cache file)
- *   - fresh = true if within TTL, false if expired but still usable
- */
+function curatedPresenceResults() {
+  return profile.socials
+    .filter((s) => s.enabled && s.href)
+    .map((s, i) => ({
+      title: `${profile.name.full} — ${s.label}`,
+      link: s.href,
+      snippet:
+        s.snippet ||
+        `${s.label} profile for ${profile.name.full} (${s.handle || 'VimLeSai'}).`,
+      position: i + 1,
+      favicon: null,
+      displayedLink: null,
+      curated: true,
+    }));
+}
+
+/** Prepend curated profiles; dedupe by normalized URL host+path. */
+function withCuratedPresence(organic, query) {
+  if (!isIdentityQuery(query)) {
+    return organic.map((r, i) => ({ ...r, position: i + 1 }));
+  }
+
+  const seeds = curatedPresenceResults();
+  const normalize = (url) => {
+    try {
+      const u = new URL(url);
+      return `${u.hostname.replace(/^www\./, '')}${u.pathname.replace(/\/$/, '')}`.toLowerCase();
+    } catch {
+      return (url || '').toLowerCase();
+    }
+  };
+
+  const seen = new Set(seeds.map((s) => normalize(s.link)));
+  const rest = organic.filter((r) => !seen.has(normalize(r.link)));
+  return [...seeds, ...rest].map((r, i) => ({ ...r, position: i + 1 }));
+}
+
+function cacheKeyFor(query) {
+  const slug = query
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '_')
+    .replace(/^_|_$/g, '');
+  return `${slug}_${CACHE_VERSION}.json`;
+}
+
 function readCache(query) {
   try {
     const filePath = path.join(CACHE_DIR, cacheKeyFor(query));
@@ -38,7 +94,6 @@ function readCache(query) {
   }
 }
 
-/** Write to file-based cache */
 function writeCache(query, data) {
   try {
     fs.mkdirSync(CACHE_DIR, { recursive: true });
@@ -50,12 +105,14 @@ function writeCache(query, data) {
   }
 }
 
-/** Build a JSON response from a cache entry */
 function respondFromCache(cached, label = 'cached') {
   const { _cachedAt, ...rest } = cached;
   const ageMs = Date.now() - _cachedAt;
   const daysAgo = Math.floor(ageMs / (24 * 60 * 60 * 1000));
-  const daysRemaining = Math.max(0, Math.ceil((CACHE_TTL_MS - ageMs) / (24 * 60 * 60 * 1000)));
+  const daysRemaining = Math.max(
+    0,
+    Math.ceil((CACHE_TTL_MS - ageMs) / (24 * 60 * 60 * 1000)),
+  );
   return NextResponse.json({
     ...rest,
     source: label,
@@ -67,37 +124,175 @@ function respondFromCache(cached, label = 'cached') {
   });
 }
 
-/** Format SerpAPI response into our standard shape */
-function formatSerpResponse(data, query) {
+function mapOrganic(results, offset = 0) {
+  return (results || []).map((r, i) => ({
+    title: r.title,
+    link: r.link,
+    snippet: r.snippet || '',
+    position: r.position ?? offset + i + 1,
+    favicon: r.favicon || null,
+    displayedLink: r.displayedLink || r.displayed_link || null,
+  }));
+}
+
+function mergeOrganicPages(pageOrganics) {
+  const seen = new Set();
+  const organic = [];
+  pageOrganics.forEach((results, pageIndex) => {
+    const offset = pageIndex * RESULTS_PER_PAGE;
+    for (const item of mapOrganic(results, offset)) {
+      const key = item.link || `${item.title}:${item.position}`;
+      if (seen.has(key)) continue;
+      seen.add(key);
+      organic.push({ ...item, position: organic.length + 1 });
+    }
+  });
+  return organic;
+}
+
+async function fetchSerperPage(query, page) {
+  const res = await fetch('https://google.serper.dev/search', {
+    method: 'POST',
+    headers: {
+      'X-API-KEY': SERPER_API_KEY,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ q: toExactQuery(query), gl: 'in', page }),
+  });
+
+  if (!res.ok) {
+    throw new Error(`Serper responded with ${res.status} (page=${page})`);
+  }
+  return res.json();
+}
+
+/** Quote bare tokens so Google does exact-phrase match (avoids Vimlesh noise). */
+function toExactQuery(query) {
+  const q = query.trim();
+  if (!q) return q;
+  if (q.includes('"')) return q;
+  if (/\s/.test(q) || q.length < 3) return q;
+  return `"${q}"`;
+}
+
+async function fetchViaSerper(query) {
+  const pages = [];
+  let relatedSearches = [];
+  let knowledgeGraph = null;
+  let emptyStreak = 0;
+
+  for (let page = 1; page <= MAX_PAGES; page++) {
+    const data = await fetchSerperPage(query, page);
+    if (page === 1) {
+      relatedSearches = (data.relatedSearches || []).map(
+        (s) => s.query || s,
+      );
+      knowledgeGraph = data.knowledgeGraph || null;
+    }
+    const organic = data.organic || [];
+    pages.push(organic);
+
+    // Quoted queries sometimes return an empty page 1 — keep paging.
+    if (organic.length === 0) {
+      emptyStreak += 1;
+      if (emptyStreak >= 2) break;
+    } else {
+      emptyStreak = 0;
+    }
+  }
+
   return {
     source: 'live',
+    provider: 'serper',
     query,
     searchInformation: {
-      totalResults: data.search_information?.total_results || null,
-      timeTaken: data.search_information?.time_taken_displayed || null,
+      totalResults: null,
+      timeTaken: null,
     },
-    organic: (data.organic_results || []).map((r) => ({
-      title: r.title,
-      link: r.link,
-      snippet: r.snippet || '',
-      position: r.position,
-      favicon: r.favicon || null,
-      displayedLink: r.displayed_link || null,
-    })),
-    knowledgeGraph: data.knowledge_graph || null,
-    relatedSearches: (data.related_searches || []).map((s) => s.query),
+    organic: withCuratedPresence(
+      filterRelevant(mergeOrganicPages(pages), query),
+      query,
+    ),
+    knowledgeGraph,
+    relatedSearches,
   };
+}
+
+/** Drop fuzzy junk that doesn't mention the query token. */
+function filterRelevant(organic, query) {
+  const token = query.replace(/"/g, '').trim().toLowerCase();
+  if (!token || token.includes(' ')) return organic;
+
+  const matched = organic.filter((r) => {
+    const hay = `${r.title || ''} ${r.link || ''} ${r.snippet || ''}`.toLowerCase();
+    return hay.includes(token);
+  });
+
+  // If filtering wiped everything (odd query), keep raw merge.
+  const list = matched.length > 0 ? matched : organic;
+  return list.map((r, i) => ({ ...r, position: i + 1 }));
+}
+
+async function fetchSerpApiPage(query, start) {
+  const serpUrl = new URL('https://serpapi.com/search.json');
+  serpUrl.searchParams.set('q', toExactQuery(query));
+  serpUrl.searchParams.set('engine', 'google');
+  serpUrl.searchParams.set('gl', 'in');
+  serpUrl.searchParams.set('start', String(start));
+  serpUrl.searchParams.set('api_key', SERP_API_KEY);
+
+  const res = await fetch(serpUrl.toString());
+  if (!res.ok) {
+    throw new Error(`SerpAPI responded with ${res.status} (start=${start})`);
+  }
+  return res.json();
+}
+
+async function fetchViaSerpApi(query) {
+  const pageBodies = [];
+  let first = null;
+
+  for (let page = 0; page < MAX_PAGES; page++) {
+    const start = page * RESULTS_PER_PAGE;
+    const data = await fetchSerpApiPage(query, start);
+    if (page === 0) first = data;
+    pageBodies.push(data.organic_results || []);
+    const count = data.organic_results?.length || 0;
+    const hasNext = Boolean(data.serpapi_pagination?.next);
+    if (count === 0 || !hasNext) break;
+  }
+
+  return {
+    source: 'live',
+    provider: 'serpapi',
+    query,
+    searchInformation: {
+      totalResults: first?.search_information?.total_results || null,
+      timeTaken: first?.search_information?.time_taken_displayed || null,
+    },
+    organic: withCuratedPresence(
+      filterRelevant(mergeOrganicPages(pageBodies), query),
+      query,
+    ),
+    knowledgeGraph: first?.knowledge_graph || null,
+    relatedSearches: (first?.related_searches || []).map((s) => s.query),
+  };
+}
+
+async function fetchLiveResults(query) {
+  if (SERPER_API_KEY) return fetchViaSerper(query);
+  if (SERP_API_KEY) return fetchViaSerpApi(query);
+  return null;
 }
 
 /**
  * GET /api/search?q=VimLeSai
  *
  * Priority:
- *   1. Return from file cache if still fresh (< 30 days)
- *   2. Cache expired → try SerpAPI → update cache → return fresh data
- *      – If SerpAPI fails → return the stale cache forever (never discard it)
- *   3. No cache exists at all → try SerpAPI → cache & return
- *      – If SerpAPI fails → return hardcoded static fallback
+ *   1. Fresh file cache (< 30 days)
+ *   2. Live Serper / SerpAPI → cache
+ *   3. Stale cache on API failure
+ *   4. Static fallback
  */
 export async function GET(request) {
   const { searchParams } = new URL(request.url);
@@ -105,50 +300,25 @@ export async function GET(request) {
 
   const { data: cached, fresh } = readCache(query);
 
-  // ── 1. Fresh cache → serve immediately ─────────────────────────────────────
   if (cached && fresh) {
     return respondFromCache(cached, 'cached');
   }
 
-  // ── 2. Try SerpAPI (cache is either stale or missing) ──────────────────────
-  if (SERP_API_KEY) {
+  if (SERPER_API_KEY || SERP_API_KEY) {
     try {
-      const serpUrl = new URL('https://serpapi.com/search.json');
-      serpUrl.searchParams.set('q', query);
-      serpUrl.searchParams.set('engine', 'google');
-      serpUrl.searchParams.set('gl', 'in');
-      serpUrl.searchParams.set('num', '10');
-      serpUrl.searchParams.set('api_key', SERP_API_KEY);
-
-      const res = await fetch(serpUrl.toString());
-
-      if (!res.ok) {
-        throw new Error(`SerpAPI responded with ${res.status}`);
-      }
-
-      const data = await res.json();
-      const formatted = formatSerpResponse(data, query);
-
-      // Cache the fresh result for next 30 days
+      const formatted = await fetchLiveResults(query);
       writeCache(query, formatted);
-
       return NextResponse.json(formatted);
     } catch (error) {
-      console.error('[/api/search] SerpAPI error:', error.message);
-
-      // API failed but we have stale cache → use it forever
+      console.error('[/api/search] Live search error:', error.message);
       if (cached) {
-        console.log('[/api/search] Serving stale cache as API fallback');
         return respondFromCache(cached, 'stale-cache');
       }
-      // No cache at all → fall through to static
     }
   } else if (cached) {
-    // No API key but stale cache exists → still serve it
     return respondFromCache(cached, 'stale-cache');
   }
 
-  // ── 3. Static fallback ─────────────────────────────────────────────────────
   const staticResults = {
     source: 'static',
     query,
@@ -156,98 +326,7 @@ export async function GET(request) {
       totalResults: '1,240',
       timeTaken: '0.42',
     },
-    organic: [
-      {
-        title: 'VimLeSai (Vimal Desai) - GitHub',
-        link: 'https://github.com/VimLeSai',
-        snippet:
-          'Shipping across frontend, backend & shared component libraries for a high-traffic enterprise asset management SaaS; ⚡ Used AI tooling to double sprint ...',
-        position: 1,
-        favicon: null,
-        displayedLink: 'github.com › VimLeSai',
-      },
-      {
-        title: 'vimlesai - NPM',
-        link: 'https://www.npmjs.com/~vimlesai',
-        snippet:
-          'It is a simple custom hook on top of useState to provide a callback after the state is updated, just like in Class Component.',
-        position: 2,
-        favicon: null,
-        displayedLink: 'npmjs.com › ~vimlesai',
-      },
-      {
-        title: 'Vimal Desai - UpKeep - LinkedIn',
-        link: 'https://in.linkedin.com/in/vimlesai',
-        snippet:
-          "I'm a Senior Full Stack Engineer with 9+ years of experience building scalable… · Experience: UpKeep · Education: SARVEPALLI RADHAKRISHNAN UNIVERSITY ...",
-        position: 3,
-        favicon: null,
-        displayedLink: 'linkedin.com › in › vimlesai',
-      },
-      {
-        title: 'Vimal Desai — Senior Full Stack Engineer',
-        link: 'https://vimlesai.io/',
-        snippet:
-          'Senior Full Stack Engineer with 9+ years building scalable, high-performance web applications — from pixel-perfect UIs to robust microservices. Known for ...',
-        position: 4,
-        favicon: null,
-        displayedLink: 'vimlesai.io',
-      },
-      {
-        title: 'User VimLeSai - Stack Overflow',
-        link: 'https://stackoverflow.com/users/7801396/vimlesai',
-        snippet:
-          "VimLeSai's user avatar. VimLeSai. Explorer. Member for 8 years, 10 months. Last seen more than a month ago. India.",
-        position: 5,
-        favicon: null,
-        displayedLink: 'stackoverflow.com › users › vimlesai',
-      },
-      {
-        title: 'Vimal Desai - Contra',
-        link: 'https://contra.com/VimLeSai/about',
-        snippet:
-          'Full Stack Developer with 8+ years of experience building scalable, high-performance web applications. Skilled in React, Node.js, and TypeScript, ...',
-        position: 6,
-        favicon: null,
-        displayedLink: 'contra.com › VimLeSai',
-      },
-      {
-        title: 'Vimal Desai (@vimlesai) • Instagram photos and videos',
-        link: 'https://www.instagram.com/vimlesai/',
-        snippet:
-          'कृष्णाय वासुदेवाय हरये परमात्मने प्रणतः क्लेशनाशाय गोविंदाय नमो नमः',
-        position: 7,
-        favicon: null,
-        displayedLink: 'instagram.com › vimlesai',
-      },
-      {
-        title: 'Vimal D. - Senior Full Stack Architect (Next.js/Node) - Upwork',
-        link: 'https://www.upwork.com/freelancers/vimlesai',
-        snippet:
-          'Senior Full Stack Engineer with 9+ years building scalable, production-ready web applications using React, Next.js, Node.js, and TypeScript.',
-        position: 8,
-        favicon: null,
-        displayedLink: 'upwork.com › freelancers › vimlesai',
-      },
-      {
-        title: 'Vimal Desai (@VimLeSai) - Facebook',
-        link: 'https://www.facebook.com/VimLeSai/about/',
-        snippet:
-          'Details. Profile · Digital creator. Goes to S.S. School of Scince. Lives in Surat, Gujarat. Married.',
-        position: 9,
-        favicon: null,
-        displayedLink: 'facebook.com › VimLeSai',
-      },
-      {
-        title: 'Vimal Desai - Senior Software Engineer, Emtec - Intch',
-        link: 'https://intch.org/p/VimLeSai',
-        snippet:
-          "Vimal Desai. Senior Software Engineer @Emtec. I'm a seasoned professional in the field of software engineering, currently holding the position of Senior ...",
-        position: 10,
-        favicon: null,
-        displayedLink: 'intch.org › VimLeSai',
-      },
-    ],
+    organic: withCuratedPresence([], query),
     relatedSearches: [
       'Vimal Desai software engineer',
       'VimLeSai GitHub projects',

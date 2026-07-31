@@ -1,26 +1,26 @@
 export default [
   {
     num: '01',
-    title: 'Discovery',
-    desc: 'Deep immersion into the business problem, user psychology, and technical constraints.',
-    bullets: ['Stakeholder Interviews', 'Technical Audit'],
+    title: 'Listen first',
+    desc: 'Talk to the people stuck in the workflow. Map constraints before picking a stack.',
+    bullets: ['Stakeholder chats', 'Code & data audit'],
   },
   {
     num: '02',
-    title: 'Architecture',
-    desc: 'Drafting the structural blueprint, database schema, and scalability roadmaps.',
-    bullets: ['System Design', 'Schema Mapping'],
+    title: 'Sketch the system',
+    desc: 'Boundaries, schema, failure modes. Enough design to build — not a 40-page deck.',
+    bullets: ['Interfaces', 'Data model'],
   },
   {
     num: '03',
-    title: 'Execution',
-    desc: 'High-fidelity development using modern stacks with extreme attention to detail.',
-    bullets: ['Code Craftsmanship', 'Agile Sprints'],
+    title: 'Build the path',
+    desc: 'Ship the vertical slice users feel. Iterate with real feedback, not ceremony.',
+    bullets: ['Working software', 'Tight reviews'],
   },
   {
     num: '04',
-    title: 'Optimization',
-    desc: 'Rigorous testing, performance tuning, and deployment orchestration.',
-    bullets: ['CI/CD Pipelines', 'Performance Audit'],
+    title: 'Harden & hand off',
+    desc: 'Tests, perf, deploy path, docs someone else can run at 2am.',
+    bullets: ['CI/CD', 'Load & regression'],
   },
 ];
