@@ -179,7 +179,7 @@ export async function GET(request) {
         title: 'Vimal Desai - UpKeep - LinkedIn',
         link: 'https://in.linkedin.com/in/vimlesai',
         snippet:
-          "I'm a Senior Full Stack Engineer with 9+ years of experience building scalable… · Experience: UpKeep · Education: SARVEPALLI RADHAKRISHNAN UNIVERSITY ...",
+          "I'm a Senior Full Stack Engineer with 10+ years of experience building scalable… · Experience: UpKeep · Education: SARVEPALLI RADHAKRISHNAN UNIVERSITY ...",
         position: 3,
         favicon: null,
         displayedLink: 'linkedin.com › in › vimlesai',
@@ -188,7 +188,7 @@ export async function GET(request) {
         title: 'Vimal Desai — Senior Full Stack Engineer',
         link: 'https://vimlesai.io/',
         snippet:
-          'Senior Full Stack Engineer with 9+ years building scalable, high-performance web applications — from pixel-perfect UIs to robust microservices. Known for ...',
+          'Senior Full Stack Engineer with 10+ years building scalable, high-performance web applications — from pixel-perfect UIs to robust microservices. Known for ...',
         position: 4,
         favicon: null,
         displayedLink: 'vimlesai.io',
@@ -224,7 +224,7 @@ export async function GET(request) {
         title: 'Vimal D. - Senior Full Stack Architect (Next.js/Node) - Upwork',
         link: 'https://www.upwork.com/freelancers/vimlesai',
         snippet:
-          'Senior Full Stack Engineer with 9+ years building scalable, production-ready web applications using React, Next.js, Node.js, and TypeScript.',
+          'Senior Full Stack Engineer with 10+ years building scalable, production-ready web applications using React, Next.js, Node.js, and TypeScript.',
         position: 8,
         favicon: null,
         displayedLink: 'upwork.com › freelancers › vimlesai',

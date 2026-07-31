@@ -7,11 +7,11 @@
 export const highlights = [
   {
     id: 'years-experience',
-    value: '9+',
+    value: '10+',
     label: 'Years of Experience',
     sublabel: 'Full-stack, frontend-to-backend',
     description:
-      'Over 9 years building production web applications across frontend, backend, and infrastructure.',
+      'Over 10 years building production web applications across frontend, backend, and infrastructure.',
     icon: 'calendar',
     order: 1,
   },

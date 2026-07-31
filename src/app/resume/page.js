@@ -6,9 +6,9 @@ import Sidebar from './components/Sidebar';
 import { resumeMeta, jobs } from '@lib/resume-data';
 
 export const metadata = {
-  title: 'Resume — Vimal Desai | Senior Full Stack Engineer',
+  title: 'Resume',
   description:
-    'View the professional resume of Vimal Desai. 9+ years of full stack engineering expertise with React, Node.js, TypeScript, and AWS infrastructure.',
+    'View the professional resume of Vimal Desai. 10+ years of full stack engineering expertise with React, Node.js, TypeScript, and AWS infrastructure.',
 };
 
 export default function ResumePage() {

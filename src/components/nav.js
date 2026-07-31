@@ -3,9 +3,10 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
+import { sectionFromPath, siteName } from '@/lib/page-titles';
 
 const navLinks = [
-  { label: 'Work', href: '/' },
+  { label: 'Work', href: '/work' },
   { label: 'Experience', href: '/experience' },
   // { label: 'Archive', href: '/archive' },
   { label: 'Process', href: '/process' },
@@ -13,13 +14,17 @@ const navLinks = [
 ];
 
 export default function Navbar({
-  brandName = 'VimLeSai',
+  brandName = null,
   ctaLabel = `Let's Talk`,
   ctaHref = '/contact',
   rightItems = null,
 }) {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const brand = sectionFromPath(pathname);
+  const showSection = brand.section;
+  const primaryLabel = brandName || brand.label;
+  const isHome = pathname === '/';
 
   return (
     <>
@@ -31,17 +36,49 @@ export default function Navbar({
           boxShadow: '0 15px 80px rgba(88,65,65,0.08)',
         }}
       >
-        <nav className="mx-auto flex w-full max-w-screen-2xl items-center justify-between px-8 py-6">
-          <a
-            href="/"
-            className="font-headline text-2xl font-bold"
-            style={{ color: 'var(--color-on-surface)' }}
-          >
-            {brandName}
-          </a>
+        <nav className="mx-auto flex w-full max-w-screen-2xl items-center justify-between px-8 py-5 md:py-6">
+          <div className="flex min-w-0 items-baseline gap-2 sm:gap-3">
+            {!isHome && (
+              <>
+                <Link
+                  href="/"
+                  className="font-label text-outline hover:text-primary shrink-0 text-[10px] tracking-[0.16em] uppercase transition-colors sm:text-[11px]"
+                >
+                  {siteName}
+                </Link>
+                <span className="text-outline/50 shrink-0 text-sm" aria-hidden>
+                  /
+                </span>
+              </>
+            )}
+            {showSection && (
+              <>
+                <Link
+                  href={brand.href}
+                  className="font-label text-outline hover:text-primary shrink-0 text-[10px] tracking-[0.16em] uppercase transition-colors sm:text-[11px]"
+                >
+                  {showSection}
+                </Link>
+                <span className="text-outline/50 shrink-0 text-sm" aria-hidden>
+                  /
+                </span>
+              </>
+            )}
+            <Link
+              href={isHome ? '/' : brand.href}
+              className="font-headline text-on-surface truncate text-xl font-bold sm:text-2xl"
+            >
+              {isHome ? siteName : primaryLabel}
+            </Link>
+          </div>
+
           <div className="hidden items-center gap-12 md:flex">
             {navLinks.map((link) => {
-              const isActive = pathname === link.href;
+              const isActive =
+                link.href === '/'
+                  ? pathname === '/'
+                  : pathname === link.href ||
+                    pathname.startsWith(`${link.href}/`);
               return (
                 <Link
                   key={link.href}
@@ -59,12 +96,11 @@ export default function Navbar({
             })}
           </div>
 
-          {/* Right Side */}
           <div className="flex items-center gap-6">
             {rightItems}
             <Link
               href={ctaHref}
-              className="font-body px-6 py-2 text-sm hidden md:block tracking-wide shadow-sm transition-all hover:opacity-90"
+              className="font-body hidden px-6 py-2 text-sm tracking-wide shadow-sm transition-all hover:opacity-90 md:block"
               style={{
                 backgroundColor: 'var(--color-primary-container)',
                 color: 'var(--color-on-primary)',
@@ -74,7 +110,6 @@ export default function Navbar({
               {ctaLabel}
             </Link>
 
-            {/* Hamburger */}
             <button
               onClick={() => setMobileOpen((v) => !v)}
               className="flex flex-col gap-1.5 p-2 md:hidden"
@@ -104,7 +139,7 @@ export default function Navbar({
               />
             </button>
           </div>
-          {/* Mobile Menu */}
+
           <div
             className={`fixed inset-0 top-[73px] h-[calc(100vh-73px)] bg-[var(--color-paper)] transition-all duration-500 ease-in-out md:hidden ${
               mobileOpen
@@ -114,7 +149,9 @@ export default function Navbar({
           >
             <div className="flex h-full flex-col items-center justify-start space-y-8 py-12">
               {navLinks.map((link) => {
-                const isActive = pathname === link.href;
+                const isActive =
+                  pathname === link.href ||
+                  pathname.startsWith(`${link.href}/`);
                 return (
                   <Link
                     key={link.href}

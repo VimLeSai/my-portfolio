@@ -5,7 +5,7 @@ import Button from '@/components/ui/Button';
 import Link from 'next/link';
 
 export const metadata = {
-  title: 'Architectural Impact & Results — Vimal Desai',
+  title: 'Impact',
   description:
     'View the measurable engineering outcomes driven by Vimal Desai, including latency reduction, infrastructure cost savings, and 99.98% data integrity SLAs.',
 };
@@ -159,7 +159,6 @@ export default function ImpactPage() {
   return (
     <>
       <Navbar
-        brandName="Vimal Desai"
         ctaLabel="View Resume"
         ctaHref="/resume"
       />
@@ -514,7 +513,6 @@ export default function ImpactPage() {
       </main>
 
       <Footer
-        brandName="Vimal Desai"
         tagline="Delivering measurable business value through robust software architecture."
       />
       <Watermark text="impact" />

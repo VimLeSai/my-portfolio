@@ -1,56 +1,89 @@
+'use client';
+
+import Reveal from '@/components/ui/reveal';
+import { motion, useReducedMotion } from 'motion/react';
+
 export default function LetsTalk() {
+  const reduce = useReducedMotion();
+
   return (
     <section
-      className="relative overflow-hidden py-40 text-center"
+      className="relative overflow-hidden py-32 text-center md:py-44"
       id="contact"
     >
-      <div className="relative z-10 mx-auto max-w-4xl px-8">
-        <h2
-          className="font-headline text-on-surface mb-12 leading-none tracking-tighter italic"
-          style={{ fontSize: 'clamp(3.5rem, 8vw, 8rem)' }}
-        >
-          Let's work <br /> together.
-        </h2>
-        {/* Globe / Interactive Area */}
-        <div className="flex flex-col items-center gap-12">
-          <div className="relative h-48 w-48">
-            <svg
-              className="text-primary/10 h-full w-full animate-[spin_20s_linear_infinite]"
-              viewBox="0 0 100 100"
-            >
-              <circle
-                cx={50}
-                cy={50}
-                fill="none"
-                r={48}
-                stroke="currentColor"
-                strokeDasharray="4 4"
-                strokeWidth="0.5"
-              />
-              <circle
-                cx={50}
-                cy={50}
-                fill="none"
-                r={30}
-                stroke="currentColor"
-                strokeWidth={1}
-              />
-            </svg>
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="bg-primary h-3 w-3 rounded-full shadow-[0_0_15px_rgba(128,0,32,0.5)]" />
-            </div>
-          </div>
-          <a
-            className="font-headline border-primary/40 hover:text-primary border-b text-2xl italic transition-colors"
-            href="/contact"
+      <Reveal>
+        <div className="relative z-10 mx-auto max-w-4xl px-8">
+          <h2
+            className="font-headline text-on-surface mb-10 leading-none tracking-tighter italic md:mb-14"
+            style={{ fontSize: 'clamp(3.2rem, 8vw, 7.5rem)' }}
           >
-            hello@vimlesai.io
-          </a>
+            Let&apos;s work
+            <br />
+            together.
+          </h2>
+
+          <div className="flex flex-col items-center gap-10">
+            <motion.div
+              className="relative h-36 w-36 md:h-44 md:w-44"
+              animate={reduce ? undefined : { rotate: 360 }}
+              transition={
+                reduce
+                  ? undefined
+                  : { duration: 28, repeat: Infinity, ease: 'linear' }
+              }
+            >
+              <svg
+                className="text-primary/15 h-full w-full"
+                viewBox="0 0 100 100"
+              >
+                <circle
+                  cx={50}
+                  cy={50}
+                  fill="none"
+                  r={48}
+                  stroke="currentColor"
+                  strokeDasharray="3 5"
+                  strokeWidth="0.6"
+                />
+                <circle
+                  cx={50}
+                  cy={50}
+                  fill="none"
+                  r={32}
+                  stroke="currentColor"
+                  strokeWidth={0.8}
+                />
+              </svg>
+              <div className="absolute inset-0 flex items-center justify-center">
+                <motion.div
+                  className="bg-primary h-2.5 w-2.5 rounded-full"
+                  animate={
+                    reduce
+                      ? undefined
+                      : { scale: [1, 1.35, 1], opacity: [0.7, 1, 0.7] }
+                  }
+                  transition={
+                    reduce
+                      ? undefined
+                      : { duration: 2.4, repeat: Infinity, ease: 'easeInOut' }
+                  }
+                  style={{ boxShadow: '0 0 18px rgba(128,0,32,0.45)' }}
+                />
+              </div>
+            </motion.div>
+
+            <a
+              className="font-headline border-primary/35 hover:border-primary hover:text-primary border-b pb-1 text-xl italic transition-colors duration-300 md:text-2xl"
+              href="/contact"
+            >
+              hello@vimlesai.io
+            </a>
+          </div>
         </div>
-      </div>
-      {/* Abstract background shape */}
-      <div className="bg-primary/5 absolute -bottom-20 -left-20 h-96 w-96 rounded-full blur-[100px]" />
-      <div className="bg-secondary/5 absolute -top-20 -right-20 h-96 w-96 rounded-full blur-[100px]" />
+      </Reveal>
+
+      <div className="bg-primary/5 absolute -bottom-24 -left-24 h-[28rem] w-[28rem] rounded-full blur-[110px]" />
+      <div className="bg-secondary/5 absolute -top-24 -right-24 h-[28rem] w-[28rem] rounded-full blur-[110px]" />
     </section>
   );
 }

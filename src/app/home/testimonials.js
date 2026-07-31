@@ -1,122 +1,179 @@
 'use client';
 
+import Reveal from '@/components/ui/reveal';
 import { testimonials } from '@/lib/testimonials';
-import { useEffect, useRef, useState } from 'react';
+import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
+import { useCallback, useEffect, useState } from 'react';
 
 export default function Testimonials() {
-  const featuredTestimonials = testimonials.filter((t) => t.featured);
-  // Duplicate array for infinite scroll
-  const marqueeItems = [...featuredTestimonials, ...featuredTestimonials];
+  const items = testimonials.filter((t) => t.featured && t.enabled !== false);
+  const [index, setIndex] = useState(0);
+  const [direction, setDirection] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const [expanded, setExpanded] = useState(false);
+  const reduce = useReducedMotion();
 
-  const scrollRef = useRef(null);
-  const [isPaused, setIsPaused] = useState(false);
+  const count = items.length;
+  const current = items[index] || items[0];
+
+  const go = useCallback(
+    (dir) => {
+      if (!count) return;
+      setDirection(dir);
+      setExpanded(false);
+      setIndex((i) => (i + dir + count) % count);
+    },
+    [count],
+  );
 
   useEffect(() => {
-    let animationFrameId;
+    if (paused || reduce || count < 2) return;
+    const id = setInterval(() => go(1), 7000);
+    return () => clearInterval(id);
+  }, [paused, reduce, count, go, index]);
 
-    const scroll = () => {
-      if (!isPaused && scrollRef.current) {
-        scrollRef.current.scrollLeft += 0.5;
-        
-        // Reset to beginning when halfway through (seamless loop)
-        if (scrollRef.current.scrollLeft >= scrollRef.current.scrollWidth / 2) {
-          scrollRef.current.scrollLeft -= scrollRef.current.scrollWidth / 2;
-        }
-      }
-      animationFrameId = requestAnimationFrame(scroll);
-    };
+  if (!current) return null;
 
-    animationFrameId = requestAnimationFrame(scroll);
-    return () => cancelAnimationFrame(animationFrameId);
-  }, [isPaused]);
+  const variants = {
+    enter: (dir) => ({
+      x: dir > 0 ? 48 : -48,
+      opacity: 0,
+    }),
+    center: { x: 0, opacity: 1 },
+    exit: (dir) => ({
+      x: dir > 0 ? -48 : 48,
+      opacity: 0,
+    }),
+  };
 
   return (
-    <section className="bg-surface-container-lowest border-outline-variant/10 border-y px-4 py-32 md:px-8">
-      <div className="mx-auto max-w-screen-2xl py-12 md:py-24">
-        <p className="font-label text-outline mb-16 text-center text-sm tracking-[0.2em] uppercase">
-          Echoes of Success
-        </p>
-        
-        <div className="relative w-full">
-          {/* Gradient Masks */}
-          <div className="pointer-events-none absolute inset-y-0 left-0 z-20 w-16 bg-gradient-to-r from-[var(--color-surface-container-lowest)] to-transparent md:w-32" />
-          <div className="pointer-events-none absolute inset-y-0 right-0 z-20 w-16 bg-gradient-to-l from-[var(--color-surface-container-lowest)] to-transparent md:w-32" />
+    <section
+      className="bg-surface-container-lowest border-outline-variant/15 border-y px-6 py-28 md:px-8 md:py-36"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+      onFocusCapture={() => setPaused(true)}
+      onBlurCapture={() => setPaused(false)}
+    >
+      <div className="mx-auto max-w-4xl">
+        <Reveal className="mb-14 text-center md:mb-16">
+          <p className="font-label text-outline mb-4 text-sm tracking-[0.2em] uppercase">
+            What people say
+          </p>
+          <h2 className="font-headline text-3xl italic md:text-4xl">
+            From people I&apos;ve shipped with
+          </h2>
+        </Reveal>
 
-          {/* Native scroll container */}
-          <div 
-            ref={scrollRef}
-            className="flex w-full overflow-x-auto overflow-y-visible pt-48 pb-32 -my-32 scrollbar-hide"
-            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-            onMouseEnter={() => setIsPaused(true)}
-            onMouseLeave={() => setIsPaused(false)}
-            onTouchStart={() => setIsPaused(true)}
-            onTouchEnd={() => setIsPaused(false)}
-          >
-            {marqueeItems.map((testimonial, idx) => (
-              <div 
-                key={`${testimonial.id}-${idx}`} 
-                className="relative flex flex-col justify-between w-[320px] shrink-0 mr-12 md:mr-16 md:w-[400px]"
+        <div className="relative min-h-[280px] md:min-h-[260px]">
+          <AnimatePresence mode="wait" custom={direction}>
+            <motion.figure
+              key={current.id}
+              custom={direction}
+              variants={reduce ? undefined : variants}
+              initial={reduce ? false : 'enter'}
+              animate="center"
+              exit={reduce ? undefined : 'exit'}
+              transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+              className="absolute inset-x-0 top-0"
+            >
+              <span
+                aria-hidden
+                className="font-headline text-primary/15 absolute -top-8 left-0 text-7xl italic leading-none"
               >
-                <span className="font-headline text-surface-container absolute -top-6 -left-4 text-8xl italic opacity-50">
-                  "
-                </span>
-                
-                <div className="relative z-10 mb-8">
-                  <p className="font-body text-on-surface text-lg italic whitespace-pre-wrap leading-relaxed">
-                    {testimonial.shortReview || testimonial.review}
-                    {' '}
-                    <span className="group relative inline-block whitespace-nowrap text-primary font-bold text-sm cursor-help">
-                      read original →
-                      
-                      {/* Tooltip */}
-                      <span className="absolute bottom-full left-1/2 -translate-x-1/2 mb-4 w-72 md:w-[450px] rounded-xl bg-inverse-surface p-6 text-inverse-on-surface shadow-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-100 pointer-events-none z-50">
-                        <span className="font-body text-[15px] font-normal italic leading-relaxed whitespace-pre-wrap">
-                          "{testimonial.review}"
-                        </span>
-                        {/* Tooltip caret */}
-                        <svg className="absolute left-1/2 top-full -mt-[1px] h-4 w-4 -translate-x-1/2 fill-inverse-surface" viewBox="0 0 24 24">
-                          <path d="M12 24l12-24H0z" />
-                        </svg>
-                      </span>
+                “
+              </span>
+              <blockquote className="relative z-10 pt-6">
+                <p className="font-body text-on-surface text-xl leading-relaxed italic md:text-2xl">
+                  {expanded
+                    ? current.review
+                    : current.shortReview || current.review}
+                </p>
+                {current.review &&
+                  current.shortReview &&
+                  current.review !== current.shortReview && (
+                    <button
+                      type="button"
+                      onClick={() => setExpanded((v) => !v)}
+                      className="font-label text-primary mt-4 text-xs font-bold tracking-wider uppercase"
+                    >
+                      {expanded ? 'Show less' : 'Read full →'}
+                    </button>
+                  )}
+              </blockquote>
+
+              <figcaption className="mt-10 flex items-center gap-4">
+                <div className="flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-full bg-stone-200">
+                  {current.reviewer.avatarUrl ? (
+                    <img
+                      alt=""
+                      src={current.reviewer.avatarUrl}
+                      className="h-full w-full object-cover"
+                    />
+                  ) : (
+                    <span className="font-label text-on-surface-variant font-bold uppercase">
+                      {current.reviewer.name.charAt(0)}
                     </span>
+                  )}
+                </div>
+                <div>
+                  <p className="font-label text-xs font-bold tracking-widest uppercase">
+                    {current.reviewer.name}
+                  </p>
+                  <p className="font-label text-outline text-[10px] tracking-wider uppercase">
+                    {current.reviewer.title}
+                    {current.reviewer.company
+                      ? `, ${current.reviewer.company}`
+                      : ''}
                   </p>
                 </div>
-                
-                <div className="flex items-center gap-4">
-                  <div className="h-10 w-10 shrink-0 overflow-hidden rounded-full bg-stone-200 flex items-center justify-center">
-                    {testimonial.reviewer.avatarUrl ? (
-                      <img
-                        alt={testimonial.reviewer.name}
-                        src={testimonial.reviewer.avatarUrl}
-                        className="h-full w-full object-cover"
-                      />
-                    ) : (
-                      <span className="text-on-surface-variant font-label font-bold uppercase">
-                        {testimonial.reviewer.name.charAt(0)}
-                      </span>
-                    )}
-                  </div>
-                  <div>
-                    <p className="font-label text-xs font-bold tracking-widest uppercase">
-                      {testimonial.reviewer.name}
-                    </p>
-                    <p className="font-label text-outline text-[10px] tracking-wider uppercase">
-                      {testimonial.reviewer.title}
-                      {testimonial.reviewer.company ? `, ${testimonial.reviewer.company}` : ''}
-                    </p>
-                  </div>
-                </div>
-              </div>
+              </figcaption>
+            </motion.figure>
+          </AnimatePresence>
+        </div>
+
+        <div className="mt-8 flex items-center justify-between gap-6 pt-4">
+          <div className="flex gap-2" role="tablist" aria-label="Testimonials">
+            {items.map((t, i) => (
+              <button
+                key={t.id}
+                type="button"
+                role="tab"
+                aria-selected={i === index}
+                aria-label={`Show testimonial ${i + 1}`}
+                onClick={() => {
+                  setDirection(i > index ? 1 : -1);
+                  setExpanded(false);
+                  setIndex(i);
+                }}
+                className={`h-1.5 rounded-full transition-all duration-300 ${
+                  i === index
+                    ? 'bg-primary-container w-8'
+                    : 'bg-outline-variant/50 hover:bg-outline w-1.5'
+                }`}
+              />
             ))}
+          </div>
+
+          <div className="flex gap-3">
+            <button
+              type="button"
+              onClick={() => go(-1)}
+              aria-label="Previous testimonial"
+              className="border-outline-variant/40 text-on-surface hover:border-primary hover:text-primary flex h-10 w-10 items-center justify-center border transition-colors"
+            >
+              ←
+            </button>
+            <button
+              type="button"
+              onClick={() => go(1)}
+              aria-label="Next testimonial"
+              className="border-outline-variant/40 text-on-surface hover:border-primary hover:text-primary flex h-10 w-10 items-center justify-center border transition-colors"
+            >
+              →
+            </button>
           </div>
         </div>
       </div>
-      
-      <style dangerouslySetInnerHTML={{__html: `
-        .scrollbar-hide::-webkit-scrollbar {
-            display: none;
-        }
-      `}} />
     </section>
   );
 }

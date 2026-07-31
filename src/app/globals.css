@@ -1,34 +1,33 @@
 /* ─────────────────────────────────────────
    app/globals.css  —  Tailwind CSS v4
    ───────────────────────────────────────── */
-/* 1. Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
-
-/* 2. Tailwind v4 entry point */
 @import 'tailwindcss';
 
 /* ─────────────────────────────────────────
-   3. Theme tokens
+   Theme tokens
+   Fonts: Newsreader (display) · Poppins (body) · DM Sans (labels) · JetBrains (mono)
+   Loaded via next/font → CSS vars on <html>
    ───────────────────────────────────────── */
 @theme {
   /* ── Colors ── */
   --color-ink: #0e0e0e;
   --color-paper: #f5f2ec;
-  --color-accent: #800020; /* burgundy */
+  --color-accent: #800020;
   --color-muted: #6b6456;
   --color-rule: #d4cfc7;
   --color-tag-bg: #e8e3da;
 
-  /* ── Fonts ── */
-  --font-serif: 'DM Serif Display', Georgia, serif;
-  --font-sans: 'Poppins, DM Sans', system-ui, sans-serif;
-  --font-mono: 'JetBrains Mono', Menlo, monospace;
+  /* ── Fonts — next/font vars on <html>; roles map here ── */
+  --font-serif: var(--font-newsreader), Georgia, serif;
+  --font-sans: var(--font-poppins), system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains), Menlo, monospace;
+  --font-headline: var(--font-newsreader), Georgia, serif;
+  --font-body: var(--font-poppins), system-ui, sans-serif;
+  --font-label: var(--font-dm-sans), system-ui, sans-serif;
 
-  /* ── Animations ── */
   --animate-fade-up: fadeUp 0.7s ease both;
   --animate-slide-right: slideRight 0.6s ease both;
 
-  /* ── Color Tokens ── */
   --color-primary: #570013;
   --color-primary-container: #800020;
   --color-primary-fixed: #ffdada;
@@ -83,12 +82,6 @@
   --color-outline: #8c7071;
   --color-outline-variant: #e0bfbf;
 
-  /* ── Typography ── */
-  --font-headline: 'Newsreader', Georgia, serif;
-  --font-body: 'Poppins', system-ui, sans-serif;
-  --font-label: 'DM Sans', system-ui, sans-serif;
-
-  /* ── Border Radius ── */
   --radius-DEFAULT: 0.125rem;
   --radius-lg: 0.25rem;
   --radius-xl: 0.5rem;
@@ -244,6 +237,52 @@
     var(--color-outline-variant),
     transparent
   );
+}
+
+/* ── Site grain / atmosphere ── */
+.site-grain {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 40;
+  opacity: 0.04;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.hero-atmosphere {
+  background:
+    radial-gradient(
+      ellipse 80% 60% at 15% 20%,
+      rgba(128, 0, 32, 0.07),
+      transparent 55%
+    ),
+    radial-gradient(
+      ellipse 70% 50% at 90% 80%,
+      rgba(51, 94, 159, 0.06),
+      transparent 50%
+    ),
+    linear-gradient(180deg, #f3ebe0 0%, #f7f2ea 45%, #fcf9f3 100%);
+}
+
+.editorial-rule {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    var(--color-primary-container),
+    transparent 80%
+  );
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 /* ─────────────────────────────────────────

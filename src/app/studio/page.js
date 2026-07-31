@@ -3,20 +3,21 @@ import Footer from '@/components/footer';
 import StudioContent from './studio-content';
 
 export const metadata = {
-  title: 'Studio & Concept Work — Vimal Desai',
+  title: 'Studio',
   description:
-    "A curated gallery of Vimal Desai's design engineering concepts, editorial interfaces, and high-performance UI architectures.",
+    'Search the web presence of Vimal Desai — profiles, writing, and public work in one place.',
 };
 
 export default function StudioPage() {
   return (
     <>
-      <Navbar brandName="Vimal Desai Studio" ctaLabel="Contact" ctaHref="/contact" />
+      <Navbar ctaLabel="Contact" ctaHref="/contact" />
       <StudioContent />
       <Footer
         brandName="Vimal Desai"
-        tagline="Where high-end visual design meets uncompromising technical performance."
+        tagline="Full-stack engineer. Ten years building products that ship and stay up."
       />
+      <div className="site-grain" aria-hidden="true" />
     </>
   );
 }

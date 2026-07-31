@@ -1,27 +1,48 @@
 import ScrollProgress from '@/components/ui/scroll-progress';
 import './globals.css';
-import { DM_Sans, DM_Serif_Display, JetBrains_Mono } from 'next/font/google';
+import {
+  DM_Sans,
+  JetBrains_Mono,
+  Newsreader,
+  Poppins,
+} from 'next/font/google';
+
+const newsreader = Newsreader({
+  subsets: ['latin'],
+  style: ['normal', 'italic'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-newsreader',
+  display: 'swap',
+});
+
+const poppins = Poppins({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700'],
+  variable: '--font-poppins',
+  display: 'swap',
+});
 
 const dmSans = DM_Sans({
   subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700'],
   variable: '--font-dm-sans',
-});
-
-const dmSerifDisplay = DM_Serif_Display({
-  subsets: ['latin'],
-  weight: '400',
-  variable: '--font-dm-serif',
+  display: 'swap',
 });
 
 const jetbrainsMono = JetBrains_Mono({
   subsets: ['latin'],
-  variable: '--font-jetbrains-mono',
+  weight: ['400', '500'],
+  variable: '--font-jetbrains',
+  display: 'swap',
 });
 
 export const metadata = {
-  title: 'Vimal Desai — Senior Full Stack Engineer & Architect',
+  title: {
+    default: 'Vimal Desai — Senior Full Stack Engineer',
+    template: '%s — Vimal Desai',
+  },
   description:
-    'Portfolio of Vimal Desai, a Senior Full Stack Engineer with 9+ years of experience building scalable, high-performance web applications using React, Node.js, and AWS.',
+    'Portfolio of Vimal Desai, a Senior Full Stack Engineer with 10+ years of experience building scalable, high-performance web applications using React, Node.js, and AWS.',
   icons: {
     icon: '/favicon.svg',
   },
@@ -31,27 +52,22 @@ export default function RootLayout({ children }) {
   return (
     <html
       lang="en"
-      className={`${dmSans.variable} ${dmSerifDisplay.variable} ${jetbrainsMono.variable}`}
+      className={`${newsreader.variable} ${poppins.variable} ${dmSans.variable} ${jetbrainsMono.variable}`}
     >
       <head>
-        {/* Google Fonts */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
           rel="preconnect"
           href="https://fonts.gstatic.com"
           crossOrigin="anonymous"
         />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Spline+Sans+Mono:ital,wght@0,300..700;1,300..700&display=swap"
-          rel="stylesheet"
-        />
-        {/* Material Symbols */}
+        {/* Icons only — text fonts via next/font */}
         <link
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
           rel="stylesheet"
         />
       </head>
-      <body className="antialiased">
+      <body className="font-body antialiased">
         <ScrollProgress />
         {children}
       </body>

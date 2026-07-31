@@ -1,4 +1,4 @@
-"use client";
+'use client';
 import React from 'react';
 import { useProjects } from './context';
 
@@ -6,16 +6,17 @@ const WorkNavSearch = () => {
   const { searchQuery, setSearchQuery } = useProjects();
 
   return (
-    <div className="bg-surface-container-low group ring-primary/10 hidden items-center gap-2 rounded-lg px-4 py-2 transition-all focus-within:ring-2 lg:flex">
-      <span className="material-symbols-outlined text-on-surface-variant text-sm">
-        search
+    <div className="border-outline-variant/30 focus-within:border-primary hidden items-center gap-2 border-b px-1 py-1.5 transition-colors lg:flex">
+      <span className="font-label text-outline text-[10px] tracking-wider uppercase">
+        Search
       </span>
       <input
-        className="w-48 border-none bg-transparent text-sm placeholder:text-[#6b6456] focus:ring-0 focus-visible:ring-0! focus-visible:shadow-none! focus-visible:outline-none! shadow-none!"
-        placeholder="Search archive..."
-        type="text"
+        className="text-on-surface placeholder:text-outline w-40 border-none bg-transparent text-sm outline-none xl:w-52"
+        placeholder="Archive…"
+        type="search"
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
+        aria-label="Search projects"
       />
     </div>
   );

@@ -5,7 +5,7 @@ import Button from '@/components/ui/Button';
 import Link from 'next/link';
 
 export const metadata = {
-  title: 'Engineering Process & Methodology — Vimal Desai',
+  title: 'Process',
   description:
     "Learn about Vimal Desai's rigorous software engineering process, from architectural discovery and system design to zero-downtime deployment.",
 };
@@ -165,7 +165,6 @@ export default function ProcessPage() {
   return (
     <>
       <Navbar
-        brandName="Vimal Desai"
         ctaLabel="Work Together"
         ctaHref="/contact"
       />
@@ -197,7 +196,7 @@ export default function ProcessPage() {
               style={{ color: 'var(--color-on-surface-variant)' }}
             >
               A repeatable, rigorous framework for building systems that scale —
-              refined across 9+ years and 50+ production deployments.
+              refined across 10+ years and 50+ production deployments.
             </p>
           </div>
         </header>
@@ -511,7 +510,6 @@ export default function ProcessPage() {
       </main>
 
       <Footer
-        brandName="Vimal Desai"
         tagline="Executing scalable engineering through a rigorous, repeatable process."
       />
       <Watermark text="process" />
