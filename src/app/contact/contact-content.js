@@ -38,8 +38,8 @@ export default function ContactContent() {
       />
 
       <main>
-        <header className="hero-atmosphere px-8 pt-40 pb-16 md:pt-48 md:pb-20">
-          <div className="mx-auto max-w-7xl">
+        <header className="hero-atmosphere w-full pt-40 pb-16 md:pt-48 md:pb-20">
+          <div className="mx-auto max-w-7xl px-8">
             <Reveal>
               <p className="font-label text-primary-container mb-6 text-[0.65rem] tracking-[0.22em] uppercase">
                 Contact

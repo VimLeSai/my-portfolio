@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
-import Reveal, { RevealItem, RevealStagger } from '@/components/ui/reveal';
+import Reveal from '@/components/ui/reveal';
 import { profile } from '@/lib/profile';
 import { highlights, jobs, skillGroups } from '@/lib/resume-data';
 
@@ -27,6 +27,8 @@ const filterTabs = [
   { label: 'Social', match: ['instagram', 'facebook', 'twitter'] },
   { label: 'Site', match: ['vimlesai.io'] },
 ];
+
+const quickQueries = ['VimLeSai', 'Vimal Desai', 'UpKeep', 'NestJS', 'StringERP'];
 
 const knowledgePanelInfo = [
   { label: 'Based in', value: profile.location.display },
@@ -82,52 +84,75 @@ export default function StudioContent() {
   });
 
   return (
-    <main className="relative min-h-screen">
-      <header className="hero-atmosphere px-5 pt-28 pb-10 sm:px-8 lg:px-16 lg:pt-32">
-        <div className="mx-auto max-w-7xl">
+    <main className="bg-surface relative min-h-screen">
+      <header className="hero-atmosphere w-full border-b border-[var(--color-outline-variant)]/20">
+        <div className="mx-auto max-w-7xl px-5 pt-28 pb-12 sm:px-8 lg:px-16 lg:pt-32 lg:pb-14">
           <Reveal>
             <p className="font-label text-primary-container mb-4 text-[0.65rem] tracking-[0.22em] uppercase">
               Studio
             </p>
-            <h1
-              className="font-headline mb-4 leading-[0.95] tracking-tight italic"
-              style={{ fontSize: 'clamp(2.5rem, 6vw, 4.5rem)' }}
-            >
-              Find me on the
-              <br />
-              <span className="text-primary-container not-italic">open web.</span>
-            </h1>
-            <p className="text-on-surface-variant max-w-xl text-base leading-relaxed">
-              A live-ish index of profiles, repos, and mentions — not a mood
-              board. Search, filter, click out.
-            </p>
-          </Reveal>
-
-          <Reveal delay={0.1} className="mt-10 max-w-2xl">
-            <form onSubmit={handleSearch}>
-              <label className="font-label text-outline mb-2 block text-[10px] tracking-[0.16em] uppercase">
-                Search
-              </label>
-              <div className="border-outline-variant/40 focus-within:border-primary flex items-center gap-3 border-b py-3 transition-colors">
-                <input
-                  type="search"
-                  value={activeQuery}
-                  onChange={(e) => setActiveQuery(e.target.value)}
-                  className="font-body text-on-surface flex-1 bg-transparent text-lg outline-none"
-                  placeholder="VimLeSai, UpKeep, NestJS…"
-                  aria-label="Search the web for VimLeSai"
-                />
-                <button
-                  type="submit"
-                  className="font-label text-primary text-xs tracking-[0.14em] uppercase"
+            <div className="grid gap-10 lg:grid-cols-12 lg:items-end lg:gap-12">
+              <div className="lg:col-span-7">
+                <h1
+                  className="font-headline mb-4 leading-[0.95] tracking-tight italic"
+                  style={{ fontSize: 'clamp(2.5rem, 6vw, 4.5rem)' }}
                 >
-                  Go →
-                </button>
+                  Find me on the
+                  <br />
+                  <span className="text-primary-container not-italic">
+                    open web.
+                  </span>
+                </h1>
+                <p className="text-on-surface-variant max-w-xl text-base leading-relaxed">
+                  Live-ish index of profiles, repos, and mentions. Search,
+                  filter, click out — not a mood board.
+                </p>
               </div>
-            </form>
+
+              <div className="lg:col-span-5">
+                <form onSubmit={handleSearch}>
+                  <label className="font-label text-outline mb-2 block text-[10px] tracking-[0.16em] uppercase">
+                    Search
+                  </label>
+                  <div className="border-outline-variant/50 focus-within:border-primary flex items-center gap-3 border-b py-3 transition-colors">
+                    <input
+                      type="search"
+                      value={activeQuery}
+                      onChange={(e) => setActiveQuery(e.target.value)}
+                      className="font-body text-on-surface flex-1 bg-transparent text-lg outline-none"
+                      placeholder="VimLeSai, UpKeep, NestJS…"
+                      aria-label="Search the web for VimLeSai"
+                    />
+                    <button
+                      type="submit"
+                      className="font-label bg-primary-container text-on-primary shrink-0 px-4 py-2 text-[10px] tracking-[0.14em] uppercase"
+                    >
+                      Search
+                    </button>
+                  </div>
+                </form>
+
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {quickQueries.map((q) => (
+                    <button
+                      key={q}
+                      type="button"
+                      onClick={() => setActiveQuery(q)}
+                      className={`font-label px-2.5 py-1 text-[10px] tracking-[0.12em] uppercase transition-colors ${
+                        activeQuery === q
+                          ? 'text-primary-container'
+                          : 'text-outline hover:text-on-surface'
+                      }`}
+                    >
+                      {q}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
           </Reveal>
 
-          <Reveal delay={0.15} className="mt-8">
+          <Reveal delay={0.1} className="mt-10">
             <div className="-mx-1 flex gap-1 overflow-x-auto px-1 pb-1">
               {filterTabs.map((tab) => (
                 <button
@@ -148,24 +173,31 @@ export default function StudioContent() {
         </div>
       </header>
 
-      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 px-5 py-12 sm:px-8 lg:grid-cols-12 lg:gap-16 lg:px-16 lg:py-16">
-        <div className="space-y-8 lg:col-span-7 xl:col-span-8">
-          <p className="font-label text-outline text-xs tracking-wide">
-            {loading
-              ? 'Searching…'
-              : `${filteredResults.length} result${filteredResults.length === 1 ? '' : 's'}${
-                  results?.searchInformation?.timeTaken
-                    ? ` · ${results.searchInformation.timeTaken}`
-                    : ''
-                }`}
-          </p>
+      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 px-5 py-12 sm:px-8 lg:grid-cols-12 lg:gap-14 lg:px-16 lg:py-16">
+        <div className="min-w-0 space-y-2 lg:col-span-7 xl:col-span-8">
+          <div className="mb-6 flex items-end justify-between gap-4">
+            <p className="font-label text-outline text-xs tracking-wide">
+              {loading
+                ? 'Searching…'
+                : `${filteredResults.length} result${
+                    filteredResults.length === 1 ? '' : 's'
+                  }${
+                    results?.searchInformation?.timeTaken
+                      ? ` · ${results.searchInformation.timeTaken}`
+                      : ''
+                  }`}
+            </p>
+            <p className="font-label text-outline hidden text-[10px] tracking-[0.14em] uppercase sm:block">
+              Query · {activeQuery}
+            </p>
+          </div>
 
           {loading && (
-            <div className="space-y-6">
+            <div className="space-y-0">
               {[1, 2, 3, 4].map((i) => (
                 <div
                   key={i}
-                  className="border-outline-variant/20 animate-pulse space-y-3 border-t pt-6"
+                  className="border-outline-variant/20 animate-pulse space-y-3 border-t py-7"
                 >
                   <div className="bg-surface-container-highest h-3 w-40" />
                   <div className="bg-surface-container-highest h-5 w-3/4" />
@@ -175,42 +207,52 @@ export default function StudioContent() {
             </div>
           )}
 
-          {!loading && (
-            <RevealStagger className="space-y-0" stagger={0.06}>
-              {filteredResults.map((result, idx) => (
-                <RevealItem
-                  key={result.link || idx}
-                  className="border-outline-variant/20 border-t py-7"
-                >
-                  <p className="font-label text-outline mb-1 text-[10px] tracking-[0.12em] uppercase">
-                    {result.displayedLink || displayedLinkFor(result.link)}
-                  </p>
-                  <a
-                    href={result.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="font-headline text-primary-container hover:text-primary mb-2 block text-xl transition-colors hover:underline"
-                  >
-                    {result.title}
-                  </a>
-                  {result.snippet && (
-                    <p className="text-on-surface-variant text-sm leading-relaxed">
-                      {result.snippet}
+          {!loading &&
+            filteredResults.map((result, idx) => (
+              <article
+                key={result.link || idx}
+                className="border-outline-variant/25 group border-t py-7 transition-colors hover:border-[var(--color-primary-container)]/40"
+              >
+                <div className="flex gap-4 sm:gap-6">
+                  <span className="font-label text-outline/50 w-6 shrink-0 pt-1 text-[10px] tracking-wider">
+                    {String(idx + 1).padStart(2, '0')}
+                  </span>
+                  <div className="min-w-0 flex-1">
+                    <p className="font-label text-outline mb-1 text-[10px] tracking-[0.12em] uppercase">
+                      {result.displayedLink || displayedLinkFor(result.link)}
                     </p>
-                  )}
-                </RevealItem>
-              ))}
-            </RevealStagger>
-          )}
+                    <a
+                      href={result.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-headline text-primary-container group-hover:text-primary mb-2 block text-xl transition-colors hover:underline"
+                    >
+                      {result.title}
+                    </a>
+                    {result.snippet && (
+                      <p className="text-on-surface-variant text-sm leading-relaxed">
+                        {result.snippet}
+                      </p>
+                    )}
+                  </div>
+                  <span
+                    aria-hidden
+                    className="text-outline group-hover:text-primary hidden shrink-0 pt-1 transition-colors sm:block"
+                  >
+                    ↗
+                  </span>
+                </div>
+              </article>
+            ))}
 
           {!loading && filteredResults.length === 0 && (
-            <p className="text-on-surface-variant py-12 text-center italic">
+            <p className="text-on-surface-variant border-outline-variant/20 border-t py-16 text-center italic">
               Nothing in this filter. Try All.
             </p>
           )}
 
           {!loading && results?.relatedSearches?.length > 0 && (
-            <Reveal className="border-outline-variant/20 border-t pt-10">
+            <div className="border-outline-variant/20 mt-4 border-t pt-10">
               <p className="font-label text-outline mb-4 text-[10px] tracking-[0.16em] uppercase">
                 Related
               </p>
@@ -219,20 +261,20 @@ export default function StudioContent() {
                   <button
                     key={s}
                     type="button"
-                    className="font-label text-on-surface-variant hover:text-primary border-outline-variant/30 border px-3 py-2 text-xs tracking-wide transition-colors"
+                    className="font-label text-on-surface-variant hover:border-primary hover:text-primary border-outline-variant/30 border px-3 py-2 text-xs tracking-wide transition-colors"
                     onClick={() => setActiveQuery(s)}
                   >
                     {s}
                   </button>
                 ))}
               </div>
-            </Reveal>
+            </div>
           )}
         </div>
 
-        <aside className="space-y-10 lg:col-span-5 xl:col-span-4">
-          <Reveal>
-            <div className="relative aspect-[4/5] max-h-[360px] overflow-hidden bg-[#12110f]">
+        <aside className="lg:col-span-5 xl:col-span-4">
+          <div className="space-y-8 lg:sticky lg:top-28">
+            <div className="relative aspect-[4/5] max-h-[320px] overflow-hidden bg-[#12110f]">
               <img
                 src="/assets/hero-image.png"
                 alt={profile.name.full}
@@ -241,118 +283,118 @@ export default function StudioContent() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#12110f] via-transparent to-transparent" />
               <div className="absolute right-0 bottom-0 left-0 p-5 text-[#f5f0e8]">
-                <p className="font-headline text-xl italic">{profile.name.full}</p>
+                <p className="font-headline text-xl italic">
+                  {profile.name.full}
+                </p>
                 <p className="font-label mt-1 text-[10px] tracking-[0.16em] text-[#c4a8a8] uppercase">
                   {profile.title}
                 </p>
               </div>
             </div>
-          </Reveal>
 
-          <Reveal delay={0.08}>
             <p className="text-on-surface-variant text-sm leading-relaxed">
               {profile.bio.short}
             </p>
-          </Reveal>
 
-          <RevealStagger className="space-y-0" stagger={0.05}>
-            {knowledgePanelInfo.map((row) => (
-              <RevealItem
-                key={row.label}
-                className="border-outline-variant/20 flex justify-between gap-4 border-t py-4"
-              >
-                <span className="font-label text-outline text-[10px] tracking-[0.14em] uppercase">
-                  {row.label}
-                </span>
-                <span className="font-body text-on-surface text-right text-sm">
-                  {row.value}
-                </span>
-              </RevealItem>
-            ))}
-          </RevealStagger>
-
-          <Reveal>
-            <p className="font-label text-outline mb-3 text-[10px] tracking-[0.16em] uppercase">
-              Profiles
-            </p>
-            <ul>
-              {profile.socials
-                .filter((s) => s.enabled && s.href)
-                .map((social) => (
-                  <li
-                    key={social.id}
-                    className="border-outline-variant/20 border-t"
-                  >
-                    <a
-                      href={social.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-on-surface hover:text-primary flex items-center justify-between py-3 text-sm transition-colors"
-                    >
-                      {social.label}
-                      <span aria-hidden>→</span>
-                    </a>
-                  </li>
-                ))}
-            </ul>
-          </Reveal>
-
-          <Reveal>
-            <p className="font-label text-outline mb-3 text-[10px] tracking-[0.16em] uppercase">
-              Stack
-            </p>
-            <div className="flex flex-wrap gap-x-4 gap-y-2">
-              {relatedTechStack.map((tech) => (
-                <span
-                  key={tech}
-                  className="font-label text-on-surface-variant text-[10px] tracking-[0.12em] uppercase"
+            <div className="space-y-0">
+              {knowledgePanelInfo.map((row) => (
+                <div
+                  key={row.label}
+                  className="border-outline-variant/20 flex justify-between gap-4 border-t py-3.5"
                 >
-                  {tech}
-                </span>
-              ))}
-            </div>
-          </Reveal>
-
-          <Reveal className="flex flex-wrap gap-4 pt-2">
-            <Link
-              href="/contact"
-              className="font-label bg-primary-container text-on-primary px-5 py-3 text-xs tracking-[0.14em] uppercase"
-            >
-              Contact
-            </Link>
-            <Link
-              href="/work"
-              className="font-label text-on-surface border-outline-variant/40 border px-5 py-3 text-xs tracking-[0.14em] uppercase"
-            >
-              Work
-            </Link>
-          </Reveal>
-
-          <Reveal className="border-outline-variant/20 border-t pt-8">
-            <div className="mb-3 flex items-center gap-2">
-              <span className="inline-block h-1.5 w-1.5 rounded-full bg-emerald-500" />
-              <p className="font-label text-[10px] tracking-[0.16em] uppercase">
-                Status
-              </p>
-            </div>
-            <p className="font-headline text-primary-container text-lg italic">
-              {profile.meta.availableForHire
-                ? 'Open for the right role'
-                : 'Not looking right now'}
-            </p>
-            <div className="mt-6 grid grid-cols-2 gap-4">
-              {highlights.slice(0, 4).map((h) => (
-                <div key={h.label}>
-                  <p className="font-headline text-primary-container text-2xl italic">
-                    {h.value}
-                  </p>
-                  <p className="font-label text-outline text-[10px] tracking-wide uppercase">
-                    {h.label}
-                  </p>
+                  <span className="font-label text-outline text-[10px] tracking-[0.14em] uppercase">
+                    {row.label}
+                  </span>
+                  <span className="font-body text-on-surface text-right text-sm">
+                    {row.value}
+                  </span>
                 </div>
               ))}
             </div>
-          </Reveal>
+
+            <div>
+              <p className="font-label text-outline mb-3 text-[10px] tracking-[0.16em] uppercase">
+                Profiles
+              </p>
+              <ul>
+                {profile.socials
+                  .filter((s) => s.enabled && s.href)
+                  .map((social) => (
+                    <li
+                      key={social.id}
+                      className="border-outline-variant/20 border-t"
+                    >
+                      <a
+                        href={social.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-on-surface hover:text-primary flex items-center justify-between py-3 text-sm transition-colors"
+                      >
+                        {social.label}
+                        <span aria-hidden>→</span>
+                      </a>
+                    </li>
+                  ))}
+              </ul>
+            </div>
+
+            <div>
+              <p className="font-label text-outline mb-3 text-[10px] tracking-[0.16em] uppercase">
+                Stack
+              </p>
+              <div className="flex flex-wrap gap-x-4 gap-y-2">
+                {relatedTechStack.map((tech) => (
+                  <span
+                    key={tech}
+                    className="font-label text-on-surface-variant text-[10px] tracking-[0.12em] uppercase"
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            <div className="flex flex-wrap gap-3">
+              <Link
+                href="/contact"
+                className="font-label bg-primary-container text-on-primary px-5 py-3 text-xs tracking-[0.14em] uppercase"
+              >
+                Contact
+              </Link>
+              <Link
+                href="/work"
+                className="font-label text-on-surface border-outline-variant/40 border px-5 py-3 text-xs tracking-[0.14em] uppercase"
+              >
+                Work
+              </Link>
+            </div>
+
+            <div className="border-outline-variant/20 border-t pt-6">
+              <div className="mb-2 flex items-center gap-2">
+                <span className="inline-block h-1.5 w-1.5 rounded-full bg-emerald-500" />
+                <p className="font-label text-[10px] tracking-[0.16em] uppercase">
+                  Status
+                </p>
+              </div>
+              <p className="font-headline text-primary-container text-lg italic">
+                {profile.meta.availableForHire
+                  ? 'Open for the right role'
+                  : 'Not looking right now'}
+              </p>
+              <div className="mt-5 grid grid-cols-2 gap-4">
+                {highlights.slice(0, 4).map((h) => (
+                  <div key={h.label}>
+                    <p className="font-headline text-primary-container text-2xl italic">
+                      {h.value}
+                    </p>
+                    <p className="font-label text-outline text-[10px] tracking-wide uppercase">
+                      {h.label}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
         </aside>
       </div>
     </main>

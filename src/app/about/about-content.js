@@ -50,44 +50,46 @@ export default function AboutContent() {
       />
       <Watermark text="VimLeSai" />
 
-      <main>
-        <section className="hero-atmosphere mx-auto max-w-6xl px-8 pt-40 pb-24 md:pt-48 md:pb-32">
-          <Reveal>
-            <p className="font-label text-primary-container mb-6 text-[0.65rem] tracking-[0.22em] uppercase">
-              About
-            </p>
-            <h1
-              className="font-headline mb-10 max-w-4xl leading-[0.95] tracking-tight"
-              style={{ fontSize: 'clamp(2.75rem, 7vw, 5.5rem)' }}
-            >
-              Engineer who started in UI
-              <br />
-              <span className="text-primary-container italic">
-                and kept pulling the rest.
-              </span>
-            </h1>
-          </Reveal>
-
-          <RevealStagger
-            className="grid max-w-4xl grid-cols-1 gap-8 md:grid-cols-2 md:gap-12"
-            stagger={0.1}
-          >
-            {bioParts.slice(0, 2).map((para) => (
-              <RevealItem key={para.slice(0, 24)}>
-                <p className="text-on-surface-variant text-lg leading-relaxed">
-                  {para}
-                </p>
-              </RevealItem>
-            ))}
-          </RevealStagger>
-
-          {bioParts[2] && (
-            <Reveal delay={0.15} className="mt-8 max-w-4xl">
-              <p className="text-on-surface-variant text-lg leading-relaxed">
-                {bioParts.slice(2).join(' ')}
+      <main className="bg-surface">
+        <section className="hero-atmosphere w-full pt-40 pb-24 md:pt-48 md:pb-32">
+          <div className="mx-auto max-w-6xl px-8">
+            <Reveal>
+              <p className="font-label text-primary-container mb-6 text-[0.65rem] tracking-[0.22em] uppercase">
+                About
               </p>
+              <h1
+                className="font-headline mb-10 max-w-4xl leading-[0.95] tracking-tight"
+                style={{ fontSize: 'clamp(2.75rem, 7vw, 5.5rem)' }}
+              >
+                Engineer who started in UI
+                <br />
+                <span className="text-primary-container italic">
+                  and kept pulling the rest.
+                </span>
+              </h1>
             </Reveal>
-          )}
+
+            <RevealStagger
+              className="grid max-w-4xl grid-cols-1 gap-8 md:grid-cols-2 md:gap-12"
+              stagger={0.1}
+            >
+              {bioParts.slice(0, 2).map((para) => (
+                <RevealItem key={para.slice(0, 24)}>
+                  <p className="text-on-surface-variant text-lg leading-relaxed">
+                    {para}
+                  </p>
+                </RevealItem>
+              ))}
+            </RevealStagger>
+
+            {bioParts[2] && (
+              <Reveal delay={0.15} className="mt-8 max-w-4xl">
+                <p className="text-on-surface-variant text-lg leading-relaxed">
+                  {bioParts.slice(2).join(' ')}
+                </p>
+              </Reveal>
+            )}
+          </div>
         </section>
 
         <section className="bg-surface-container-low border-outline-variant/15 border-y py-24 md:py-32">
