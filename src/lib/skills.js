@@ -170,6 +170,22 @@ export const skills = {
     group: 'backend',
     yearsOfExperience: 3,
   },
+  express: {
+    label: 'Express',
+    description:
+      'Minimal Node.js web framework for REST APIs and service routes.',
+    href: 'https://expressjs.com/',
+    group: 'backend',
+    yearsOfExperience: 6,
+  },
+  trpc: {
+    label: 'tRPC',
+    description:
+      'End-to-end typesafe APIs between TypeScript clients and servers.',
+    href: 'https://trpc.io/',
+    group: 'backend',
+    yearsOfExperience: 2,
+  },
   laravel: {
     label: 'Laravel',
     description:
@@ -228,7 +244,7 @@ export const skills = {
       'Reliable end-to-end testing for modern web apps across all major browsers.',
     href: 'https://playwright.dev/',
     group: 'testing',
-    yearsOfExperience: 2,
+    yearsOfExperience: 3,
   },
 
   // ─── Infrastructure & DevOps ──────────────────────────────────────────────────
@@ -321,13 +337,21 @@ export const skills = {
     group: 'ai',
     yearsOfExperience: 2,
   },
+  langgraph: {
+    label: 'LangGraph',
+    description:
+      'Graph-based orchestration for multi-step LLM agents and eval loops.',
+    href: 'https://www.langchain.com/langgraph',
+    group: 'ai',
+    yearsOfExperience: 1,
+  },
   cursorAi: {
     label: 'Cursor AI',
     description:
-      'AI-powered code editor that accelerates development with context-aware suggestions.',
+      'AI-powered code editor used for hands-on coding and agent-assisted delivery loops.',
     href: 'https://cursor.sh/',
     group: 'ai',
-    yearsOfExperience: 1,
+    yearsOfExperience: 2,
   },
 
   // ─── Tools & Build ───────────────────────────────────────────────────────────

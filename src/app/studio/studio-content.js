@@ -28,7 +28,7 @@ const filterTabs = [
   { label: 'Site', match: ['vimlesai.io'] },
 ];
 
-const quickQueries = ['VimLeSai', 'Vimal Desai', 'UpKeep', 'NestJS', 'StringERP'];
+const quickQueries = ['VimLeSai', 'Vimal Desai', 'UpKeep', 'Playwright', 'StringERP'];
 
 const knowledgePanelInfo = [
   { label: 'Based in', value: profile.location.display },
@@ -120,7 +120,7 @@ export default function StudioContent() {
                       value={activeQuery}
                       onChange={(e) => setActiveQuery(e.target.value)}
                       className="font-body text-on-surface flex-1 bg-transparent text-lg outline-none"
-                      placeholder="VimLeSai, UpKeep, NestJS…"
+                      placeholder="VimLeSai, UpKeep, Playwright…"
                       aria-label="Search the web for VimLeSai"
                     />
                     <button

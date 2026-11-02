@@ -2,8 +2,10 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { motion, useReducedMotion } from 'motion/react';
 import { sectionFromPath, siteName } from '@/lib/page-titles';
+import useScrollDirection from '@/hooks/use-scroll-direction';
 
 const navLinks = [
   { label: 'Work', href: '/work' },
@@ -21,19 +23,46 @@ export default function Navbar({
 }) {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [atTop, setAtTop] = useState(true);
+  const scrollDir = useScrollDirection({
+    initialDirection: 'up',
+    thresholdPixels: 10,
+  });
+  const reduce = useReducedMotion();
   const brand = sectionFromPath(pathname);
   const showSection = brand.section;
   const primaryLabel = brandName || brand.label;
   const isHome = pathname === '/';
+  const hideNav = !reduce && !atTop && !mobileOpen && scrollDir === 'down';
+
+  useEffect(() => {
+    const onScroll = () => setAtTop(window.scrollY < 16);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  useEffect(() => {
+    document.body.style.overflow = mobileOpen ? 'hidden' : '';
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [mobileOpen]);
+
+  useEffect(() => {
+    setMobileOpen(false);
+  }, [pathname]);
 
   return (
     <>
       <header
-        className="fixed top-0 z-50 w-full border-b border-stone-200/60 bg-[#F5F0E8]/85 px-6 backdrop-blur-md"
+        className={`fixed top-0 z-50 w-full border-b border-stone-200/60 px-6 backdrop-blur-md transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+          hideNav ? '-translate-y-full' : 'translate-y-0'
+        }`}
         style={{
           background: 'rgba(252,249,243,0.7)',
           backdropFilter: 'blur(15px)',
-          boxShadow: '0 15px 80px rgba(88,65,65,0.08)',
+          boxShadow: atTop ? 'none' : '0 15px 80px rgba(88,65,65,0.08)',
         }}
       >
         <nav className="mx-auto flex w-full max-w-screen-2xl items-center justify-between px-8 py-5 md:py-6">
@@ -84,13 +113,25 @@ export default function Navbar({
                   key={link.href}
                   href={link.href}
                   onClick={() => setMobileOpen(false)}
-                  className={`font-body text-base tracking-wide transition-colors ${
+                  aria-current={isActive ? 'page' : undefined}
+                  className={`font-body relative py-1 text-base tracking-wide transition-colors ${
                     isActive
                       ? 'text-[var(--color-accent)]'
-                      : 'text-[var(--color-ink)]'
+                      : 'text-[var(--color-ink)] hover:text-[var(--color-accent)]'
                   }`}
                 >
                   {link.label}
+                  {isActive && (
+                    <motion.span
+                      layoutId={reduce ? undefined : 'nav-underline'}
+                      className="absolute inset-x-0 -bottom-0.5 h-px bg-[var(--color-accent)]"
+                      transition={{
+                        type: 'spring',
+                        stiffness: 380,
+                        damping: 32,
+                      }}
+                    />
+                  )}
                 </Link>
               );
             })}
@@ -100,7 +141,7 @@ export default function Navbar({
             {rightItems}
             <Link
               href={ctaHref}
-              className="font-body hidden px-6 py-2 text-sm tracking-wide shadow-sm transition-all hover:opacity-90 md:block"
+              className="font-body hidden px-6 py-2 text-sm tracking-wide shadow-sm transition-all duration-300 hover:-translate-y-px hover:opacity-90 md:block"
               style={{
                 backgroundColor: 'var(--color-primary-container)',
                 color: 'var(--color-on-primary)',
@@ -162,6 +203,7 @@ export default function Navbar({
                         ? 'text-[var(--color-accent)]'
                         : 'text-[var(--color-ink)]'
                     }`}
+                    aria-current={isActive ? 'page' : undefined}
                   >
                     {link.label}
                   </Link>

@@ -7,14 +7,14 @@ import Link from 'next/link';
 export const metadata = {
   title: 'Impact',
   description:
-    'View the measurable engineering outcomes driven by Vimal Desai, including latency reduction, infrastructure cost savings, and 99.98% data integrity SLAs.',
+    'Numbers and decisions from Vimal Desai’s work — factory throughput at UpKeep, module time at Knovator, and the trade-offs behind them.',
 };
 
 const impactStats = [
   {
-    value: '2×',
-    label: 'Sprint Velocity Improvement',
-    context: 'UpKeep Technologies — AI-Augmented Workflows',
+    value: '5–8',
+    label: 'PRs per Day',
+    context: 'UpKeep — factory weeks, still reviewed',
     icon: 'rocket_launch',
     color: 'var(--color-primary-container)',
     onColor: 'var(--color-on-primary)',
@@ -46,6 +46,24 @@ const impactStats = [
 ];
 
 const architecturalDecisions = [
+  {
+    id: 'adr-005',
+    title: 'Ticket-to-PR Factory, Review Still Required',
+    context:
+      'Ticket volume on a multi-repo CMMS (web, APIs, event consumers) outpaced one-PR-at-a-time delivery. Drafting faster without review and tests would just move the bottleneck to QA and merge.',
+    decision:
+      'Run an internal factory that takes a ticket through intake, implementation, review, and Playwright. Agents draft; a human still owns the merge. Volume is a side effect of the loop, not the goal.',
+    consequences: [
+      'Typically 5–8 PRs a day on factory weeks',
+      'Review and Playwright stay in the same loop as the draft',
+      'Same pattern used for CMMS features and in-product AI work',
+      'Throughput without treating merge as a dump onto main',
+    ],
+    status: 'Accepted',
+    date: 'October 2026',
+    project: 'UpKeep Technologies',
+    href: '/work/upkeep-platform',
+  },
   {
     id: 'adr-001',
     title: 'Modular Frontend Architecture for Rapid Module Delivery',
@@ -125,15 +143,15 @@ const systemDesignDocs = [
     title: 'Enterprise Asset Management Platform Architecture',
     category: 'System Design',
     description:
-      'Full-stack architecture for a high-traffic CMMS platform serving thousands of businesses — React, NestJS, PostgreSQL, AWS.',
-    tags: ['React', 'NestJS', 'PostgreSQL', 'AWS'],
+      'Full-stack architecture for a high-traffic CMMS platform — React, Express/TypeScript APIs, Kafka events, PostgreSQL and MongoDB.',
+    tags: ['React', 'Express', 'Kafka', 'PostgreSQL'],
     icon: 'engineering',
   },
   {
     title: 'Zero-Downtime Release Engineering Playbook',
     category: 'Operations',
     description:
-      'Platform-wide release strategy enabling smooth, zero-downtime deployments across frontend, backend, and consumer services.',
+      'Platform-wide release strategy enabling smooth, zero-downtime deployments across frontend, backend, and shared services.',
     tags: ['CI/CD', 'Docker', 'AWS', 'GitHub Actions'],
     icon: 'swap_horiz',
   },
@@ -170,25 +188,24 @@ export default function ImpactPage() {
             className="font-label mb-4 text-xs font-medium tracking-[0.2em] uppercase"
             style={{ color: 'var(--color-on-surface-variant)' }}
           >
-            Vimal Desai — Architecture of Scale
+            Numbers, not slogans
           </p>
           <h1
             className="font-headline text-7xl leading-none tracking-tighter italic md:text-9xl"
             style={{ color: 'var(--color-on-surface)' }}
           >
-            Architectural
+            What
             <br />
             <span style={{ color: 'var(--color-primary-container)' }}>
-              Impact.
+              changed.
             </span>
           </h1>
           <p
             className="font-body mt-8 max-w-2xl text-xl leading-relaxed"
             style={{ color: 'var(--color-on-surface-variant)' }}
           >
-            Engineering is only as valuable as its measurable outcome. Every
-            decision documented, every trade-off justified, every improvement
-            quantified.
+            A few numbers I can stand behind, and the decisions behind them.
+            Not every ticket has a metric. These ones did.
           </p>
         </header>
 
@@ -231,21 +248,20 @@ export default function ImpactPage() {
                 className="font-label mb-2 text-xs font-medium tracking-[0.2em] uppercase"
                 style={{ color: 'var(--color-on-surface-variant)' }}
               >
-                Decision Log
+                Decisions
               </p>
               <h2
                 className="font-headline text-5xl"
                 style={{ color: 'var(--color-on-surface)' }}
               >
-                Architecture Decision Records
+                Why we picked that
               </h2>
             </div>
             <p
               className="font-body hidden max-w-xs text-right text-sm md:block"
               style={{ color: 'var(--color-on-surface-variant)' }}
             >
-              Every significant decision documented with context, rationale, and
-              consequences.
+              Context, what we chose, and what happened after.
             </p>
           </div>
 
@@ -391,13 +407,13 @@ export default function ImpactPage() {
             className="font-label mb-3 text-xs font-medium tracking-[0.2em] uppercase"
             style={{ color: 'var(--color-on-surface-variant)' }}
           >
-            Knowledge Base
+            Systems
           </p>
           <h2
             className="font-headline mb-10 text-5xl"
             style={{ color: 'var(--color-on-surface)' }}
           >
-            System Design Documents
+            How the bigger pieces fit
           </h2>
           <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
             {systemDesignDocs.map((doc) => (
@@ -487,14 +503,13 @@ export default function ImpactPage() {
               className="font-headline text-4xl italic md:text-5xl"
               style={{ color: 'var(--color-on-primary)' }}
             >
-              Let's work together.
+              Got something to ship?
             </h2>
             <p
               className="font-body mt-3 text-base opacity-75"
               style={{ color: 'var(--color-on-primary)' }}
             >
-              Currently open to architectural consultation and strategic
-              engineering leadership.
+              Full-time or a well-scoped project. Remote, with overlap.
             </p>
           </div>
           <Button
@@ -507,13 +522,13 @@ export default function ImpactPage() {
               flexShrink: 0,
             }}
           >
-            Initiate Contact
+            Get in touch
           </Button>
         </section>
       </main>
 
       <Footer
-        tagline="Delivering measurable business value through robust software architecture."
+        tagline="Full-stack engineer. Ten years building products that ship and stay up."
       />
       <Watermark text="impact" />
     </>

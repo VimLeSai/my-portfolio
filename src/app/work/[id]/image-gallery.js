@@ -13,7 +13,7 @@ export default function ImageGallery({ images, title }) {
           className="font-label text-xs font-bold tracking-[0.2em] uppercase"
           style={{ color: 'var(--color-outline)' }}
         >
-          Visual Documentation
+          Screenshots
         </p>
         <p className="text-xs tracking-wider" style={{ color: 'var(--color-on-surface-variant)' }}>
           Click an image to expand. Swipe or use arrow keys to navigate.

@@ -18,7 +18,7 @@ export const companies = {
     id: 'upkeep',
     name: 'UpKeep',
     description:
-      'A leading mobile-first CMMS and asset operations platform helping maintenance and reliability teams work smarter.',
+      'A mobile-first CMMS and asset operations platform for maintenance and reliability teams.',
     href: 'https://www.upkeep.com/',
     industries: ['Software', 'Enterprise Resource Planning (ERP)', 'CMMS'],
     role: 'Sr. Software Development Engineer',
