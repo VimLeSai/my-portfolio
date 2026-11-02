@@ -7,99 +7,88 @@ import Link from 'next/link';
 export const metadata = {
   title: 'Process',
   description:
-    "Learn about Vimal Desai's rigorous software engineering process, from architectural discovery and system design to zero-downtime deployment.",
+    'How Vimal Desai actually ships: listen, sketch, build, harden. Agents can draft; review and tests still sit on the merge.',
 };
 
 const phases = [
   {
     number: '01',
-    title: 'Discovery',
+    title: 'Listen',
     icon: 'search',
-    duration: '1–2 weeks',
+    duration: 'Until it’s clear',
     color: 'var(--color-surface-container-highest)',
     textColor: 'var(--color-on-surface)',
     description:
-      'Every system begins with ruthless clarification. I map business requirements to technical constraints, surface hidden complexity, and define the measurable outcomes that will determine success.',
+      'Talk to the people stuck in the workflow. Read the code. Write down what’s actually blocking them before picking a stack.',
     activities: [
-      'Stakeholder interviews & requirement extraction',
-      'Technical audit of existing infrastructure',
-      'Competitive landscape & constraint mapping',
-      'Risk identification and mitigation catalogue',
-      'Definition of success metrics (SLOs, KPIs)',
+      'Talk to the people in the workflow',
+      'Read the existing code and data',
+      'Write down constraints, not wishes',
+      'Agree on what “done” looks like',
     ],
     deliverables: [
-      'Technical Brief',
-      'Risk Register',
-      'Architecture Decision Log (ADL) — draft',
+      'A short brief someone can argue with',
+      'Risks worth naming out loud',
     ],
   },
   {
     number: '02',
-    title: 'Architecture',
+    title: 'Sketch',
     icon: 'hub',
-    duration: '1–3 weeks',
+    duration: 'Enough to build',
     color: 'var(--color-primary-container)',
     textColor: 'var(--color-on-primary)',
     description:
-      'I draft the structural blueprint — domain models, database schemas, and service boundaries. Every boundary is a deliberate decision; every abstraction earns its existence. Seams are installed early.',
+      'Boundaries, schema, failure modes. Enough design to start — not a 40-page deck. If a seam will change, put it in now.',
     activities: [
-      'Domain modelling & bounded context definition',
-      'Data schema design and normalisation review',
-      'API contract specification (OpenAPI / gRPC protobuf)',
-      'Infrastructure topology and service mesh design',
-      'Security threat modelling (STRIDE)',
+      'Where the services split, and why',
+      'Data model that can survive the first year',
+      'API shape the UI can actually call',
+      'What happens when this fails at 2am',
     ],
     deliverables: [
-      'System Design Document',
-      'ER Diagrams',
-      'API Spec v1',
-      'Infrastructure as Code scaffold',
+      'A sketch the team can build from',
+      'Contracts, not slideware',
     ],
   },
   {
     number: '03',
-    title: 'Development',
+    title: 'Build',
     icon: 'code',
-    duration: '4–12 weeks',
+    duration: 'Until users can click',
     color: 'var(--color-secondary)',
     textColor: 'var(--color-on-secondary)',
     description:
-      'High-fidelity development using modern stacks with schema attention to detail — test coverage, code review standards, and automated quality gates enforced from day one. No hero code.',
+      'Ship the vertical slice. Agents can draft; I still review. Tests go out with the change, not in a follow-up ticket.',
     activities: [
-      'Feature development in vertical slices (outside-in)',
-      'Unit, integration, and contract test suites',
-      'Continuous integration with mandatory coverage thresholds',
-      'Weekly architectural review sessions',
-      'Performance profiling at every milestone',
+      'One path a user can click, end to end',
+      'Review on every PR, including factory drafts',
+      'Playwright (or Cypress) on the flows that break',
+      'Small PRs so revert is boring',
     ],
     deliverables: [
-      'Production-ready codebase',
-      'Test suite (≥80% coverage)',
-      'CI/CD pipeline',
-      'Runbook draft',
+      'Working software',
+      'Tests sitting next to the code',
     ],
   },
   {
     number: '04',
-    title: 'Deployment',
+    title: 'Harden',
     icon: 'rocket_launch',
-    duration: '1–2 weeks',
+    duration: 'Before it has to hold',
     color: 'var(--color-tertiary-container)',
     textColor: 'var(--color-on-primary)',
     description:
-      'Zero-downtime deployments, observability-first releases, and a structured rollout strategy. I treat every release as a controlled experiment — with rollback conditions defined before a single byte ships.',
+      'Deploy path, rollback, logs someone else can read. I don’t ship a release I can’t undo.',
     activities: [
-      'Blue-green or canary deployment orchestration',
-      'Observability stack setup (traces, metrics, logs)',
-      'Load testing and chaos engineering (pre-prod)',
-      'Incident response playbook creation',
-      'Post-deployment health dashboards',
+      'Deploy + rollback written down first',
+      'Logs and traces on the new path',
+      'Load check if the feature will feel it',
+      'A note for the next person at 2am',
     ],
     deliverables: [
-      'Deployment runbook',
-      'Observability dashboard',
-      'Post-mortem template',
-      'SLO monitoring',
+      'A deploy you can reverse',
+      'A short runbook',
     ],
   },
 ];
@@ -107,57 +96,57 @@ const phases = [
 const principles = [
   {
     icon: 'architecture',
-    title: 'Seams Before Scale',
-    desc: 'Any component expected to change in 18 months gets an abstraction layer today. Retrofitting seams is 10× more expensive than installing them early.',
+    title: 'Put the seam in now',
+    desc: 'If this will change in a year, don’t weld it shut. Retrofitting later is the expensive version of the same decision.',
   },
   {
     icon: 'verified',
-    title: 'Explicit Trade-offs',
-    desc: 'Every architectural compromise is documented with its context, alternatives considered, and the conditions that would invalidate the decision.',
+    title: 'Say the trade-off',
+    desc: 'Write down what you didn’t pick, and what would make you change your mind. Future-you will need it.',
   },
   {
     icon: 'monitor_heart',
-    title: 'Observability-First',
-    desc: 'A system that cannot be observed cannot be trusted. Telemetry, tracing, and structured logging are non-negotiable features, not afterthoughts.',
+    title: 'If you can’t see it, you don’t trust it',
+    desc: 'Logs and traces on the new path before it goes to production. Not a cleanup ticket.',
   },
   {
     icon: 'groups',
-    title: 'Team as Infrastructure',
-    desc: "The best systems are shaped by the teams who maintain them. Conway's Law is a design constraint, not a coincidence.",
+    title: 'The team is the runtime',
+    desc: 'Code that only you can operate is unfinished. Reviews, pairing, and boring patterns beat heroics.',
   },
   {
     icon: 'auto_fix_high',
-    title: 'Automate the Boring',
-    desc: 'Manual processes are error-prone and slow. Any task performed more than twice gets automated; CI/CD is the heartbeat of every delivery pipeline.',
+    title: 'Automate the boring',
+    desc: 'If we’ve done it twice, it gets a loop. Agents draft; review and tests still sit on the merge.',
   },
   {
     icon: 'balance',
-    title: 'The Three-Quarter Rule',
-    desc: 'When evaluating shortcuts: will this decision hold at 75% of projected scale? If yes, ship. If no, invest now. The edge cases are where systems fail.',
+    title: 'Ship at 75%',
+    desc: 'If the shortcut still holds at most of projected load, take it. If it won’t, spend the time now.',
   },
 ];
 
 const caseStudySnippets = [
   {
     project: 'StringERP',
-    phase: 'Architecture',
+    phase: 'Sketch',
     insight:
-      'Installed a single `ReportingRepository` seam at week 2, knowing the naive query layer would need replacement. The eventual migration took 4 days, not 4 months.',
+      'One reporting seam in week two. Naive queries were fine until they weren’t — the swap later took four days, not four months.',
     href: '/work/string-erp',
   },
   {
-    project: 'Orion Gateway',
-    phase: 'Deployment',
+    project: 'UpKeep Platform',
+    phase: 'Build',
     insight:
-      'Defined rollback conditions before go-live: P95 latency > 15ms or error rate > 0.1% triggers automatic revert. Zero incidents in first 90 days.',
-    href: '/work/orion-gateway',
+      'Agents draft the PR. Playwright and review stay in the same loop. Factory weeks: usually 5–8 PRs a day, still reviewed.',
+    href: '/work/upkeep-platform',
   },
   {
-    project: 'Pulse CRM',
-    phase: 'Discovery',
+    project: 'RentBase',
+    phase: 'Listen',
     insight:
-      "Identified that the real constraint wasn't data volume but conflict resolution semantics. Pivoted to CRDT architecture two weeks in — saved 6 months of future rework.",
-    href: '/work/pulse-crm',
+      'Three-person team, a rental CRM, and a screening domain that had to be right. The API shape came from the portal, not the other way around.',
+    href: '/work/rentbase',
   },
 ];
 
@@ -165,7 +154,7 @@ export default function ProcessPage() {
   return (
     <>
       <Navbar
-        ctaLabel="Work Together"
+        ctaLabel="Get in Touch"
         ctaHref="/contact"
       />
 
@@ -177,16 +166,16 @@ export default function ProcessPage() {
               className="font-label mb-4 text-xs font-medium tracking-[0.2em] uppercase"
               style={{ color: 'var(--color-on-surface-variant)' }}
             >
-              The Methodology
+              How I work
             </p>
             <h1
               className="font-headline text-7xl leading-none tracking-tighter md:text-9xl"
               style={{ color: 'var(--color-on-surface)' }}
             >
-              From Discovery
+              Listen.
               <br />
               <em style={{ color: 'var(--color-primary-container)' }}>
-                to Deployment.
+                Then ship.
               </em>
             </h1>
           </div>
@@ -195,8 +184,8 @@ export default function ProcessPage() {
               className="font-body text-lg leading-relaxed"
               style={{ color: 'var(--color-on-surface-variant)' }}
             >
-              A repeatable, rigorous framework for building systems that scale —
-              refined across 10+ years and 50+ production deployments.
+              Same four steps as on the home page — just with more of the
+              messy middle. No 40-page decks.
             </p>
           </div>
         </header>
@@ -281,7 +270,7 @@ export default function ProcessPage() {
                     className="font-label mb-4 text-xs font-bold tracking-widest uppercase"
                     style={{ color: 'var(--color-outline)' }}
                   >
-                    Core Activities
+                    What I do
                   </p>
                   <ul className="space-y-2">
                     {phase.activities.map((a) => (
@@ -349,13 +338,13 @@ export default function ProcessPage() {
                 className="font-label mb-2 text-xs font-medium tracking-[0.2em] uppercase"
                 style={{ color: 'var(--color-on-surface-variant)' }}
               >
-                Philosophy
+                Habits
               </p>
               <h2
                 className="font-headline text-5xl"
                 style={{ color: 'var(--color-on-surface)' }}
               >
-                Guiding Principles
+                What I keep repeating
               </h2>
             </div>
           </div>
@@ -416,13 +405,13 @@ export default function ProcessPage() {
             className="font-label mb-4 text-xs font-medium tracking-[0.2em] uppercase"
             style={{ color: 'var(--color-on-surface-variant)' }}
           >
-            Process in Practice
+            In practice
           </p>
           <h2
             className="font-headline mb-12 text-5xl"
             style={{ color: 'var(--color-on-surface)' }}
           >
-            From the Case Studies
+            From the work
           </h2>
           <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
             {caseStudySnippets.map((cs) => (
@@ -485,13 +474,13 @@ export default function ProcessPage() {
               className="font-headline text-4xl italic md:text-5xl"
               style={{ color: 'var(--color-on-primary)' }}
             >
-              Ready to build something remarkable?
+              Got something to ship?
             </h2>
             <p
               className="font-body mt-3 text-base opacity-75"
               style={{ color: 'var(--color-on-primary)' }}
             >
-              Let's put the process to work on your next challenge.
+              If it sounds like a fit, write me.
             </p>
           </div>
           <Button
@@ -504,13 +493,13 @@ export default function ProcessPage() {
               flexShrink: 0,
             }}
           >
-            Initiate Contact
+            Get in touch
           </Button>
         </section>
       </main>
 
       <Footer
-        tagline="Executing scalable engineering through a rigorous, repeatable process."
+        tagline="Full-stack engineer. Ten years building products that ship and stay up."
       />
       <Watermark text="process" />
     </>

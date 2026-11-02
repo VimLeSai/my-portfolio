@@ -10,7 +10,7 @@ export const resumeMeta = {
   github: 'https://github.com/VimLeSai',
   npm: 'https://npmjs.com/~vimlesai',
   summary:
-    'Senior Full Stack Engineer with **10+ years** building scalable, high-performance web applications — from pixel-perfect UIs to robust microservices. Known for **doubling sprint velocity** through AI-augmented workflows, leading zero-downtime deployments, and growing from intern to Tech Lead in 4 years. Testing is core to my craft, not an afterthought.',
+    'Full-stack engineer, **10+ years**. React, Node, TypeScript. At UpKeep I ship CMMS features, in-product AI, and an internal factory that typically lands **5–8 PRs a day** on factory weeks — still reviewed, still tested. Intern to Tech Lead in four years before that. Tests go out with the change.',
 };
 
 export const jobs = [
@@ -20,26 +20,24 @@ export const jobs = [
     period: 'Nov 2023 – Present',
     location: 'Remote, India',
     bullets: [
-      'Delivered full-stack features across frontend, backend & shared component libraries for a **high-traffic enterprise asset management platform** used by thousands of businesses worldwide.',
-      'Key contributor to the **Preventive Maintenance module** — optimised performance and significantly reduced system complexity.',
-      'Served as **Release Engineer for 2 months**, owning and executing platform-wide zero-downtime deployments.',
-      'Leveraged AI tooling to **double sprint velocity from 16 → 30+ story points** through smarter automation & workflow efficiency.',
-      '**3rd place** in internal AI Hackathon for a POC improving data consistency and system-wide quality at scale.',
-      'Recognised as **"Leader of the Month"** for ownership, innovation, and cross-functional impact.',
+      'Ship tickets across web, APIs, and shared services on a **CMMS** — vendor and parts, event pipelines, product UI.',
+      '**In-product AI**: access, credits, scoring, admin review.',
+      'Internal **ticket-to-PR factory**. Factory weeks: typically **5–8 PRs a day**, with Playwright and review still required.',
+      'Earlier: **Preventive Maintenance**, a stretch as **Release Engineer**, sprint velocity **16 → 40+**. **Leader of the Month** (2×); **3rd** in an internal AI hackathon.',
     ],
     tech: [
       'React.js',
       'Next.js',
       'Node.js',
-      'NestJS',
       'TypeScript',
-      'TailwindCSS',
+      'Express',
+      'tRPC',
+      'Kafka',
       'MongoDB',
       'PostgreSQL',
-      'Cypress',
-      'Jest',
-      'AWS',
+      'Playwright',
       'Docker',
+      'Cursor',
     ],
   },
   {
@@ -48,11 +46,10 @@ export const jobs = [
     period: 'Sep 2022 – Nov 2023',
     location: 'Remote, India',
     bullets: [
-      'Built scalable, responsive UIs for a **high-traffic US rental platform** using React.js, Next.js, TypeScript, and modern UI libraries.',
-      'Designed and managed **Node.js/NestJS APIs** backed by MongoDB and PostgreSQL.',
-      'Reduced automated testing cycle time significantly through **Cypress, Jest, k6, and JMeter** automation.',
-      'Collaborated directly with the CTO; championed coding standards driving an **11% improvement in operational efficiency.**',
-      'Improved CI/CD pipelines and AWS-based deployment infrastructure, streamlining release workflows.',
+      'Web app for a **US rental platform** — React, Next.js, TypeScript.',
+      '**NestJS APIs** on MongoDB and PostgreSQL, GraphQL where the UI needed it.',
+      'Shorter test cycles with **Cypress, Jest, k6, JMeter**.',
+      'Worked with the CTO on the load-sensitive features; standards work later showed up as about **11%** operational efficiency.',
     ],
     tech: [
       'React.js',
@@ -73,11 +70,10 @@ export const jobs = [
     period: 'Jul 2018 – Jul 2022',
     location: 'Surat, Gujarat, India',
     bullets: [
-      'Grew from **intern to Tech Lead in 4 years** — led cross-functional teams delivering **50+ projects** across Healthcare, Real Estate, Textile, Travel & Diamond industries.',
-      'Architected scalable Node.js microservices — one (**"Implr"**) independently launched as a standalone product.',
-      'Built a reusable React.js + TypeScript component library that **accelerated development velocity by 30%.**',
-      'Conducted **40+ technical interviews**, mentored junior developers, and championed Agile practices across the team.',
-      'Managed StringERP product — overseeing front-end quality, server management, and team operations end-to-end.',
+      '**Intern to Tech Lead in 4 years.** 50+ projects — healthcare, real estate, textile, travel, diamond.',
+      'Built **StringERP** from scratch. Spun **Implr** out as its own service.',
+      'Reusable React + TypeScript modules — new domains in **under 10 minutes**, not days.',
+      '**40+ frontend interviews**, a mixed team of 11–20, client calls and deploys.',
     ],
     tech: [
       'React.js',
@@ -98,7 +94,7 @@ export const jobs = [
     period: 'Feb 2017 – Mar 2018',
     location: 'Vadodara, Gujarat, India',
     bullets: [
-      'Crafted responsive, cross-browser UI solutions using HTML5, CSS3, JavaScript, jQuery, and PHP with third-party API integrations.',
+      'Client websites — HTML, CSS, JavaScript, jQuery, PHP. First paid shipping.',
     ],
     tech: ['HTML5', 'CSS3', 'JavaScript', 'jQuery', 'PHP'],
   },
@@ -112,9 +108,9 @@ export const highlights = [
   },
   { value: '50+', label: 'Projects Shipped', sub: 'Across 7 industries' },
   {
-    value: '2×',
-    label: 'Sprint Velocity',
-    sub: '16 → 30+ story points via AI',
+    value: '5–8',
+    label: 'PRs per Day',
+    sub: 'Factory weeks, still reviewed',
   },
   {
     value: '40+',
@@ -148,6 +144,7 @@ export const skillGroups = [
       'Node.js',
       'NestJS',
       'Express',
+      'tRPC',
       'GraphQL',
       'Microservices',
       'RabbitMQ',
@@ -166,12 +163,16 @@ export const skillGroups = [
     category: 'DevOps',
     skills: ['AWS', 'Docker', 'CI/CD', 'Git'],
   },
+  {
+    category: 'AI',
+    skills: ['Cursor', 'LangGraph', 'OpenAI'],
+  },
 ];
 
 export const awards = [
   {
     name: 'Leader of the Month',
-    desc: 'UpKeep Technologies — ownership, innovation & cross-functional impact',
+    desc: 'UpKeep — shipped, unblocked the team, did it twice',
   },
   {
     name: 'AI Hackathon — 3rd Place',
@@ -183,7 +184,7 @@ export const awards = [
   },
   {
     name: 'Tech Lead',
-    desc: 'Led a cross-functional team of 10+ developers to successful project delivery',
+    desc: 'Mixed team of 10+ through delivery',
   },
 ];
 

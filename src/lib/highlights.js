@@ -26,14 +26,24 @@ export const highlights = [
     order: 2,
   },
   {
+    id: 'factory-prs',
+    value: '5–8',
+    label: 'PRs per Day',
+    sublabel: 'Factory weeks, still reviewed',
+    description:
+      'On weeks running an internal ticket-to-PR factory at UpKeep, throughput is typically 5–8 PRs a day — intake through implementation, with Playwright and review still required before merge.',
+    icon: 'bolt',
+    order: 3,
+  },
+  {
     id: 'sprint-velocity',
     value: '2×',
     label: 'Sprint Velocity',
     sublabel: '16 → 40+ story points via AI',
     description:
-      'Doubled team sprint throughput at UpKeep by integrating AI tools and workflow automation — without sacrificing code quality.',
+      'Earlier at UpKeep, doubled team sprint throughput by integrating AI tools and workflow automation — without sacrificing code quality.',
     icon: 'lightning',
-    order: 3,
+    order: 4,
   },
   {
     id: 'interviews-conducted',
@@ -43,7 +53,7 @@ export const highlights = [
     description:
       'Conducted 40+ technical interviews for frontend roles at Knovator, directly shaping the engineering team.',
     icon: 'users',
-    order: 4,
+    order: 5,
   },
   {
     id: 'efficiency-gain',
@@ -53,7 +63,7 @@ export const highlights = [
     description:
       'Improved operational efficiency by 11% at Emtec through proactive bug resolution, code standardization, and engineering best practices.',
     icon: 'chart',
-    order: 5,
+    order: 6,
   },
   {
     id: 'module-integration',
@@ -63,7 +73,7 @@ export const highlights = [
     description:
       'Designed a reusable, module-based frontend architecture at Knovator that reduced new module integration to under 10 minutes.',
     icon: 'puzzle',
-    order: 6,
+    order: 7,
   },
   {
     id: 'team-size',
@@ -73,7 +83,7 @@ export const highlights = [
     description:
       'Led a cross-functional team of up to 20 members — frontend, backend, Flutter developers, and business analysts — as Tech Lead and Scrum Master.',
     icon: 'team',
-    order: 7,
+    order: 8,
   },
   {
     id: 'leader-of-month',
@@ -83,7 +93,7 @@ export const highlights = [
     description:
       'Awarded "Leader of the Month" twice at UpKeep for exceptional contributions to platform delivery and team performance.',
     icon: 'award',
-    order: 8,
+    order: 9,
   },
   {
     id: 'hackathon',
@@ -93,6 +103,6 @@ export const highlights = [
     description:
       'Secured 3rd place in an internal AI hackathon at UpKeep for a POC that substantially improved data consistency across microservices.',
     icon: 'trophy',
-    order: 9,
+    order: 10,
   },
 ];

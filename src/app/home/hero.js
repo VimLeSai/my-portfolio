@@ -1,8 +1,25 @@
 'use client';
 
 import Link from 'next/link';
+import { useRef } from 'react';
+import { useReducedMotion } from 'motion/react';
 
 const Hero = () => {
+  const photoRef = useRef(null);
+  const reduce = useReducedMotion();
+
+  const onPhotoMove = (e) => {
+    if (reduce || !photoRef.current) return;
+    const r = photoRef.current.getBoundingClientRect();
+    const x = (e.clientX - r.left) / r.width - 0.5;
+    const y = (e.clientY - r.top) / r.height - 0.5;
+    photoRef.current.style.transform = `perspective(1100px) rotateY(${x * 5}deg) rotateX(${-y * 5}deg)`;
+  };
+
+  const onPhotoLeave = () => {
+    if (photoRef.current) photoRef.current.style.transform = '';
+  };
+
   return (
     <>
       <style>{`
@@ -22,17 +39,22 @@ const Hero = () => {
           0%, 100% { opacity: 0.35; transform: translateY(0); }
           50%       { opacity: 1;    transform: translateY(4px); }
         }
+        @keyframes vd-live-pulse {
+          0%, 100% { opacity: 0.35; transform: scale(1); }
+          50%       { opacity: 0;    transform: scale(2.1); }
+        }
 
-        .vd-eyebrow-anim   { animation: vd-fade-up   0.7s ease 0.25s both; }
-        .vd-line1-anim     { animation: vd-slide-up  0.75s cubic-bezier(0.16,1,0.3,1) 0.4s both; }
-        .vd-line2-anim     { animation: vd-slide-up  0.75s cubic-bezier(0.16,1,0.3,1) 0.55s both; }
-        .vd-line3-anim     { animation: vd-slide-up  0.75s cubic-bezier(0.16,1,0.3,1) 0.7s both; }
-        .vd-body-anim      { animation: vd-fade-up   0.7s ease 0.85s both; }
-        .vd-focus-anim     { animation: vd-fade-up   0.7s ease 1s both; }
-        .vd-cta-anim       { animation: vd-fade-up   0.7s ease 1.1s both; }
-        .vd-photo-anim     { animation: vd-fade-in   0.95s ease 0.5s both; }
-        .vd-scroll-anim    { animation: vd-fade-in   0.6s ease 1.35s both; }
+        .vd-eyebrow-anim   { animation: vd-fade-up   0.55s ease 0.05s both; }
+        .vd-line1-anim     { animation: vd-slide-up  0.6s cubic-bezier(0.16,1,0.3,1) 0.08s both; }
+        .vd-line2-anim     { animation: vd-slide-up  0.6s cubic-bezier(0.16,1,0.3,1) 0.16s both; }
+        .vd-line3-anim     { animation: vd-slide-up  0.6s cubic-bezier(0.16,1,0.3,1) 0.24s both; }
+        .vd-body-anim      { animation: vd-fade-up   0.55s ease 0.32s both; }
+        .vd-focus-anim     { animation: vd-fade-up   0.55s ease 0.4s both; }
+        .vd-cta-anim       { animation: vd-fade-up   0.55s ease 0.48s both; }
+        .vd-photo-anim     { animation: vd-fade-in   0.7s ease 0.12s both; }
+        .vd-scroll-anim    { animation: vd-fade-in   0.5s ease 0.7s both; }
         .vd-scroll-dot     { animation: vd-scroll-pulse 1.8s ease-in-out 1.5s infinite; }
+        .vd-live-dot       { animation: vd-live-pulse 2s ease-out infinite; }
 
         .vd-photo-wrap img {
           transition: filter 0.7s ease, transform 0.7s cubic-bezier(0.16,1,0.3,1);
@@ -49,11 +71,11 @@ const Hero = () => {
             opacity: 1 !important;
             transform: none !important;
           }
-          .vd-scroll-dot { animation: none !important; }
+          .vd-scroll-dot, .vd-live-dot { animation: none !important; }
         }
       `}</style>
 
-      <section className="hero-atmosphere relative flex min-h-svh items-center overflow-hidden px-6 pb-24 pt-32 md:px-10 md:pt-32 lg:px-16">
+      <section className="hero-atmosphere relative overflow-hidden px-6 pb-16 pt-28 md:px-10 md:pt-32 md:pb-20 lg:px-16 lg:pb-24">
         {/* Soft vignette edge */}
         <div
           aria-hidden
@@ -92,28 +114,48 @@ const Hero = () => {
 
             <p className="vd-body-anim mb-8 max-w-[430px] text-[0.9375rem] leading-[1.78] text-stone-500">
               Ten years shipping React, Next.js, Node, and TypeScript —
-              rental CRMs, travel booking, ERPs, social apps. Frontends that
-              feel sharp, backends that hold up, tests so small teams can
-              deploy without fear.
+              CMMS platforms, rental CRMs, travel booking, ERPs. Frontends
+              that feel sharp, backends that hold up, tests so a change can
+              merge without a prayer.
             </p>
 
-            <div className="vd-focus-anim mb-10 flex items-center gap-4">
-              <div
-                className="h-px w-8 shrink-0"
-                style={{ background: '#8B1A2B' }}
-              />
-              <span className="font-serif text-lg italic text-stone-700">
-                Currently: platform work at UpKeep + AI-assisted delivery
-              </span>
+            <div className="vd-focus-anim mb-10">
+              <a
+                href="https://www.upkeep.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group inline-flex max-w-full flex-wrap items-center gap-x-3 gap-y-2 border border-stone-300/80 bg-white/50 px-3.5 py-2.5 transition-all duration-300 hover:-translate-y-px hover:border-[#8B1A2B]/35 hover:bg-white/80"
+              >
+                <span className="relative flex h-2 w-2 shrink-0" aria-hidden>
+                  <span className="vd-live-dot absolute inline-flex h-full w-full rounded-full bg-[#8B1A2B]" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-[#8B1A2B]" />
+                </span>
+                <span className="font-label text-[0.62rem] font-medium uppercase tracking-[0.16em] text-stone-400">
+                  Now at
+                </span>
+                <span className="font-headline text-lg leading-none text-stone-900 transition-colors group-hover:text-[#8B1A2B]">
+                  UpKeep
+                </span>
+                <span
+                  className="hidden h-3.5 w-px bg-stone-300 sm:block"
+                  aria-hidden
+                />
+                <span className="font-label text-[0.62rem] uppercase tracking-[0.12em] text-stone-500">
+                  CMMS · in-product AI
+                </span>
+              </a>
             </div>
 
             <div className="vd-cta-anim flex flex-wrap items-center gap-6">
               <Link
                 href="/work"
-                className="font-label inline-flex items-center gap-2 bg-[var(--color-primary-container)] px-6 py-3 text-sm tracking-wide text-[var(--color-on-primary)] transition-transform duration-300 hover:-translate-y-0.5"
+                className="font-label group/cta inline-flex items-center gap-2 bg-[var(--color-primary-container)] px-6 py-3 text-sm tracking-wide text-[var(--color-on-primary)] transition-transform duration-300 hover:-translate-y-0.5"
               >
                 See the work
-                <span aria-hidden className="text-base leading-none">
+                <span
+                  aria-hidden
+                  className="text-base leading-none transition-transform duration-300 group-hover/cta:translate-x-1"
+                >
                   →
                 </span>
               </Link>
@@ -126,7 +168,12 @@ const Hero = () => {
             </div>
           </div>
 
-          <div className="vd-photo-anim relative mx-auto w-auto max-w-sm lg:max-w-none">
+          <div
+            className="vd-photo-anim relative mx-auto w-auto max-w-sm transition-transform duration-200 ease-out lg:max-w-none"
+            ref={photoRef}
+            onMouseMove={onPhotoMove}
+            onMouseLeave={onPhotoLeave}
+          >
             <div
               className="pointer-events-none absolute -right-4 -top-4 hidden h-10 w-10 md:block"
               style={{
@@ -167,29 +214,13 @@ const Hero = () => {
               <p className="font-label text-[0.58rem] font-medium uppercase tracking-[0.2em] text-stone-400">
                 Based in
               </p>
-              <p
-                className="font-serif text-lg italic"
-                style={{ color: '#8B1A2B' }}
-              >
-                Surat · Remote-ready
+              <p className="font-body text-sm text-stone-600">
+                Surat · remote
               </p>
             </div>
           </div>
         </div>
 
-        <a
-          href="#work"
-          className="vd-scroll-anim absolute bottom-8 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 md:flex"
-          aria-label="Scroll to selected work"
-        >
-          <span className="font-label text-[0.55rem] uppercase tracking-[0.25em] text-stone-400">
-            Scroll
-          </span>
-          <span
-            className="vd-scroll-dot block h-8 w-px bg-stone-400/60"
-            aria-hidden
-          />
-        </a>
       </section>
     </>
   );

@@ -23,7 +23,7 @@ const footerSections = [
       },
       {
         label: 'GitHub',
-        href: 'https://github.com/vimlesai',
+        href: 'https://github.com/VimLeSai',
         target: '_blank',
         rel: 'noopener noreferrer',
       },
@@ -54,7 +54,7 @@ const footerSections = [
 
 export default function Footer({
   brandName = 'Vimal Desai',
-  tagline = 'Senior Full Stack Architect specializing in high-fidelity interfaces and distributed backend systems. Engineered with editorial intent.',
+  tagline = 'Full-stack engineer. Ten years building products that ship and stay up.',
 }) {
   return (
     <footer className="w-full border-t border-[var(--color-rule)] bg-[var(--color-paper)] pt-32 pb-16">
@@ -86,7 +86,7 @@ export default function Footer({
                     href={link.href}
                     target={link.target}
                     rel={link.rel}
-                    className="font-body text-md text-[var(--color-muted)] transition-colors hover:text-[var(--color-accent)]"
+                    className="font-body text-md relative text-[var(--color-muted)] transition-colors hover:text-[var(--color-accent)] after:absolute after:inset-x-0 after:-bottom-0.5 after:h-px after:origin-left after:scale-x-0 after:bg-[var(--color-accent)] after:transition-transform after:duration-300 hover:after:scale-x-100"
                   >
                     {link.label}
                   </Link>

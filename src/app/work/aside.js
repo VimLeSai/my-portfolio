@@ -52,7 +52,7 @@ const WorkAside = () => {
               Vimal Desai
             </p>
             <p className="font-label text-outline text-[10px] tracking-wider uppercase">
-              Open to work
+              Now at UpKeep
             </p>
           </div>
         </div>

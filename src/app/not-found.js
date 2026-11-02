@@ -28,14 +28,13 @@ export default function NotFound() {
             className="font-headline mb-8 text-7xl tracking-tighter italic"
             style={{ color: 'var(--color-on-surface)' }}
           >
-            Lost in the architecture.
+            This page isn’t here.
           </h1>
           <p
             className="font-body mx-auto mb-12 max-w-md text-lg leading-relaxed"
             style={{ color: 'var(--color-on-surface-variant)' }}
           >
-            This page doesn't exist — but the rest of the portfolio does. Let's
-            get you back on track.
+            Wrong URL, or I moved something. The rest of the site still is.
           </p>
           <Link
             href="/"
@@ -54,7 +53,7 @@ export default function NotFound() {
         </div>
       </main>
       <Footer
-        tagline="Architecting scalable web applications and high-performance digital products."
+        tagline="Full-stack engineer. Ten years building products that ship and stay up."
       />
     </>
   );

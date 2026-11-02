@@ -168,7 +168,7 @@ export default function ContactForm() {
         <button
           type="submit"
           disabled={status === 'loading'}
-          className="font-body flex items-center justify-center gap-3 w-full md:w-auto px-12 py-5 font-semibold transition-all hover:opacity-80 hover:shadow-xl active:translate-y-px disabled:opacity-50 disabled:cursor-not-allowed"
+          className="font-body group flex w-full items-center justify-center gap-3 px-12 py-5 font-semibold transition-all hover:-translate-y-0.5 hover:opacity-90 active:translate-y-px disabled:cursor-not-allowed disabled:opacity-50 md:w-auto"
           style={{
             backgroundColor: 'var(--color-primary-container)',
             color: 'var(--color-on-primary)',
@@ -177,7 +177,7 @@ export default function ContactForm() {
         >
           {status === 'loading' ? 'Sending...' : 'Send Inquiry'}
           {status !== 'loading' && (
-            <span className="material-symbols-outlined text-lg">
+            <span className="material-symbols-outlined text-lg transition-transform duration-300 group-hover:translate-x-1">
               arrow_forward
             </span>
           )}

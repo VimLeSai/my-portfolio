@@ -16,9 +16,9 @@ const stats = [
     color: 'var(--color-on-secondary)',
   },
   {
-    label: 'Optimization',
-    value: '2x',
-    sub: 'Sprint Velocity',
+    label: 'Delivery',
+    value: '5–8',
+    sub: 'PRs a day, factory weeks',
     icon: 'bolt',
     bg: 'var(--color-surface-container)',
     color: 'var(--color-on-surface)',

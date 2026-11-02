@@ -74,7 +74,14 @@ export default function Testimonials() {
               animate="center"
               exit={reduce ? undefined : 'exit'}
               transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-              className="absolute inset-x-0 top-0"
+              className="absolute inset-x-0 top-0 cursor-grab active:cursor-grabbing"
+              drag={reduce ? false : 'x'}
+              dragConstraints={{ left: 0, right: 0 }}
+              dragElastic={0.12}
+              onDragEnd={(_, info) => {
+                if (info.offset.x < -60) go(1);
+                if (info.offset.x > 60) go(-1);
+              }}
             >
               <span
                 aria-hidden

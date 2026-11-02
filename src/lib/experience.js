@@ -30,36 +30,35 @@ export const experience = [
     side: 'right',
     highlights: [
       {
-        title: 'Release Engineering Leadership',
+        title: 'Full-Stack CMMS Delivery',
         description:
-          'Served as the primary Release Engineer, leading platform-wide releases and ensuring smooth, zero-downtime deployments while actively supporting product planning and technical execution.',
-      },
-       {
-        title: 'Recognition & Innovation',
-        description:
-          'Recognized twice as "Leader of the Month" for exceptional performance; secured 3rd place in an internal AI hackathon for developing a POC that substantially improved data consistency across services.',
+          'Most tickets touch more than one repo — web, APIs, sometimes an event path. Vendor and parts, webhooks, everyday CMMS UI.',
       },
       {
-        title: 'Full-Stack Contributions',
+        title: 'AI Product Engineering',
         description:
-          'Contributed across the entire ecosystem — frontend, backend, shared component libraries, and consumer services — delivering scalable solutions for high-traffic platforms.',
+          'In-product AI: who gets access, how credits work, how output gets scored, and a board for humans to review it.',
       },
       {
-        title: 'Preventive Maintenance Module',
+        title: 'Agent-Assisted Delivery',
         description:
-          'Acted as a key contributor to the Preventive Maintenance module, optimizing performance, reducing architectural complexity, and significantly improving workflow efficiency for end-users.',
+          'Internal ticket-to-PR factory — intake, implementation, review, QA. On factory weeks that’s typically 5–8 PRs a day. I still review what merges.',
       },
       {
-        title: 'Velocity & AI Integration',
+        title: 'QA & Review',
         description:
-          'Leveraged cutting-edge AI tools and workflow automation to increase team sprint velocity from 16 to over 40 story points without compromising code quality or stability.',
+          'Test plans and Playwright sit in the same loop as the PR. Review isn’t a ceremony after shipping.',
       },
       {
-        title: 'Strategic Planning',
+        title: 'Preventive Maintenance & Releases',
         description:
-          'Supported the Product Manager in requirement clarification, technical planning, sprint organization, and cross-team coordination to ensure alignment with business goals.',
+          'Earlier: a lot of time in Preventive Maintenance, and a stretch owning platform releases with no downtime window.',
       },
-     
+      {
+        title: 'Recognition',
+        description:
+          'Leader of the Month twice. 3rd in an internal AI hackathon for a data-consistency POC.',
+      },
     ],
 
     skills: [
@@ -71,6 +70,9 @@ export const experience = [
       skills.nodejs,
       skills.postgresql,
       skills.mongodb,
+      skills.express,
+      skills.trpc,
+      skills.apacheKafka,
       skills.docker,
       skills.cypress,
       skills.playwright,
@@ -78,6 +80,7 @@ export const experience = [
       skills.awsSns,
       skills.awsSqs,
       skills.openai,
+      skills.langgraph,
     ],
 
     tools: [
@@ -86,6 +89,7 @@ export const experience = [
       tools.vercel,
       tools.postman,
       tools.slack,
+      tools.jira,
       tools.cursorAi,
       tools.openai,
     ],
@@ -105,29 +109,24 @@ export const experience = [
     side: 'left',
     highlights: [
       {
-        title: 'Application Development',
+        title: 'Rental platform UI',
         description:
-          'Built highly scalable and responsive applications using React.js, Next.js, and TypeScript, backed by comprehensive testing coverage using Cypress and Jest.',
+          'Built the web app for a US rental platform — React, Next.js, TypeScript — with Cypress and Jest covering the paths that actually broke.',
       },
       {
-        title: 'API Architecture',
+        title: 'APIs',
         description:
-          'Designed and maintained high-performance Node.js/NestJS APIs integrated with MongoDB and PostgreSQL to support scalable, production-grade systems.',
+          'Owned NestJS services on MongoDB and PostgreSQL. GraphQL where the UI needed it, REST everywhere else.',
       },
       {
-        title: 'Pipeline Optimization',
+        title: 'Test pipelines',
         description:
-          'Optimized automated testing and performance pipelines using Apache Kafka, k6, JMeter, and Postman, significantly reducing execution time and improving the overall release cycle.',
+          'Cut the wait on automated tests with Cypress, k6, and JMeter so releases didn’t sit in a queue.',
       },
       {
-        title: 'Operational Excellence',
+        title: 'Working with the CTO',
         description:
-          'Improved operational efficiency by 11% through proactive bug resolution, the establishment of code standardization, and rigorous enforcement of engineering best practices.',
-      },
-      {
-        title: 'Leadership Collaboration',
-        description:
-          'Collaborated directly with engineering leadership and the CTO to deliver performance-critical features for a high-traffic rental platform based in the United States.',
+          'Sat with engineering leadership on the features that had to hold under load. Coding standards work later showed up as about an 11% efficiency gain.',
       },
     ],
 
@@ -173,44 +172,29 @@ export const experience = [
     side: 'right',
     highlights: [
       {
-        title: 'Flagship Product Development',
+        title: 'StringERP',
         description:
-          'Architected and built StringERP from the ground up using React, Node.js, and TypeScript, establishing a scalable micro-services architecture and a modular frontend framework.',
+          'Built StringERP from scratch — React, Node, TypeScript. Modular frontend, services behind it, releases every couple of weeks.',
       },
       {
-        title: 'Product Scaling',
+        title: 'Implr',
         description:
-          'Successfully launched "Implr" as a standalone micro-service product, demonstrating high levels of service-level scalability and code reusability.',
+          'Split one module out as its own product. Same codebase habits, its own deploy.',
       },
       {
-        title: 'Career Growth & Project Scope',
+        title: 'Intern → Tech Lead',
         description:
-          'Advanced from intern to Tech Lead over 4+ years, contributing to over 50 projects across multiple industries while expanding expertise into system architecture and product leadership.',
+          'Four years, intern to Tech Lead. 50+ projects across textiles, healthcare, travel, real estate, and a few others.',
       },
       {
-        title: 'Team Leadership',
+        title: 'The team',
         description:
-          'Managed cross-functional teams of 11–20 members — including Frontend, Backend, and Flutter developers as well as Business Analysts — while fulfilling the roles of Scrum Master and Product Lead.',
+          'Ran a mixed team of 11–20 — frontend, backend, Flutter, BAs. Interviews (40+ frontend), sprints, client calls, deploys.',
       },
       {
-        title: 'Talent Development',
+        title: 'Module kit',
         description:
-          'Conducted over 40 technical interviews for frontend roles, directly contributing to the scaling of the engineering team and maintaining high hiring standards.',
-      },
-      {
-        title: 'Client & Project Management',
-        description:
-          'Managed end-to-end client communication, requirement gathering, sprint planning, and deployments while overseeing high-level technical execution.',
-      },
-      {
-        title: 'Efficiency Innovation',
-        description:
-          'Designed a reusable, module-based frontend architecture that reduced the integration time for new modules to under 10 minutes.',
-      },
-      {
-        title: 'Industry Adaptation',
-        description:
-          'Delivered tailored technical solutions for diverse industries including textiles, healthcare, job portals, travel, diamond trade, and real estate.',
+          'Reusable frontend modules so a new domain didn’t take days of wiring. New ones landed in under 10 minutes.',
       },
     ],
 
@@ -264,7 +248,7 @@ export const experience = [
       {
         title: 'Internship',
         description:
-          'Joined as a Java intern, learning core Java and JSP fundamentals during the 3-month programme.',
+          'Three-month Java intern. Core Java and JSP — the first job that wasn’t HTML.',
       },
     ],
 
@@ -288,24 +272,19 @@ export const experience = [
     location: 'Vadodara, Gujarat, India',
     highlights: [
       {
-        title: 'Web Development',
+        title: 'Websites',
         description:
-          'Developed multiple customer-facing websites using a variety of technologies including HTML, CSS, SASS, LESS, PHP, and JavaScript.',
+          'Client sites in HTML, CSS, SASS, PHP, and JavaScript. First time shipping for someone who wasn’t me.',
       },
       {
-        title: 'Startup Growth',
+        title: 'The startup',
         description:
-          'Contributed to the foundational growth of the startup and assisted the CEO in offline marketing and increasing awareness for the in-house product "Helping Hand".',
+          'Helped the CEO with the in-house product and the unglamorous offline marketing that came with a college-born shop.',
       },
       {
-        title: 'Creative Contributions',
+        title: 'Posters and video',
         description:
-          'Beyond core development, contributed to graphic design by creating promotional posters for college festival events.',
-      },
-      {
-        title: 'Event Media',
-        description:
-          'Supported and managed video production for high-profile MSU college events including Paramarsh, Junoon, Footprints, and Prerna.',
+          'Festival posters, and video for MSU events — Paramarsh, Junoon, Footprints, Prerna.',
       },
     ],
 

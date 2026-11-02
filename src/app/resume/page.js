@@ -8,7 +8,7 @@ import { resumeMeta, jobs } from '@lib/resume-data';
 export const metadata = {
   title: 'Resume',
   description:
-    'View the professional resume of Vimal Desai. 10+ years of full stack engineering expertise with React, Node.js, TypeScript, and AWS infrastructure.',
+    'Resume of Vimal Desai — Senior Full Stack Engineer. Currently at UpKeep shipping CMMS features, in-product AI, and agent-assisted delivery.',
 };
 
 export default function ResumePage() {

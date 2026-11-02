@@ -28,8 +28,7 @@ export default function Sidebar() {
             Leader of the Month
           </div>
           <div className="award-desc text-muted mt-0.5 text-[0.8rem]">
-            UpKeep Technologies — ownership, innovation & cross-functional
-            impact
+            UpKeep — shipped, unblocked the team, did it twice
           </div>
         </div>
         <div className="award-item mb-2.5">
@@ -53,7 +52,7 @@ export default function Sidebar() {
             Tech Lead
           </div>
           <div className="award-desc text-muted mt-0.5 text-[0.8rem]">
-            Led a cross-functional team of 10+ developers to successful project delivery
+            Mixed team of 10+ — frontend, backend, and the rest — through delivery
           </div>
         </div>
       </SidebarSection>
