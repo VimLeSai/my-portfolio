@@ -1,4 +1,5 @@
 import ScrollProgress from '@/components/ui/scroll-progress';
+import TalkDock from '@/components/talk/dock';
 import './globals.css';
 import {
   DM_Sans,
@@ -70,6 +71,7 @@ export default function RootLayout({ children }) {
       <body className="font-body antialiased">
         <ScrollProgress />
         {children}
+        <TalkDock />
       </body>
     </html>
   );

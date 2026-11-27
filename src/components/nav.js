@@ -12,6 +12,7 @@ const navLinks = [
   { label: 'Experience', href: '/experience' },
   // { label: 'Archive', href: '/archive' },
   { label: 'Process', href: '/process' },
+  { label: 'Talk', href: '/talk' },
   { label: 'About', href: '/about' },
 ];
 
