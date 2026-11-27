@@ -2880,10 +2880,10 @@ node-releases@^2.0.64:
   resolved "https://registry.yarnpkg.com/node-releases/-/node-releases-2.0.66.tgz#33d4146658040a2b03da853f7243492569eda69b"
   integrity sha512-uSMWN9/XtWzxaE0d9ZNHe00Hda6028AXH3WRjTsK71neiPCSeL5nGSD9MXTQX/6Qx0k7Op1AyyinmIUw9fBzrg==
 
-nodemailer@^8.0.7:
-  version "8.0.11"
-  resolved "https://registry.yarnpkg.com/nodemailer/-/nodemailer-8.0.11.tgz#ce46b7c2c8bbf17b0408122fbfb4e47f4bffc688"
-  integrity sha512-nrO/pDAUKl+wXX+lx16tDLbnm0fW6sK/x8mgohaCpg+CdCEl482bD4tCuAZk2DyliruiNTIZxRCoWkDqJEnAiA==
+nodemailer@^10.6.1:
+  version "10.6.1"
+  resolved "https://registry.yarnpkg.com/nodemailer/-/nodemailer-10.6.1.tgz#cdcfbfde7f10e113a52c79abfe1d6b53bc017ded"
+  integrity sha512-d7kfFfS/tR4Aca+SBvRaQ+MXKNv7d2JiRe5TxaRcFT/kYMh4GGPnW9aKksTIEvyEbA7d/7HYWE4YPDEHxzJj/g==
 
 object-assign@^4.1.1:
   version "4.1.1"
