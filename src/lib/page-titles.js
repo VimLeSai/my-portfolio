@@ -26,6 +26,9 @@ export function sectionFromPath(pathname = '/') {
   if (pathname.startsWith('/about')) {
     return { section: null, label: 'About', href: '/about' };
   }
+  if (pathname.startsWith('/talk')) {
+    return { section: null, label: 'Talk', href: '/talk' };
+  }
   if (pathname.startsWith('/contact')) {
     return { section: null, label: 'Contact', href: '/contact' };
   }
@@ -55,6 +58,7 @@ export const pageTitles = {
   experience: 'Experience',
   process: 'Process',
   about: 'About',
+  talk: 'Talk',
   contact: 'Contact',
   studio: 'Studio',
   stack: 'Stack',
