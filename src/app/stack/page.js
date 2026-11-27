@@ -6,7 +6,7 @@ import Button from '@/components/ui/Button';
 export const metadata = {
   title: 'Stack',
   description:
-    'Explore the trusted technology stack of Vimal Desai. Expertise across React, Next.js, TypeScript, Node.js, PostgreSQL, and AWS infrastructure.',
+    'What Vimal Desai actually uses: React, Next.js, TypeScript, Node, PostgreSQL, Kafka, Playwright, Cursor.'
 };
 
 const stackCategories = [
@@ -26,13 +26,13 @@ const stackCategories = [
         name: 'TypeScript',
         level: 95,
         years: '7 yrs',
-        note: 'Enforced across all team repos',
+        note: 'Default language on the teams I work with',
       },
       {
         name: 'TailwindCSS',
         level: 97,
         years: '6 yrs',
-        note: 'Design system token architecture',
+        note: 'Most of the UI work, including design-system tokens',
       },
       {
         name: 'Redux',
@@ -70,13 +70,19 @@ const stackCategories = [
         name: 'NestJS',
         level: 90,
         years: '3 yrs',
-        note: 'Enterprise-grade API framework at UpKeep & Emtec',
+        note: 'APIs at Emtec',
       },
       {
         name: 'Express.js',
         level: 92,
         years: '7 yrs',
-        note: 'REST APIs across 50+ projects',
+        note: 'REST and domain routes at UpKeep; APIs across 50+ projects',
+      },
+      {
+        name: 'tRPC',
+        level: 80,
+        years: '2 yrs',
+        note: 'Typesafe APIs on product surfaces at UpKeep',
       },
       {
         name: 'GraphQL',
@@ -94,7 +100,7 @@ const stackCategories = [
         name: 'RabbitMQ / Kafka',
         level: 78,
         years: '3 yrs',
-        note: 'Event-driven architecture & messaging',
+        note: 'Event pipelines at UpKeep; messaging at Knovator',
       },
     ],
   },
@@ -140,19 +146,25 @@ const stackCategories = [
         name: 'Docker',
         level: 90,
         years: '5 yrs',
-        note: 'All production services containerised',
+        note: 'Local stacks and production services',
       },
       {
         name: 'CI/CD (GitHub Actions)',
         level: 90,
         years: '5 yrs',
-        note: 'Pipeline design & optimisation',
+        note: 'Build, test, deploy loops',
+      },
+      {
+        name: 'Playwright',
+        level: 88,
+        years: '3 yrs',
+        note: 'E2E coverage attached to factory PRs at UpKeep',
       },
       {
         name: 'Cypress',
         level: 92,
         years: '4 yrs',
-        note: 'E2E testing at UpKeep & Emtec',
+        note: 'E2E testing at Emtec and earlier UpKeep work',
       },
       {
         name: 'Jest',
@@ -161,7 +173,7 @@ const stackCategories = [
         note: 'Unit & integration testing',
       },
       {
-        name: 'Playwright / k6 / JMeter',
+        name: 'k6 / JMeter',
         level: 82,
         years: '3 yrs',
         note: 'Performance & load testing',
@@ -176,7 +188,8 @@ const tools = [
   { name: 'Postman', category: 'API Testing', icon: 'api' },
   { name: 'Vercel', category: 'Deployment', icon: 'rocket_launch' },
   { name: 'Docker', category: 'Containers', icon: 'deployed_code' },
-  { name: 'Cursor AI', category: 'AI Editor', icon: 'smart_toy' },
+  { name: 'Cursor AI', category: 'AI Editor & Agents', icon: 'smart_toy' },
+  { name: 'LangGraph', category: 'Agent Orchestration', icon: 'account_tree' },
   { name: 'Slack', category: 'Communication', icon: 'chat' },
   { name: 'ClickUp / Jira', category: 'Project Mgmt', icon: 'view_kanban' },
 ];
@@ -207,25 +220,24 @@ export default function StackPage() {
             className="font-label mb-4 text-xs font-medium tracking-[0.2em] uppercase"
             style={{ color: 'var(--color-on-surface-variant)' }}
           >
-            Technical Depth
+            Tools
           </p>
           <h1
             className="font-headline text-7xl leading-none tracking-tighter italic md:text-9xl"
             style={{ color: 'var(--color-on-surface)' }}
           >
-            The Trusted
+            What I
             <br />
             <span style={{ color: 'var(--color-primary-container)' }}>
-              Stack.
+              reach for.
             </span>
           </h1>
           <p
             className="font-body mt-8 max-w-2xl text-lg leading-relaxed"
             style={{ color: 'var(--color-on-surface-variant)' }}
           >
-            10+ years of production experience across the full spectrum — from
-            pixel-perfect interfaces to distributed infrastructure. Every tool
-            chosen for a reason; every level earned in production.
+            Years in production, not a score out of 100. React and Node most
+            days; Kafka, Playwright, and Cursor when the work needs them.
           </p>
         </header>
 
@@ -321,51 +333,6 @@ export default function StackPage() {
                         {item.years}
                       </span>
                     </div>
-
-                    {/* Proficiency Bar */}
-                    <div>
-                      <div className="mb-1.5 flex items-center justify-between">
-                        <span
-                          className="font-label text-xs tracking-widest uppercase"
-                          style={{ color: 'var(--color-outline)' }}
-                        >
-                          Proficiency
-                        </span>
-                        <span
-                          className="font-label text-xs font-bold"
-                          style={{
-                            color:
-                              cat.color !==
-                              'var(--color-surface-container-highest)'
-                                ? cat.color
-                                : 'var(--color-primary-container)',
-                          }}
-                        >
-                          {item.level}%
-                        </span>
-                      </div>
-                      <div
-                        className="h-1.5 w-full overflow-hidden"
-                        style={{
-                          backgroundColor:
-                            'var(--color-surface-container-highest)',
-                          borderRadius: 'var(--radius-full)',
-                        }}
-                      >
-                        <div
-                          style={{
-                            width: `${item.level}%`,
-                            height: '100%',
-                            backgroundColor:
-                              cat.color !==
-                              'var(--color-surface-container-highest)'
-                                ? cat.color
-                                : 'var(--color-primary-container)',
-                            borderRadius: 'var(--radius-full)',
-                          }}
-                        />
-                      </div>
-                    </div>
                   </div>
                 ))}
               </div>
@@ -385,7 +352,7 @@ export default function StackPage() {
             className="font-headline mb-10 text-5xl"
             style={{ color: 'var(--color-on-surface)' }}
           >
-            Daily Environment
+            Day to day
           </h2>
           <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
             {tools.map((tool) => (
@@ -428,13 +395,13 @@ export default function StackPage() {
             className="font-label mb-3 text-xs font-medium tracking-[0.2em] uppercase"
             style={{ color: 'var(--color-on-surface-variant)' }}
           >
-            Credentials
+            Paper
           </p>
           <h2
             className="font-headline mb-10 text-5xl"
             style={{ color: 'var(--color-on-surface)' }}
           >
-            Professional Certifications
+            Certifications
           </h2>
           <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
             {certifications.map((cert) => (
@@ -476,29 +443,28 @@ export default function StackPage() {
               className="font-headline text-4xl"
               style={{ color: 'var(--color-on-surface)' }}
             >
-              See the stack in action.
+              See it in the work.
             </h2>
             <p
               className="font-body mt-2 text-base"
               style={{ color: 'var(--color-on-surface-variant)' }}
             >
-              Explore the case studies to see how these technologies come
-              together in production.
+              Case studies are a better test than a list of logos.
             </p>
           </div>
           <div className="flex flex-wrap gap-4">
-            <Button href="/" icon="arrow_forward" size="md">
-              View Projects
+            <Button href="/work" icon="arrow_forward" size="md">
+              View work
             </Button>
             <Button href="/contact" variant="outline" size="md">
-              Work Together
+              Get in touch
             </Button>
           </div>
         </section>
       </main>
 
       <Footer
-        tagline="Building scalable foundations using the best tools for the job."
+        tagline="Full-stack engineer. Ten years building products that ship and stay up."
       />
       <Watermark text="stack" />
     </>

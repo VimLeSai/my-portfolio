@@ -21,7 +21,7 @@ const traits = [
   {
     n: '04',
     title: 'AI as a tool',
-    body: 'Use LLMs to move faster on boilerplate — keep judgment on architecture and product calls.',
+    body: 'Agents for ticket-to-PR loops. I still review, test, and decide what merges.',
   },
 ];
 
@@ -45,9 +45,9 @@ const Biography = () => {
                 click to database.
               </p>
               <p>
-                These days I lead delivery on larger platforms: clear
-                interfaces, boring-reliable deploys, and mentoring so the next
-                person can move faster than I did.
+                These days at UpKeep I ship CMMS work across web and APIs:
+                vendor and parts flows, in-product AI, and an internal factory
+                that turns tickets into reviewed PRs. Same habit, larger surface.
               </p>
             </div>
           </Reveal>
@@ -56,7 +56,7 @@ const Biography = () => {
             {traits.map((t) => (
               <RevealItem
                 key={t.n}
-                className="border-outline-variant/25 border-t px-1 py-7 sm:odd:pr-8 sm:even:pl-8"
+                className="border-outline-variant/25 hover:border-primary/50 border-t px-1 py-7 transition-all duration-300 hover:-translate-y-0.5 sm:odd:pr-8 sm:even:pl-8"
               >
                 <span className="font-label text-primary/50 mb-3 block text-[0.65rem] tracking-[0.2em]">
                   {t.n}

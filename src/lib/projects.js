@@ -24,7 +24,7 @@ export const projects = {
     id: 'string-erp',
     title: 'StringERP',
     tagline:
-      'Enterprise-grade ERP built from the ground up for the textile industry.',
+      'Textile ERP I built from scratch — ledgers, orders, inventory, and a module kit.',
     tags: ['Enterprise SaaS', 'ERP', 'CRM'],
     role: 'Lead Architect & Full-Stack Engineer',
     platform: 'Web · Mobile-Responsive',
@@ -67,67 +67,66 @@ export const projects = {
     ],
 
     impact:
-      'Reduced new module integration time from days to under 10 minutes via a reusable module-based architecture; processed high-volume daily textile transactions with 99.98% data integrity through distributed locking.',
+      'New modules went from days of wiring to under 10 minutes. Concurrent order edits stopped corrupting rows after we put MongoDB transactions and locks on the writes.',
 
     overview:
-      'StringERP is a real-time enterprise resource planning system purpose-built for mid-to-large textile enterprises. I architected and built the entire platform from scratch — from the public marketing site through to the core ERP system and a standalone micro-service product (Implr). The platform handles complex financial ledgers, purchase/sales orders, and inventory workflows for a business processing thousands of transactions daily.',
+      'StringERP is a textile ERP I built from zero — marketing site, the product, and Implr as a spin-out. Ledgers, purchase and sales orders, inventory. Thousands of transactions a day. Releases every two weeks.',
 
     challenges: [
       {
-        label: 'Race Conditions at Scale',
-        value: `As the client's business grew, multiple employees began updating purchase and sales orders simultaneously, causing data mismatches and corrupt entries. I implemented MongoDB transactions and distributed locking to guarantee atomic, consistent writes across concurrent operations.`,
+        label: 'Two people, one order',
+        value:
+          'As the client grew, two people would edit the same purchase or sales order at once. Rows went stale or wrong. MongoDB transactions and distributed locks made those writes atomic.',
       },
       {
-        label: 'Bulk Data Import',
+        label: 'CSV dumps',
         value:
-          'Clients needed to migrate legacy textile data via Excel/CSV uploads. I built a RabbitMQ-backed import queue to process requests sequentially, prevent overload, and send confirmation emails once imports completed.',
+          'Clients needed to import legacy Excel/CSV without taking the app down. A RabbitMQ queue processed uploads one at a time and emailed when they finished.',
       },
       {
-        label: 'Module Integration Bottleneck',
+        label: 'New modules took days',
         value:
-          'Onboarding new domain modules was slow and inconsistent. I designed a reusable, copy-paste module architecture that cut integration time to under 10 minutes per module.',
+          'Adding a domain meant wiring folders by hand. I made a copy-paste module shape so a new one landed in under 10 minutes.',
       },
     ],
 
     approach: [
       {
         icon: 'architecture',
-        title: 'Modular Frontend Architecture',
+        title: 'Copy-paste modules',
         description:
-          'Established a reusable component library and module-based folder structure, enabling rapid feature additions without regression risk.',
+          'Same folder shape, same hooks, same routes. A new domain didn’t mean a new architecture conversation.',
       },
       {
         icon: 'lock',
-        title: 'Distributed Locking via MongoDB Transactions',
+        title: 'Locks on the writes',
         description:
-          'Ensured atomic operations across concurrent multi-user writes, eliminating data corruption under load.',
+          'MongoDB transactions so two people couldn’t corrupt the same order.',
       },
       {
         icon: 'queue',
-        title: 'RabbitMQ Import Queue',
+        title: 'Imports off the request',
         description:
-          'Decoupled heavy CSV import jobs from the request cycle, giving users reliable async feedback via email.',
+          'CSV jobs went to RabbitMQ. The browser didn’t wait. Email when it was done.',
       },
       {
         icon: 'rocket_launch',
-        title: 'CI/CD & Container Management',
+        title: 'Docker + GitLab CI',
         description:
-          'Managed full server infrastructure, Docker containerization, and GitLab CI/CD pipelines for automated, predictable bi-weekly releases.',
+          'I ran the boxes, the containers, and a pipeline that shipped every two weeks.',
       },
     ],
 
     impacts: [
       { label: 'Module Integration Time', before: 'Days of manual wiring', after: 'Under 10 minutes' },
-      { label: 'Data Integrity', before: 'Race-condition corruption', after: '99.98% integrity via distributed locking' },
+      { label: 'Data Integrity', before: 'Race-condition corruption', after: 'Locked writes — no more stale orders' },
       { label: 'CSV Import Workflow', before: 'Blocking synchronous uploads', after: 'Async RabbitMQ processing' }
     ],
 
     markdown: `
-I led the end-to-end development of **StringERP**, architecting and building the platform from scratch using React and Next.js. I established strong engineering standards with ESLint, Prettier, Commitlint, and Docker to ensure code quality, consistency, and scalable resource management.
+**StringERP** is a textile ERP I built from scratch with React and Next.js. Client calls, sprints, deploys every 15 days. ESLint, Prettier, Commitlint, Docker — the boring stuff that keeps a small team honest.
 
-From project inception, I oversaw product planning, client communication, requirement analysis, and feature roadmapping. I managed sprint cycles and delivered production releases every 15 days, ensuring predictable and stable deployments. I handled server infrastructure, containerization, and CI/CD pipelines using Docker and GitLab CI/CD.
-
-We implemented several unique, domain-specific features — including a real-time ledger, distributed import queue, and a micro-service spin-off product (Implr) — that set StringERP apart from typical off-the-shelf ERP solutions.
+The interesting bits: a live ledger, a RabbitMQ import queue, Mongo locks so concurrent orders didn’t eat each other, and **Implr** as a module we later shipped on its own.
     `.trim(),
 
     image: '/assets/projects/string-erp/thumbnail.png',
@@ -148,7 +147,7 @@ We implemented several unique, domain-specific features — including a real-tim
     id: 'mastery-logistics',
     title: 'Mastery Logistics System',
     tagline:
-      'Enterprise TMS with a zero-downtime MySQL → PostgreSQL migration at scale.',
+      'Logistics TMS — I moved production from MySQL to PostgreSQL without taking the site down.',
     tags: ['Logistics', 'SaaS', 'TMS', 'Database Migration'],
     role: 'Full-Stack Engineer',
     platform: 'Web · SaaS',
@@ -179,52 +178,53 @@ We implemented several unique, domain-specific features — including a real-tim
     tools: [tools.jmeter, tools.postman, tools.git, tools.github],
 
     impact:
-      'Achieved 100% data integrity across a full MySQL → PostgreSQL migration for mission-critical logistics data, eliminating manual QA of thousands of records via a custom real-time comparison automation script.',
+      'Moved production logistics data MySQL → PostgreSQL with a TypeScript script that compared both sides live. No hand-checking thousands of rows. Nothing dropped.',
 
-    overview: `Mastery Cloud TMS is a high-traffic SaaS platform serving large-scale transportation and logistics providers. I joined as a Full-Stack Engineer with a primary focus on frontend performance and a pivotal role in driving the platform's database migration from MySQL to PostgreSQL — all while keeping the system live for customers.`,
+    overview:
+      'Mastery Cloud TMS is a logistics platform that has to stay up. I did frontend work in TypeScript and Redux Toolkit, NestJS APIs, and the MySQL → PostgreSQL move while customers were still using the product.',
 
     challenges: [
       {
-        label: 'Zero-Downtime Database Migration',
+        label: 'Move the database, keep the site up',
         value:
-          'Migrating a production logistics database from MySQL to PostgreSQL without service interruption required careful planning, phased execution, and real-time validation against both systems simultaneously.',
+          'Production logistics data, MySQL to PostgreSQL, no downtime window. Both databases had to be true at the same time until cutover.',
       },
       {
-        label: 'Manual QA Bottleneck',
+        label: 'Nobody can eyeball thousands of rows',
         value:
-          'Verifying thousands of migrated records manually was infeasible. A scalable automation approach was needed to catch discrepancies before the production cutover.',
+          'Manual QA before cutover wasn’t a plan. We needed a script that told us what didn’t match.',
       },
       {
-        label: 'API Performance Under Load',
+        label: 'APIs under load',
         value:
-          'The platform required strict P90 latency targets under concurrent load, demanding rigorous benchmarking and optimization of NestJS API endpoints.',
+          'P90 latency had a number attached. NestJS endpoints needed JMeter, not hope.',
       },
     ],
 
     approach: [
       {
         icon: 'moving',
-        title: 'Phased DB Migration Strategy',
+        title: 'Phased cutover',
         description:
-          'Authored PRDs and technical migration maps to guide a structured, risk-mitigated transition from MySQL to PostgreSQL, including specialized handling for geolocation data.',
+          'Wrote the migration maps, including the messy geo fields, and moved in pieces instead of a big bang.',
       },
       {
         icon: 'auto_awesome',
-        title: 'Data Integrity Automation Script',
+        title: 'Compare both databases',
         description:
-          'Built a TypeScript script that simultaneously queried both databases, performed deep record comparison, and generated discrepancy reports — replacing manual QA entirely.',
+          'A TypeScript script queried MySQL and Postgres together, diffed records, and printed the mismatches.',
       },
       {
         icon: 'data_object',
-        title: 'GraphQL Query Optimization',
+        title: 'Leaner GraphQL',
         description:
-          'Audited schemas to remove unnecessary fields and applied strategic database indexes, making PostgreSQL queries faster than the legacy MySQL system.',
+          'Dropped unused fields, added indexes. Postgres ended up faster than the old MySQL queries.',
       },
       {
         icon: 'bolt',
-        title: 'P90 Load Testing',
+        title: 'JMeter on P90',
         description:
-          'Used JMeter to benchmark API endpoints at the 90th percentile response time, ensuring the system handled high-concurrency loads without latency spikes.',
+          'Load-tested the endpoints that would feel it, not a vanity homepage.',
       },
     ],
 
@@ -247,11 +247,9 @@ We implemented several unique, domain-specific features — including a real-tim
     ],
 
     markdown: `
-At **Mastery Logistics**, I contributed to the Mastery Cloud TMS — a high-traffic SaaS platform for large-scale transportation management.
+**Mastery Cloud TMS** — logistics SaaS. TypeScript + Redux Toolkit on the UI, NestJS in a monorepo.
 
-I developed responsive UIs using **TypeScript and Redux Toolkit**, and built modular APIs with **NestJS** in a monorepo architecture. A major highlight was driving the **full-scale database migration from MySQL to PostgreSQL**. I authored the technical PRDs, optimized data fetching via **GraphQL** with strategic indexing, and engineered a custom **TypeScript automation script** that performed real-time comparative analysis between both databases, generating discrepancy reports automatically.
-
-This eliminated manual QA and ensured a seamless, zero-data-loss production cutover.
+The job that mattered: **MySQL → PostgreSQL** while the product stayed live. I wrote the maps, trimmed GraphQL, indexed Postgres, and a TypeScript script that queried both databases and reported diffs. Cutover didn’t wait on someone reading a spreadsheet.
     `.trim(),
 
     image: '/assets/projects/mastery/thumbnail.png',
@@ -376,15 +374,15 @@ With no QA hire, I wrote **Postman** lifecycle automation and **Cypress** covera
     id: 'africa-business-console',
     title: 'Africa Business Console',
     tagline:
-      "ETK's first digital platform for cross-border business operations across Africa.",
+      "ETK's first product — React + NestJS so a new country was config, not a rewrite.",
     tags: ['Enterprise', 'Cross-Border Operations', 'Dashboard'],
     role: 'Senior Full-Stack Engineer',
     platform: 'Web · Enterprise SaaS',
     industries: ['Business Services', 'Cross-Border Trade', 'Enterprise'],
     deliverables: [
-      'Centralized cross-border operations platform',
-      'Scalable component architecture',
-      'Enterprise-grade folder structure and code standards',
+      'Cross-border operations dashboard',
+      'Reusable React components',
+      'Folder layout and lint rules the next person could follow',
     ],
     url: null,
     featured: false,
@@ -403,36 +401,36 @@ With no QA hire, I wrote **Postman** lifecycle automation and **Cypress** covera
     tools: [tools.git, tools.github, tools.postman, tools.docker],
 
     impact:
-      "Delivered ETK's first digital platform, establishing enterprise-level architectural patterns and reusable component standards that support long-term maintainability across diverse regulatory environments.",
+      "ETK's first digital product. I put the component kit and folder rules in place so the next country didn't mean a rewrite.",
 
     overview:
-      'The Africa Business Console is the first digital platform launched by ETK, designed to provide end-to-end solutions for companies conducting business in, out of, and within Africa. The platform streamlines cross-border operations through a centralized, scalable system tailored to diverse regulatory and operational requirements across the continent.',
+      "ETK needed a first product for companies doing business in and out of Africa. I built the console — React, TypeScript, NestJS — knowing rules and currencies would change by country.",
 
     challenges: [
       {
-        label: 'Regulatory Diversity',
+        label: 'Every country is a little different',
         value:
-          'Operating across multiple African markets meant the platform needed to be highly adaptable to differing regulatory, currency, and compliance requirements without a complete rebuild per country.',
+          'Currency, compliance, paperwork. The UI had to bend without a fork per market.',
       },
       {
-        label: 'Long-Term Maintainability',
+        label: 'First product, so the habits stick',
         value:
-          'Being the first digital product for ETK, architectural decisions would define how the platform scaled. Strong patterns were critical from day one.',
+          'Whatever we put in the repo would be the template. Folder layout and components had to be copyable.',
       },
     ],
 
     approach: [
       {
         icon: 'architecture',
-        title: 'Scalable Component Architecture',
+        title: 'Components you can reuse',
         description:
-          'Designed highly reusable and adaptable components with clean separation of concerns, enabling rapid feature additions without structural changes.',
+          'Same pieces, different country config. New screens didn’t start from a blank file.',
       },
       {
         icon: 'verified',
-        title: 'Enterprise Code Standards',
+        title: 'Boring structure',
         description:
-          'Established scalable folder structures, naming conventions, and architectural patterns aligned with enterprise-level expectations.',
+          'Folders, names, lint. Not exciting. The next engineer can find things.',
       },
     ],
 
@@ -445,9 +443,9 @@ With no QA hire, I wrote **Postman** lifecycle automation and **Cypress** covera
     ],
 
     markdown: `
-The **Africa Business Console** is the first digital platform launched by ETK, providing end-to-end solutions for companies conducting business across Africa.
+**Africa Business Console** — ETK's first digital product for companies working across African markets.
 
-Through this project, I strengthened my ability to design highly reusable and adaptable components, implement scalable folder structures, and establish clean architectural patterns to support long-term maintainability — aligning development standards with enterprise-level expectations across diverse regulatory environments.
+React, TypeScript, NestJS. I spent the time on components and folder rules so a new country was config, not a rewrite.
     `.trim(),
 
     image: '/assets/projects/etk/etk-hero-section.png',
@@ -461,23 +459,23 @@ Through this project, I strengthened my ability to design highly reusable and ad
   },
 
   // ─────────────────────────────────────────────────────────────────────────────
-  // 5. UpKeep Platform (Preventive Maintenance & Release Engineering)
+  // 5. UpKeep Platform (CMMS, AI product, agent-assisted delivery)
   // ─────────────────────────────────────────────────────────────────────────────
   upkeepplatform: {
     id: 'upkeep-platform',
     title: 'UpKeep Platform',
     tagline:
-      'Release engineering and full-stack contributions for a high-traffic CMMS SaaS.',
-    tags: ['CMMS', 'Enterprise SaaS', 'ERP', 'Release Engineering'],
-    role: 'Sr. Software Engineer · Release Engineer',
-    platform: 'Web · Mobile-Responsive · SaaS',
+      'Full-stack CMMS delivery, in-product AI, and an internal ticket-to-PR factory.',
+    tags: ['CMMS', 'Enterprise SaaS', 'AI Product', 'Agent Delivery'],
+    role: 'Sr. Software Engineer',
+    platform: 'Web · SaaS',
     industries: ['Software', 'CMMS', 'Enterprise Resource Planning'],
     deliverables: [
-      'Platform-wide zero-downtime release pipeline',
-      'Preventive Maintenance module optimizations',
-      'AI hackathon POC for cross-service data consistency',
-      'Shared component library contributions',
-      'Consumer service integrations',
+      'Vendor and parts workflows across web and APIs',
+      'Event-driven webhook paths (work-order feedback and similar)',
+      'In-product AI: access, credits, scoring, admin review',
+      'Internal ticket-to-PR factory with review and Playwright in the loop',
+      'Preventive Maintenance module work and a release-engineering stretch',
     ],
     url: 'https://www.upkeep.com/',
     featured: true,
@@ -490,9 +488,12 @@ Through this project, I strengthened my ability to design highly reusable and ad
       skills.react,
       skills.nextjs,
       skills.nodejs,
+      skills.express,
+      skills.trpc,
       skills.angular,
       skills.postgresql,
       skills.mongodb,
+      skills.apacheKafka,
       skills.docker,
       skills.cypress,
       skills.playwright,
@@ -500,65 +501,79 @@ Through this project, I strengthened my ability to design highly reusable and ad
       skills.awsSns,
       skills.awsSqs,
       skills.openai,
+      skills.langgraph,
+      skills.cursorAi,
     ],
     tools: [
       tools.git,
       tools.github,
-      tools.vercel,
+      tools.jira,
       tools.postman,
       tools.cursorAi,
       tools.openai,
       tools.slack,
+      tools.docker,
     ],
 
     impact:
-      'Doubled sprint velocity from 16 to 40+ story points through AI tooling and workflow automation; recognized twice as "Leader of the Month" and secured 3rd place in an internal AI hackathon for a data-consistency POC.',
+      'On factory weeks, typically 5–8 reviewed PRs a day. Earlier: sprint velocity 16 → 40+ story points; Leader of the Month (2×); 3rd place in an internal AI hackathon.',
 
     overview:
-      'UpKeep is a leading mobile-first CMMS and asset operations management platform used by maintenance and reliability teams globally. As a Sr. Software Engineer, I serve as the primary Release Engineer, own full-stack contributions across frontend, backend, and shared libraries, and act as a key contributor to the Preventive Maintenance module.',
+      'UpKeep is a mobile-first CMMS and asset operations platform. As a Sr. Software Engineer I ship full-stack tickets across web, APIs, and shared services — vendor and parts workflows, event pipelines, in-product AI, and an internal factory that turns tickets into reviewed PRs. Earlier work includes the Preventive Maintenance module and a stretch as Release Engineer.',
 
     challenges: [
       {
-        label: 'Release Reliability at Scale',
+        label: 'Work spans more than one repo',
         value:
-          'Coordinating platform-wide releases across multiple services and teams without downtime required a disciplined release engineering process and deep cross-team communication.',
+          'A typical ticket touches UI, API routes, and sometimes an event consumer. The job is to keep those changes consistent without leaking unfinished work across services.',
       },
       {
-        label: 'Sprint Velocity Ceiling',
+        label: 'AI features need product rails, not demos',
         value:
-          'The team was capped at ~16 story points per sprint. Without sacrificing quality, velocity needed to scale to meet growing product demands.',
+          'In-product AI needs access control, credits, scoring, and a place for humans to review output. Shipping the model call is the easy part; the rails around it are the work.',
       },
       {
-        label: 'Data Consistency Across Services',
+        label: 'Speed without skipping the loop',
         value:
-          'Disparate microservices created data consistency challenges that impacted product reliability. Identified and prototyped a solution during an internal AI hackathon.',
+          'An internal factory can draft a lot of PRs. The constraint is keeping review, Playwright, and merge hygiene attached so volume does not become noise.',
       },
     ],
 
     approach: [
       {
-        icon: 'new_releases',
-        title: 'Release Engineering Leadership',
+        icon: 'layers',
+        title: 'Full-stack tickets',
         description:
-          'Established and led the release engineering process for the entire platform, coordinating zero-downtime deployments across services and teams.',
+          'Own the path from UI through API and events: vendor/parts flows, webhook paths, feature flags, and the shared pieces those features sit on.',
       },
       {
         icon: 'smart_toy',
-        title: 'AI & Automation-Driven Velocity',
+        title: 'In-product AI',
         description:
-          'Leveraged Cursor AI, OpenAI integrations, and workflow automation tools to more than double sprint throughput without compromising code quality.',
+          'Trial access, shared credits, scoring pipelines, and admin review boards — Next.js surfaces, TypeScript APIs, and prompt/eval loops.',
       },
       {
-        icon: 'speed',
-        title: 'Preventive Maintenance Module',
+        icon: 'precision_manufacturing',
+        title: 'Ticket-to-PR factory',
         description:
-          'Optimized performance, reduced architectural complexity, and improved workflow efficiency for end-users in the core PM module.',
+          'Intake, implementation, review, and QA in one loop. On factory weeks that usually means 5–8 PRs a day. I still review what merges.',
+      },
+      {
+        icon: 'verified',
+        title: 'QA attached to shipping',
+        description:
+          'Structured test plans and Playwright coverage sit in the same loop as the PR — not a pass after the fact.',
       },
     ],
 
     impacts: [
       {
-        label: 'Sprint Velocity',
+        label: 'Factory throughput',
+        before: 'One-ticket, one-PR days',
+        after: 'Typically 5–8 PRs a day on factory weeks, still reviewed',
+      },
+      {
+        label: 'Sprint velocity (earlier)',
         before: '16 story points per sprint',
         after: '40+ story points per sprint',
       },
@@ -570,11 +585,11 @@ Through this project, I strengthened my ability to design highly reusable and ad
     ],
 
     markdown: `
-At **UpKeep**, I serve as the primary **Release Engineer**, leading platform-wide releases and ensuring smooth, zero-downtime deployments across a high-traffic CMMS SaaS product.
+At **UpKeep** I ship full-stack work on a CMMS used by maintenance and reliability teams. A typical change can span the web app, API services, and an event consumer — vendor and parts workflows, webhook paths, and in-product AI (access, credits, scoring, admin review).
 
-I contribute across the full stack — frontend, backend, shared component libraries, and consumer services. As a key contributor to the **Preventive Maintenance module**, I optimized performance and reduced architectural complexity to improve the end-user workflow.
+I also run an internal **ticket-to-PR factory**: intake, implementation, review, QA. On factory weeks throughput is typically **5–8 PRs a day**. That is a loop with Playwright and review attached, not a personal coding speedrun.
 
-By integrating AI tools and workflow automation (Cursor AI, OpenAI), I helped increase team sprint velocity from **16 to over 40 story points** without compromising code quality. I was recognized twice as **"Leader of the Month"** and placed **3rd in an internal AI hackathon** for a POC that substantially improved data consistency across services.
+Earlier on this team I was a key contributor to **Preventive Maintenance**, served a stretch as **Release Engineer** for zero-downtime platform deploys, helped lift sprint velocity from **16 to 40+ story points**, and was recognised twice as **Leader of the Month** (plus 3rd place in an internal AI hackathon for a data-consistency POC).
     `.trim(),
 
     image: '/assets/projects/upkeep/thumbnail.png',
@@ -697,7 +712,7 @@ Deployed on **EC2** with Apache + **pm2** (\`yarn init\` / \`yarn serve\`). Goal
     id: 'not-loco',
     title: '(not)Loco',
     tagline:
-      'A calm, conversion-focused website for a modern online therapy platform.',
+      'Therapy site from Figma — calm type and spacing, not a clinic brochure.',
     tags: ['Healthcare', 'Mental Health', 'UI Design', 'Marketing Site'],
     role: 'UI Design & Development',
     platform: 'Web',
@@ -721,25 +736,25 @@ Deployed on **EC2** with Apache + **pm2** (\`yarn init\` / \`yarn serve\`). Goal
     tools: [tools.git, tools.vercel],
 
     impact:
-      'Delivered a calm, trustworthy, and conversion-focused web experience tailored to a mental health audience — balancing emotional warmth with clean, minimal UI.',
+      'A therapy marketing site that doesn’t look like a clinic brochure. Figma → Next.js + Tailwind, with type and spacing doing the work.',
 
     overview:
-      '(not)Loco is a modern online therapy platform connecting users with licensed therapists via voice notes and video check-ins. I designed and developed the full website from Figma designs — with a strong emphasis on creating an emotionally appropriate, accessible, and conversion-optimised experience for users seeking mental health support.',
+      '(not)Loco connects people with licensed therapists over voice notes and video. I took the Figma and built the site. The brief was: don’t look clinical, don’t look loud.',
 
     challenges: [
       {
-        label: 'Tone and Trust',
+        label: 'Tone',
         value:
-          'Mental health audiences require interfaces that feel calm and trustworthy. Every design choice — typography, spacing, color — needed to carry emotional weight without feeling clinical or cold.',
+          'People arriving here are not shopping. Type, space, and color had to feel quiet without going cold.',
       },
     ],
 
     approach: [
       {
         icon: 'design_services',
-        title: 'Figma to Production',
+        title: 'Figma → Next.js',
         description:
-          'Translated detailed Figma designs into pixel-perfect, responsive Next.js components with Tailwind CSS — preserving every detail of the therapeutic aesthetic.',
+          'Next.js + Tailwind. Match the file. Don’t invent a second design on the way to production.',
       },
     ],
 
@@ -747,17 +762,17 @@ Deployed on **EC2** with Apache + **pm2** (\`yarn init\` / \`yarn serve\`). Goal
       {
         label: 'Brand Trust',
         before: 'Generic clinical design',
-        after: 'Emotionally warm, accessible UI',
+        after: 'Quiet type, real spacing',
       },
       {
-        label: 'Development Speed',
-        before: 'Figma prototypes',
-        after: 'Pixel-perfect production in Next.js',
+        label: 'Build',
+        before: 'Figma',
+        after: 'Shipped Next.js site',
       },
     ],
 
     markdown: `
-**(not)Loco** is an online therapy platform connecting users with licensed therapists. I designed and built the full website, translating Figma designs into a responsive, production-ready **Next.js + Tailwind CSS** site — with careful attention to emotional tone, accessibility, and conversion design for a mental health audience.
+**(not)Loco** — therapy over voice notes and video. I built the site from Figma in **Next.js + Tailwind**. Quiet type, real spacing. Not a clinic template.
     `.trim(),
 
     image: '/assets/projects/notloco/hero-section.png',
@@ -804,42 +819,42 @@ Deployed on **EC2** with Apache + **pm2** (\`yarn init\` / \`yarn serve\`). Goal
     tools: [tools.git, tools.github, tools.postman, tools.vercel],
 
     impact:
-      'Delivered four distinct, production-ready product modules as the sole frontend engineer — from public landing page to payment checkout widget to multi-role admin and merchant consoles — fully wired to live backend services.',
+      'Four UIs, one frontend engineer: landing page, checkout widget, merchant dashboard, admin. Wired to live payment APIs and webhooks.',
 
     overview:
-      'Rampnow is a global payment infrastructure platform enabling merchants to accept and manage payments. I was brought on as the sole frontend engineer responsible for the entire client-facing product — architecting and building from initial wireframes to production-ready, API-integrated modules across four distinct user roles.',
+      'Rampnow lets merchants take payments. I was the only frontend person. Four surfaces — public site, checkout widget, merchant console, internal admin — from wireframes to live APIs.',
 
     challenges: [
       {
-        label: 'Four Modules, One Engineer',
+        label: 'Four UIs, one of me',
         value:
-          'The product required four purpose-built UIs — public visitors, paying customers, merchants, and internal admins — each with distinct access-controlled API calls and flows.',
+          'Visitor, customer, merchant, admin. Different APIs, different permissions, same calendar.',
       },
       {
-        label: 'End-to-End Payment Integrations',
+        label: 'Payments fail in the edges',
         value:
-          'Integrating payment gateway APIs, hosted payment page flows, and webhook endpoints required careful handling of edge cases and error states throughout the entire payment lifecycle.',
+          'Gateway APIs, hosted checkout, webhooks. Most of the work was the states between “pay” and “paid”.',
       },
     ],
 
     approach: [
       {
         icon: 'architecture',
-        title: 'Sole Frontend Ownership',
+        title: 'One kit, four apps',
         description:
-          'Took complete ownership of the frontend architecture — from wireframes through to production — ensuring each of the four modules shared a consistent design system and component library.',
+          'Shared components so the landing page and the admin didn’t look like two companies.',
       },
       {
         icon: 'integration_instructions',
-        title: 'End-to-End API Wiring',
+        title: 'Wire the money path',
         description:
-          'Integrated payment gateway APIs, connected webhook endpoints, and wired both merchant and admin consoles to live backend services — handling all edge cases and error states.',
+          'Gateway calls, webhooks, merchant and admin consoles on live services. Errors on screen, not in a log nobody reads.',
       },
       {
         icon: 'devices',
-        title: 'Pixel-Perfect Responsive Design',
+        title: 'Match the designs',
         description:
-          'Translated provided design files into clean, responsive UI code working seamlessly across desktop, tablet, and mobile — zero layout breakage.',
+          'Desktop, tablet, phone. If it broke at 375px, it wasn’t done.',
       },
     ],
 
@@ -857,9 +872,9 @@ Deployed on **EC2** with Apache + **pm2** (\`yarn init\` / \`yarn serve\`). Goal
     ],
 
     markdown: `
-**Rampnow** is a global payment infrastructure platform. As the **sole frontend engineer**, I designed and built the entire client-facing product — a public landing page, a payment checkout widget, an internal admin console, and a merchant dashboard.
- 
-I integrated payment gateway APIs, wired webhook endpoints, and connected both consoles to live backend services — handling all edge cases throughout. Four modules, one engineer, fully production-ready.
+**Rampnow** — payments. I was the only frontend engineer: landing page, checkout widget, merchant dashboard, admin.
+
+Gateway APIs, webhooks, live consoles. Four surfaces. The interesting work was the error states.
     `.trim(),
 
     image: '/assets/projects/rampnow/thumbnail.png',
@@ -884,7 +899,7 @@ I integrated payment gateway APIs, wired webhook endpoints, and connected both c
     id: 'textile-aadhar',
     title: 'Textile Aadhar',
     tagline:
-      'E-commerce platform for Zari, Threads, and Yarn with a dynamic, admin-managed storefront.',
+      'Zari, thread, and yarn shop — homepage and products come from the admin, not a deploy.',
     tags: ['Textiles', 'E-commerce', 'Admin Panel'],
     role: 'Full-Stack Engineer',
     platform: 'Web',
@@ -910,25 +925,25 @@ I integrated payment gateway APIs, wired webhook endpoints, and connected both c
     tools: [tools.git, tools.github],
 
     impact:
-      'Delivered the first project I managed end-to-end — built an admin-driven dynamic storefront that taught the importance of rigorous verification in what you ship.',
+      'First project I ran end to end. Admin could change the landing page, categories, and product fields without a deploy. Also the project that taught me to check before you ship.',
 
     overview:
-      'Textile Aadhar is an e-commerce platform for textile products including Zari, Threads, and Yarn. The platform includes an admin panel and a user-facing website with a dynamic landing page — entirely customizable by the admin, including which product categories are displayed and what details each contains. This was the first project I managed from end to end.',
+      'Store for Zari, threads, and yarn. Shop plus admin. The homepage, which categories showed, and which fields a product had — all from the admin, not a deploy. First time I owned the whole thing.',
 
     challenges: [
       {
-        label: 'Admin-Driven Dynamic UI',
+        label: 'Admin owns the homepage',
         value:
-          'The landing page layout, category visibility, and product detail fields all needed to be controllable by the admin without any code changes.',
+          'Layout, categories, product fields. If the client wanted a new block, it couldn’t wait on me.',
       },
     ],
 
     approach: [
       {
         icon: 'dynamic_feed',
-        title: 'Config-Driven Storefront',
+        title: 'Config, not deploys',
         description:
-          'Built a configuration-driven frontend where the admin panel controls landing page content, category structure, and product field visibility — no deployments needed for content changes.',
+          'The storefront read config from the admin. Content changes didn’t need a release.',
       },
     ],
 
@@ -946,7 +961,9 @@ I integrated payment gateway APIs, wired webhook endpoints, and connected both c
     ],
 
     markdown: `
-**Textile Aadhar** is an e-commerce platform for textile products (Zari, Threads, Yarn). I built the user website and admin panel with a fully dynamic, admin-configurable landing page. This was my first project as manager — it taught me the necessity of thorough verification before shipping.
+**Textile Aadhar** — shop for Zari, threads, yarn. I built the store and the admin. Homepage and product fields came from config, not a deploy.
+
+First project I ran end to end. Also the one that taught me: check it before you ship it.
     `.trim(),
 
     image: '/assets/projects/textileaadhar/landing-page.png',
@@ -965,7 +982,7 @@ I integrated payment gateway APIs, wired webhook endpoints, and connected both c
     id: 'textile-erp',
     title: 'Textile ERP',
     tagline:
-      'End-to-end fabric and design ERP covering inventory, recipes, manufacturing, and sales.',
+      'Mill ERP — designs, recipes, warp/weft math, inventory, orders. The formulas had to match the floor.',
     tags: ['Textiles', 'ERP', 'Admin Panel'],
     role: 'Frontend Engineer',
     platform: 'Web',
@@ -993,25 +1010,25 @@ I integrated payment gateway APIs, wired webhook endpoints, and connected both c
     tools: [tools.git, tools.gitlab],
 
     impact:
-      'Delivered a domain-specific ERP handling the full textile manufacturing lifecycle — from design recipe calculations through to inventory and sales.',
+      'Textile ERP from design recipes through warp/weft math, inventory, and sales. The formulas came from sitting with the mill, not from a spec.',
 
     overview:
-      'A textile-specific ERP system covering the full fabric and design business workflow. The admin panel manages designs, recipes (cloth design patterns), Warp and Weft calculations based on recipes, and the complete manufacturing cycle including inventory management, sales orders, and purchase orders.',
+      'ERP for a fabric mill: designs, recipes (the cloth pattern), warp and weft calculations, manufacturing, inventory, sales and purchase orders.',
 
     challenges: [
       {
-        label: 'Domain-Specific Calculations',
+        label: 'The math is the product',
         value:
-          'Warp and Weft calculations are highly domain-specific and formula-driven, requiring deep understanding of textile manufacturing logic to implement correctly.',
+          'Warp and weft aren’t generic inventory. Get the formula wrong and the mill wastes yarn. I sat with the client until the numbers matched the shop floor.',
       },
     ],
 
     approach: [
       {
         icon: 'domain',
-        title: 'Deep Domain Collaboration',
+        title: 'Ask the mill',
         description:
-          'Worked closely with the client to understand textile manufacturing workflows, translating them into reliable, formula-driven modules.',
+          'Walk the workflow, then write the modules. The formulas aren’t in a textbook.',
       },
     ],
 
@@ -1029,7 +1046,9 @@ I integrated payment gateway APIs, wired webhook endpoints, and connected both c
     ],
 
     markdown: `
-A domain-specific **Textile ERP** covering the full manufacturing lifecycle — design management, cloth design recipe management, Warp and Weft calculations, inventory, and sales and purchase orders. Deep collaboration with the client was essential to translate complex textile domain logic into reliable software.
+**Textile ERP** — designs, recipes, warp/weft calculations, inventory, sales and purchase orders.
+
+The work was sitting with the mill until the formulas matched what they actually do.
     `.trim(),
 
     image: '/assets/projects/textileerp/dashboard.png',
@@ -1052,7 +1071,7 @@ A domain-specific **Textile ERP** covering the full manufacturing lifecycle — 
     id: 'tatkal-jobs',
     title: 'Tatkal Jobs',
     tagline:
-      'Recruitment consultancy platform with animated infographics and a full admin panel.',
+      'Jobs, interviews, agencies — first Redux I actually understood, plus the animated About page.',
     tags: ['Job Portal', 'Recruitment', 'Admin Panel'],
     role: 'Frontend Engineer',
     platform: 'Web',
@@ -1077,31 +1096,31 @@ A domain-specific **Textile ERP** covering the full manufacturing lifecycle — 
     tools: [tools.git, tools.github],
 
     impact:
-      'Deepened expertise in Redux state management and bundle optimization while delivering a full recruitment platform with custom animated infographics.',
+      'Recruitment admin + job site. First time I really used Redux in production. Also built the animated About page.',
 
     overview:
-      'Tatkal Jobs is a recruitment consultancy with a full admin panel and public-facing job portal. The admin manages jobs, interviews, student profiles, agencies, and employees. I also designed and built animated infographic components for the About Us page. This project was pivotal in deepening my understanding of Redux, compilation, and bundle optimization.',
+      'Tatkal Jobs — consultancy. Admin for jobs, interviews, students, agencies, employees, plus the public job site. I also made the About page infographics. This is where Redux stopped being a tutorial.',
 
     challenges: [
       {
-        label: 'Complex State Management',
+        label: 'Too many entities in one admin',
         value:
-          'The admin panel managed multiple entity types with complex relationships — jobs, interviews, agencies, students, and employees — requiring disciplined Redux architecture.',
+          'Jobs, interviews, agencies, students, employees. Without a store that made sense, the UI fought itself.',
       },
     ],
 
     approach: [
       {
         icon: 'account_tree',
-        title: 'Redux Architecture',
+        title: 'Redux, for real',
         description:
-          'Applied Redux deeply for the first time on this project — learning state normalization, selectors, and bundle optimization in production.',
+          'Normalized state, selectors, and a smaller bundle. Learned it here, not in a course.',
       },
       {
         icon: 'animation',
-        title: 'Animated Infographics',
+        title: 'Animated About page',
         description:
-          'Built custom animated SVG/CSS infographic components for the About Us page.',
+          'Custom SVG/CSS infographics. The bit people actually screenshot.',
       },
     ],
 
@@ -1119,7 +1138,9 @@ A domain-specific **Textile ERP** covering the full manufacturing lifecycle — 
     ],
 
     markdown: `
-**Tatkal Jobs** is a recruitment consultancy platform. I contributed to both the admin panel (managing jobs, interviews, students, agencies, employees) and the user-facing site. I also created custom **animated infographics** for the About Us page. This project significantly deepened my understanding of **Redux**, compilation, and frontend bundle optimization.
+**Tatkal Jobs** — recruitment admin and public job site. Jobs, interviews, students, agencies, employees.
+
+First production **Redux** I actually understood. Also built the animated About page.
     `.trim(),
 
     image: '/assets/projects/tatkaljobs/thumbnail.png',
@@ -1229,7 +1250,7 @@ I spent a day reading the real flow, then remodelled filter selection from array
     id: 'zovil-store',
     title: 'ZovilStore',
     tagline:
-      'Custom phone and laptop accessories store with a full-featured admin panel.',
+      'Phone and laptop cases you can customize — shop and admin in Next.js, Vercel + AWS.',
     tags: ['E-commerce', 'Customization', 'Admin Panel'],
     role: 'Full-Stack Engineer',
     platform: 'Web',
@@ -1255,31 +1276,31 @@ I spent a day reading the real flow, then remodelled filter selection from array
     tools: [tools.vercel, tools.git, tools.github, tools.docker],
 
     impact:
-      'Delivered a seamless personalization storefront and an intuitive admin panel — deployed on a dual Vercel + AWS stack for peak performance and reliability.',
+      'Phone and laptop accessory shop with live customization, plus an admin. Next.js on Vercel, APIs on AWS.',
 
     overview:
-      'ZovilStore is an online platform that empowers users to personalize phone and laptop accessories. The project included a full customer-facing store and an intuitive admin panel for the client to manage products and categories. Built with Next.js and Tailwind CSS, and deployed on Vercel and AWS.',
+      'ZovilStore — pick a case, pick the options, see it. Storefront and admin in Next.js + Tailwind. Vercel for the site, AWS for the rest.',
 
     challenges: [
       {
-        label: 'Product Customization UX',
+        label: 'See it before you buy it',
         value:
-          'The platform needed a seamless, real-time customization experience for end users selecting accessory options.',
+          'Accessory options had to update on the product, not after a refresh.',
       },
     ],
 
     approach: [
       {
         icon: 'web',
-        title: 'Next.js + Tailwind Stack',
+        title: 'Next.js + Tailwind',
         description:
-          'Leveraged Next.js for SSR/SSG performance and Tailwind CSS for rapid, consistent styling across both the storefront and admin panel.',
+          'Same stack for the shop and the admin. Fewer surprises.',
       },
       {
         icon: 'admin_panel_settings',
-        title: 'Carbon-Powered Admin Panel',
+        title: 'Carbon admin',
         description:
-          'Built a sleek, modern admin panel using the Carbon component library for a clean management interface.',
+          'IBM Carbon for the product/category screens. Catalog isn’t hardcoded.',
       },
     ],
 
@@ -1292,12 +1313,12 @@ I spent a day reading the real flow, then remodelled filter selection from array
       {
         label: 'Admin Capabilities',
         before: 'Hardcoded products',
-        after: 'Carbon-powered management panel',
+        after: 'Carbon admin for products and categories',
       },
     ],
 
     markdown: `
-**ZovilStore** is an e-commerce platform for personalized phone and laptop accessories. I built the customer-facing storefront using **Next.js and Tailwind CSS** and delivered an intuitive admin panel for product and category management. The platform is deployed on a dual **Vercel + AWS** stack for reliability and performance.
+**ZovilStore** — customize phone and laptop accessories. I built the shop and the admin in **Next.js + Tailwind**. Site on Vercel, rest on AWS.
     `.trim(),
   },
 
@@ -1308,7 +1329,7 @@ I spent a day reading the real flow, then remodelled filter selection from array
     id: 'thomas-cook',
     title: 'Thomas Cook Admin Panel',
     tagline:
-      'Internal operations panel for a global travel agency featuring a custom multi-event calendar.',
+      'Thomas Cook ops admin — I wrote the calendar because nothing off the shelf did overlaps and ranges.',
     tags: ['Travel', 'Admin Panel', 'Calendar'],
     role: 'Frontend Engineer',
     platform: 'Web',
@@ -1333,25 +1354,25 @@ I spent a day reading the real flow, then remodelled filter selection from array
     tools: [tools.git, tools.github],
 
     impact:
-      'Delivered a bespoke calendar component supporting multiple overlapping events and date-range selections — a complex UI challenge built entirely from scratch.',
+      'Internal Thomas Cook admin. The calendar — overlapping tours, date ranges — didn’t exist in a library, so I wrote it.',
 
     overview:
-      'Thomas Cook is a globally recognized tours and travel agency. I built their internal operations admin panel, which manages employee tour schedules and availability. The standout engineering challenge was developing a fully customized calendar component that supports multiple overlapping events and date-range selections simultaneously.',
+      'Internal ops panel for Thomas Cook: who is on which tour, when they’re free. The calendar had to show overlapping events and let you pick ranges. Off-the-shelf widgets couldn’t.',
 
     challenges: [
       {
-        label: 'Custom Calendar Component',
+        label: 'The calendar was the job',
         value:
-          'No existing library satisfied the requirement for simultaneous overlapping event display and date-range selection. A fully custom implementation was required.',
+          'Overlapping events and range select at the same time. Every library we tried failed one of those.',
       },
     ],
 
     approach: [
       {
         icon: 'dashboard_customize',
-        title: 'Built-from-Scratch Calendar',
+        title: 'Write the calendar',
         description:
-          'Designed and built a fully custom React calendar component supporting multiple overlapping events, date-range selections, and employee schedule visualization.',
+          'Custom React calendar. Overlaps, ranges, employee schedules. No wrapper around a plugin that almost worked.',
       },
     ],
 
@@ -1369,7 +1390,7 @@ I spent a day reading the real flow, then remodelled filter selection from array
     ],
 
     markdown: `
-For **Thomas Cook**, I built an internal operations admin panel managing employee tour schedules and availability. The key engineering challenge was a **fully custom calendar component** built from scratch — supporting multiple overlapping events and date-range selections simultaneously. No off-the-shelf library could meet the requirement.
+**Thomas Cook** internal admin — tour schedules and who is free. I wrote a **custom calendar**: overlapping events, date ranges. Libraries couldn’t do both.
     `.trim(),
   },
 
@@ -1380,7 +1401,7 @@ For **Thomas Cook**, I built an internal operations admin panel managing employe
     id: 'implr',
     title: 'Implr',
     tagline:
-      'A StringERP micro-service scaled and launched as its own standalone product.',
+      'A StringERP module we pulled out and shipped as its own product.',
     tags: ['Micro-Service', 'SaaS', 'Product Launch'],
     role: 'Lead Engineer',
     platform: 'Web',
@@ -1405,24 +1426,25 @@ For **Thomas Cook**, I built an internal operations admin panel managing employe
     tools: [tools.docker, tools.git, tools.gitlab, tools.linux],
 
     impact:
-      'Demonstrated high service-level scalability and code reusability by successfully spinning a StringERP module into a fully independent, deployable product.',
+      'Took a StringERP module, cut the shared bits, gave it its own deploy. StringERP kept working.',
 
-    overview: `Implr began as a module within the StringERP ecosystem. Recognizing its value as a standalone solution, I led the extraction, refactoring, and independent deployment of the service as its own product — validating the modular architecture philosophy that underpinned all of StringERP's design decisions.`,
+    overview:
+      'Implr started as a folder inside StringERP. It was useful on its own, so I pulled it out — own API, own pipeline — without breaking the ERP.',
 
     challenges: [
       {
-        label: 'Service Extraction Without Regression',
+        label: 'Cut it out without the ERP falling over',
         value:
-          'Decoupling a tightly integrated module from the core ERP without breaking existing StringERP functionality required careful boundary definition and API contract design.',
+          'Shared code, shared assumptions. Needed a real boundary and a contract, not a copy-paste of the folder.',
       },
     ],
 
     approach: [
       {
         icon: 'account_tree',
-        title: 'Modular Extraction',
+        title: 'Own deploy, same habits',
         description:
-          'Defined clear service boundaries, refactored shared dependencies, and established an independent deployment pipeline for the new standalone product.',
+          'Clear edges, fewer shared imports, its own pipeline. The ERP still used it as a module.',
       },
     ],
 
@@ -1435,9 +1457,9 @@ For **Thomas Cook**, I built an internal operations admin panel managing employe
     ],
 
     markdown: `
-**Implr** was originally a module within the StringERP platform. I led its extraction and relaunch as a standalone product, demonstrating the scalability and reusability of the modular architecture I designed for StringERP.
+**Implr** was a StringERP module. I pulled it out as its own product — own API, own deploy — without breaking the ERP.
 
-This project validated the architectural approach of building each module as an independently deployable unit — a pattern that cut integration time across all StringERP modules to under 10 minutes.
+That’s why the StringERP module kit exists: if a folder might become a product, don’t weld it to the rest.
     `.trim(),
   },
 
@@ -1448,7 +1470,7 @@ This project validated the architectural approach of building each module as an 
     id: 'gatflix',
     title: 'Gatflix',
     tagline:
-      'GATE coaching platform with secure video delivery, chunked uploads, and manual SSR.',
+      'GATE coaching — chunked lecture uploads, streams that don’t leak the file URL, Express SSR.',
     tags: ['EdTech', 'Video', 'SSR', 'Security'],
     role: 'Frontend Engineer',
     platform: 'Web',
@@ -1475,47 +1497,47 @@ This project validated the architectural approach of building each module as an 
     tools: [tools.git, tools.linux],
 
     impact:
-      'Implemented chunked video uploads for large files and a URL-concealed video serving solution to prevent content piracy — plus manually implemented SSR by compiling React to Vanilla JS and serving via Express.',
+      'Six months on a GATE coaching site: chunked video uploads, streams that didn’t leak the file URL, and SSR the hard way — compile React to JS, serve it with Express.',
 
     overview:
-      "Gatflix is one of India's leading GATE coaching platforms, offering live classes, video lectures, books, practice tests, and test series. I worked on this project for 6+ months, solving two major technical challenges: secure video delivery (serving video without exposing the URL or allowing downloads) and chunked video uploads to handle large file sizes. I also manually implemented server-side rendering by compiling the entire codebase to Vanilla JS and serving it through Express — predating modern SSR frameworks.",
+      'Gatflix — GATE coaching: live classes, lectures, tests. I was on it for 6+ months. Videos were huge and people tried to steal them. Next.js SSR wasn’t a given yet, so we compiled React and served HTML from Express.',
 
     challenges: [
       {
-        label: 'Secure Video Serving',
+        label: 'Don’t leak the video URL',
         value:
-          'Educational video content had to be streamed without exposing the source URL or allowing users to download it.',
+          'Lectures had to play without a URL you could paste into another tab, and without a download button that actually worked.',
       },
       {
-        label: 'Large Video Uploads',
+        label: 'Files that don’t fit in one request',
         value:
-          'Uploading large video files in a single request was unreliable. A chunked upload strategy was needed.',
+          'A single PUT of a lecture would die. Chunk it, resume it.',
       },
       {
-        label: 'Manual Server-Side Rendering',
+        label: 'SSR without a framework for it',
         value:
-          'SSR was required for SEO and performance but implemented manually — compiling the full React app to Vanilla JS and serving it via Express.',
+          'SEO wanted HTML. We compiled the React app to vanilla JS and let Express serve it.',
       },
     ],
 
     approach: [
       {
         icon: 'security',
-        title: 'URL-Concealed Video Streaming',
+        title: 'Hide the file',
         description:
-          'Implemented a secure video serving mechanism that streams content without exposing source URLs, preventing direct downloads.',
+          'Stream the lecture. Don’t put the source URL in the page.',
       },
       {
         icon: 'upload',
-        title: 'Chunked Video Upload',
+        title: 'Chunk the upload',
         description:
-          'Split large video files into smaller chunks for reliable, resumable uploads.',
+          'Split the file. Resume if the network flakes.',
       },
       {
         icon: 'dns',
-        title: 'Manual SSR via Express',
+        title: 'SSR via Express',
         description:
-          'Compiled the entire React codebase to Vanilla JS and served it using an Express server for server-rendered HTML — a manual SSR implementation.',
+          'Compile React, serve HTML. Before App Router made this a checkbox.',
       },
     ],
 
@@ -1538,7 +1560,7 @@ This project validated the architectural approach of building each module as an 
     ],
 
     markdown: `
-**Gatflix** is a leading GATE coaching platform. Over 6+ months I implemented **chunked video uploads** for large files, a **URL-concealed video streaming** system to prevent piracy, and manual **server-side rendering** by compiling the full React app to Vanilla JS and serving it via Express — a non-trivial SSR implementation before modern frameworks made it easy.
+**Gatflix** — GATE coaching. Six months. **Chunked uploads** for big lectures, streams that **don’t leak the file URL**, and SSR by compiling React and serving it with Express. This was before that was a framework default.
     `.trim(),
   },
 
@@ -1628,15 +1650,15 @@ This project validated the architectural approach of building each module as an 
     id: 'laahchee',
     title: 'Laahchee',
     tagline:
-      'High-performance interactive web experience with complex timeline animations.',
+      'Marketing site with GSAP timelines — Next.js 15, React 19, keep it at 60fps.',
     tags: ['Frontend', 'Animation', 'Web', 'Performance'],
     role: 'Frontend Engineer',
     platform: 'Web',
     industries: ['Creative Web', 'Design'],
     deliverables: [
-      'High-performance React 19 frontend',
-      'GSAP-driven interactive animations',
-      'Next.js 15 App Router architecture',
+      'React 19 frontend',
+      'GSAP scroll timelines',
+      'Next.js 15 App Router',
     ],
     url: null,
     featured: false,
@@ -1652,36 +1674,36 @@ This project validated the architectural approach of building each module as an 
     tools: [tools.git, tools.github],
 
     impact:
-      'Delivered a buttery-smooth 60fps animated experience while maintaining excellent core web vitals and SEO performance through modern React 19 architecture.',
+      'Scroll-driven GSAP timelines that stay at 60fps. Next.js 15 / React 19, not a slideshow that janks on a phone.',
 
     overview:
-      'Laahchee is a visually stunning, high-performance web platform built with Next.js 15 and React 19. The project heavily utilizes GSAP for complex, timeline-based animations and micro-interactions, wrapped in a modern TailwindCSS v4 architecture.',
+      'Laahchee is a marketing site that lives or dies on motion. Next.js 15, React 19, Tailwind v4, GSAP timelines on scroll. If it dropped frames, it wasn’t done.',
 
     challenges: [
       {
-        label: 'Complex Animation States',
+        label: 'Motion vs the main thread',
         value:
-          'Managing complex timeline animations and scroll-triggered events required precision to avoid layout thrashing and maintain 60fps performance.',
+          'Lots of scroll-triggered timelines. Easy to thrash layout. Had to keep 60fps.',
       },
       {
-        label: 'React 19 Compatibility',
+        label: 'GSAP + React 19',
         value:
-          'Integrating advanced client-side animations with bleeding-edge React 19 concurrent features and server components.',
+          'Client animations next to server components. Don’t fight the new React, don’t freeze the page.',
       },
     ],
 
     approach: [
       {
         icon: 'animation',
-        title: 'GSAP Choreography',
+        title: 'GSAP timelines',
         description:
-          'Orchestrated intricate, multi-step animations using GSAP timelines to create a cohesive narrative flow without sacrificing performance.',
+          'One timeline per scene, tied to scroll. Measure, then add the next beat.',
       },
       {
         icon: 'bolt',
-        title: 'Modern Architecture',
+        title: 'Keep the JS small',
         description:
-          'Leveraged Next.js 15 and Tailwind v4 to ensure the application remains lightweight, highly responsive, and easy to maintain.',
+          'Next.js 15 and Tailwind v4. Animation is the feature; the bundle isn’t.',
       },
     ],
 
@@ -1689,7 +1711,7 @@ This project validated the architectural approach of building each module as an 
       {
         label: 'Animation Performance',
         before: 'Janky scroll effects',
-        after: 'Buttery-smooth 60fps GSAP timelines',
+        after: '60fps GSAP timelines',
       },
       {
         label: 'Architecture',
@@ -1699,9 +1721,9 @@ This project validated the architectural approach of building each module as an 
     ],
 
     markdown: `
-**Laahchee** represents a cutting-edge approach to creative web development. Leveraging the power of **Next.js 15**, **React 19**, and **TailwindCSS v4**, I engineered a high-performance frontend focused on immersive user experiences.
+**Laahchee** — marketing site that has to move. **Next.js 15**, **React 19**, **Tailwind v4**, **GSAP** on scroll.
 
-The core of the project relies on **GSAP** to orchestrate intricate, scroll-driven timelines. By carefully managing render cycles and offloading heavy computations, I ensured that the complex visual effects maintain a buttery-smooth **60fps** across all devices without compromising core web vitals.
+The job: keep it at **60fps**. If a timeline janked on a phone, it went back.
     `.trim(),
   },
 
@@ -1712,7 +1734,7 @@ The core of the project relies on **GSAP** to orchestrate intricate, scroll-driv
     id: 'jivita-design',
     title: 'Jivita Design',
     tagline:
-      'Modern, responsive storefront with highly interactive UI components.',
+      'Next.js storefront — SSR for SEO, Mongo behind it, Tailwind + Alpine for the bits that need to move.',
     tags: ['E-commerce', 'Full-Stack', 'UI/UX'],
     role: 'Full-Stack Engineer',
     platform: 'Web',
@@ -1730,30 +1752,30 @@ The core of the project relies on **GSAP** to orchestrate intricate, scroll-driv
     tools: [tools.git, tools.github],
 
     impact:
-      'Architected an SEO-optimized storefront with highly interactive UI components, significantly improving user engagement metrics.',
+      'Storefront that search engines can actually index. Interactivity stayed on Alpine so Next didn’t ship a SPA to shop.',
 
     overview:
-      'Jivita is a full-stack Next.js web application designed for a seamless user experience. Combining SSR for performance with a robust MongoDB backend, the project emphasizes a clean, responsive design utilizing TailwindCSS and Alpine.js for lightweight frontend interactions.',
+      'Jivita is a Next.js storefront. SSR for product pages, Mongo for data, Tailwind for layout, Alpine.js for the small client bits. Shopping pages that load as HTML, not a spinner.',
 
     challenges: [
       {
-        label: 'SSR Performance',
+        label: 'SSR vs clicky UI',
         value:
-          'Balancing SSR performance with dynamic client-side interactivity using lightweight libraries.',
+          'Needed product pages as HTML. Also needed hover, drawers, small interactions. Alpine, not a second React tree.',
       },
       {
-        label: 'Database Integration',
+        label: 'Mongo without waiting',
         value:
-          'Integrating a fast, scalable MongoDB backend with a heavy frontend without causing latency.',
+          'Catalog from Mongo. Don’t make the first paint wait on a fat client fetch.',
       },
     ],
 
     approach: [
       {
         icon: 'architecture',
-        title: 'Hybrid Rendering',
+        title: 'SSR first, Alpine second',
         description:
-          'Utilized Next.js SSR and SSG features to provide instant page loads while deferring non-critical interactive components.',
+          'Next.js SSR/SSG for pages. Alpine only where something has to move. Mongo on the server.',
       },
     ],
 
@@ -1771,9 +1793,9 @@ The core of the project relies on **GSAP** to orchestrate intricate, scroll-driv
     ],
 
     markdown: `
-**Jivita Design** is a modern e-commerce platform built on **Next.js** and **TailwindCSS**. The goal was to create a highly responsive, visually appealing storefront that doesn't compromise on performance or SEO.
+**Jivita Design** — Next.js storefront. **SSR** so product pages are HTML. **Mongo** for the catalog. **Tailwind** for layout, **Alpine** for the bits that need to move.
 
-By leveraging server-side rendering (SSR) and integrating a flexible **MongoDB** backend, I delivered a robust full-stack solution. Lightweight interactivity was handled carefully to ensure the time-to-interactive (TTI) remained minimal, providing users with a fast and fluid shopping experience.
+Not a SPA with a loading screen. Shoppers get a page; search engines get markup.
     `.trim(),
   },
 
@@ -1784,15 +1806,15 @@ By leveraging server-side rendering (SSR) and integrating a flexible **MongoDB**
     id: 'ds-universe',
     title: 'DS Universe',
     tagline:
-      'Immersive, creative web experience pushing the boundaries of modern frontend development.',
+      'Scroll site with Lenis + GSAP — Next.js 16, React 19, motion tied to the wheel.',
     tags: ['Creative Web', 'Animation', 'Immersive'],
     role: 'Frontend Engineer',
     platform: 'Web',
     industries: ['Creative Web', 'Design'],
     deliverables: [
-      'Immersive smooth-scrolling experience',
-      'Complex GSAP animations',
-      'Modern React 19 frontend',
+      'Lenis smooth scrolling',
+      'GSAP scroll-tied scenes',
+      'React 19 / Next.js 16 frontend',
     ],
     url: null,
     featured: false,
@@ -1807,25 +1829,25 @@ By leveraging server-side rendering (SSR) and integrating a flexible **MongoDB**
     tools: [tools.git, tools.github],
 
     impact:
-      'Created an award-winning level digital experience that captivates users through interactive storytelling and seamless performance.',
+      'Lenis scroll + GSAP ScrollTrigger so scenes fire on the wheel, not on a timer. Works on a phone, not just a 27-inch demo.',
 
     overview:
-      'DS Universe is an immersive, creative web experience that pushes the boundaries of modern frontend development. Utilizing Next.js 16 and React 19, the project features buttery-smooth scrolling powered by Lenis and highly choreographed animations using GSAP.',
+      'DS Universe is a scroll-driven marketing site. Next.js 16, React 19, Lenis for momentum scroll, GSAP for the scenes. If the animation doesn’t match the scroll, it’s wrong.',
 
     challenges: [
       {
-        label: 'Scroll Synchronization',
+        label: 'Scroll has to match the scene',
         value:
-          'Achieving perfectly synchronized scroll-based animations across varied device capabilities and screen sizes.',
+          'Different screens, different refresh rates. ScrollTrigger and Lenis had to stay in lockstep.',
       },
     ],
 
     approach: [
       {
         icon: 'bolt',
-        title: 'Smooth Scrolling',
+        title: 'Lenis + ScrollTrigger',
         description:
-          'Implemented Lenis for fluid, momentum-based scrolling, closely tied to GSAP ScrollTrigger for precise animation timing.',
+          'Lenis owns the scroll. GSAP ScrollTrigger owns the beats. One source of progress.',
       },
     ],
 
@@ -1843,9 +1865,9 @@ By leveraging server-side rendering (SSR) and integrating a flexible **MongoDB**
     ],
 
     markdown: `
-**DS Universe** is a testament to what is possible on the modern web. Built using **Next.js 16** and **React 19**, it prioritizes fluid motion and user immersion above all else.
+**DS Universe** — scroll site. **Next.js 16**, **React 19**. **Lenis** for the wheel, **GSAP ScrollTrigger** for the scenes.
 
-I integrated **Lenis** for smooth, momentum-based scrolling and paired it with **GSAP** to orchestrate animations that react perfectly to the user's scroll position. This combination creates a seamless narrative flow, transforming a standard website into an interactive digital journey.
+If a beat fired late on a phone, it went back. Motion is the product here.
     `.trim(),
   },
 
@@ -1856,7 +1878,7 @@ I integrated **Lenis** for smooth, momentum-based scrolling and paired it with *
     id: 'creg-caribbean',
     title: 'Creg Caribbean',
     tagline:
-      'Comprehensive real estate platform with a heavy focus on geospatial property discovery.',
+      'Caribbean listings on a Mapbox map — React, Redux, Ant Design for the dashboard.',
     tags: ['Real Estate', 'Maps', 'Dashboard'],
     role: 'Frontend Engineer',
     platform: 'Web',
@@ -1875,25 +1897,25 @@ I integrated **Lenis** for smooth, momentum-based scrolling and paired it with *
     tools: [tools.git, tools.github],
 
     impact:
-      'Transformed property discovery by building a high-performance, map-first interface that handles large geospatial datasets smoothly.',
+      'Listings live on the map, not in a table you scroll forever. Hundreds of pins, Redux keeps filters and the map in the same state.',
 
     overview:
-      'Creg Caribbean is a comprehensive real estate platform focused on the Caribbean market. The frontend is powered by React and Redux, featuring a deeply integrated Mapbox-GL interactive map for property discovery, coupled with an Ant Design dashboard for data management.',
+      'Creg Caribbean is a listings product for the Caribbean. Mapbox-GL is the search. React + Redux hold pins and filters. Ant Design is the back-office for the listings themselves.',
 
     challenges: [
       {
-        label: 'Geospatial Performance',
+        label: 'Too many pins',
         value:
-          'Optimizing performance with heavy geospatial data rendering on the client side using Mapbox and React.',
+          'Mapbox + React will stall if you dump every listing as a React node. Pins had to stay in the map layer.',
       },
     ],
 
     approach: [
       {
         icon: 'architecture',
-        title: 'Map-First UI',
+        title: 'Map first',
         description:
-          'Architected a map-first interface that tightly synchronizes with Redux state to display hundreds of properties without lag.',
+          'Mapbox owns the pins. Redux owns the filters. The list is a view of the same state, not a second source.',
       },
     ],
 
@@ -1901,7 +1923,7 @@ I integrated **Lenis** for smooth, momentum-based scrolling and paired it with *
       {
         label: 'Property Discovery',
         before: 'List-based search',
-        after: 'High-performance Mapbox-GL interface',
+        after: 'Mapbox-GL map with Redux filters',
       },
       {
         label: 'Data Rendering',
@@ -1911,9 +1933,9 @@ I integrated **Lenis** for smooth, momentum-based scrolling and paired it with *
     ],
 
     markdown: `
-**Creg Caribbean** is a dedicated real estate platform designed for the Caribbean market. The core feature of the application is its interactive, map-based property search, built using **React** and **Mapbox-GL**.
+**Creg Caribbean** — listings for the Caribbean. You search on a **Mapbox-GL** map, not a spreadsheet.
 
-I engineered the frontend to handle large geospatial datasets efficiently. By leveraging **Redux** for state management and **Ant Design** for dashboard UI components, the platform offers users a fast, intuitive way to explore properties, filtering by complex criteria while maintaining smooth map interactions.
+**React** + **Redux** for filters and pins. **Ant Design** for the dashboard that actually edits the listings. If the map lagged, the pins were in the wrong place.
     `.trim(),
   },
 
@@ -1924,7 +1946,7 @@ I engineered the frontend to handle large geospatial datasets efficiently. By le
     id: 'gateflix',
     title: 'Gateflix',
     tagline:
-      'Scalable educational platform focused on delivering high-quality video content.',
+      'GATE video courses — HLS.js so lectures adapt to the network, Redux for progress.',
     tags: ['EdTech', 'Video Streaming', 'Platform'],
     role: 'Frontend Engineer',
     platform: 'Web',
@@ -1943,25 +1965,25 @@ I engineered the frontend to handle large geospatial datasets efficiently. By le
     tools: [tools.git, tools.github],
 
     impact:
-      'Empowered thousands of students with a reliable, scalable streaming experience and interactive study materials.',
+      'Lectures stream as HLS, not a single MP4 that buffers on a 3G train. Progress and catalogs live in Redux.',
 
     overview:
-      'Gateflix is a robust educational platform focused on delivering high-quality video content to students preparing for competitive exams. The platform integrates HLS.js for adaptive bitrate streaming, complex state management via Redux, and a rich content editor.',
+      'Gateflix is GATE coaching in a browser. Video is the product. HLS.js for adaptive bitrate, Redux for courses and progress, a rich editor for notes.',
 
     challenges: [
       {
-        label: 'Adaptive Streaming',
+        label: 'Video on bad networks',
         value:
-          'Ensuring smooth video playback across varied network conditions using adaptive streaming technologies.',
+          'Students weren’t all on office wifi. A single MP4 meant a spinner. HLS had to pick a bitrate that fit.',
       },
     ],
 
     approach: [
       {
         icon: 'bolt',
-        title: 'HLS Integration',
+        title: 'HLS.js',
         description:
-          'Implemented HLS.js to provide seamless, adaptive bitrate video streaming, minimizing buffering for users on slower connections.',
+          'Adaptive bitrate. The player drops quality before it stalls. Redux keeps which lecture you were on.',
       },
     ],
 
@@ -1979,9 +2001,9 @@ I engineered the frontend to handle large geospatial datasets efficiently. By le
     ],
 
     markdown: `
-**Gateflix** is an EdTech platform designed to help students prepare for competitive exams through high-quality video courses. Built with **React** and **Redux**, the application handles complex state requirements for student progress, course catalogs, and interactive testing.
+**Gateflix** — GATE lectures in a browser. **React** + **Redux** for catalogs, progress, tests.
 
-A major focus of the project was video delivery. I integrated **HLS.js** to enable adaptive bitrate streaming, ensuring that students across varying network conditions receive a smooth, uninterrupted learning experience.
+Video is **HLS.js**. If the network dropped, the player dropped quality — not a 20-minute rebuffer.
     `.trim(),
   },
 
@@ -1991,7 +2013,8 @@ A major focus of the project was video delivery. I integrated **HLS.js** to enab
   hkanalytics: {
     id: 'hk-analytics',
     title: 'HK Analytics',
-    tagline: 'Enterprise-grade data visualization and analytics dashboard.',
+    tagline:
+      'Analytics dashboard — AG-Grid for the tables, Highcharts for the graphs, Next.js around it.',
     tags: ['Data Analytics', 'Dashboard', 'Enterprise'],
     role: 'Frontend Engineer',
     platform: 'Web',
@@ -2010,25 +2033,25 @@ A major focus of the project was video delivery. I integrated **HLS.js** to enab
     tools: [tools.git, tools.github],
 
     impact:
-      'Streamlined enterprise decision-making by providing a highly performant, customizable data analytics suite.',
+      'Thousands of rows without locking the tab. AG-Grid virtualizes the table; Highcharts only redraws when the data actually changed.',
 
     overview:
-      'HK Analytics is an enterprise-grade data visualization and analytics dashboard. Built with Next.js, the platform leverages AG-Grid for handling massive datasets in tabular formats and Highcharts for rendering complex, interactive data visualizations.',
+      'HK Analytics is a dashboard for people who live in tables. Next.js + Tailwind. AG-Grid for the grids. Highcharts for the charts. If you dump 10k rows into a <table>, the browser dies. We didn’t.',
 
     challenges: [
       {
-        label: 'Massive Datasets',
+        label: 'Too many rows',
         value:
-          'Maintaining 60fps rendering performance when dealing with thousands of data rows and complex chart re-renders.',
+          'Thousands of rows plus charts. A naive table froze the tab. Charts re-rendering on every parent update made it worse.',
       },
     ],
 
     approach: [
       {
         icon: 'architecture',
-        title: 'Virtualization & Memoization',
+        title: 'Virtualize the grid',
         description:
-          'Utilized AG-Grid for efficient DOM virtualization and strict React memoization to prevent unnecessary re-renders of complex charts.',
+          'AG-Grid only paints what’s on screen. Memo on the chart wrappers so Highcharts doesn’t redraw for a sort on another column.',
       },
     ],
 
@@ -2046,9 +2069,9 @@ A major focus of the project was video delivery. I integrated **HLS.js** to enab
     ],
 
     markdown: `
-**HK Analytics** is a powerful data visualization tool built for enterprise clients. Utilizing **Next.js** and **TailwindCSS**, the platform provides a clean, responsive interface for deep data analysis.
+**HK Analytics** — Next.js dashboard. **AG-Grid** for the tables (virtualized — the DOM doesn’t get 10k rows). **Highcharts** for the graphs, memoized so a sort doesn’t redraw every chart.
 
-To handle massive amounts of tabular data without crashing the browser, I integrated **AG-Grid** for advanced row virtualization and column management. For visualization, **Highcharts** was used to render interactive, customizable charts, giving stakeholders real-time insights into their business metrics.
+People used it to look at numbers, not to wait on a spinner.
     `.trim(),
   },
 
@@ -2058,14 +2081,15 @@ To handle massive amounts of tabular data without crashing the browser, I integr
   rksynthetics: {
     id: 'rk-synthetics',
     title: 'RK Synthetics',
-    tagline: 'Lightning-fast corporate portal engineered for B2B excellence.',
+    tagline:
+      'B2B corporate site — Next.js 15 server components, less JS on the wire.',
     tags: ['Corporate Website', 'B2B', 'Performance'],
     role: 'Frontend Engineer',
     platform: 'Web',
     industries: ['Manufacturing', 'Corporate'],
     deliverables: [
-      'High-speed corporate portal',
-      'Modern frontend architecture',
+      'B2B corporate site',
+      'Next.js 15 server components',
     ],
     url: null,
     featured: false,
@@ -2080,25 +2104,25 @@ To handle massive amounts of tabular data without crashing the browser, I integr
     tools: [tools.git, tools.github],
 
     impact:
-      'Modernized the corporate digital presence, significantly reducing page load times and improving B2B lead generation.',
+      'Corporate pages as server components. Smaller JS, faster first paint, search engines get HTML.',
 
     overview:
-      'RK Synthetics is a modern B2B corporate portal engineered for lightning-fast load times and SEO excellence. Built on the cutting edge of Next.js 15 and React 19, it utilizes Turbopack and Tailwind v4 to deliver a pristine user experience.',
+      'RK Synthetics is a B2B company site. Next.js 15, React 19, Tailwind v4, Turbopack in dev. Server components first so the marketing pages aren’t a 400kb SPA.',
 
     challenges: [
       {
-        label: 'Migration to Modern Stack',
+        label: 'Old content, new stack',
         value:
-          'Migrating legacy corporate content to a strict TypeScript, server-component-first Next.js architecture.',
+          'Legacy pages into TypeScript + server components. Don’t ship a client bundle for a brochure.',
       },
     ],
 
     approach: [
       {
         icon: 'bolt',
-        title: 'Server Components',
+        title: 'Server components',
         description:
-          'Heavily utilized React Server Components to reduce client-side JavaScript, resulting in near-instant page loads.',
+          'HTML from the server. Client JS only where a form or a menu needs it.',
       },
     ],
 
@@ -2116,9 +2140,9 @@ To handle massive amounts of tabular data without crashing the browser, I integr
     ],
 
     markdown: `
-**RK Synthetics** is a corporate website revamp that focuses on raw performance and professional aesthetics. Built with the latest **Next.js 15** and **React 19**, the site leverages **Turbopack** for rapid development and **TailwindCSS v4** for styling.
+**RK Synthetics** — B2B site. **Next.js 15**, **React 19**, **Tailwind v4**. **Turbopack** in dev.
 
-By embracing a Server-Component-first architecture, I was able to dramatically reduce the client-side JavaScript payload. This architectural choice led to near-instant page loads, excellent SEO scores, and a significantly improved digital presence for the enterprise.
+Server components by default. A brochure page doesn’t need a client runtime. First paint got faster because we stopped shipping one.
     `.trim(),
   },
 
@@ -2129,7 +2153,7 @@ By embracing a Server-Component-first architecture, I was able to dramatically r
     id: 'sequelis',
     title: 'Sequelis',
     tagline:
-      'Interactive digital experience built to captivate audiences through motion design.',
+      'Marketing site where GSAP timelines react to scroll and hover — Next.js 15.',
     tags: ['Creative Web', 'Interactive', 'Frontend'],
     role: 'Frontend Engineer',
     platform: 'Web',
@@ -2148,25 +2172,25 @@ By embracing a Server-Component-first architecture, I was able to dramatically r
     tools: [tools.git, tools.github],
 
     impact:
-      'Delivered a highly engaging marketing platform that sets a new standard for brand presentation through motion.',
+      'GSAP timelines that fire on scroll and hover. Same motion on a phone as on a desktop — scaled, not stripped.',
 
     overview:
-      'Sequelis is an interactive digital experience built to captivate audiences through motion design. Leveraging Next.js 15 and React 19, the platform makes heavy use of GSAP to orchestrate intricate animation sequences that respond to user interaction.',
+      'Sequelis is a marketing site that sells with motion. Next.js 15, React 19, GSAP timelines on scroll and hover. If it only worked on a desktop, it wasn’t shipped.',
 
     challenges: [
       {
-        label: 'Motion Choreography',
+        label: 'Motion on a phone',
         value:
-          'Managing complex timeline animations and ensuring smooth playback across mobile and desktop devices.',
+          'Timelines that look fine on a 27-inch screen will hitch on a mid-range Android. Had to test both.',
       },
     ],
 
     approach: [
       {
         icon: 'animation',
-        title: 'Interactive Timelines',
+        title: 'GSAP on the gesture',
         description:
-          'Designed sequential, interactive GSAP timelines that respond naturally to user scroll and hover events.',
+          'Scroll and hover drive the timelines. Shorter beats on small screens, not a second site.',
       },
     ],
 
@@ -2184,9 +2208,9 @@ By embracing a Server-Component-first architecture, I was able to dramatically r
     ],
 
     markdown: `
-**Sequelis** is a creative marketing platform where motion design takes center stage. Utilizing **Next.js 15** and **React 19**, I built a fast, modern foundation capable of supporting heavy visual interactions.
+**Sequelis** — marketing site. **Next.js 15**, **React 19**, **GSAP** on scroll and hover.
 
-The standout feature of the project is its extensive use of **GSAP**. By choreographing complex timeline animations that react to user inputs—such as scrolling and hovering—I created an engaging, dynamic experience that elevates the brand's digital presence while maintaining strict performance standards.
+Motion is the point. I tested it on a phone. If a timeline hitched, it went back.
     `.trim(),
   },
 
@@ -2196,7 +2220,8 @@ The standout feature of the project is its extensive use of **GSAP**. By choreog
   can: {
     id: 'can-package',
     title: '@knovator/can',
-    tagline: 'Role-based access control npm package for React admin panels.',
+    tagline:
+      'npm package — `<Can>` and `hasAccessOf` so admin UIs stop sprinkling role ifs.',
     tags: ['NPM Package', 'Open Source', 'Access Control'],
     role: 'Open Source Creator',
     platform: 'Web · Library',
@@ -2212,22 +2237,22 @@ The standout feature of the project is its extensive use of **GSAP**. By choreog
     skills: [skills.react, skills.javascript, skills.babel],
     tools: [tools.git, tools.github],
     impact:
-      'Simplified role-based access control in multiple admin panels, abstracting complex condition logic into reusable methods and components.',
+      'Admin screens stopped growing a forest of `role ===`. One permission object, a `<Can>` wrap, done.',
     overview:
-      'In admin panels, different roles require different access to routes and functionalities. @knovator/can is an npm package I developed to simplify this process. It provides utility methods like `hasAccessOf` and `hasAccessTo`, along with a `Can` component for conditionally rendering JSX based on a standardized permission object structure.',
+      'Admin panels have roles. We were writing the same ifs on every button. `@knovator/can` is a small npm package: `hasAccessOf` / `hasAccessTo` for logic, a `<Can>` component for JSX. One permission shape.',
     challenges: [
       {
-        label: 'Condition Bloat',
+        label: 'Ifs everywhere',
         value:
-          'Writing multiple conditions for every role-based action clutters the codebase and increases maintenance overhead.',
+          'Every action had its own role check. Miss one and a button shows up for the wrong person.',
       },
     ],
     approach: [
       {
         icon: 'architecture',
-        title: 'Declarative Access Control',
+        title: '<Can> wrap',
         description:
-          'Abstracted permission logic into a declarative `Can` wrapper component, making role-based UI clean and readable.',
+          'Permission object in, JSX in. If they don’t have it, it doesn’t render. Same helpers for routes.',
       },
     ],
     impacts: [
@@ -2243,7 +2268,9 @@ The standout feature of the project is its extensive use of **GSAP**. By choreog
       },
     ],
     markdown: `
-Developed **@knovator/can**, an open-source npm package that streamlines role-based access control in React applications. By standardizing the permission object structure, it provides an intuitive way to manage module-level and function-level access, significantly reducing conditional boilerplate across multiple admin panel codebases.
+**@knovator/can** — small npm package. Permission object, hasAccessOf / hasAccessTo, a Can wrap for JSX.
+
+Used it on more than one admin panel so we weren’t copying role ifs between repos.
     `.trim(),
   },
 
@@ -2254,7 +2281,7 @@ Developed **@knovator/can**, an open-source npm package that streamlines role-ba
     id: 'api-wrapper',
     title: '@knovator/api',
     tagline:
-      'Productive Axios wrapper for simplified and centralized API calls.',
+      'Axios wrapper — one `setAPIConfig`, tokens and cancel-in-flight live there.',
     tags: ['NPM Package', 'Open Source', 'API Wrapper'],
     role: 'Open Source Creator',
     platform: 'Web · Library',
@@ -2271,22 +2298,22 @@ Developed **@knovator/can**, an open-source npm package that streamlines role-ba
     skills: [skills.typescript, skills.javascript],
     tools: [tools.git, tools.github],
     impact:
-      'Reduced boilerplate for API calls across multiple projects by centralizing token management, error handling, and request cancellation.',
+      'One config for base URL, token, errors. Duplicate in-flight calls cancel. Less copy-paste Axios in every screen.',
     overview:
-      '@knovator/api is a lightweight wrapper around Axios designed to make API calls more productive. It provides a centralized configuration method `setAPIConfig` to handle base URLs, token injection, and global error handling, alongside a streamlined `fetchUrl` method for executing requests with built-in support for request cancellation.',
+      '`@knovator/api` wraps Axios. `setAPIConfig` once — base URL, token, errors. `fetchUrl` for the call. If you fire the same endpoint twice, the first one cancels.',
     challenges: [
       {
-        label: 'Redundant Configuration',
+        label: 'Token on every call',
         value:
-          'Passing tokens and managing base URLs individually for every API call creates redundant code and increases the risk of errors.',
+          'Every screen was passing the token and the base URL. Easy to miss. Easy to double-fetch.',
       },
     ],
     approach: [
       {
         icon: 'speed',
-        title: 'Centralized Configuration & Caching',
+        title: 'Config once',
         description:
-          'Implemented a `setAPIConfig` method for global configuration and built-in request cancellation to prevent redundant API calls when endpoints match.',
+          '`setAPIConfig` holds the token and the host. Matching in-flight requests cancel so you don’t race.',
       },
     ],
     impacts: [
@@ -2302,7 +2329,7 @@ Developed **@knovator/can**, an open-source npm package that streamlines role-ba
       },
     ],
     markdown: `
-Created **@knovator/api**, an npm package that wraps Axios to simplify HTTP requests. The package abstracts away repetitive tasks like token injection and error handling into a single global configuration. It also features automatic request cancellation to prevent race conditions and redundant network calls, significantly improving the efficiency of data fetching in complex front-end applications.
+**@knovator/api** — Axios with the boring parts in one place. setAPIConfig for host, token, errors. fetchUrl for the call. Same endpoint twice → first request dies.
     `.trim(),
   },
 
@@ -2313,7 +2340,7 @@ Created **@knovator/api**, an npm package that wraps Axios to simplify HTTP requ
     id: 'game-design-platform',
     title: 'Game Design Platform',
     tagline:
-      'A responsive and interactive game design interface built with React.',
+      'React 18 UI for a game-design tool — Tailwind, actually usable on a phone.',
     tags: ['Interactive UI', 'Responsive', 'Platform'],
     role: 'Frontend Engineer',
     platform: 'Web · Mobile-Responsive',
@@ -2321,27 +2348,26 @@ Created **@knovator/api**, an npm package that wraps Axios to simplify HTTP requ
     deliverables: ['Responsive interactive UI', 'React component architecture'],
     url: null,
     featured: false,
-    company: companies.personal,
     period: { start: '2023', end: '2023' },
     skills: [skills.react, skills.tailwindcss, skills.javascript],
     tools: [tools.git],
     impact:
-      'Delivered a highly responsive and visually engaging platform interface, ensuring seamless interaction across both desktop and mobile devices.',
+      'Design tools that still work on a phone. Tailwind breakpoints, not a hidden desktop-only canvas.',
     overview:
-      'A frontend interface for a game design platform built using modern React 18 paradigms. The project focused heavily on creating a dynamic, responsive user experience that adapts flawlessly to different screen sizes, utilizing Tailwind CSS for rapid and consistent styling.',
+      'Frontend for a game-design tool. React 18, Tailwind. The hard part wasn’t the look — it was keeping editors and palettes usable when the screen is 375px.',
     challenges: [
       {
-        label: 'Responsive Complexity',
+        label: 'Editors on a phone',
         value:
-          'Ensuring that interactive game design elements remain usable and visually appealing on smaller mobile screens.',
+          'Design UIs assume a mouse and a wide canvas. Had to collapse tools without losing the actual job.',
       },
     ],
     approach: [
       {
         icon: 'architecture',
-        title: 'Mobile-First Design',
+        title: 'Mobile first',
         description:
-          'Leveraged Tailwind CSS to implement a mobile-first responsive strategy, ensuring a unified experience across devices.',
+          'Tailwind breakpoints. If it didn’t work at 375px, the desktop version wasn’t done either.',
       },
     ],
     impacts: [
@@ -2357,7 +2383,7 @@ Created **@knovator/api**, an npm package that wraps Axios to simplify HTTP requ
       },
     ],
     markdown: `
-Developed the frontend for a **Game Design Platform** using **React 18** and **Tailwind CSS**. A major focus of my work was ensuring the entire application was fully responsive, allowing users to interact with complex game design interfaces seamlessly on both mobile and desktop environments.
+**Game Design Platform** — **React 18**, **Tailwind**. Editors and palettes that still work at phone width. If a control disappeared on 375px, it wasn’t done.
     `.trim(),
   },
 
@@ -2367,7 +2393,8 @@ Developed the frontend for a **Game Design Platform** using **React 18** and **T
   digibooks: {
     id: 'digibooks',
     title: 'Digibooks',
-    tagline: 'Comprehensive digital publishing and reading platform.',
+    tagline:
+      'Digital books — Draft.js for authoring, HLS.js so video isn’t a downloadable MP4.',
     tags: ['EdTech', 'Digital Publishing', 'SSR'],
     role: 'Frontend Engineer',
     platform: 'Web',
@@ -2384,33 +2411,33 @@ Developed the frontend for a **Game Design Platform** using **React 18** and **T
     skills: [skills.react, skills.redux, skills.nodejs, skills.webpack],
     tools: [tools.git, tools.github],
     impact:
-      'Successfully delivered a robust digital reading experience capable of handling rich media, secure streaming, and real-time updates.',
+      'Authors get Draft.js. Readers get HLS chunks, not an MP4 URL. Firebase keeps sessions in sync.',
     overview:
-      'Digibooks is a sophisticated digital publishing platform designed to deliver rich, interactive reading experiences. I was responsible for architecting and implementing complex frontend modules, utilizing React and Redux.',
+      'Digibooks is a reading product. React + Redux on the frontend. I owned the hard modules: a real editor, video that isn’t a stealable file, and live sync.',
     challenges: [
       {
-        label: 'Rich Content Authoring',
+        label: 'Books aren’t a textarea',
         value:
-          'Integrating a robust editor capable of handling complex formatting and media for digital books.',
+          'Authors needed formatting, embeds, structure. A contenteditable with hope wasn’t going to ship.',
       },
       {
-        label: 'Secure Media Delivery',
+        label: 'Don’t leak the video',
         value:
-          'Preventing unauthorized downloading of premium video content embedded within the digital books.',
+          'Premium lectures inside books. A direct MP4 is a download. Chunk it.',
       },
     ],
     approach: [
       {
         icon: 'integration_instructions',
-        title: 'Draft.js & HLS.js Integration',
+        title: 'Draft.js + HLS.js',
         description:
-          'Implemented Draft.js for advanced rich-text authoring and utilized HLS.js to deliver secure, chunked video streaming, preventing unauthorized downloads.',
+          'Draft.js for the document. HLS.js for video so the file URL never sits in the player.',
       },
       {
         icon: 'architecture',
-        title: 'Real-time Sync with Firebase',
+        title: 'Firebase for live state',
         description:
-          'Leveraged Firebase to provide real-time updates and synchronization across user sessions.',
+          'Progress and session bits over Firebase so two tabs don’t fight.',
       },
     ],
     impacts: [
@@ -2426,9 +2453,9 @@ Developed the frontend for a **Game Design Platform** using **React 18** and **T
       },
     ],
     markdown: `
-As a Frontend Engineer on **Digibooks**, I tackled significant technical challenges to deliver a robust digital publishing platform. 
+**Digibooks** — digital books. **React** + **Redux**.
 
-A key difficulty was enabling rich content authoring; I solved this by deeply integrating **Draft.js** to handle complex document structures. Additionally, to protect premium content, I implemented secure video streaming using **HLS.js**, effectively preventing unauthorized downloads. I also integrated **Firebase** to ensure real-time data synchronization, creating a seamless and secure reading experience for end users.
+**Draft.js** for authors. **HLS.js** for video so the MP4 isn’t sitting in the network tab. **Firebase** so two sessions don’t overwrite each other.
     `.trim(),
   },
 
@@ -2438,7 +2465,8 @@ A key difficulty was enabling rich content authoring; I solved this by deeply in
   digibooksadmin: {
     id: 'digibooks-admin',
     title: 'Digibooks Admin Panel',
-    tagline: 'Comprehensive CMS and back-office management for Digibooks.',
+    tagline:
+      'Digibooks CMS — React, Redux, Ant Design. Fine Uploader so a 2GB lecture doesn’t time out.',
     tags: ['Admin Panel', 'CMS'],
     role: 'Frontend Engineer',
     platform: 'Web',
@@ -2455,22 +2483,22 @@ A key difficulty was enabling rich content authoring; I solved this by deeply in
     skills: [skills.react, skills.redux, skills.webpack],
     tools: [tools.git, tools.github],
     impact:
-      'Streamlined content management and user administration, empowering the operations team to efficiently handle thousands of digital assets.',
+      'Ops upload lectures in chunks. If the wifi dies at 80%, they resume — they don’t start over.',
     overview:
-      'The back-office administration portal for the Digibooks platform. Built with React, Redux, and Ant Design, the panel provides the necessary tools for administrators to manage users, digital assets, and system configurations.',
+      'Back office for Digibooks. React, Redux, Ant Design. Users, books, configs. The painful part was video: a single POST of a lecture file would time out.',
     challenges: [
       {
-        label: 'Large File Management',
+        label: 'Huge files',
         value:
-          'Handling reliable uploads for large video and document files required robust upload architecture.',
+          'Lectures and PDFs are big. A naive upload dies halfway. Need chunks and a resume.',
       },
     ],
     approach: [
       {
         icon: 'integration_instructions',
-        title: 'Fine Uploader Integration',
+        title: 'Fine Uploader',
         description:
-          'Integrated Fine Uploader to handle chunked, resumable uploads for large digital assets seamlessly within the dashboard.',
+          'Chunked, resumable uploads in the dashboard. The browser doesn’t sit on one request for ten minutes.',
       },
     ],
     impacts: [
@@ -2486,7 +2514,9 @@ A key difficulty was enabling rich content authoring; I solved this by deeply in
       },
     ],
     markdown: `
-Developed the **Digibooks Admin Panel**, the core CMS enabling the operations team to manage the digital publishing platform. Utilizing **React, Redux, and Ant Design**, I built complex, data-heavy interfaces. A notable feature was the integration of Fine Uploader to reliably process chunked, resumable uploads for large media assets.
+**Digibooks Admin** — React, Redux, Ant Design. Tables, forms, users.
+
+The thing that actually broke: big video. **Fine Uploader** — chunk it, resume it, don’t make ops sit on a spinner for twenty minutes.
     `.trim(),
   },
 
@@ -2497,7 +2527,7 @@ Developed the **Digibooks Admin Panel**, the core CMS enabling the operations te
     id: 'gateflix-admin',
     title: 'Gateflix Admin Panel',
     tagline:
-      'Robust administration portal for the Gateflix educational platform.',
+      'Gateflix CMS — same Ant Design stack as Digibooks admin, courses and video assets.',
     tags: ['EdTech', 'Admin Panel'],
     role: 'Frontend Engineer',
     platform: 'Web',
@@ -2510,15 +2540,22 @@ Developed the **Digibooks Admin Panel**, the core CMS enabling the operations te
     skills: [skills.react, skills.redux, skills.webpack],
     tools: [tools.git, tools.github],
     impact:
-      'Provided a stable and efficient management interface for organizing educational content and video assets.',
-    overview: `The administration portal for Gateflix, built to manage course content, student data, and video assets. It utilizes a similar architectural foundation to the Digibooks admin panel, ensuring consistency and reliability across Knovator\\'s internal tools.`,
-    challenges: [],
+      'Ops manage courses and video from one panel. Same Ant Design patterns as Digibooks, so we weren’t inventing a second admin language.',
+    overview:
+      'Admin for Gateflix — courses, students, video. Same React / Redux / Ant Design shape as Digibooks admin. That’s the point: two products, one way to build a table.',
+    challenges: [
+      {
+        label: 'Don’t fork the admin',
+        value:
+          'A second custom table kit would have doubled the bugs. Reuse the Digibooks patterns.',
+      },
+    ],
     approach: [
       {
         icon: 'architecture',
-        title: 'Standardized Component Library',
+        title: 'Ant Design, same as Digibooks',
         description:
-          'Utilized Ant Design to rapidly build out complex data tables and forms, ensuring a consistent administrative user experience.',
+          'Tables and forms from Ant Design. Faster to ship, and ops already knew the chrome.',
       },
     ],
     impacts: [
@@ -2534,7 +2571,9 @@ Developed the **Digibooks Admin Panel**, the core CMS enabling the operations te
       },
     ],
     markdown: `
-Built the **Gateflix Admin Panel** using **React, Redux, and Ant Design**. The platform serves as the central hub for managing educational content and video assets. By standardizing the UI with a robust component library, I was able to rapidly deliver complex data-management interfaces that empowered the Gateflix team.
+**Gateflix Admin** — React, Redux, Ant Design. Courses and video.
+
+Same admin shape as Digibooks. I wasn’t going to invent a second table kit for the same company.
     `.trim(),
   },
 
@@ -2544,7 +2583,8 @@ Built the **Gateflix Admin Panel** using **React, Redux, and Ant Design**. The p
   stayclassy: {
     id: 'stay-classy',
     title: 'Stay Classy',
-    tagline: 'High-performance Next.js e-commerce platform.',
+    tagline:
+      'Shop with Next.js SSR — product pages as HTML, zoom and sliders on top.',
     tags: ['E-commerce', 'SSR', 'Web Platform'],
     role: 'Frontend Engineer',
     platform: 'Web',
@@ -2560,14 +2600,14 @@ Built the **Gateflix Admin Panel** using **React, Redux, and Ant Design**. The p
     skills: [skills.nextjs, skills.react, skills.redux],
     tools: [tools.git, tools.github],
     impact:
-      'Improved SEO and initial page load times significantly by migrating the e-commerce architecture to Server-Side Rendering via Next.js.',
+      'Product pages as HTML. Google can index them. Shoppers don’t wait on a blank SPA.',
     overview:
-      'Stay Classy is an e-commerce platform where performance and SEO were paramount. I utilized Next.js to build a Server-Side Rendered (SSR) application, integrating rich features like product magnification, dynamic sliders, and comprehensive cart management.',
+      'Stay Classy is a shop. SPA product pages weren’t showing up in search and first paint was a spinner. Next.js SSR for the pages. Zoom, sliders, and cart still on the client.',
     challenges: [
       {
-        label: 'SEO & Performance',
+        label: 'SPA vs search',
         value:
-          'A traditional SPA approach was harming search engine visibility and initial load performance for product pages.',
+          'Client-rendered product pages were invisible to crawlers and slow on a cheap phone.',
       },
     ],
     approach: [
@@ -2575,7 +2615,7 @@ Built the **Gateflix Admin Panel** using **React, Redux, and Ant Design**. The p
         icon: 'speed',
         title: 'Next.js SSR',
         description:
-          'Implemented Server-Side Rendering using Next.js to ensure product pages were fully indexed by search engines and delivered instantly to users.',
+          'Render the product on the server. Zoom and sliders hydrate after. Cart still works.',
       },
     ],
     impacts: [
@@ -2591,7 +2631,9 @@ Built the **Gateflix Admin Panel** using **React, Redux, and Ant Design**. The p
       },
     ],
     markdown: `
-Engineered the **Stay Classy** e-commerce platform focusing heavily on SEO and performance. By adopting **Next.js** for Server-Side Rendering (SSR), I resolved indexing issues inherent to traditional SPAs and drastically improved initial page load times. I integrated complex interactive elements like product magnification and dynamic sliders while maintaining a smooth user experience.
+**Stay Classy** — shop. **Next.js SSR** so product pages are HTML. Zoom, sliders, cart still on the client.
+
+A SPA here meant a blank first paint and pages Google couldn’t see. SSR fixed both.
     `.trim(),
   },
 
@@ -2601,7 +2643,8 @@ Engineered the **Stay Classy** e-commerce platform focusing heavily on SEO and p
   wondermdpatient: {
     id: 'wondermd-patient',
     title: 'WonderMD Patient Portal',
-    tagline: 'Secure telehealth platform for patient consultations.',
+    tagline:
+      'Patient portal — OpenTok in the browser, Stripe for the visit, Next.js + Tailwind.',
     tags: ['Healthcare', 'Telemedicine', 'Patient Portal'],
     role: 'Frontend Engineer',
     platform: 'Web',
@@ -2618,22 +2661,22 @@ Engineered the **Stay Classy** e-commerce platform focusing heavily on SEO and p
     skills: [skills.nextjs, skills.react, skills.tailwindcss],
     tools: [tools.git, tools.github],
     impact:
-      'Enabled seamless, secure remote medical consultations by integrating robust video conferencing and payment solutions.',
+      'Visit happens in the tab. OpenTok for video, Stripe for the bill. No Zoom download, no invoice later.',
     overview:
-      'WonderMD is a telehealth platform designed to connect patients with medical professionals. I developed the patient-facing portal using Next.js and Tailwind CSS, focusing on a secure and accessible user experience for scheduling, payments, and video consultations.',
+      'WonderMD is telehealth. I built the patient portal in Next.js and Tailwind — book, pay, sit in the call. History and appointments in the same app.',
     challenges: [
       {
-        label: 'Seamless Video Integration',
+        label: 'Video in the browser',
         value:
-          'Providing a reliable, in-browser video consultation experience without requiring external application downloads.',
+          'Patients weren’t going to install another app for a 15-minute visit. The call had to live in the page.',
       },
     ],
     approach: [
       {
         icon: 'integration_instructions',
-        title: 'OpenTok & Stripe',
+        title: 'OpenTok + Stripe',
         description:
-          'Integrated OpenTok (Vonage) for high-quality, secure video calls directly within the portal, and Stripe for seamless consultation payments.',
+          'Vonage OpenTok in the portal. Stripe for the session. Book → pay → join, one flow.',
       },
     ],
     impacts: [
@@ -2649,9 +2692,9 @@ Engineered the **Stay Classy** e-commerce platform focusing heavily on SEO and p
       },
     ],
     markdown: `
-Developed the **WonderMD Patient Portal**, a secure telemedicine platform built with **Next.js** and **Tailwind CSS**. 
+**WonderMD** patient portal — **Next.js**, **Tailwind**. Book, pay, talk.
 
-The core of the application revolved around facilitating remote consultations. I successfully integrated the **OpenTok (Vonage)** API to deliver stable, browser-based video conferencing, and implemented **Stripe** to handle secure session payments. The portal provides patients with an intuitive interface for managing their medical history, appointments, and active telehealth calls.
+**OpenTok (Vonage)** in the tab so nobody installs Zoom. **Stripe** for the visit. History and appointments live here too.
     `.trim(),
   },
 
@@ -2661,7 +2704,8 @@ The core of the application revolved around facilitating remote consultations. I
   otpinput: {
     id: 'otp-input-react',
     title: 'otp-input-react',
-    tagline: 'Open-source React component for OTP inputs.',
+    tagline:
+      'OSS — I helped on otp-input-react: logic, TypeScript, Jest coverage.',
     tags: ['Open Source Contributor', 'React Component'],
     role: 'Open Source Contributor',
     platform: 'Web · Library',
@@ -2672,21 +2716,26 @@ The core of the application revolved around facilitating remote consultations. I
     ],
     url: 'https://github.com/shubhanus/otp-input-react',
     featured: false,
-    company: companies.personal,
     period: { start: '2020', end: '2020' },
     skills: [skills.react, skills.typescript, skills.jest],
     tools: [tools.git, tools.github],
     impact:
-      'Contributed to the stability and feature set of a widely-used open-source OTP input component.',
+      'PRs on a public OTP input — tests and TypeScript so paste / backspace don’t fall over.',
     overview:
-      'An open-source React functional component providing a customizable One-Time Password (OTP) input interface. I contributed to the repository to improve its functionality and reliability.',
-    challenges: [],
+      'otp-input-react is a small React OTP field. I wasn’t the author. I sent PRs: logic, types, Jest + Testing Library so the edge cases stayed covered.',
+    challenges: [
+      {
+        label: 'OTP is fiddly',
+        value:
+          'Paste, backspace, autofill. Easy to break if you only test the happy path.',
+      },
+    ],
     approach: [
       {
         icon: 'speed',
-        title: 'Open Source Collaboration',
+        title: 'Tests with the maintainer',
         description:
-          'Collaborated with the maintainer to refine component logic and ensure high test coverage using Jest and React Testing Library.',
+          'Jest + Testing Library on the weird keys. TypeScript so the props aren’t a guess.',
       },
     ],
     impacts: [
@@ -2702,7 +2751,9 @@ The core of the application revolved around facilitating remote consultations. I
       },
     ],
     markdown: `
-Made significant open-source contributions to **otp-input-react**, a popular React component library for handling One-Time Passwords. My work involved refining the component's internal logic, improving TypeScript support, and enhancing test coverage using **Jest** and **React Testing Library**.
+**otp-input-react** — not my repo. I sent PRs: component logic, TypeScript, **Jest** + Testing Library.
+
+OTP fields break on paste and backspace. That’s what the tests were for.
     `.trim(),
   },
 
@@ -2712,7 +2763,8 @@ Made significant open-source contributions to **otp-input-react**, a popular Rea
   svitae: {
     id: 'svitae-housing',
     title: 'Svitae Housing Management',
-    tagline: 'Comprehensive dashboard for property and housing management.',
+    tagline:
+      'Housing dashboard — Wijmo grids for the tables, Chartist for the money.',
     tags: ['Property Management', 'Dashboard'],
     role: 'Frontend Engineer',
     platform: 'Web',
@@ -2723,34 +2775,33 @@ Made significant open-source contributions to **otp-input-react**, a popular Rea
     ],
     url: null,
     featured: false,
-    company: companies.personal,
     period: { start: '2019', end: '2020' },
     skills: [skills.react, skills.typescript],
     tools: [tools.git, tools.github],
     impact:
-      'Delivered complex data visualization and management tools that allowed property managers to oversee housing portfolios efficiently.',
+      'Property tables that don’t choke. Wijmo for the grids, Chartist for the money charts.',
     overview:
-      'A robust housing management dashboard built with React and Material-UI. The application provides detailed analytics, financial reporting, and property oversight tools.',
+      'Housing dashboard. React, Material-UI, TypeScript. Managers live in tables — rent, units, ledgers. Native <table> wasn’t going to hold it.',
     challenges: [
       {
-        label: 'Complex Data Grids',
+        label: 'Fat tables',
         value:
-          'Handling and rendering large datasets for financial and property records required high-performance grid solutions.',
+          'Financial and unit rows in volume. A DOM table stalls. Need a real grid.',
       },
     ],
     approach: [
       {
         icon: 'integration_instructions',
-        title: 'Wijmo & Chartist Integration',
+        title: 'Wijmo + Chartist',
         description:
-          'Integrated GrapeCity Wijmo for high-performance, complex data grids and Chartist for rendering responsive financial analytics dashboards.',
+          'GrapeCity Wijmo for the grids. Chartist for the finance charts that have to fit a laptop and a tablet.',
       },
     ],
     impacts: [
       {
         label: 'Data Management',
         before: 'Basic tables',
-        after: 'High-performance Wijmo grids',
+        after: 'Wijmo grids that virtualize rows',
       },
       {
         label: 'Financial Reporting',
@@ -2759,7 +2810,9 @@ Made significant open-source contributions to **otp-input-react**, a popular Rea
       },
     ],
     markdown: `
-Developed the **Svitae Housing Management** dashboard, a complex administrative tool for real estate professionals. Built utilizing **React and Material-UI**, the platform required handling substantial amounts of data. I integrated **GrapeCity Wijmo** to provide advanced, high-performance data grids, and utilized **Chartist** to build responsive data visualization dashboards for financial reporting.
+**Svitae** — housing dashboard. **React**, Material-UI, TypeScript.
+
+**Wijmo** for the tables so rent rolls don’t freeze the tab. **Chartist** for the finance charts.
     `.trim(),
   },
 
@@ -2769,14 +2822,15 @@ Developed the **Svitae Housing Management** dashboard, a complex administrative 
   propertyiq: {
     id: 'property-iq',
     title: 'PropertyIQ',
-    tagline: 'High-fidelity mobile UI/UX implementation for PropTech.',
+    tagline:
+      'PropTech mobile screens — I turned drafts into React views that fit real phones.',
     tags: ['PropTech', 'Mobile UI/UX'],
     role: 'Frontend Engineer',
     platform: 'Mobile',
     industries: ['Real Estate', 'PropTech'],
     deliverables: [
-      'Responsive mobile screen implementation',
-      'Pixel-perfect UI translation from draft screens',
+      'React mobile screens from drafts',
+      'Layouts that hold on more than one phone size',
     ],
     url: null,
     featured: false,
@@ -2785,29 +2839,29 @@ Developed the **Svitae Housing Management** dashboard, a complex administrative 
     skills: [skills.react],
     tools: [tools.git],
     impact:
-      'Translated draft designs into high-fidelity, responsive mobile views for an intuitive property intelligence application.',
+      'Drafts became screens you can tap. Same layout on a SE and a Pro Max, not a stretched PNG.',
     overview:
-      'PropertyIQ is a PropTech application focusing on intuitive property intelligence. My work involved analyzing draft screens and implementing pixel-perfect, highly responsive mobile interfaces.',
+      'PropertyIQ is property intel on a phone. My job was the UI: take the drafts, make them React, make them fit more than one viewport.',
     challenges: [
       {
-        label: 'Pixel-Perfect Translation',
+        label: 'Drafts aren’t a layout',
         value:
-          'Ensuring the implemented mobile UI matched the high-fidelity design drafts precisely across various device sizes.',
+          'PDFs and PNGs at one size. Real phones are many sizes. Spacing had to hold.',
       },
     ],
     approach: [
       {
         icon: 'architecture',
-        title: 'Responsive UI Implementation',
+        title: 'Build the screens',
         description:
-          'Focused on precise styling and layout techniques to translate static PDF/PNG drafts into interactive, responsive mobile screens.',
+          'Measure the draft, then flex. If it only matched iPhone 12, it wasn’t done.',
       },
     ],
     impacts: [
       {
         label: 'UI Implementation',
         before: 'Static draft screens',
-        after: 'Pixel-perfect mobile interfaces',
+        after: 'React screens that match the drafts',
       },
       {
         label: 'Device Responsiveness',
@@ -2816,7 +2870,9 @@ Developed the **Svitae Housing Management** dashboard, a complex administrative 
       },
     ],
     markdown: `
-Worked on **PropertyIQ**, a PropTech mobile application. My primary responsibility was the precise implementation of high-fidelity mobile UI/UX screens based on provided design drafts. I ensured that the application delivered an intuitive and highly responsive mobile experience tailored for property intelligence tasks.
+**PropertyIQ** — PropTech on a phone. I took the drafts and built the React screens.
+
+If it only looked right on one viewport, it went back.
     `.trim(),
   },
 
@@ -3130,4 +3186,7 @@ I led the client experience and stayed in the Node API and admin so supplier res
   },
 };
 
-export const projectsArray = Object.values(projects);
+export const projectsArray = [
+  projects.upkeepplatform,
+  ...Object.values(projects).filter((p) => p.id !== 'upkeep-platform'),
+];

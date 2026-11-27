@@ -17,21 +17,16 @@ export const profile = {
   pronouns: null,
 
   tagline:
-    'I build scalable, high-performance web applications — and quietly obsess over reusable architecture.',
+    'I build products people actually use — React, Node, TypeScript, and the seams between them.',
 
   bio: {
     short:
-      'Full-stack engineer with 10+ years of experience across ERP, CRM, logistics, real estate, and healthcare. I specialize in React, Node.js, and TypeScript, and care deeply about clean architecture, team velocity, and thoughtful engineering.',
-    long: `A few years ago, I set out to find my niche in software by exploring different languages and fields.
-I found it in front-end development, fell deep into the React ecosystem, and never looked back.
+      'Full-stack engineer, 10+ years. React, Node, TypeScript. Right now at UpKeep I ship CMMS features, in-product AI, and an internal factory that turns tickets into reviewed PRs.',
+    long: `I started in UI because that's where users feel the product. Backend work followed because that's where it breaks.
 
-Since 2018, I've been fully immersed in building everything from single-page apps to large-scale ERP systems
-and micro-service architectures. Along the way I've led teams, managed products, conducted 40+ technical
-interviews, and shipped 50+ projects across 7+ industries.
+Since 2018 I've shipped ERPs, CRMs, travel flows, and a lot of unglamorous production software. Led teams, ran interviews, handed work to people who could keep it.
 
-My approach is always the same: understand the problem thoroughly, design for reusability and maintainability,
-and iterate fast. In my free time I stay sharp by experimenting with new tools, AI workflows, and
-the occasional hackathon.`,
+At UpKeep I work across web, APIs, and shared services — vendor and parts, event pipelines, in-product AI, and a ticket-to-PR factory. Same habit: understand the problem, keep the seams clean, don't merge without tests.`,
   },
 
   // ─── Contact ──────────────────────────────────────────────────────────────
@@ -90,7 +85,7 @@ the occasional hackathon.`,
       enabled: true,
       icon: 'linkedin',
       snippet:
-        'Senior Full Stack Engineer · React, Node.js, TypeScript · Experience at UpKeep and prior product teams.',
+        'Senior Full Stack Engineer · React, Node.js, TypeScript · CMMS, in-product AI, and agent-assisted delivery at UpKeep.',
     },
     {
       id: 'upwork',
@@ -228,7 +223,7 @@ the occasional hackathon.`,
       id: 'ai-tools',
       label: 'AI & Emerging Tech',
       description:
-        'Experimenting with new AI tools, workflows, and integrations. Built a POC at an internal hackathon that improved cross-service data consistency.',
+        'Agent-assisted delivery loops, evals, and in-product AI. Still the person who reviews what merges.',
       icon: '🤖',
     },
     {

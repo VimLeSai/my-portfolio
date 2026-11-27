@@ -11,7 +11,7 @@ const Certifications = () => {
               className="font-headline mb-10 text-4xl"
               style={{ color: 'var(--color-on-surface)' }}
             >
-              Professional Accreditations
+              Certifications
             </h2>
             <div className="grid grid-cols-2 gap-4">
               {certifications.map((cert) => (

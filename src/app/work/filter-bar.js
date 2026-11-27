@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
+import { AnimatePresence, motion } from 'motion/react';
 import { useProjects } from './context';
 import { companies } from '@/lib/companies';
 import { workCategories } from './categories';
@@ -137,6 +138,39 @@ const WorkFilterBar = () => {
     label: c.name,
     value: c.id,
   }));
+
+  const activeFilters = [
+    filters.company
+      ? {
+          key: 'company',
+          label:
+            companyArray.find((c) => c.id === filters.company)?.name ||
+            filters.company,
+          clear: () => setFilters({ ...filters, company: null }),
+        }
+      : null,
+    filters.softwareArea
+      ? {
+          key: 'area',
+          label: filters.softwareArea,
+          clear: () => setFilters({ ...filters, softwareArea: null }),
+        }
+      : null,
+    filters.skills
+      ? {
+          key: 'skill',
+          label: filters.skills,
+          clear: () => setFilters({ ...filters, skills: null }),
+        }
+      : null,
+    filters.category && filters.category !== 'All Projects'
+      ? {
+          key: 'category',
+          label: filters.category,
+          clear: () => setFilters({ ...filters, category: 'All Projects' }),
+        }
+      : null,
+  ].filter(Boolean);
   const areaOptions = uniqueSoftwareAreas.map((area) => ({
     label: area,
     value: area,
@@ -210,14 +244,56 @@ const WorkFilterBar = () => {
           />
         </div>
         <div className="shrink-0 text-left md:text-right">
-          <span className="font-headline text-primary text-2xl">
+          <motion.span
+            key={filteredProjects.length}
+            initial={{ opacity: 0, y: 6 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="font-headline text-primary inline-block text-2xl"
+          >
             {filteredProjects.length}
-          </span>
+          </motion.span>
           <span className="font-label text-outline block text-[10px] font-bold tracking-widest uppercase">
             Projects shown
           </span>
         </div>
       </div>
+
+      <AnimatePresence>
+        {activeFilters.length > 0 && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            className="flex flex-wrap items-center gap-2"
+          >
+            {activeFilters.map((chip) => (
+              <button
+                key={chip.key}
+                type="button"
+                onClick={chip.clear}
+                className="font-label text-on-surface-variant hover:border-primary hover:text-primary border-outline-variant/40 inline-flex items-center gap-2 border px-3 py-1.5 text-[10px] tracking-[0.12em] uppercase transition-colors"
+              >
+                {chip.label}
+                <span aria-hidden>×</span>
+              </button>
+            ))}
+            <button
+              type="button"
+              onClick={() =>
+                setFilters({
+                  company: null,
+                  softwareArea: null,
+                  skills: null,
+                  category: 'All Projects',
+                })
+              }
+              className="font-label text-outline hover:text-primary text-[10px] tracking-[0.14em] uppercase"
+            >
+              Clear all
+            </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 };

@@ -9,7 +9,7 @@ const Education = () => {
         className="font-headline mb-10 text-4xl"
         style={{ color: 'var(--color-on-surface)' }}
       >
-        Knowledge Foundation
+        School
       </h2>
       <div className="space-y-8">
         {educations.map((edu) => (

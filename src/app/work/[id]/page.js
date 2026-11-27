@@ -3,9 +3,10 @@ import Footer from '@/components/footer';
 import Button from '@/components/ui/Button';
 import Watermark from '@/components/ui/Watermark';
 import { notFound } from 'next/navigation';
-import { projects } from '@/lib/projects';
+import { projects, projectsArray } from '@/lib/projects';
 import ImpactCard from './impact-cards';
 import ImageGallery from './image-gallery';
+import CaseStudyPager from './pager';
 
 const projectsList = Object.values(projects);
 
@@ -30,6 +31,14 @@ export default async function WorkDetailPage({ params }) {
 
   if (!project) notFound();
 
+  const hasHeroImage = Boolean(project.image);
+  const index = projectsArray.findIndex((p) => p.id === project.id);
+  const prev = index > 0 ? projectsArray[index - 1] : null;
+  const next =
+    index >= 0 && index < projectsArray.length - 1
+      ? projectsArray[index + 1]
+      : null;
+
   // Mapping lib data to UI expectations
   const uiProject = {
     ...project,
@@ -39,7 +48,7 @@ export default async function WorkDetailPage({ params }) {
     duration: project.period?.end === 'Present' ? 'Ongoing' : `${project.period?.start} – ${project.period?.end}`,
     tags: project.skills?.filter(Boolean).map(s => s.label || s.name).slice(0, 6) || project.tags,
     hero: project.image || project.images?.[0] || '/assets/projects/placeholder.png',
-    challenge: project.challenges?.[0]?.value || project.overview,
+    challenges: project.challenges || [],
     approach: project.approach?.map((a) => ({
       icon: a.icon,
       title: a.title,
@@ -58,49 +67,55 @@ export default async function WorkDetailPage({ params }) {
         ctaHref="/work"
       />
 
-      {/* ── Hero Image ── */}
-      <div
-        className="relative w-full overflow-hidden"
-        style={{ height: '70vh', marginTop: '80px' }}
-      >
-        <img
-          src={uiProject.hero}
-          alt={uiProject.title}
-          className="h-full w-full object-cover object-top"
-        />
-        <div
-          className="absolute inset-0"
-          style={{
-            background:
-              'linear-gradient(to bottom, rgba(28,28,24,0.2) 0%, rgba(28,28,24,0.7) 100%)',
-          }}
-        />
-        {/* Overlay text */}
-        <div className="absolute right-0 bottom-0 left-0 mx-auto max-w-7xl px-8 pb-16">
-          <p
-            className="font-label mb-3 text-xs tracking-[0.2em] uppercase"
-            style={{ color: 'rgba(252,249,243,0.7)' }}
-          >
+      {hasHeroImage ? (
+        <div className="relative mt-20 h-[min(56vh,560px)] w-full overflow-hidden md:mt-[80px]">
+          <img
+            src={uiProject.hero}
+            alt={uiProject.title}
+            className="h-full w-full object-cover object-top"
+          />
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                'linear-gradient(to bottom, rgba(28,28,24,0.15) 0%, rgba(28,28,24,0.72) 100%)',
+            }}
+          />
+          <div className="absolute right-0 bottom-0 left-0 mx-auto max-w-7xl px-8 pb-12 md:pb-16">
+            <p className="font-label mb-3 text-xs tracking-[0.2em] uppercase text-white/70">
+              {uiProject.category} · {uiProject.year}
+            </p>
+            <h1 className="font-headline text-5xl leading-[0.95] tracking-tight text-white md:text-7xl">
+              {uiProject.title}
+            </h1>
+            {uiProject.subtitle && (
+              <p className="font-body mt-4 max-w-2xl text-base leading-relaxed text-white/80 md:text-lg">
+                {uiProject.subtitle}
+              </p>
+            )}
+          </div>
+        </div>
+      ) : (
+        <header className="mx-auto max-w-7xl px-8 pt-32 pb-8 md:pt-40 md:pb-12">
+          <p className="font-label mb-4 text-xs tracking-[0.2em] uppercase text-[var(--color-outline)]">
             {uiProject.category} · {uiProject.year}
           </p>
-          <h1
-            className="font-headline text-6xl leading-none tracking-tighter md:text-8xl"
-            style={{ color: '#ffffff' }}
-          >
+          <h1 className="font-headline text-5xl leading-[0.95] tracking-tight text-[var(--color-on-surface)] md:text-7xl">
             {uiProject.title}
           </h1>
           {uiProject.subtitle && (
-            <p
-              className="font-headline mt-3 text-2xl italic"
-              style={{ color: 'rgba(255,179,181,0.9)' }}
-            >
+            <p className="font-body mt-5 max-w-2xl text-lg leading-relaxed text-[var(--color-on-surface-variant)]">
               {uiProject.subtitle}
             </p>
           )}
-        </div>
-      </div>
+        </header>
+      )}
 
-      <main className="mx-auto max-w-7xl px-8 pt-20 pb-24">
+      <main
+        className={`mx-auto max-w-7xl px-8 pb-24 ${
+          hasHeroImage ? 'pt-16 md:pt-20' : 'pt-6 md:pt-8'
+        }`}
+      >
         {/* ── Meta bar ── */}
         <div
           className="mb-16 flex flex-wrap gap-8 pb-12"
@@ -108,9 +123,14 @@ export default async function WorkDetailPage({ params }) {
         >
           {[
             { label: 'Role', value: uiProject.role },
+            project.company?.name
+              ? { label: 'Company', value: project.company.name }
+              : null,
             { label: 'Duration', value: uiProject.duration },
             { label: 'Year', value: uiProject.year },
-          ].map((m) => (
+          ]
+            .filter(Boolean)
+            .map((m) => (
             <div key={m.label}>
               <p
                 className="font-label mb-1 text-xs tracking-widest uppercase"
@@ -166,12 +186,33 @@ export default async function WorkDetailPage({ params }) {
             >
               The Challenge
             </p>
-            <p
-              className="font-body text-lg leading-relaxed"
-              style={{ color: 'var(--color-on-surface-variant)' }}
-            >
-              {uiProject.challenge}
-            </p>
+            {uiProject.challenges.length > 1 ? (
+              <ul className="space-y-5">
+                {uiProject.challenges.map((c) => (
+                  <li key={c.label}>
+                    <p
+                      className="font-headline mb-1 text-lg"
+                      style={{ color: 'var(--color-on-surface)' }}
+                    >
+                      {c.label}
+                    </p>
+                    <p
+                      className="font-body text-base leading-relaxed"
+                      style={{ color: 'var(--color-on-surface-variant)' }}
+                    >
+                      {c.value}
+                    </p>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p
+                className="font-body text-lg leading-relaxed"
+                style={{ color: 'var(--color-on-surface-variant)' }}
+              >
+                {uiProject.challenges[0]?.value || uiProject.overview}
+              </p>
+            )}
           </div>
         </section>
 
@@ -182,13 +223,13 @@ export default async function WorkDetailPage({ params }) {
               className="font-label mb-12 text-xs font-bold tracking-[0.2em] uppercase"
               style={{ color: 'var(--color-outline)' }}
             >
-              Architectural Approach
+              Approach
             </p>
             <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
               {uiProject.approach.map((item, i) => (
                 <div
                   key={item.title}
-                  className="flex items-start gap-6 p-10"
+                  className="flex items-start gap-6 p-10 transition-transform duration-300 hover:-translate-y-0.5"
                   style={{
                     backgroundColor: 'var(--color-surface-container-low)',
                     borderRadius: 'var(--radius-xl)',
@@ -245,11 +286,9 @@ export default async function WorkDetailPage({ params }) {
         {/* ── Screenshots ── */}
         <ImageGallery images={uiProject.images} title={uiProject.title} />
 
-        {/* ── Navigation ── */}
-        <div
-          className="flex items-center justify-between pt-12"
-          style={{ borderTop: '1px solid var(--color-outline-variant)' }}
-        >
+        <CaseStudyPager prev={prev} next={next} />
+
+        <div className="mt-8 flex items-center justify-between">
           <Button
             href="/work"
             variant="ghost"
@@ -259,14 +298,14 @@ export default async function WorkDetailPage({ params }) {
             All Work
           </Button>
           <Button href="/contact" icon="arrow_forward">
-            Start a Project
+            Get in touch
           </Button>
         </div>
       </main>
 
       <Footer
         brandName="Vimal Desai"
-        tagline="Building performant, scalable systems from concept to deployment."
+        tagline="Full-stack engineer. Ten years building products that ship and stay up."
       />
       <Watermark text={uiProject.title?.toLowerCase()} />
     </>

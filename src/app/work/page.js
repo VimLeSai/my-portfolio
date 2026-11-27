@@ -10,7 +10,7 @@ import { ProjectsProvider } from './context';
 export const metadata = {
   title: 'Work',
   description:
-    'Case studies from Vimal Desai — ERPs, PropTech, travel, social, and platform work built with React, Node.js, and TypeScript.',
+    'Case studies from Vimal Desai — CMMS, ERPs, PropTech, travel, and the unglamorous production work in between.',
 };
 
 const AllWork = () => {
@@ -18,7 +18,7 @@ const AllWork = () => {
     <ProjectsProvider>
       <div className="relative min-h-screen">
         <Navbar
-          ctaLabel="Start a Project"
+          ctaLabel="Get in Touch"
           ctaHref="/contact"
           rightItems={<WorkNavSearch />}
         />

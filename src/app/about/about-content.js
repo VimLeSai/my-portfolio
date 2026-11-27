@@ -32,7 +32,7 @@ const traits = [
   {
     n: '04',
     title: 'AI as a tool',
-    desc: 'LLMs for boilerplate velocity. Judgment stays on architecture and product calls.',
+    desc: 'Agents for ticket-to-PR loops. I still review, test, and decide what merges.',
   },
 ];
 

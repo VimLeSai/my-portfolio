@@ -15,9 +15,9 @@ const milestonesData = [
     id: 2,
     type: 'primary',
     gridSpan: 'md:col-span-4',
-    title: 'AI Hackathon Champion',
+    title: 'AI Hackathon — 3rd',
     description:
-      'Built an LLM refactoring agent that cut a chunk of tech debt ~40% in a weekend sprint.',
+      'Weekend POC on data consistency across services. Placed 3rd. Still the kind of problem I like.',
   },
   {
     id: 3,
@@ -33,7 +33,7 @@ const milestonesData = [
     gridSpan: 'md:col-span-8',
     title: 'Core stack',
     description:
-      'TypeScript, Node, React/Next.js, AWS, and the SQL/NoSQL mix the product actually needs.',
+      'TypeScript, Node, React/Next.js, Kafka, Playwright, and the SQL/NoSQL mix the product actually needs.',
   },
 ];
 

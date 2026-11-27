@@ -3,7 +3,7 @@ export default [
     num: '01',
     title: 'Listen first',
     desc: 'Talk to the people stuck in the workflow. Map constraints before picking a stack.',
-    bullets: ['Stakeholder chats', 'Code & data audit'],
+    bullets: ['Talk to the people', 'Read the code'],
   },
   {
     num: '02',
@@ -14,7 +14,7 @@ export default [
   {
     num: '03',
     title: 'Build the path',
-    desc: 'Ship the vertical slice users feel. Iterate with real feedback, not ceremony.',
+    desc: 'Ship the vertical slice users feel. Agents can draft; review and tests still sit on the merge.',
     bullets: ['Working software', 'Tight reviews'],
   },
   {

@@ -18,14 +18,14 @@ const ScheduleConsultationCTA = () => {
         className="font-headline text-5xl italic"
         style={{ color: 'var(--color-on-primary)' }}
       >
-        Let's work together
+        Let&apos;s talk
       </h2>
       <p
         className="font-body mt-4 text-base opacity-80"
         style={{ color: 'var(--color-on-primary)' }}
       >
-        I'm currently open to new architectural challenges and leadership
-        opportunities within high-growth engineering teams.
+        Open to full-time roles and a few well-scoped projects. Remote, with
+        overlap.
       </p>
       <Button
         href="/contact"
@@ -38,7 +38,7 @@ const ScheduleConsultationCTA = () => {
           borderRadius: 'var(--radius-full)',
         }}
       >
-        Schedule a Consultation
+        Get in touch
       </Button>
     </section>
   );

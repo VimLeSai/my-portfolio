@@ -1,6 +1,6 @@
 'use client';
 
-import React, { createContext, useContext, useMemo, useState } from 'react';
+import React, { createContext, useContext, useEffect, useMemo, useState } from 'react';
 import { projectsArray } from '@/lib/projects';
 
 const ProjectsContext = createContext();
@@ -71,6 +71,10 @@ export const ProjectsProvider = ({ children }) => {
     }
 
     return result;
+  }, [searchQuery, filters]);
+
+  useEffect(() => {
+    setShowAllProjects(false);
   }, [searchQuery, filters]);
 
   const visibleProjects = useMemo(() => {

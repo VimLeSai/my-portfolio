@@ -14,7 +14,7 @@ export default function WorkHeroSection() {
         <span className="text-primary-container not-italic">for real users.</span>
       </h1>
       <p className="text-on-surface-variant font-body mt-6 max-w-2xl text-base leading-relaxed md:mt-7 md:text-lg">
-        Case studies from ERPs, PropTech, travel, social, and platform work —
+        Case studies from CMMS, ERPs, PropTech, travel, and platform work —
         frontends, APIs, and the messy middle. Filter by company, domain, or
         skill.
       </p>

@@ -42,7 +42,7 @@ export const metadata = {
     template: '%s — Vimal Desai',
   },
   description:
-    'Portfolio of Vimal Desai, a Senior Full Stack Engineer with 10+ years of experience building scalable, high-performance web applications using React, Node.js, and AWS.',
+    'Portfolio of Vimal Desai, a Senior Full Stack Engineer with 10+ years building production web apps. Currently at UpKeep: CMMS features, in-product AI, and agent-assisted delivery.',
   icons: {
     icon: '/favicon.svg',
   },

@@ -4,10 +4,11 @@ import Reveal from '@/components/ui/reveal';
 import Vink from '@/components/ui/vink';
 import { projects } from '@/lib/projects';
 import { motion, useReducedMotion } from 'motion/react';
+import Link from 'next/link';
 
 export default function SelectedArtifacts() {
-  const { stringerp, rentbase, micqro } = projects;
-  const selectedProjects = [stringerp, rentbase, micqro];
+  const { upkeepplatform, stringerp, rentbase } = projects;
+  const selectedProjects = [upkeepplatform, stringerp, rentbase];
   const reduce = useReducedMotion();
 
   return (
@@ -23,8 +24,8 @@ export default function SelectedArtifacts() {
           <h2 className="font-headline mb-8 text-4xl leading-tight md:text-5xl">
             Work that paid rent — not demos.
           </h2>
-          <p className="text-on-surface-variant mb-8 text-lg leading-relaxed italic">
-            Textile ERP, PropTech CRM, quiz social. Real users, real
+          <p className="text-on-surface-variant mb-8 text-lg leading-relaxed">
+            CMMS platform, textile ERP, PropTech CRM. Real users, real
             constraints.
           </p>
           <div className="editorial-rule mb-6 hidden w-24 lg:block" />
@@ -42,7 +43,7 @@ export default function SelectedArtifacts() {
           {selectedProjects.map((project, i) => (
             <Reveal key={project.id} delay={i * 0.05}>
               <article className="group">
-                <a href={`/work/${project.id}`} className="block">
+                <Link href={`/work/${project.id}`} className="block">
                   <div className="bg-surface-container-low relative mb-7 aspect-[16/10] overflow-hidden">
                     <motion.img
                       className="h-full w-full object-cover"
@@ -68,18 +69,22 @@ export default function SelectedArtifacts() {
                     />
                     <div
                       aria-hidden
-                      className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                      className="pointer-events-none absolute inset-0 flex items-end bg-gradient-to-t from-[rgba(28,28,24,0.5)] to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"
                       style={{
                         boxShadow: 'inset 0 0 0 1px rgba(128,0,32,0.25)',
                       }}
-                    />
+                    >
+                      <span className="font-label m-5 text-[10px] tracking-[0.16em] uppercase text-white">
+                        Read case study →
+                      </span>
+                    </div>
                   </div>
-                </a>
+                </Link>
 
                 <div className="flex items-start justify-between gap-6">
                   <div>
                     <h3 className="font-headline text-3xl transition-colors group-hover:text-[var(--color-primary-container)]">
-                      <a href={`/work/${project.id}`}>{project.title}</a>
+                      <Link href={`/work/${project.id}`}>{project.title}</Link>
                     </h3>
                     <p className="font-body text-on-surface-variant mb-4 mt-1 max-w-xl text-sm leading-relaxed">
                       {project.tagline}

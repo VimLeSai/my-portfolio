@@ -11,7 +11,7 @@ import Timeline from './timeline';
 export const metadata = {
   title: 'Experience',
   description:
-    "Explore Vimal Desai's 10+ year engineering career across UpKeep, Emtec, and Knovator, leading teams to build high-traffic scalable enterprise applications.",
+    "Explore Vimal Desai's 10+ year engineering career — currently shipping CMMS features, in-product AI, and agent-assisted delivery at UpKeep, plus earlier work at Emtec and Knovator.",
 };
 
 export default function ExperiencePage() {
@@ -45,7 +45,7 @@ export default function ExperiencePage() {
       </main>
 
       <Footer
-        tagline="Engineering the future of digital products through thoughtful architecture."
+        tagline="Full-stack engineer. Ten years building products that ship and stay up."
       />
       <Watermark text="lineage" />
     </>
